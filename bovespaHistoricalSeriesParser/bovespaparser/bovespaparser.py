@@ -2,23 +2,51 @@
 # Filename: bovespaparser.py
 
 
-def parse(fileName="../files/COTAHIST_A2011.TXT"):
+TIPREG, DATA, CODBDI, CODNEG, TPMERC, NOMRES, ESPECI, PRAZOT, MODREF, PREABE, PREMAX, PREMIN, PREMED, PREULT, PREOFC, PREOFV, TOTNEG, QUATOT, VOLTOT, PREEXE, INDOPC, DATEN, FATCOT, PTOEXE, CODISI, DISMES = [slice(p[0], p[1]) for p in [(0, 2), (2, 10), (10, 12), (12, 24), (24, 27), (27, 39), (39, 49), (49, 52), (52, 56), (56, 69), (69, 82), (82, 95), (95, 108), (108, 121), (121, 134), (134, 147), (147, 152), (152, 170), (170, 188), (188, 201), (201, 202), (202, 210), (210, 217), (217, 230), (230, 242), (242, 245)]]
+
+
+def parse(filename):
     values = []
-    with open(fileName) as f:
+    with open(filename) as f:
 
         for line in f:
-            treg = line[0:2]
-            if treg == '00' or treg == '99' or line[24:27] == '010':
+            treg = line[TIPREG]
+            if treg == '00' or line[TPMERC] != '010':
                 continue
+            if treg == '99':
+                break
 
-            date = line[2:10]
-            code = line[12:24].rstrip()
-            popen = float(line[56:69]) / 100
-            pmax = float(line[69:82]) / 100
-            pmin = float(line[82:95]) / 100
-            pclose = float(line[108:121]) / 100
+            data = line[DATA]
+            code = line[CODNEG].rstrip()
+            popen = float(line[PREABE]) / 100
+            pmax = float(line[PREMAX]) / 100
+            pmin = float(line[PREMIN]) / 100
+            pclose = float(line[PREULT]) / 100
+            volume = int(line[VOLTOT])
 
-            values.append([code, date, popen, pmin, pmax, pclose])
+            values.append([code, data, popen, pmin, pmax, pclose, volume])
     return values
 
-version = '0.1'
+
+def parsefields(filename, *opts):
+    values = []
+    with open(filename) as f:
+
+        for line in f:
+            treg = line[TIPREG]
+            if treg == '00':
+                continue
+            if treg == '99':
+                break
+
+            values.append([line[opt] for opt in opts])
+    return values
+
+
+def parsefields2(filename, *opts):
+    values = []
+    with open(filename) as f:
+        values = [[line[opt] for opt in opts] for line in f if line[TIPREG] == '01']
+    return values
+
+version = '0.1a'
