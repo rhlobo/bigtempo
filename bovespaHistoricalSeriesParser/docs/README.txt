@@ -1,6 +1,3 @@
-README
-======
-
 Parses Bovespa Historical Series Files
 
 For more information: 
