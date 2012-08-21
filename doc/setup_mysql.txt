@@ -1,0 +1,14 @@
+Login
+	mysql -u root -p
+
+Create a schema
+	CREATE SCHEMA `stockexperiments` ;
+
+Create a user
+	CREATE USER stockexperiments@localhost IDENTIFIED BY '';
+
+Add a database user
+        GRANT ALL ON stockexperiments.* TO stockexperiments@localhost;
+        FLUSH PRIVILEGES;
+
+
