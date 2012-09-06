@@ -1,3 +1,6 @@
+Setting the database up
+=======================
+
 Login
 	mysql -u root -p
 

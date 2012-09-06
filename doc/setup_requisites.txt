@@ -1,0 +1,19 @@
+Setting the environment up
+==========================
+
+Install Python 2.7
+
+Install bovespaParser
+	easy_install bovespaparser
+
+Install mySql (=> 5.5) 
+	ubuntu:
+		sudo apt-get install mysql-server
+	*Project specific mysql setup instructions can be found in 'setup_mysql.txt'.
+
+Install nose (for testing)
+	easy_install nose
+
+[Optional] Instal qtStalker
+	ubuntu:
+		sudo apt-get install qtstalker
