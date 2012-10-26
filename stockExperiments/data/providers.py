@@ -1,3 +1,4 @@
+#!/usr/bin/python2.7 -tt
 
 
 import data.cotahist.cotahist as cotahist
@@ -6,7 +7,33 @@ import data.cotahist.cotahist as cotahist
 def get():
     c_dataMapFactory = SymbolMapFactory()
     return (DataProvider(CachedProvider(c_dataMapFactory.get()),
-                         RawCotationProvider(c_dataMapFactory.get())))
+                         CotahistProvider(c_dataMapFactory.get())))
+
+
+class SymbolMapFactory():
+
+    def get(self):
+        return SymbolMap()
+
+
+class SymbolMap():
+
+    def __init__(self):
+        self.c_dataMap = {}
+
+    def get(self, s_symbol):
+        if s_symbol not in self.c_dataMap:
+            self.c_dataMap[s_symbol] = {}
+        return self.c_dataMap[s_symbol]
+
+
+class DataFrame():
+
+    def __init__(self):
+        self.d_data = {}
+
+    def update(self, c_dataFrame):
+        self.d_data.update(c_dataFrame.d_data)
 
 
 class AbstractProvider():
@@ -63,7 +90,7 @@ class CachedProvider(AbstractProvider):
         self.c_dataMap.get(s_symbol).update(c_dataFrame)
 
 
-class RawCotationProvider(AbstractProvider):
+class CotahistProvider(AbstractProvider):
 
     def __init__(self, c_dataMap):
         AbstractProvider.__init__(self)
@@ -76,36 +103,10 @@ class RawCotationProvider(AbstractProvider):
         return c_dataFrame
 
     def update(self, s_symbol, c_dataFrame):
-        pass
+        self.c_dataMap.get(s_symbol).update(c_dataFrame)
 
     def __importData(self):
         la_quote = cotahist.importData()
         for s_symbol, date, f_open, f_min, f_max, f_close, i_vol in la_quote:
             c_dataFrame = self.c_dataMap.get(s_symbol)
             c_dataFrame[date] = (date, f_open, f_min, f_max, f_close, i_vol)
-
-
-class SymbolMapFactory():
-
-    def get(self):
-        return SymbolMap()
-
-
-class SymbolMap():
-
-    def __init__(self):
-        self.c_dataMap = {}
-
-    def get(self, s_symbol):
-        if s_symbol not in self.c_dataMap:
-            self.c_dataMap[s_symbol] = {}
-        return self.c_dataMap[s_symbol]
-
-
-class DataFrame():
-
-    def __init__(self):
-        self.d_data = {}
-
-    def update(self, c_dataFrame):
-        self.d_data.update(c_dataFrame.d_data)

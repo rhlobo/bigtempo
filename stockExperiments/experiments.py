@@ -2,7 +2,6 @@
 
 
 import data.providers as providers
-import datetime
 from matplotlib import pyplot
 from matplotlib.dates import date2num
 
@@ -12,7 +11,7 @@ def plotstockdata(stockdata, stockticker, dates, col):
     pyplot.title('%s - %s / %s' % (stockticker, col, dates))
     pyplot.xlabel(dates)
     pyplot.ylabel(col)
-    pyplot.savefig('%s.png' % stockticker)
+    pyplot.savefig('output/%s.png' % stockticker)
     pyplot.show()
 
 
@@ -20,16 +19,14 @@ if __name__ == '__main__':
     s_symbol = "PETR4"
     d = providers.get().load(s_symbol)
 
-    ls_date = sorted(d)
+    l_date = sorted(d)
     quotes = []
     dates = []
-    for s_date in ls_date:
-        date = datetime.date(int(s_date[0:4]),int(s_date[4:6]),int(s_date[6:8]))
-        print date
-        d_date = date2num(date)
-        dates.append(d_date)
-        quotes.append(d[s_date][4])
-        print (d_date, d[s_date][4])
+    for date in l_date:
+        i_date = date2num(date)
+        dates.append(i_date)
+        quotes.append(d[date][4])
+        print (i_date, d[date][4])
     data = [dates, quotes]
     plotstockdata(data, s_symbol, "Date", s_symbol)
 
