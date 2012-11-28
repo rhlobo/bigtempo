@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7 -tt
 
 
-import data.providers as providers
+import providers.locator as providers
 from matplotlib import pyplot
 from matplotlib.dates import date2num
 

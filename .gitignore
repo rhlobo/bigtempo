@@ -35,6 +35,7 @@ pip-log.txt
 *.sql
 *.sqlite
 .coverage
+coverage
 .tox
 nosetests.xml
 

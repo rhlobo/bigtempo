@@ -1,5 +1,3 @@
-#!/usr/bin/python2.7 -tt
-
 
 import os
 import bovespaparser.bovespaparser as bp
