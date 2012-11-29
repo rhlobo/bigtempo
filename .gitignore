@@ -36,6 +36,7 @@ pip-log.txt
 *.sqlite
 .coverage
 coverage
+cover
 .tox
 nosetests.xml
 
