@@ -1,6 +1,6 @@
 import unittest
 from mockito import mock, when, verify, inorder, any as anyv
-from providers.base import AbstractProvider, Provider, CachedProvider, SymbolMap, SymbolMapFactory
+from providers.base import AbstractProvider, AbstractCachingProvider, Provider, CachedProvider, SymbolMap, SymbolMapFactory
 
 
 class TestAbstractProvider(unittest.TestCase):
@@ -9,9 +9,12 @@ class TestAbstractProvider(unittest.TestCase):
         p = AbstractProvider()
         self.assertRaises(NotImplementedError, p.load, "")
 
+
+class TestAbstractCachingProvider(unittest.TestCase):
+
     def test_should_have_update_method_with_symbol_and_data_arguments(self):
-        p = AbstractProvider()
-        self.assertRaises(NotImplementedError, p.update, "", {})
+        p = AbstractCachingProvider()
+        self.assertRaises(NotImplementedError, p.update, "", object())
 
 
 class TestProvider(unittest.TestCase):
@@ -82,10 +85,6 @@ class TestProvider(unittest.TestCase):
         inorder.verify(providerMock3, times=0).update(anyv(), anyv())
         inorder.verify(providerMock2, times=1).update(s_symbol, l_data)
         inorder.verify(providerMock1, times=1).update(s_symbol, l_data)
-
-    def test_should_have_update_method_with_symbol_and_data_arguments(self):
-        provider = Provider()
-        self.assertRaises(NotImplementedError, provider.update, "", {})
 
 
 class TestCachedProvider(unittest.TestCase):
