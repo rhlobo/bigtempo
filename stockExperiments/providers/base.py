@@ -2,11 +2,11 @@
 
 class AbstractProvider(object):
 
-    def __init__(self):
-        pass
-
     def load(self, s_symbol):
         raise NotImplementedError
+
+
+class AbstractCachingProvider(AbstractProvider):
 
     def update(self, s_symbol, c_dataFrame):
         raise NotImplementedError
@@ -34,11 +34,8 @@ class Provider(AbstractProvider):
         for provider in lc_providers:
             provider.update(s_symbol, data)
 
-    def update(self, s_symbol, c_dataFrame):
-        raise NotImplementedError
 
-
-class CachedProvider(AbstractProvider):
+class CachedProvider(AbstractCachingProvider):
 
     def __init__(self, c_dataMap):
         AbstractProvider.__init__(self)
