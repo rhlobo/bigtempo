@@ -53,3 +53,6 @@ Thumbs.db
 
 ### Output files
 /output/
+
+### Personal configurations
+/.codeintel

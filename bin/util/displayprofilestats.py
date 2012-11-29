@@ -14,7 +14,7 @@ def printStats(filename):
 def main():
     argcount = len(sys.argv)
     if argcount != 2:
-        print 'usage: ./displayprofilestats.py file [packageFilterStr]'
+        print 'usage: ./displayprofilestats.py file'
         sys.exit(1)
 
     filename = sys.argv[1]

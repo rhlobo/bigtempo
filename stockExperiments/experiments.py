@@ -32,7 +32,3 @@ def plot(ll_data, s_symbol, s_xAxDesc, s_yAxDesc):
 
 if __name__ == '__main__':
     main()
-
-# TODO Logging
-# TODO Remove AbstractProvider ?
-# TODO Write tests

@@ -1,6 +1,6 @@
 
 from providers.base import *
-from providers.rawdata import *
+from providers.raw import *
 
 
 def get():
