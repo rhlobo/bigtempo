@@ -34,9 +34,10 @@ pip-log.txt
 *.log
 *.sql
 *.sqlite
-.coverage
-coverage
-cover
+/.coverage
+/coverage/
+/cover/
+/profile/
 .tox
 nosetests.xml
 
@@ -51,4 +52,4 @@ ehthumbs.db
 Thumbs.db
 
 ### Output files
-output
+/output/
