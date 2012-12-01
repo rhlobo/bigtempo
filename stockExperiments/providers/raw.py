@@ -1,4 +1,4 @@
-import data.cotahist.cotahist as cotahist
+import sources.cotahist as cotahist
 from base import *
 
 

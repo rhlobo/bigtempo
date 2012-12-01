@@ -63,6 +63,6 @@ class SymbolMap(object):
         self.c_dataMap = {}
 
     def get(self, s_symbol):
-        if s_symbol not in self.c_dataMap:
+        if self.c_dataMap.get(s_symbol) is None:
             self.c_dataMap[s_symbol] = {}
         return self.c_dataMap[s_symbol]

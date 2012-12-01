@@ -1,4 +1,3 @@
-
 import os
 import bovespaparser.bovespaparser as bp
 
@@ -14,4 +13,4 @@ def __parseFile(filename):
 
 def __getFilepath(name):
     path = os.path.split(__file__)[0]
-    return os.path.join(path, name)
+    return os.path.join(os.path.join(path, "data"), name)
