@@ -4,14 +4,25 @@ import urllib2
 import collections
 import csv
 import datetime
-import decimal
+
+
+_FIELDS = {
+    'l1': 'price',
+    'r0': 'pe_ratio',
+}
+_FIELDS_REMOTE = _FIELDS.keys()
+_FIELDS_TUPLE = collections.namedtuple('CurrentValues', _FIELDS.values())
+_DIVIDENDS_TUPLE = collections.namedtuple('Dividend', 'date amount')
+_SPLITS_TUPLE = collections.namedtuple('Split', 'date before after')
 
 
 def convert_string(field, strptime_string=None, strptime_cache={}):
     if '-' in field:
         return datetime.date(*map(int, field.split('-')))
+    elif '.' in field:
+        return float(field)
     else:
-        return decimal.Decimal(field)
+        return int(field)
 
 
 def _ichart_request(symbol, start_date, end_date, extra_params=[], resource='table.csv'):
@@ -45,26 +56,24 @@ def historical_prices(symbol, start_date=None, end_date=None):
         response.close()
 
 
-_DIVIDENDS_TUPLE = collections.namedtuple('Dividend', 'date amount')
 def dividends(symbol, start_date=None, end_date=None):
     response = _ichart_request(symbol, start_date, end_date, extra_params=['g=v'])
     try:
         raw = csv.reader(response)
 
-        next(raw) # remove directives row
+        next(raw)  # remove directives row
         return [_DIVIDENDS_TUPLE(*map(convert_string, row)) for row in raw]
     finally:
         response.close()
 
 
-_SPLITS_TUPLE = collections.namedtuple('Split', 'date before after')
 def splits(symbol, start_date=None, end_date=None):
     # What the hell is 'x'?  I really hate Yahoo API...
     response = _ichart_request(symbol, start_date, end_date, extra_params=['g=v'], resource='x')
     try:
         raw = csv.reader(response)
 
-        next(raw) # remove directives row. Useless AND wrong this time!
+        next(raw)  # remove directives row. Useless AND wrong this time!
         splits = []
         for row in raw:
             if row[0].lower() != 'split':
@@ -80,12 +89,6 @@ def splits(symbol, start_date=None, end_date=None):
         response.close()
 
 
-_FIELDS = {
-    'l1': 'price',
-    'r0': 'pe_ratio',
-}
-_FIELDS_REMOTE = _FIELDS.keys()
-_FIELDS_TUPLE = collections.namedtuple('CurrentValues', _FIELDS.values())
 def current_values(symbol):
     params = ['s=%s' % symbol, 'f=%s' % ''.join(_FIELDS_REMOTE)]
 
