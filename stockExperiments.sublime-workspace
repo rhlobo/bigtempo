@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"j",
+				"jqXHR"
+			],
+			[
+				"co",
+				"container_id"
+			],
+			[
 				"s",
 				"struct"
 			],
@@ -111,18 +119,15 @@
 			"file": "stockExperiments/ipyghstocks/options.py",
 			"settings":
 			{
-				"buffer_size": 1216,
+				"buffer_size": 2017,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "# *-* encoding: UTF-8 *-*\n\nfrom IPython.display import HTML as export\nimport random\n\n\ndef plot():\n    cid = __generate_id()\n    html = __importLibs() + __generate_container_html(cid) + __generate_javascript(cid)\n    return export(html)\n\n\ndef __generate_javascript(container_id):\n    return __script__ % (container_id, container_id, container_id)\n\n\ndef __generate_container_html(container_id):\n    return '<div id=\"%s\" style=\"height: 500px; min-width: 500px; border: 1px solid gray;\"></div>​' % (container_id)\n\n\ndef __generate_id():\n    return 'c%030x' % random.randrange(256 ** 15)\n\n\n__importedLibs__ = False\n\n\ndef importLibs():\n    return export(__importLibs)\n\n\ndef __importLibs():\n    global __importedLibs__\n    if __importedLibs__ is True:\n        return \"\"\n    __importedLibs__ = True\n    return '''\n            <script>\n                $.getScript(\"http://code.highcharts.com/stock/highstock.src.js\", function(script, textStatus, jqXHR) {\n                    $.getScript(\"http://code.highcharts.com/stock/modules/exporting.js\");\n                });\n            </script>\n           '''\n\n\n__script__ = '''\n         <script>\n            function draw%s() {\n                $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {\n\n                    // split the data set into ohlc and volume\n                    var ohlc = [],\n                        volume = [],\n                        dataLength = data.length;\n\n                    for (i = 0; i < dataLength; i++) {\n                        ohlc.push([\n                            data[i][0], // the date\n                            data[i][1], // open\n                            data[i][2], // high\n                            data[i][3], // low\n                            data[i][4] // close\n                        ]);\n\n                        volume.push([\n                            data[i][0], // the date\n                            data[i][5] // the volume\n                        ])\n                    }\n\n                    // set the allowed units for data grouping\n                    var groupingUnits = [[\n                        'week',                         // unit name\n                        [1]                             // allowed multiples\n                    ], [\n                        'month',\n                        [1, 2, 3, 4, 6]\n                    ]];\n\n                    // create the chart\n                    chart = new Highcharts.StockChart({\n                        chart: {\n                            renderTo: '%s',\n                            alignTicks: false\n                        },\n\n                        rangeSelector: {\n                            selected: 1\n                        },\n\n                        title: {\n                            text: 'AAPL Historical'\n                        },\n\n                        yAxis: [{\n                            title: {\n                                text: 'OHLC'\n                            },\n                            height: 200,\n                            lineWidth: 2\n                        }, {\n                            title: {\n                                text: 'Volume'\n                            },\n                            top: 300,\n                            height: 100,\n                            offset: 0,\n                            lineWidth: 2\n                        }],\n\n                        series: [{\n                            type: 'candlestick',\n                            name: 'AAPL',\n                            data: ohlc,\n                            dataGrouping: {\n                                units: groupingUnits\n                            }\n                        }, {\n                            type: 'column',\n                            name: 'Volume',\n                            data: volume,\n                            yAxis: 1,\n                            dataGrouping: {\n                                units: groupingUnits\n                            }\n                        }]\n                    });\n\n                });\n            }\n            setTimeout('draw%s()',500);\n         </script>\n        '''\n",
-			"file": "stockExperiments/ipyghstocks/ipyghstocks.py",
-			"file_size": 4217,
-			"file_write_time": 1355314907000000,
+			"file": "stockExperiments/ipyghstocks/chart.py",
 			"settings":
 			{
-				"buffer_size": 4214,
+				"buffer_size": 1528,
 				"line_ending": "Unix"
 			}
 		}
@@ -171,6 +176,9 @@
 	},
 	"file_history":
 	[
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/__init__.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
 		"/data/dev/workspace-py/stockExperiments/bin/util/displayprofilestats.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/options.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/dateutils_tests.py",
@@ -186,9 +194,7 @@
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/pynvest.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/ystockquote.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/locator.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/__init__.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/typetraversal.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator_tests.py",
 		"/data/dev/workspace-py/stockExperiments/docs/NAMING_CONVENTIONS.md",
@@ -238,6 +244,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"options",
+			"\");\n",
+			"                             <script>\n                                function draw${cid}() {\n                                    alert(\"4\");\n                                    window.chart = new Highcharts.StockChart(${code});\n                                }\n                             </script>\n                            ''')\n",
+			"__generate_container_html",
+			"__HighChartsOptions",
+			"as_dict",
+			"HighChartsOptions",
+			"struct",
 			"Clazz",
 			"s_symbol",
 			"c_dataFrame",
@@ -273,15 +287,15 @@
 					"file": "stockExperiments/ipyghstocks/options.py",
 					"settings":
 					{
-						"buffer_size": 1216,
+						"buffer_size": 2017,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1216,
-								1216
+								1228,
+								1228
 							]
 						],
 						"settings":
@@ -377,7 +391,7 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 353.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -390,18 +404,18 @@
 			[
 				{
 					"buffer": 1,
-					"file": "stockExperiments/ipyghstocks/ipyghstocks.py",
+					"file": "stockExperiments/ipyghstocks/chart.py",
 					"settings":
 					{
-						"buffer_size": 4214,
+						"buffer_size": 1528,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3805,
-								3805
+								27,
+								27
 							]
 						],
 						"settings":
@@ -497,7 +511,7 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1221.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -543,6 +557,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 102.0
+	},
 	"replace":
 	{
 		"height": 66.0
