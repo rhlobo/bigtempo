@@ -1,6 +1,7 @@
 import unittest
 from mockito import mock, when, verify, inorder, any as anyv
-from providers.base import AbstractProvider, AbstractCachingProvider, Provider, CachedProvider, SymbolMap, SymbolMapFactory
+import util.classutils as classutils
+from providers.base import AbstractProvider, AbstractCachingProvider, RawProvider, ProviderChainManager, CachedProvider, SymbolMap, SymbolMapFactory
 
 
 class TestAbstractProvider(unittest.TestCase):
@@ -8,6 +9,10 @@ class TestAbstractProvider(unittest.TestCase):
     def test_should_have_load_method_with_symbol_argument(self):
         p = AbstractProvider()
         self.assertRaises(NotImplementedError, p.load, "")
+
+    def test_should_have_typifies_method_without_arguments(self):
+        p = AbstractProvider()
+        self.assertRaises(NotImplementedError, p.typifies)
 
 
 class TestAbstractCachingProvider(unittest.TestCase):
@@ -17,14 +22,28 @@ class TestAbstractCachingProvider(unittest.TestCase):
         self.assertRaises(NotImplementedError, p.update, "", object())
 
 
-class TestProvider(unittest.TestCase):
+class TestRawProvider(unittest.TestCase):
+
+    def test_typifies_should_return_class(self):
+        p = RawProvider()
+        assert p.typifies() is p.__class__
+        assert p.typifies() is RawProvider
+
+    def test_subclasses_typifies_should_return_class(self):
+        l_instances = classutils.instantiate(classutils.get_all_subclasses(RawProvider))
+        for instance in l_instances:
+            assert instance.typifies() is instance.__class__
+            assert isinstance(instance, RawProvider)
+
+
+class TestProviderChainManager(unittest.TestCase):
 
     def test_should_subclass_abstractProvider(self):
-        provider = Provider()
+        provider = ProviderChainManager()
         assert isinstance(provider, AbstractProvider)
 
     def test_load_should_return_None_if_no_providers_where_registered(self):
-        provider = Provider()
+        provider = ProviderChainManager()
         assert provider.load("") is None
 
     def test_load_should_delegate_to_registered_providers(self):
@@ -37,7 +56,7 @@ class TestProvider(unittest.TestCase):
         when(providerMock2).load(s_symbol).thenReturn(None)
         when(providerMock3).load(s_symbol).thenReturn(None)
 
-        provider = Provider(providerMock1, providerMock2, providerMock3)
+        provider = ProviderChainManager(providerMock1, providerMock2, providerMock3)
         provider.load(s_symbol)
 
         inorder.verify(providerMock1, times=1).load(s_symbol)
@@ -55,7 +74,7 @@ class TestProvider(unittest.TestCase):
         when(providerMock2).load(s_symbol).thenReturn(l_data)
         when(providerMock3).load(s_symbol).thenReturn(None)
 
-        provider = Provider(providerMock1, providerMock2, providerMock3)
+        provider = ProviderChainManager(providerMock1, providerMock2, providerMock3)
         result = provider.load(s_symbol)
 
         assert result == l_data
@@ -74,7 +93,7 @@ class TestProvider(unittest.TestCase):
         when(providerMock2).load(s_symbol).thenReturn(None)
         when(providerMock3).load(s_symbol).thenReturn(l_data)
 
-        provider = Provider(providerMock1, providerMock2, providerMock3)
+        provider = ProviderChainManager(providerMock1, providerMock2, providerMock3)
         result = provider.load(s_symbol)
 
         assert result == l_data
@@ -85,6 +104,14 @@ class TestProvider(unittest.TestCase):
         inorder.verify(providerMock3, times=0).update(anyv(), anyv())
         inorder.verify(providerMock2, times=1).update(s_symbol, l_data)
         inorder.verify(providerMock1, times=1).update(s_symbol, l_data)
+
+    def test_typifies_should_delegate_to_base_provider(self):
+        providerMock1 = mock(AbstractProvider)
+        providerMock2 = mock(AbstractProvider)
+        providerMock3 = mock(AbstractProvider)
+        when(providerMock3).typifies().thenReturn(providerMock3.__class__)
+        provider = ProviderChainManager(providerMock1, providerMock2, providerMock3)
+        assert provider.typifies() is providerMock3.__class__
 
 
 class TestCachedProvider(unittest.TestCase):

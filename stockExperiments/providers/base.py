@@ -2,22 +2,38 @@
 
 class AbstractProvider(object):
 
-    def load(self, s_symbol):
+    def load(self, s_symbol, da_start=None, da_end=None):
+        raise NotImplementedError
+
+    def typifies(self):
         raise NotImplementedError
 
 
 class AbstractCachingProvider(AbstractProvider):
 
+    def __init__(self):
+        AbstractProvider.__init__(self)
+
     def update(self, s_symbol, c_dataFrame):
         raise NotImplementedError
 
 
-class Provider(AbstractProvider):
+class RawProvider(AbstractProvider):
+
+    def __init__(self):
+        AbstractProvider.__init__(self)
+
+    def typifies(self):
+        return self.__class__
+
+
+class ProviderChainManager(AbstractProvider):
 
     def __init__(self, *providers):
+        AbstractProvider.__init__(self)
         self.providers = providers
 
-    def load(self, s_symbol):
+    def load(self, s_symbol, da_start=None, da_end=None):
         lc_providers = []
         for provider in self.providers:
             result = provider.load(s_symbol)
@@ -34,14 +50,17 @@ class Provider(AbstractProvider):
         for provider in lc_providers:
             provider.update(s_symbol, data)
 
+    def typifies(self):
+        return self.providers[-1].typifies()
+
 
 class CachedProvider(AbstractCachingProvider):
 
     def __init__(self, c_dataMap):
-        AbstractProvider.__init__(self)
+        AbstractCachingProvider.__init__(self)
         self.c_dataMap = c_dataMap
 
-    def load(self, s_symbol):
+    def load(self, s_symbol, da_start=None, da_end=None):
         c_dataFrame = self.c_dataMap.get(s_symbol)
         if len(c_dataFrame) == 0:
             return None

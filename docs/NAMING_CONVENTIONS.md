@@ -23,3 +23,4 @@ Prefix	 	Type	 				Examples
 na_*	 	Numpy Array	 			l_index
 ts_*	 	Pandas TimeSeries	 	ts_close
 df_*	 	Pandas DataFrame	 	df_close
+m_*			Mock

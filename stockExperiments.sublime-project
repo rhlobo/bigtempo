@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "/data/dev/workspace-py/stockExperiments"
+		}
+	],
+    "settings":
+    {
+        "SublimeLinter":
+        {
+		    "pep8_ignore":
+		    [
+		        "E501"
+		    ]
+        }
+    }
+}

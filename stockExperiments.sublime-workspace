@@ -1,0 +1,613 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"s",
+				"struct"
+			],
+			[
+				"C",
+				"CANDLESTICK"
+			],
+			[
+				"date",
+				"datetime"
+			],
+			[
+				"f",
+				"False"
+			],
+			[
+				"__",
+				"__importLibs"
+			],
+			[
+				"im",
+				"importedLibs"
+			],
+			[
+				"imp",
+				"importLibs"
+			],
+			[
+				"l_",
+				"l_mock"
+			],
+			[
+				"Mok",
+				"Mock3"
+			],
+			[
+				"Mo",
+				"Mock2"
+			],
+			[
+				"l",
+				"l_providers"
+			],
+			[
+				"pro",
+				"providerLoader"
+			],
+			[
+				"clas",
+				"classutils"
+			],
+			[
+				"Mock",
+				"MockClass2"
+			],
+			[
+				"Class",
+				"MockClass"
+			],
+			[
+				"Pro",
+				"ProviderLoader"
+			],
+			[
+				"p",
+				"providerClass"
+			],
+			[
+				"ar",
+				"argcount"
+			],
+			[
+				"a",
+				"argcount"
+			],
+			[
+				"prin",
+				"printStats"
+			],
+			[
+				"is",
+				"isinstance"
+			],
+			[
+				"da",
+				"dataMock"
+			],
+			[
+				"S",
+				"SymbolMap"
+			],
+			[
+				"new",
+				"newDataMock"
+			],
+			[
+				"assert",
+				"assertRaises  (function)"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "stockExperiments/ipyghstocks/options.py",
+			"settings":
+			{
+				"buffer_size": 1216,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "# *-* encoding: UTF-8 *-*\n\nfrom IPython.display import HTML as export\nimport random\n\n\ndef plot():\n    cid = __generate_id()\n    html = __importLibs() + __generate_container_html(cid) + __generate_javascript(cid)\n    return export(html)\n\n\ndef __generate_javascript(container_id):\n    return __script__ % (container_id, container_id, container_id)\n\n\ndef __generate_container_html(container_id):\n    return '<div id=\"%s\" style=\"height: 500px; min-width: 500px; border: 1px solid gray;\"></div>​' % (container_id)\n\n\ndef __generate_id():\n    return 'c%030x' % random.randrange(256 ** 15)\n\n\n__importedLibs__ = False\n\n\ndef importLibs():\n    return export(__importLibs)\n\n\ndef __importLibs():\n    global __importedLibs__\n    if __importedLibs__ is True:\n        return \"\"\n    __importedLibs__ = True\n    return '''\n            <script>\n                $.getScript(\"http://code.highcharts.com/stock/highstock.src.js\", function(script, textStatus, jqXHR) {\n                    $.getScript(\"http://code.highcharts.com/stock/modules/exporting.js\");\n                });\n            </script>\n           '''\n\n\n__script__ = '''\n         <script>\n            function draw%s() {\n                $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {\n\n                    // split the data set into ohlc and volume\n                    var ohlc = [],\n                        volume = [],\n                        dataLength = data.length;\n\n                    for (i = 0; i < dataLength; i++) {\n                        ohlc.push([\n                            data[i][0], // the date\n                            data[i][1], // open\n                            data[i][2], // high\n                            data[i][3], // low\n                            data[i][4] // close\n                        ]);\n\n                        volume.push([\n                            data[i][0], // the date\n                            data[i][5] // the volume\n                        ])\n                    }\n\n                    // set the allowed units for data grouping\n                    var groupingUnits = [[\n                        'week',                         // unit name\n                        [1]                             // allowed multiples\n                    ], [\n                        'month',\n                        [1, 2, 3, 4, 6]\n                    ]];\n\n                    // create the chart\n                    chart = new Highcharts.StockChart({\n                        chart: {\n                            renderTo: '%s',\n                            alignTicks: false\n                        },\n\n                        rangeSelector: {\n                            selected: 1\n                        },\n\n                        title: {\n                            text: 'AAPL Historical'\n                        },\n\n                        yAxis: [{\n                            title: {\n                                text: 'OHLC'\n                            },\n                            height: 200,\n                            lineWidth: 2\n                        }, {\n                            title: {\n                                text: 'Volume'\n                            },\n                            top: 300,\n                            height: 100,\n                            offset: 0,\n                            lineWidth: 2\n                        }],\n\n                        series: [{\n                            type: 'candlestick',\n                            name: 'AAPL',\n                            data: ohlc,\n                            dataGrouping: {\n                                units: groupingUnits\n                            }\n                        }, {\n                            type: 'column',\n                            name: 'Volume',\n                            data: volume,\n                            yAxis: 1,\n                            dataGrouping: {\n                                units: groupingUnits\n                            }\n                        }]\n                    });\n\n                });\n            }\n            setTimeout('draw%s()',500);\n         </script>\n        '''\n",
+			"file": "stockExperiments/ipyghstocks/ipyghstocks.py",
+			"file_size": 4217,
+			"file_write_time": 1355314907000000,
+			"settings":
+			{
+				"buffer_size": 4214,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 79.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ori",
+				"Origami: Create Pane on the Right"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 588.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/data/dev/workspace-py/stockExperiments/bin/util/displayprofilestats.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/options.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/dateutils_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/dateutils.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/ipythonutils.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments.sublime-project",
+		"/data/resemblanceProfiles/oncast-linux-PC/config/.config/sublime-text-2/Packages/User/SublimeLinter.sublime-settings",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/ipython.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/classutils.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/classutils_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/classutils_testmocks.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/__init__.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/pynvest.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/ystockquote.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/locator.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/__init__.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/typetraversal.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator_tests.py",
+		"/data/dev/workspace-py/stockExperiments/docs/NAMING_CONVENTIONS.md",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/cotahist.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/ystockquote.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/base_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/pynvest.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/experiments.py",
+		"/data/dev/workspace-py/stockExperiments/docs/TODO.md",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/raw_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/__init__.py",
+		"/data/resemblanceProfiles/oncast-linux-PC/config/.config/sublime-text-2/Packages/User/Python.sublime-settings",
+		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_providers_base.html",
+		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_providers_rawdata.html",
+		"/data/dev/workspace-py/stockExperiments/bin/profile.sh",
+		"/data/dev/workspace-py/stockExperiments/example/template.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/rawdata.py",
+		"/data/dev/workspace-py/stockExperiments/__init__.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/cotahist/cotahist.py",
+		"/data/dev/workspace-py/stockExperiments/bin/runtests.sh",
+		"/data/dev/workspace-py/stockExperiments/runtests.sh",
+		"/data/dev/workspace-py/stockExperiments/test.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/tests/provider_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/__init__.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/provider.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/providers.py",
+		"/data/dev/workspace-py/stockExperiments/output/PETR4.png",
+		"/data/dev/workspace-py/stockExperiments/README.md",
+		"/data/dev/workspace-py/stockExperiments/deprecated/files/data.csv",
+		"/data/dev/workspace-py/stockExperiments/"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Clazz",
+			"s_symbol",
+			"c_dataFrame",
+			"assert_method_not_implemented",
+			"#!/",
+			"alr+n",
+			"new_f",
+			"advanced"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"MockClass",
+			"data"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "stockExperiments/ipyghstocks/options.py",
+					"settings":
+					{
+						"buffer_size": 1216,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1216,
+								1216
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 353.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "stockExperiments/ipyghstocks/ipyghstocks.py",
+					"settings":
+					{
+						"buffer_size": 4214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3805,
+								3805
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1221.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"ya",
+				"bin/util/displayprofilestats.py"
+			],
+			[
+				"op",
+				"stockExperiments/ipyghstocks/options.py"
+			],
+			[
+				"dateutt",
+				"stockExperiments/util/tests/dateutils_tests.py"
+			],
+			[
+				"ip",
+				"stockExperiments/util/ipythonutils.py"
+			],
+			[
+				"base",
+				"stockExperiments/providers/base.py"
+			],
+			[
+				"lo",
+				"stockExperiments/providers/tests/locator_tests.py"
+			],
+			[
+				"namin",
+				"docs/NAMING_CONVENTIONS.md"
+			],
+			[
+				"y",
+				"stockExperiments/sources/ystockquote.py"
+			],
+			[
+				"ex",
+				"stockExperiments/experiments.py"
+			],
+			[
+				"raw",
+				"stockExperiments/providers/rawdata.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 247.0,
+	"status_bar_visible": true
+}
