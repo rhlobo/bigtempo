@@ -11,7 +11,7 @@ class HighChartsOptions(object):
         return self.asDict
 
 
-class OptionBuilder(HighChartsOptions):
+class Options(HighChartsOptions):
 
     def __init__(self, title='ipyghstocks'):
         self.asDict = {
