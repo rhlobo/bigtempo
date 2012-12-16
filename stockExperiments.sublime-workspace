@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"_",
+				"_generate_id"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
 				"j",
 				"jqXHR"
 			],
@@ -116,10 +124,18 @@
 	"buffers":
 	[
 		{
+			"file": "stockExperiments/ipyghstocks/tests/chart_tests.py",
+			"settings":
+			{
+				"buffer_size": 4273,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "stockExperiments/ipyghstocks/options.py",
 			"settings":
 			{
-				"buffer_size": 2017,
+				"buffer_size": 1976,
 				"line_ending": "Unix"
 			}
 		},
@@ -127,7 +143,15 @@
 			"file": "stockExperiments/ipyghstocks/chart.py",
 			"settings":
 			{
-				"buffer_size": 1528,
+				"buffer_size": 1529,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "stockExperiments/providers/tests/base_tests.py",
+			"settings":
+			{
+				"buffer_size": 8025,
 				"line_ending": "Unix"
 			}
 		}
@@ -176,11 +200,16 @@
 	},
 	"file_history":
 	[
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/__init__.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
-		"/data/dev/workspace-py/stockExperiments/bin/util/displayprofilestats.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/options.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/locator.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/cotahist.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/classutils_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/experiments.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/__init__.py",
+		"/data/dev/workspace-py/stockExperiments/bin/util/displayprofilestats.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/dateutils_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/dateutils.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/ipythonutils.py",
@@ -188,21 +217,16 @@
 		"/data/resemblanceProfiles/oncast-linux-PC/config/.config/sublime-text-2/Packages/User/SublimeLinter.sublime-settings",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/ipython.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/classutils.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/classutils_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/classutils_testmocks.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/__init__.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/pynvest.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/ystockquote.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/locator.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/__init__.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/typetraversal.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator_tests.py",
 		"/data/dev/workspace-py/stockExperiments/docs/NAMING_CONVENTIONS.md",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/cotahist.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/ystockquote.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/base_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/pynvest.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/experiments.py",
 		"/data/dev/workspace-py/stockExperiments/docs/TODO.md",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/raw_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/__init__.py",
@@ -233,7 +257,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 95.0,
 		"where_history":
 		[
 			""
@@ -244,6 +268,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_generate_html",
+			"Mock3",
+			"Mock2",
+			"Mock1",
+			"MockClass",
+			"__getFilepath",
+			"__parseFile",
+			"__createSeries",
+			"__stock_locator",
+			"__updateProviders",
+			"__^[\\w*]__",
+			"__",
 			"options",
 			"\");\n",
 			"                             <script>\n                                function draw${cid}() {\n                                    alert(\"4\");\n                                    window.chart = new Highcharts.StockChart(${code});\n                                }\n                             </script>\n                            ''')\n",
@@ -267,6 +303,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"_",
 			"MockClass",
 			"data"
 		],
@@ -284,18 +321,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "stockExperiments/ipyghstocks/options.py",
+					"file": "stockExperiments/ipyghstocks/tests/chart_tests.py",
 					"settings":
 					{
-						"buffer_size": 2017,
+						"buffer_size": 4273,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1228,
-								1228
+								1510,
+								1510
 							]
 						],
 						"settings":
@@ -391,7 +428,121 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "stockExperiments/ipyghstocks/options.py",
+					"settings":
+					{
+						"buffer_size": 1976,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								221,
+								221
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -403,19 +554,139 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "stockExperiments/ipyghstocks/chart.py",
 					"settings":
 					{
-						"buffer_size": 1528,
+						"buffer_size": 1529,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								27,
-								27
+								707,
+								707
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "stockExperiments/providers/tests/base_tests.py",
+					"settings":
+					{
+						"buffer_size": 8025,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -535,13 +806,19 @@
 				0,
 				0,
 				1,
-				1
+				2
 			],
 			[
 				1,
 				0,
 				2,
 				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
 			]
 		],
 		"cols":
@@ -553,6 +830,7 @@
 		"rows":
 		[
 			0.0,
+			0.5,
 			1.0
 		]
 	},

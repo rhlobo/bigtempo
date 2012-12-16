@@ -5,13 +5,13 @@ CANDLESTICK, COLUMN = 'candlestick', 'column'
 GROUPING_UNITS = [['week', [1]], ['month', [1, 2, 3, 4, 6]]]
 
 
-class HighChartsOptions(object):
+class _AbstractHighChartsOptions(object):
 
     def asDict(self):
         return self.asDict
 
 
-class Options(HighChartsOptions):
+class Options(_AbstractHighChartsOptions):
 
     def __init__(self, title='ipyghstocks'):
         self.asDict = {
@@ -49,16 +49,16 @@ class Options(HighChartsOptions):
 
     def json(self, renderTo):
         self.asDict['chart']['renderTo'] = renderTo
-        return json.dumps(self, cls=HighChartsOptionsJSONEncoder)
+        return json.dumps(self, cls=_AbstractHighChartsOptionsJSONEncoder)
 
     def add(self, obj):
-        if not isinstance(obj, HighChartsOptions):
+        if not isinstance(obj, _AbstractHighChartsOptions):
             raise ValueError
         self.asDict[('yAxis' if isinstance(obj, Axis) else 'series')].append(obj)
         return self
 
 
-class Axis(HighChartsOptions):
+class Axis(_AbstractHighChartsOptions):
 
     def __init__(self, name, lineWidth=2):
         self.asDict = {
@@ -72,7 +72,7 @@ class Axis(HighChartsOptions):
         }
 
 
-class Series(HighChartsOptions):
+class Series(_AbstractHighChartsOptions):
 
     def __init__(self, name, data, chartType=CANDLESTICK, yAxisIndex=0, dataGroupingUnits=GROUPING_UNITS):
         self.asDict = {
@@ -92,9 +92,9 @@ class Series(HighChartsOptions):
         }
 
 
-class HighChartsOptionsJSONEncoder(json.JSONEncoder):
+class _AbstractHighChartsOptionsJSONEncoder(json.JSONEncoder):
 
     def default(self, obj):
-        if isinstance(obj, HighChartsOptions):
+        if isinstance(obj, _AbstractHighChartsOptions):
             return obj.asDict
         return json.JSONEncoder.default(self, obj)
