@@ -39,8 +39,8 @@ class OptionBuilder(HighChartsOptions):
                     'color': 'red',
 
                     'upColor': 'blue'
-            }
-        },
+                }
+            },
 
             'yAxis': [],
 
@@ -60,15 +60,13 @@ class OptionBuilder(HighChartsOptions):
 
 class Axis(HighChartsOptions):
 
-    def __init__(self, name, height=300, lineWidth=2):
+    def __init__(self, name, lineWidth=2):
         self.asDict = {
 
             'title':  {
 
                 'text': name
             },
-
-            'height': height,
 
             'lineWidth': lineWidth,
         }
