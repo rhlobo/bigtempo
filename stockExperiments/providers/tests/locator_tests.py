@@ -56,7 +56,7 @@ class TestLocator(unittest.TestCase):
 
     def test_get_without_params_should_return_all_providers(self):
         providerLoader = mock(locator.ProviderLoader)
-        l_providerMocks = [Mock1(), Mock2(), Mock3()]
+        l_providerMocks = [_Mock1(), _Mock2(), _Mock3()]
         when(providerLoader).load().thenReturn(l_providerMocks)
 
         c_locator = locator.Locator(providerLoader)
@@ -69,7 +69,7 @@ class TestLocator(unittest.TestCase):
 
     def test_get_with_provider_class_as_param_should_return_all_providers(self):
         providerLoader = mock(locator.ProviderLoader)
-        l_providerMocks = [Mock1(), Mock2(), Mock3()]
+        l_providerMocks = [_Mock1(), _Mock2(), _Mock3()]
         when(providerLoader).load().thenReturn(l_providerMocks)
 
         c_locator = locator.Locator(providerLoader)
@@ -78,13 +78,13 @@ class TestLocator(unittest.TestCase):
             assert c_locator.get(l_mock.__class__) is not None
 
 
-class Mock1(base.RawProvider):
+class _Mock1(base.RawProvider):
     pass
 
 
-class Mock2(base.RawProvider):
+class _Mock2(base.RawProvider):
     pass
 
 
-class Mock3(base.RawProvider):
+class _Mock3(base.RawProvider):
     pass

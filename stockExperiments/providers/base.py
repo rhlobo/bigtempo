@@ -41,12 +41,12 @@ class ProviderChainManager(AbstractProvider):
             if result is None:
                 lc_providers.append(provider)
             else:
-                self.__updateProviders(lc_providers, s_symbol, result)
+                self._updateProviders(lc_providers, s_symbol, result)
                 return result
 
         return None
 
-    def __updateProviders(self, lc_providers, s_symbol, data):
+    def _updateProviders(self, lc_providers, s_symbol, data):
         for provider in lc_providers:
             provider.update(s_symbol, data)
 

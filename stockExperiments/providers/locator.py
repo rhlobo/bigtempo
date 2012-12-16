@@ -39,7 +39,7 @@ class ProviderLazyLoadingChainBuider(object):
 
 
 def stock():
-    return __stock_locator
+    return _stock_locator
 
 
-__stock_locator = Locator(ProviderLoader(ProviderLazyLoadingChainBuider()))
+_stock_locator = Locator(ProviderLoader(ProviderLazyLoadingChainBuider()))

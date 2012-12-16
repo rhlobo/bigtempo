@@ -12,8 +12,8 @@ class YahooCotationProvider(RawProvider):
     def load(self, s_symbol, da_start=None, da_end=None):
         ll_data = zip(*pynvest.historical_prices(s_symbol + ".SA", da_start, da_end))
         ts_index = ll_data[0][::-1]
-        #return {s_name: self.__createSeries(ll_data[i_columnIndex], ts_index, s_name) for s_name, i_columnIndex in self.mapping}
-        return dict((s_name, self.__createSeries(ll_data[i_columnIndex], ts_index, s_name)) for s_name, i_columnIndex in self.mapping)
+        #return {s_name: self._createSeries(ll_data[i_columnIndex], ts_index, s_name) for s_name, i_columnIndex in self.mapping}
+        return dict((s_name, self._createSeries(ll_data[i_columnIndex], ts_index, s_name)) for s_name, i_columnIndex in self.mapping)
 
-    def __createSeries(self, data, ts_index, s_name):
+    def _createSeries(self, data, ts_index, s_name):
         return pandas.TimeSeries(data, index=ts_index, name=s_name)
