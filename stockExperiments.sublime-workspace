@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"se",
+				"series"
+			],
+			[
 				"_",
 				"_generate_id"
 			],
@@ -124,18 +128,10 @@
 	"buffers":
 	[
 		{
-			"file": "stockExperiments/ipyghstocks/tests/chart_tests.py",
+			"file": "stockExperiments/ipyghstocks/tests/options_tests.py",
 			"settings":
 			{
-				"buffer_size": 4273,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "stockExperiments/ipyghstocks/options.py",
-			"settings":
-			{
-				"buffer_size": 1976,
+				"buffer_size": 3276,
 				"line_ending": "Unix"
 			}
 		},
@@ -148,10 +144,37 @@
 			}
 		},
 		{
+			"file": "stockExperiments/ipyghstocks/options.py",
+			"settings":
+			{
+				"buffer_size": 2026,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "stockExperiments/providers/tests/base_tests.py",
 			"settings":
 			{
 				"buffer_size": 8025,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "import unittest\nfrom mockito import mock, when, verify, unstub, any as anyv\nimport re\nimport ipyghstocks.chart as chart\n\n\nclass TestPlot(unittest.TestCase):\n\n    def test_plot_should_importlibs_generate_id_once_and_use_it_on_rest(self):\n        container_id = 'random'\n\n        options = mock(chart.options.Options)\n        when(options).json().thenReturn('')\n        when(chart)._generate_id().thenReturn(container_id)\n        when(chart)._generate_container_html(container_id).thenReturn('')\n        when(chart)._generate_javascript(container_id, anyv()).thenReturn('')\n        when(chart)._importLibs(container_id).thenReturn('')\n\n        chart.plot(options)\n        verify(chart, times=1)._generate_id()\n        verify(chart, times=1)._generate_container_html(container_id)\n        verify(chart, times=1)._generate_javascript(container_id, anyv())\n        verify(chart, times=1)._importLibs(container_id)\n        unstub()\n\n\nclass TestIpyghstocksChartModuleGenerateIdFunction(unittest.TestCase):\n\n    def __init__(self, a):\n        unittest.TestCase.__init__(self, a)\n        self.testloops = 100\n\n    def test_generate_id_function_should_always_return_different_ids(self):\n        ids = {}\n        for i in range(self.testloops):\n            generated = chart._generate_id()\n            assert ids.get(generated) is None\n            ids[generated] = generated\n\n    def test_generate_id_function_should_always_starts_with_alpha(self):\n        for i in range(self.testloops):\n            generated = chart._generate_id()\n            assert generated[0].isalpha()\n\n    def test_generate_id_function_should_be_long_enough(self):\n        for i in range(self.testloops):\n            generated = chart._generate_id()\n            assert len(generated) > 10\n\n    def test_generate_id_function_should_not_have_whitespaces(self):\n        regex = re.compile(r'\\s+')\n        for i in range(self.testloops):\n            generated = chart._generate_id()\n            assert regex.search(generated) is None\n\n\nclass TestIpyghstocksChartModuleGenerateHtmlFunction(unittest.TestCase):\n\n    def __init__(self, a):\n        unittest.TestCase.__init__(self, a)\n        self.regex = re.compile(r'<div\\s+id=\"(.*?)\"\\s+.*?/>', re.IGNORECASE)\n\n    def test_generate_container_html_should_return_div_tag(self):\n        generated = chart._generate_container_html('')\n        result = self.regex.search(generated)\n        assert result is not None\n\n    def test_generate_container_html_returned_tag_should_have_given_id(self):\n        container_id = \"container_id\"\n        generated = chart._generate_container_html(container_id)\n        result = self.regex.search(generated)\n        if result is not None:\n            assert result.group(1) == container_id\n\n\nclass TestIpyghstocksChartModuleGenerateJavascriptFunction(unittest.TestCase):\n\n    def test_generate_javascript_should_return_script_tag(self):\n        regex = re.compile(r'.*?<script>.*?</script>.*?', re.I | re.M | re.S)\n        generated = chart._generate_javascript('', '')\n        result = regex.search(generated)\n        assert result is not None\n\n    def test_generate_javascript_returned_script_should_have_js_function(self):\n        container_id = \"container_id\"\n        regex_str = (\n                     r'\\s*<script>.*?\\s+function draw' +\n                     container_id +\n                     r'\\(\\) \\{.*?\\}.*?</script>\\s*'\n                    )\n        regex = re.compile(regex_str, re.I | re.M | re.S)\n        generated = chart._generate_javascript(container_id, '')\n        result = regex.search(generated)\n        assert result is not None\n\n\nclass TestIpyghstocksChartModuleImportLibsFunction(unittest.TestCase):\n\n    def test_import_libs_should_return_script_tag(self):\n        regex = re.compile(r'.*?<script>.*?</script>.*?', re.I | re.M | re.S)\n        generated = chart._importLibs('')\n        result = regex.search(generated)\n        assert result is not None\n\n    def test_import_libs_returned_script_should_have_js_function_call(self):\n        container_id = \"container_id\"\n        regex_str = (\n                     r'\\s*<script>.*?\\s+draw' +\n                     container_id +\n                     r'\\(\\);.*?</script>\\s*'\n                    )\n        regex = re.compile(regex_str, re.I | re.M | re.S)\n        generated = chart._importLibs(container_id)\n        result = regex.search(generated)\n        assert result is not None\n",
+			"file": "stockExperiments/ipyghstocks/tests/chart_tests.py",
+			"file_size": 4273,
+			"file_write_time": 1355626511000000,
+			"settings":
+			{
+				"buffer_size": 4391,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "stockExperiments/providers/tests/locator_tests.py",
+			"settings":
+			{
+				"buffer_size": 3276,
 				"line_ending": "Unix"
 			}
 		}
@@ -200,8 +223,8 @@
 	},
 	"file_history":
 	[
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/options.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/locator.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
@@ -257,7 +280,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 95.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -268,6 +291,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"HighChartsOptions",
+			")\n",
 			"_generate_html",
 			"Mock3",
 			"Mock2",
@@ -321,18 +346,138 @@
 			[
 				{
 					"buffer": 0,
-					"file": "stockExperiments/ipyghstocks/tests/chart_tests.py",
+					"file": "stockExperiments/ipyghstocks/tests/options_tests.py",
 					"settings":
 					{
-						"buffer_size": 4273,
+						"buffer_size": 3276,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1510,
-								1510
+								3180,
+								3180
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "stockExperiments/ipyghstocks/chart.py",
+					"settings":
+					{
+						"buffer_size": 1529,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								465,
+								465
 							]
 						],
 						"settings":
@@ -434,19 +579,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "stockExperiments/ipyghstocks/options.py",
 					"settings":
 					{
-						"buffer_size": 1976,
+						"buffer_size": 2026,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								221,
-								221
+								2007,
+								2007
 							]
 						],
 						"settings":
@@ -542,7 +687,7 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1058.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -550,127 +695,7 @@
 			]
 		},
 		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "stockExperiments/ipyghstocks/chart.py",
-					"settings":
-					{
-						"buffer_size": 1529,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								707,
-								707
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110.0
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2.0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -685,8 +710,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								8025,
+								8025
 							]
 						],
 						"settings":
@@ -782,7 +807,235 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2917.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "stockExperiments/ipyghstocks/tests/chart_tests.py",
+					"settings":
+					{
+						"buffer_size": 4391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4391,
+								4391
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1251.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "stockExperiments/providers/tests/locator_tests.py",
+					"settings":
+					{
+						"buffer_size": 3276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3276,
+								3276
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 876.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -849,6 +1102,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"tests",
+				"stockExperiments/providers/tests/locator_tests.py"
+			],
+			[
+				"opt",
+				"stockExperiments/ipyghstocks/options.py"
+			],
 			[
 				"ya",
 				"bin/util/displayprofilestats.py"

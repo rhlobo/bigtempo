@@ -52,7 +52,7 @@ class Options(_AbstractHighChartsOptions):
         return json.dumps(self, cls=_AbstractHighChartsOptionsJSONEncoder)
 
     def add(self, obj):
-        if not isinstance(obj, _AbstractHighChartsOptions):
+        if not isinstance(obj, Axis) and not isinstance(obj, Series):
             raise ValueError
         self.asDict[('yAxis' if isinstance(obj, Axis) else 'series')].append(obj)
         return self
@@ -97,4 +97,4 @@ class _AbstractHighChartsOptionsJSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, _AbstractHighChartsOptions):
             return obj.asDict
-        return json.JSONEncoder.default(self, obj)
+        return obj
