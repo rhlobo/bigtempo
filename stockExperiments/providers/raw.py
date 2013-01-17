@@ -7,7 +7,7 @@ class YahooCotationProvider(RawProvider):
 
     def __init__(self):
         RawProvider.__init__(self)
-        self.mapping = [("open", 1), ("min", 3), ("max", 2), ("close", 4), ("volume", 5)]
+        self.mapping = [("open", 1), ("max", 2), ("min", 3), ("close", 4), ("volume", 5)]
 
     def load(self, s_symbol, da_start=None, da_end=None):
         ll_data = zip(*pynvest.historical_prices(s_symbol + ".SA", da_start, da_end))
