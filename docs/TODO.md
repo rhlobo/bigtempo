@@ -16,7 +16,6 @@ Functional
 TASKS
 =====
 
-- Test existing functions
 - Import cotahist data into existing providers
 -- Create update method into providers
 -- Test merging and updateing data into providers
