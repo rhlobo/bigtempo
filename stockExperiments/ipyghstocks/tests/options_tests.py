@@ -1,5 +1,9 @@
 import unittest
 import json
+import pandas
+import datetime
+import util.dateutils as dateutils
+import util.pandasutils as pandasutils
 import ipyghstocks.options as options
 
 
@@ -66,19 +70,41 @@ class TestOptions(unittest.TestCase):
         self.assertEqual(d_opts['series'][1]['name'], name2)
 
 
-class Test_AbstractHighChartsOptionsJSONEncoder(unittest.TestCase):
+class Test_HighChartsJSONEncoder(unittest.TestCase):
 
     def test_should_return_options_as_dict_when_Series(self):
-        encoder = options._AbstractHighChartsOptionsJSONEncoder()
+        encoder = options._HighChartsJSONEncoder()
         assert isinstance(encoder.default(options.Series('test', [])), dict)
 
     def test_should_return_options_as_dict_when_Axis(self):
-        encoder = options._AbstractHighChartsOptionsJSONEncoder()
+        encoder = options._HighChartsJSONEncoder()
         assert isinstance(encoder.default(options.Axis('test')), dict)
 
     def test_should_not_return_dict_when_not_AbstractHighChartsOptions(self):
-        encoder = options._AbstractHighChartsOptionsJSONEncoder()
+        encoder = options._HighChartsJSONEncoder()
         assert not isinstance(encoder.default([]), dict)
+
+    def test_should_convert_datetime_to_timestamp(self):
+        encoder = options._HighChartsJSONEncoder()
+        date = datetime.datetime(2000, 1, 1)
+        assert encoder.default(date) == dateutils.date_to_timestamp(date)
+
+    def test_should_convert_date_to_timestamp(self):
+        encoder = options._HighChartsJSONEncoder()
+        date = datetime.date(2000, 1, 1)
+        assert encoder.default(date) == dateutils.date_to_timestamp(date)
+
+    def test_should_convert_dataFrames(self):
+        encoder = options._HighChartsJSONEncoder()
+        data = self._createDataframe()
+        assert encoder.default(data) == pandasutils.dataframe_to_list_of_lists(data)
+
+    def _createDataframe(self):
+        d = {
+             'one': [1., 2., 3., 4.],
+             'two': [4., 3., 2., 1.]
+            }
+        return pandas.DataFrame(d)
 
 
 class _AbstractHighChartsOptions_Mock(options._AbstractHighChartsOptions):

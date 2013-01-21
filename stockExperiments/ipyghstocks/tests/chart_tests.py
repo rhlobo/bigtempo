@@ -14,11 +14,13 @@ class TestPlot(unittest.TestCase):
         when(chart)._generate_id().thenReturn(container_id)
         when(chart)._generate_container_html(container_id).thenReturn('')
         when(chart)._generate_javascript(container_id, anyv()).thenReturn('')
+        when(chart)._importLibs(container_id).thenReturn('')
 
         chart.plot(options)
         verify(chart, times=1)._generate_id()
         verify(chart, times=1)._generate_container_html(container_id)
         verify(chart, times=1)._generate_javascript(container_id, anyv())
+        verify(chart, times=1)._importLibs(container_id)
         unstub()
 
 

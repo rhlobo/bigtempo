@@ -1,5 +1,6 @@
 import pandas
 import datetime
+import time
 import configurations as config
 
 
@@ -34,3 +35,11 @@ def to_date(date_time):
 
 def to_datetime(date):
     return datetime.datetime(date.year, date.month, date.day)
+
+
+def date_to_timestamp(date):
+    return time.mktime(date.timetuple()) * 1000
+
+
+def timestamp_to_datetime(millis):
+    return datetime.datetime.fromtimestamp(millis // 1000)

@@ -1,5 +1,4 @@
 import os
-import re
 import bovespaparser.bovespaparser as bp
 
 
@@ -24,6 +23,6 @@ class CotahistImporter(object):
 
     def importData(self):
         la_quote = importData()
-        for s_symbol, date, f_open, f_min, f_max, f_close, i_vol in la_quote:
+        for s_symbol, date, f_open, f_low, f_high, f_close, i_vol in la_quote:
             c_dataFrame = self.c_dataMap.get(s_symbol)
-            c_dataFrame[date] = [date, f_open, f_max, f_min, f_close, i_vol]
+            c_dataFrame[date] = [date, f_open, f_high, f_low, f_close, i_vol]

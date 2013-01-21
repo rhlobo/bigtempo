@@ -49,7 +49,7 @@ class TestRelativeWorkingDayFunction(unittest.TestCase):
         assert util.relative_working_day(20, date(2012, 12, 17)) == date(2013, 1, 14)
 
     def test_should_return_date_1_working_day_ago(self):
-        assert util.relative_working_day(-1) == util.last_working_day() - timedelta(1)
+        assert util.relative_working_day(-1) == util.last_working_day(date.today() - timedelta(1))
 
     def test_should_use_today_if_no_argument_is_given(self):
         assert util.relative_working_day(0) == util.last_working_day(date.today())
@@ -134,3 +134,45 @@ class TestToDatetime(unittest.TestCase):
     def test_return_should_be_instance_of_datetime(self):
         result = util.to_datetime(date(2012, 12, 12))
         assert isinstance(result, datetime)
+
+
+class TestDateToTimestamp(unittest.TestCase):
+
+    def test_should_return_int_or_float_value(self):
+        result = util.date_to_timestamp(date(2000, 1, 1))
+        assert isinstance(result, int) or isinstance(result, float)
+
+    def test_epoch_should_define_initial_timestamp_count(self):
+        result = util.date_to_timestamp(date(1970, 1, 1))
+        assert result == 10800000
+
+    def test_should_return_correct_millis_for_year_2k(self):
+        result = util.date_to_timestamp(date(2000, 1, 1))
+        assert result == 946692000000
+
+    def test_should_each_day_add_correct_millis(self):
+        result = util.date_to_timestamp(date(2000, 1, 2))
+        assert result == 946692000000 + 24 * 3600 * 1000
+
+    def test_should_accept_date_object_as_input(self):
+        result = util.date_to_timestamp(date(2000, 1, 1))
+        assert result == 946692000000
+
+    def test_should_accept_datetime_object_as_input(self):
+        result = util.date_to_timestamp(datetime(2000, 1, 1))
+        assert result == 946692000000
+
+
+class TestTimestampToDate(unittest.TestCase):
+
+    def test_should_return_datetime_object(self):
+        result = util.timestamp_to_datetime(0)
+        assert isinstance(result, datetime)
+
+    def test_should_equivalent_to_epoch(self):
+        result = util.timestamp_to_datetime(10800000)
+        assert result == datetime(1970, 1, 1)
+
+    def test_should_return_equivalent_to_year2k(self):
+        result = util.timestamp_to_datetime(946692000000)
+        assert result == datetime(2000, 1, 1)

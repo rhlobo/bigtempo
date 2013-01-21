@@ -1,4 +1,8 @@
 import json
+import pandas
+import datetime
+import util.dateutils as dateutils
+import util.pandasutils as pandasutils
 
 
 CANDLESTICK, COLUMN = 'candlestick', 'column'
@@ -49,7 +53,7 @@ class Options(_AbstractHighChartsOptions):
 
     def json(self, renderTo):
         self.asDict['chart']['renderTo'] = renderTo
-        return json.dumps(self, cls=_AbstractHighChartsOptionsJSONEncoder)
+        return json.dumps(self, cls=_HighChartsJSONEncoder)
 
     def add(self, obj):
         if not isinstance(obj, Axis) and not isinstance(obj, Series):
@@ -92,9 +96,19 @@ class Series(_AbstractHighChartsOptions):
         }
 
 
-class _AbstractHighChartsOptionsJSONEncoder(json.JSONEncoder):
+class _HighChartsJSONEncoder(json.JSONEncoder):
 
     def default(self, obj):
         if isinstance(obj, _AbstractHighChartsOptions):
             return obj.asDict
+        if isinstance(obj, pandas.DataFrame):
+            return self._convertPandasDataFrame(obj)
+        if isinstance(obj, datetime.date) or isinstance(obj, datetime.datetime):
+            return self._convertDatetimeDate(obj)
         return obj
+
+    def _convertPandasDataFrame(self, df):
+        return pandasutils.dataframe_to_list_of_lists(df)
+
+    def _convertDatetimeDate(self, date):
+        return dateutils.date_to_timestamp(date)
