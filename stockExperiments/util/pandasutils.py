@@ -2,10 +2,8 @@
 
 def dataframe_to_list_of_lists(dataframe):
     result = []
-    for i in range(len(dataframe)):
-        row = []
-        row.append(dataframe.ix[i].name)
-        for j in dataframe.ix[i]:
-            row.append(j)
+    for index, c_row in dataframe.iterrows():
+        row = [index]
+        row.extend(list(c_row))
         result.append(row)
     return result

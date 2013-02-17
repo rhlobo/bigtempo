@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"_",
+				"_dataframe_to_list_of_lists_impl2"
+			],
+			[
 				"as",
 				"assert"
 			],
@@ -18,10 +22,6 @@
 			[
 				"u",
 				"util"
-			],
-			[
-				"_",
-				"_createDataframe"
 			],
 			[
 				"C",
@@ -144,53 +144,18 @@
 	"buffers":
 	[
 		{
-			"file": "stockExperiments/util/tests/pandasutils_tests.py",
-			"settings":
-			{
-				"buffer_size": 1101,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "docs/TODO.md",
 			"settings":
 			{
-				"buffer_size": 1211,
+				"buffer_size": 1185,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "stockExperiments/util/tests/dateutils_tests.py",
+			"file": "stockExperiments/sources/tests/cotahist_tests.py",
 			"settings":
 			{
-				"buffer_size": 6708,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "stockExperiments/ipyghstocks/options.py",
-			"settings":
-			{
-				"buffer_size": 2524,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "stockExperiments/sources/sketches/pynvest.py",
-			"settings":
-			{
-				"buffer_size": 3318,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "\n\ndef dataframe_to_list_of_lists(dataframe):\n    result = []\n    for i in range(len(dataframe)):\n        row = []\n        row.append(dataframe.ix[i].name)\n        for j in dataframe.ix[i]:\n            row.append(j)\n        result.append(row)\n    return result\n",
-			"file": "stockExperiments/util/pandasutils.py",
-			"file_size": 260,
-			"file_write_time": 1358698685000000,
-			"settings":
-			{
-				"buffer_size": 260,
+				"buffer_size": 156,
 				"line_ending": "Unix"
 			}
 		},
@@ -203,6 +168,33 @@
 			}
 		},
 		{
+			"file": "stockExperiments/providers/base.py",
+			"settings":
+			{
+				"buffer_size": 2090,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "stockExperiments/ipyghstocks/options.py",
+			"settings":
+			{
+				"buffer_size": 2524,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "import providers.base as base\n\n\nclass CotahistImporter(base.RawProvider):\n\n    def load(self, s_symbol, da_start=None, da_end=None):\n        pass\n",
+			"file": "stockExperiments/sources/cotahist.py",
+			"file_size": 96,
+			"file_write_time": 1359585931000000,
+			"settings":
+			{
+				"buffer_size": 146,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "stockExperiments/sources/yahoofinance.py",
 			"settings":
 			{
@@ -211,43 +203,26 @@
 			}
 		},
 		{
-			"file": "stockExperiments/util/dateutils.py",
+			"file": "stockExperiments/util/tests/dateutils_tests.py",
 			"settings":
 			{
-				"buffer_size": 1149,
+				"buffer_size": 6720,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<!doctype html PUBLIC \"-//W3C//DTD html 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n    \n    \n    <meta http-equiv='X-UA-Compatible' content='IE=emulateIE7' />\n    <title>Coverage for stockExperiments/util/dateutils: 100%</title>\n    <link rel='stylesheet' href='style.css' type='text/css'>\n    \n    <script type='text/javascript' src='jquery-1.4.3.min.js'></script>\n    <script type='text/javascript' src='jquery.hotkeys.js'></script>\n    <script type='text/javascript' src='jquery.isonscreen.js'></script>\n    <script type='text/javascript' src='coverage_html.js'></script>\n    <script type='text/javascript' charset='utf-8'>\n        jQuery(document).ready(coverage.pyfile_ready);\n    </script>\n</head>\n<body id='pyfile'>\n\n<div id='header'>\n    <div class='content'>\n        <h1>Coverage for <b>stockExperiments/util/dateutils</b> :\n            <span class='pc_cov'>100%</span>\n        </h1>\n        <img id='keyboard_icon' src='keybd_closed.png'>\n        <h2 class='stats'>\n            29 statements &nbsp;\n            <span class='run hide_run shortkey_r button_toggle_run'>29 run</span>\n            <span class='mis shortkey_m button_toggle_mis'>0 missing</span>\n            <span class='exc shortkey_x button_toggle_exc'>0 excluded</span>\n            \n                <span class='par run hide_run shortkey_p button_toggle_par'>0 partial</span>\n            \n        </h2>\n    </div>\n</div>\n\n<div class='help_panel'>\n    <img id='panel_icon' src='keybd_open.png'>\n<p class='legend'>Hot-keys on this page</p>\n    <div>\n<p class='keyhelp'>\n        <span class='key'>r</span>\n        <span class='key'>m</span>\n        <span class='key'>x</span>\n        <span class='key'>p</span> &nbsp; toggle line displays\n    </p>\n<p class='keyhelp'>\n        <span class='key'>j</span>\n        <span class='key'>k</span> &nbsp; next/prev highlighted chunk\n    </p>\n<p class='keyhelp'>\n        <span class='key'>0</span> &nbsp; (zero) top of page\n    </p>\n<p class='keyhelp'>\n        <span class='key'>1</span> &nbsp; (one) first highlighted chunk\n    </p>\n    </div>\n</div>\n\n<div id='source'>\n    <table cellspacing='0' cellpadding='0'>\n        <tr>\n            <td class='linenos' valign='top'>\n<p id='n1' class='stm run hide_run'><a href='#n1'>1</a></p>\n<p id='n2' class='stm run hide_run'><a href='#n2'>2</a></p>\n<p id='n3' class='stm run hide_run'><a href='#n3'>3</a></p>\n<p id='n4' class='stm run hide_run'><a href='#n4'>4</a></p>\n<p id='n5' class='pln'><a href='#n5'>5</a></p>\n<p id='n6' class='pln'><a href='#n6'>6</a></p>\n<p id='n7' class='stm run hide_run'><a href='#n7'>7</a></p>\n<p id='n8' class='stm run hide_run'><a href='#n8'>8</a></p>\n<p id='n9' class='stm run hide_run'><a href='#n9'>9</a></p>\n<p id='n10' class='stm run hide_run'><a href='#n10'>10</a></p>\n<p id='n11' class='pln'><a href='#n11'>11</a></p>\n<p id='n12' class='pln'><a href='#n12'>12</a></p>\n<p id='n13' class='stm run hide_run'><a href='#n13'>13</a></p>\n<p id='n14' class='stm run hide_run'><a href='#n14'>14</a></p>\n<p id='n15' class='stm run hide_run'><a href='#n15'>15</a></p>\n<p id='n16' class='pln'><a href='#n16'>16</a></p>\n<p id='n17' class='pln'><a href='#n17'>17</a></p>\n<p id='n18' class='stm run hide_run'><a href='#n18'>18</a></p>\n<p id='n19' class='stm run hide_run'><a href='#n19'>19</a></p>\n<p id='n20' class='stm run hide_run'><a href='#n20'>20</a></p>\n<p id='n21' class='stm run hide_run'><a href='#n21'>21</a></p>\n<p id='n22' class='stm run hide_run'><a href='#n22'>22</a></p>\n<p id='n23' class='pln'><a href='#n23'>23</a></p>\n<p id='n24' class='pln'><a href='#n24'>24</a></p>\n<p id='n25' class='stm run hide_run'><a href='#n25'>25</a></p>\n<p id='n26' class='stm run hide_run'><a href='#n26'>26</a></p>\n<p id='n27' class='stm run hide_run'><a href='#n27'>27</a></p>\n<p id='n28' class='stm run hide_run'><a href='#n28'>28</a></p>\n<p id='n29' class='stm run hide_run'><a href='#n29'>29</a></p>\n<p id='n30' class='pln'><a href='#n30'>30</a></p>\n<p id='n31' class='pln'><a href='#n31'>31</a></p>\n<p id='n32' class='stm run hide_run'><a href='#n32'>32</a></p>\n<p id='n33' class='stm run hide_run'><a href='#n33'>33</a></p>\n<p id='n34' class='pln'><a href='#n34'>34</a></p>\n<p id='n35' class='pln'><a href='#n35'>35</a></p>\n<p id='n36' class='stm run hide_run'><a href='#n36'>36</a></p>\n<p id='n37' class='stm run hide_run'><a href='#n37'>37</a></p>\n<p id='n38' class='pln'><a href='#n38'>38</a></p>\n<p id='n39' class='pln'><a href='#n39'>39</a></p>\n<p id='n40' class='stm run hide_run'><a href='#n40'>40</a></p>\n<p id='n41' class='stm run hide_run'><a href='#n41'>41</a></p>\n<p id='n42' class='pln'><a href='#n42'>42</a></p>\n<p id='n43' class='pln'><a href='#n43'>43</a></p>\n<p id='n44' class='stm run hide_run'><a href='#n44'>44</a></p>\n<p id='n45' class='stm run hide_run'><a href='#n45'>45</a></p>\n                \n            </td>\n            <td class='text' valign='top'>\n<p id='t1' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>pandas</span><span class='strut'>&nbsp;</span></p>\n<p id='t2' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>datetime</span><span class='strut'>&nbsp;</span></p>\n<p id='t3' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>time</span><span class='strut'>&nbsp;</span></p>\n<p id='t4' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>configurations</span> <span class='key'>as</span> <span class='nam'>config</span><span class='strut'>&nbsp;</span></p>\n<p id='t5' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t6' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t7' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>working_day_range</span><span class='op'>(</span><span class='nam'>start_date</span><span class='op'>=</span><span class='nam'>config</span><span class='op'>.</span><span class='nam'>START_DATE</span><span class='op'>,</span> <span class='nam'>end_date</span><span class='op'>=</span><span class='nam'>None</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t8' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>if</span> <span class='key'>not</span> <span class='nam'>end_date</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t9' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>end_date</span> <span class='op'>=</span> <span class='nam'>last_working_day</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t10' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>pandas</span><span class='op'>.</span><span class='nam'>bdate_range</span><span class='op'>(</span><span class='nam'>start_date</span><span class='op'>,</span> <span class='nam'>end_date</span><span class='op'>,</span> <span class='nam'>normalize</span><span class='op'>=</span><span class='nam'>True</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t11' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t12' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t13' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>relative_working_day</span><span class='op'>(</span><span class='nam'>days</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>=</span><span class='nam'>None</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t14' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>wday</span> <span class='op'>=</span> <span class='nam'>last_working_day</span><span class='op'>(</span><span class='op'>)</span> <span class='key'>if</span> <span class='key'>not</span> <span class='nam'>date</span> <span class='key'>else</span> <span class='nam'>last_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t15' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>to_date</span><span class='op'>(</span><span class='nam'>to_datetime</span><span class='op'>(</span><span class='nam'>wday</span><span class='op'>)</span> <span class='op'>+</span> <span class='nam'>days</span> <span class='op'>*</span> <span class='nam'>pandas</span><span class='op'>.</span><span class='nam'>tseries</span><span class='op'>.</span><span class='nam'>offsets</span><span class='op'>.</span><span class='nam'>BDay</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t16' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t17' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t18' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>last_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>=</span><span class='nam'>None</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t19' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>if</span> <span class='key'>not</span> <span class='nam'>date</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t20' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>date</span> <span class='op'>=</span> <span class='nam'>datetime</span><span class='op'>.</span><span class='nam'>date</span><span class='op'>.</span><span class='nam'>today</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t21' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>wday</span> <span class='op'>=</span> <span class='nam'>date</span><span class='op'>.</span><span class='nam'>weekday</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t22' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>date</span> <span class='key'>if</span> <span class='nam'>wday</span> <span class='op'>&lt;=</span> <span class='num'>4</span> <span class='key'>else</span> <span class='nam'>date</span> <span class='op'>-</span> <span class='nam'>datetime</span><span class='op'>.</span><span class='nam'>timedelta</span><span class='op'>(</span><span class='nam'>wday</span> <span class='op'>-</span> <span class='num'>4</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t23' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t24' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t25' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>next_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>=</span><span class='nam'>None</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t26' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>if</span> <span class='key'>not</span> <span class='nam'>date</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t27' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>date</span> <span class='op'>=</span> <span class='nam'>datetime</span><span class='op'>.</span><span class='nam'>date</span><span class='op'>.</span><span class='nam'>today</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t28' class='stm run hide_run'>&nbsp; &nbsp; <span class='nam'>wday</span> <span class='op'>=</span> <span class='nam'>date</span><span class='op'>.</span><span class='nam'>weekday</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t29' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>date</span> <span class='key'>if</span> <span class='nam'>wday</span> <span class='op'>&lt;=</span> <span class='num'>4</span> <span class='key'>else</span> <span class='nam'>date</span> <span class='op'>+</span> <span class='nam'>datetime</span><span class='op'>.</span><span class='nam'>timedelta</span><span class='op'>(</span><span class='num'>7</span> <span class='op'>-</span> <span class='nam'>wday</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t30' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t31' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t32' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>to_date</span><span class='op'>(</span><span class='nam'>date_time</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t33' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>date_time</span><span class='op'>.</span><span class='nam'>date</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t34' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t35' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t36' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>to_datetime</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t37' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>datetime</span><span class='op'>.</span><span class='nam'>datetime</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>.</span><span class='nam'>year</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>.</span><span class='nam'>month</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>.</span><span class='nam'>day</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t38' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t39' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t40' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>date_to_timestamp</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t41' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>time</span><span class='op'>.</span><span class='nam'>mktime</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>.</span><span class='nam'>timetuple</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>*</span> <span class='num'>1000</span><span class='strut'>&nbsp;</span></p>\n<p id='t42' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t43' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t44' class='stm run hide_run'><span class='key'>def</span> <span class='nam'>timestamp_to_datetime</span><span class='op'>(</span><span class='nam'>millis</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t45' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>return</span> <span class='nam'>datetime</span><span class='op'>.</span><span class='nam'>datetime</span><span class='op'>.</span><span class='nam'>fromtimestamp</span><span class='op'>(</span><span class='nam'>millis</span> <span class='op'>//</span> <span class='num'>1000</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n                \n            </td>\n        </tr>\n    </table>\n</div>\n\n<div id='footer'>\n    <div class='content'>\n        <p>\n            <a class='nav' href='index.html'>&#xab; index</a> &nbsp; &nbsp; <a class='nav' href='http://nedbatchelder.com/code/coverage'>coverage.py v3.5.3</a>\n        </p>\n    </div>\n</div>\n\n</body>\n</html>\n",
-			"file": "coverage/stockExperiments_util_dateutils.html",
-			"file_size": 15891,
-			"file_write_time": 1358730419000000,
+			"file": "stockExperiments/providers/tests/locator_tests.py",
 			"settings":
 			{
-				"buffer_size": 15895,
+				"buffer_size": 3305,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<!doctype html PUBLIC \"-//W3C//DTD html 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n    \n    \n    <meta http-equiv='X-UA-Compatible' content='IE=emulateIE7' />\n    <title>Coverage for stockExperiments/util/tests/dateutils_tests: 100%</title>\n    <link rel='stylesheet' href='style.css' type='text/css'>\n    \n    <script type='text/javascript' src='jquery-1.4.3.min.js'></script>\n    <script type='text/javascript' src='jquery.hotkeys.js'></script>\n    <script type='text/javascript' src='jquery.isonscreen.js'></script>\n    <script type='text/javascript' src='coverage_html.js'></script>\n    <script type='text/javascript' charset='utf-8'>\n        jQuery(document).ready(coverage.pyfile_ready);\n    </script>\n</head>\n<body id='pyfile'>\n\n<div id='header'>\n    <div class='content'>\n        <h1>Coverage for <b>stockExperiments/util/tests/dateutils_tests</b> :\n            <span class='pc_cov'>100%</span>\n        </h1>\n        <img id='keyboard_icon' src='keybd_closed.png'>\n        <h2 class='stats'>\n            123 statements &nbsp;\n            <span class='run hide_run shortkey_r button_toggle_run'>123 run</span>\n            <span class='mis shortkey_m button_toggle_mis'>0 missing</span>\n            <span class='exc shortkey_x button_toggle_exc'>0 excluded</span>\n            \n                <span class='par run hide_run shortkey_p button_toggle_par'>0 partial</span>\n            \n        </h2>\n    </div>\n</div>\n\n<div class='help_panel'>\n    <img id='panel_icon' src='keybd_open.png'>\n<p class='legend'>Hot-keys on this page</p>\n    <div>\n<p class='keyhelp'>\n        <span class='key'>r</span>\n        <span class='key'>m</span>\n        <span class='key'>x</span>\n        <span class='key'>p</span> &nbsp; toggle line displays\n    </p>\n<p class='keyhelp'>\n        <span class='key'>j</span>\n        <span class='key'>k</span> &nbsp; next/prev highlighted chunk\n    </p>\n<p class='keyhelp'>\n        <span class='key'>0</span> &nbsp; (zero) top of page\n    </p>\n<p class='keyhelp'>\n        <span class='key'>1</span> &nbsp; (one) first highlighted chunk\n    </p>\n    </div>\n</div>\n\n<div id='source'>\n    <table cellspacing='0' cellpadding='0'>\n        <tr>\n            <td class='linenos' valign='top'>\n<p id='n1' class='stm run hide_run'><a href='#n1'>1</a></p>\n<p id='n2' class='stm run hide_run'><a href='#n2'>2</a></p>\n<p id='n3' class='stm run hide_run'><a href='#n3'>3</a></p>\n<p id='n4' class='stm run hide_run'><a href='#n4'>4</a></p>\n<p id='n5' class='pln'><a href='#n5'>5</a></p>\n<p id='n6' class='pln'><a href='#n6'>6</a></p>\n<p id='n7' class='stm run hide_run'><a href='#n7'>7</a></p>\n<p id='n8' class='pln'><a href='#n8'>8</a></p>\n<p id='n9' class='stm run hide_run'><a href='#n9'>9</a></p>\n<p id='n10' class='stm run hide_run'><a href='#n10'>10</a></p>\n<p id='n11' class='stm run hide_run'><a href='#n11'>11</a></p>\n<p id='n12' class='pln'><a href='#n12'>12</a></p>\n<p id='n13' class='stm run hide_run'><a href='#n13'>13</a></p>\n<p id='n14' class='stm run hide_run'><a href='#n14'>14</a></p>\n<p id='n15' class='stm run hide_run'><a href='#n15'>15</a></p>\n<p id='n16' class='stm run hide_run'><a href='#n16'>16</a></p>\n<p id='n17' class='pln'><a href='#n17'>17</a></p>\n<p id='n18' class='stm run hide_run'><a href='#n18'>18</a></p>\n<p id='n19' class='stm run hide_run'><a href='#n19'>19</a></p>\n<p id='n20' class='stm run hide_run'><a href='#n20'>20</a></p>\n<p id='n21' class='stm run hide_run'><a href='#n21'>21</a></p>\n<p id='n22' class='stm run hide_run'><a href='#n22'>22</a></p>\n<p id='n23' class='stm run hide_run'><a href='#n23'>23</a></p>\n<p id='n24' class='pln'><a href='#n24'>24</a></p>\n<p id='n25' class='stm run hide_run'><a href='#n25'>25</a></p>\n<p id='n26' class='stm run hide_run'><a href='#n26'>26</a></p>\n<p id='n27' class='stm run hide_run'><a href='#n27'>27</a></p>\n<p id='n28' class='pln'><a href='#n28'>28</a></p>\n<p id='n29' class='stm run hide_run'><a href='#n29'>29</a></p>\n<p id='n30' class='stm run hide_run'><a href='#n30'>30</a></p>\n<p id='n31' class='stm run hide_run'><a href='#n31'>31</a></p>\n<p id='n32' class='pln'><a href='#n32'>32</a></p>\n<p id='n33' class='stm run hide_run'><a href='#n33'>33</a></p>\n<p id='n34' class='stm run hide_run'><a href='#n34'>34</a></p>\n<p id='n35' class='stm run hide_run'><a href='#n35'>35</a></p>\n<p id='n36' class='stm run hide_run'><a href='#n36'>36</a></p>\n<p id='n37' class='pln'><a href='#n37'>37</a></p>\n<p id='n38' class='stm run hide_run'><a href='#n38'>38</a></p>\n<p id='n39' class='stm run hide_run'><a href='#n39'>39</a></p>\n<p id='n40' class='stm run hide_run'><a href='#n40'>40</a></p>\n<p id='n41' class='pln'><a href='#n41'>41</a></p>\n<p id='n42' class='pln'><a href='#n42'>42</a></p>\n<p id='n43' class='stm run hide_run'><a href='#n43'>43</a></p>\n<p id='n44' class='pln'><a href='#n44'>44</a></p>\n<p id='n45' class='stm run hide_run'><a href='#n45'>45</a></p>\n<p id='n46' class='stm run hide_run'><a href='#n46'>46</a></p>\n<p id='n47' class='pln'><a href='#n47'>47</a></p>\n<p id='n48' class='stm run hide_run'><a href='#n48'>48</a></p>\n<p id='n49' class='stm run hide_run'><a href='#n49'>49</a></p>\n<p id='n50' class='pln'><a href='#n50'>50</a></p>\n<p id='n51' class='stm run hide_run'><a href='#n51'>51</a></p>\n<p id='n52' class='stm run hide_run'><a href='#n52'>52</a></p>\n<p id='n53' class='pln'><a href='#n53'>53</a></p>\n<p id='n54' class='stm run hide_run'><a href='#n54'>54</a></p>\n<p id='n55' class='stm run hide_run'><a href='#n55'>55</a></p>\n<p id='n56' class='pln'><a href='#n56'>56</a></p>\n<p id='n57' class='stm run hide_run'><a href='#n57'>57</a></p>\n<p id='n58' class='stm run hide_run'><a href='#n58'>58</a></p>\n<p id='n59' class='stm run hide_run'><a href='#n59'>59</a></p>\n<p id='n60' class='pln'><a href='#n60'>60</a></p>\n<p id='n61' class='stm run hide_run'><a href='#n61'>61</a></p>\n<p id='n62' class='stm run hide_run'><a href='#n62'>62</a></p>\n<p id='n63' class='pln'><a href='#n63'>63</a></p>\n<p id='n64' class='stm run hide_run'><a href='#n64'>64</a></p>\n<p id='n65' class='stm run hide_run'><a href='#n65'>65</a></p>\n<p id='n66' class='pln'><a href='#n66'>66</a></p>\n<p id='n67' class='stm run hide_run'><a href='#n67'>67</a></p>\n<p id='n68' class='stm run hide_run'><a href='#n68'>68</a></p>\n<p id='n69' class='pln'><a href='#n69'>69</a></p>\n<p id='n70' class='pln'><a href='#n70'>70</a></p>\n<p id='n71' class='stm run hide_run'><a href='#n71'>71</a></p>\n<p id='n72' class='pln'><a href='#n72'>72</a></p>\n<p id='n73' class='stm run hide_run'><a href='#n73'>73</a></p>\n<p id='n74' class='stm run hide_run'><a href='#n74'>74</a></p>\n<p id='n75' class='stm run hide_run'><a href='#n75'>75</a></p>\n<p id='n76' class='pln'><a href='#n76'>76</a></p>\n<p id='n77' class='stm run hide_run'><a href='#n77'>77</a></p>\n<p id='n78' class='stm run hide_run'><a href='#n78'>78</a></p>\n<p id='n79' class='pln'><a href='#n79'>79</a></p>\n<p id='n80' class='stm run hide_run'><a href='#n80'>80</a></p>\n<p id='n81' class='stm run hide_run'><a href='#n81'>81</a></p>\n<p id='n82' class='pln'><a href='#n82'>82</a></p>\n<p id='n83' class='stm run hide_run'><a href='#n83'>83</a></p>\n<p id='n84' class='stm run hide_run'><a href='#n84'>84</a></p>\n<p id='n85' class='stm run hide_run'><a href='#n85'>85</a></p>\n<p id='n86' class='stm run hide_run'><a href='#n86'>86</a></p>\n<p id='n87' class='pln'><a href='#n87'>87</a></p>\n<p id='n88' class='stm run hide_run'><a href='#n88'>88</a></p>\n<p id='n89' class='stm run hide_run'><a href='#n89'>89</a></p>\n<p id='n90' class='pln'><a href='#n90'>90</a></p>\n<p id='n91' class='pln'><a href='#n91'>91</a></p>\n<p id='n92' class='stm run hide_run'><a href='#n92'>92</a></p>\n<p id='n93' class='pln'><a href='#n93'>93</a></p>\n<p id='n94' class='stm run hide_run'><a href='#n94'>94</a></p>\n<p id='n95' class='stm run hide_run'><a href='#n95'>95</a></p>\n<p id='n96' class='stm run hide_run'><a href='#n96'>96</a></p>\n<p id='n97' class='pln'><a href='#n97'>97</a></p>\n<p id='n98' class='stm run hide_run'><a href='#n98'>98</a></p>\n<p id='n99' class='stm run hide_run'><a href='#n99'>99</a></p>\n<p id='n100' class='pln'><a href='#n100'>100</a></p>\n<p id='n101' class='stm run hide_run'><a href='#n101'>101</a></p>\n<p id='n102' class='stm run hide_run'><a href='#n102'>102</a></p>\n<p id='n103' class='pln'><a href='#n103'>103</a></p>\n<p id='n104' class='stm run hide_run'><a href='#n104'>104</a></p>\n<p id='n105' class='stm run hide_run'><a href='#n105'>105</a></p>\n<p id='n106' class='stm run hide_run'><a href='#n106'>106</a></p>\n<p id='n107' class='stm run hide_run'><a href='#n107'>107</a></p>\n<p id='n108' class='pln'><a href='#n108'>108</a></p>\n<p id='n109' class='stm run hide_run'><a href='#n109'>109</a></p>\n<p id='n110' class='stm run hide_run'><a href='#n110'>110</a></p>\n<p id='n111' class='pln'><a href='#n111'>111</a></p>\n<p id='n112' class='pln'><a href='#n112'>112</a></p>\n<p id='n113' class='stm run hide_run'><a href='#n113'>113</a></p>\n<p id='n114' class='pln'><a href='#n114'>114</a></p>\n<p id='n115' class='stm run hide_run'><a href='#n115'>115</a></p>\n<p id='n116' class='stm run hide_run'><a href='#n116'>116</a></p>\n<p id='n117' class='stm run hide_run'><a href='#n117'>117</a></p>\n<p id='n118' class='stm run hide_run'><a href='#n118'>118</a></p>\n<p id='n119' class='stm run hide_run'><a href='#n119'>119</a></p>\n<p id='n120' class='pln'><a href='#n120'>120</a></p>\n<p id='n121' class='stm run hide_run'><a href='#n121'>121</a></p>\n<p id='n122' class='stm run hide_run'><a href='#n122'>122</a></p>\n<p id='n123' class='stm run hide_run'><a href='#n123'>123</a></p>\n<p id='n124' class='pln'><a href='#n124'>124</a></p>\n<p id='n125' class='pln'><a href='#n125'>125</a></p>\n<p id='n126' class='stm run hide_run'><a href='#n126'>126</a></p>\n<p id='n127' class='pln'><a href='#n127'>127</a></p>\n<p id='n128' class='stm run hide_run'><a href='#n128'>128</a></p>\n<p id='n129' class='stm run hide_run'><a href='#n129'>129</a></p>\n<p id='n130' class='stm run hide_run'><a href='#n130'>130</a></p>\n<p id='n131' class='stm run hide_run'><a href='#n131'>131</a></p>\n<p id='n132' class='stm run hide_run'><a href='#n132'>132</a></p>\n<p id='n133' class='pln'><a href='#n133'>133</a></p>\n<p id='n134' class='stm run hide_run'><a href='#n134'>134</a></p>\n<p id='n135' class='stm run hide_run'><a href='#n135'>135</a></p>\n<p id='n136' class='stm run hide_run'><a href='#n136'>136</a></p>\n<p id='n137' class='pln'><a href='#n137'>137</a></p>\n<p id='n138' class='pln'><a href='#n138'>138</a></p>\n<p id='n139' class='stm run hide_run'><a href='#n139'>139</a></p>\n<p id='n140' class='pln'><a href='#n140'>140</a></p>\n<p id='n141' class='stm run hide_run'><a href='#n141'>141</a></p>\n<p id='n142' class='stm run hide_run'><a href='#n142'>142</a></p>\n<p id='n143' class='stm run hide_run'><a href='#n143'>143</a></p>\n<p id='n144' class='pln'><a href='#n144'>144</a></p>\n<p id='n145' class='stm run hide_run'><a href='#n145'>145</a></p>\n<p id='n146' class='stm run hide_run'><a href='#n146'>146</a></p>\n<p id='n147' class='stm run hide_run'><a href='#n147'>147</a></p>\n<p id='n148' class='pln'><a href='#n148'>148</a></p>\n<p id='n149' class='stm run hide_run'><a href='#n149'>149</a></p>\n<p id='n150' class='stm run hide_run'><a href='#n150'>150</a></p>\n<p id='n151' class='stm run hide_run'><a href='#n151'>151</a></p>\n<p id='n152' class='pln'><a href='#n152'>152</a></p>\n<p id='n153' class='stm run hide_run'><a href='#n153'>153</a></p>\n<p id='n154' class='stm run hide_run'><a href='#n154'>154</a></p>\n<p id='n155' class='stm run hide_run'><a href='#n155'>155</a></p>\n<p id='n156' class='pln'><a href='#n156'>156</a></p>\n<p id='n157' class='stm run hide_run'><a href='#n157'>157</a></p>\n<p id='n158' class='stm run hide_run'><a href='#n158'>158</a></p>\n<p id='n159' class='stm run hide_run'><a href='#n159'>159</a></p>\n<p id='n160' class='pln'><a href='#n160'>160</a></p>\n<p id='n161' class='stm run hide_run'><a href='#n161'>161</a></p>\n<p id='n162' class='stm run hide_run'><a href='#n162'>162</a></p>\n<p id='n163' class='stm run hide_run'><a href='#n163'>163</a></p>\n<p id='n164' class='pln'><a href='#n164'>164</a></p>\n<p id='n165' class='pln'><a href='#n165'>165</a></p>\n<p id='n166' class='stm run hide_run'><a href='#n166'>166</a></p>\n<p id='n167' class='pln'><a href='#n167'>167</a></p>\n<p id='n168' class='stm run hide_run'><a href='#n168'>168</a></p>\n<p id='n169' class='stm run hide_run'><a href='#n169'>169</a></p>\n<p id='n170' class='stm run hide_run'><a href='#n170'>170</a></p>\n<p id='n171' class='pln'><a href='#n171'>171</a></p>\n<p id='n172' class='stm run hide_run'><a href='#n172'>172</a></p>\n<p id='n173' class='stm run hide_run'><a href='#n173'>173</a></p>\n<p id='n174' class='stm run hide_run'><a href='#n174'>174</a></p>\n<p id='n175' class='pln'><a href='#n175'>175</a></p>\n<p id='n176' class='stm run hide_run'><a href='#n176'>176</a></p>\n<p id='n177' class='stm run hide_run'><a href='#n177'>177</a></p>\n                \n            </td>\n            <td class='text' valign='top'>\n<p id='t1' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>unittest</span><span class='strut'>&nbsp;</span></p>\n<p id='t2' class='stm run hide_run'><span class='key'>from</span> <span class='nam'>datetime</span> <span class='key'>import</span> <span class='nam'>date</span><span class='op'>,</span> <span class='nam'>datetime</span><span class='op'>,</span> <span class='nam'>timedelta</span><span class='strut'>&nbsp;</span></p>\n<p id='t3' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>configurations</span> <span class='key'>as</span> <span class='nam'>config</span><span class='strut'>&nbsp;</span></p>\n<p id='t4' class='stm run hide_run'><span class='key'>import</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>dateutils</span> <span class='key'>as</span> <span class='nam'>util</span><span class='strut'>&nbsp;</span></p>\n<p id='t5' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t6' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t7' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestWorkingDayRangeFunction</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t8' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t9' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_week_working_days</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t10' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>working_day_range</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>9</span><span class='op'>)</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>15</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t11' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>len</span><span class='op'>(</span><span class='nam'>result</span><span class='op'>)</span> <span class='key'>is</span> <span class='num'>5</span><span class='strut'>&nbsp;</span></p>\n<p id='t12' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t13' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>i</span> <span class='op'>=</span> <span class='num'>0</span><span class='strut'>&nbsp;</span></p>\n<p id='t14' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>for</span> <span class='nam'>day</span> <span class='key'>in</span> <span class='nam'>result</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t15' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>day</span> <span class='op'>==</span> <span class='nam'>datetime</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>10</span> <span class='op'>+</span> <span class='nam'>i</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t16' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>i</span> <span class='op'>+=</span> <span class='num'>1</span><span class='strut'>&nbsp;</span></p>\n<p id='t17' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t18' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_only_working_days</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t19' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>working_day_range</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>11</span><span class='op'>,</span> <span class='num'>29</span><span class='op'>)</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>3</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t20' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>len</span><span class='op'>(</span><span class='nam'>result</span><span class='op'>)</span> <span class='key'>is</span> <span class='num'>3</span><span class='strut'>&nbsp;</span></p>\n<p id='t21' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>[</span><span class='num'>0</span><span class='op'>]</span> <span class='op'>==</span> <span class='nam'>datetime</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>11</span><span class='op'>,</span> <span class='num'>29</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t22' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>[</span><span class='num'>1</span><span class='op'>]</span> <span class='op'>==</span> <span class='nam'>datetime</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>11</span><span class='op'>,</span> <span class='num'>30</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t23' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>[</span><span class='num'>2</span><span class='op'>]</span> <span class='op'>==</span> <span class='nam'>datetime</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>03</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t24' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t25' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_use_config_start_date_when_argument_is_not_pased</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t26' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>working_day_range</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t27' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>[</span><span class='num'>0</span><span class='op'>]</span><span class='op'>.</span><span class='nam'>date</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>next_working_day</span><span class='op'>(</span><span class='nam'>config</span><span class='op'>.</span><span class='nam'>START_DATE</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t28' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t29' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_use_today_date_when_argument_is_not_pased</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t30' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>working_day_range</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t31' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>[</span><span class='op'>-</span><span class='num'>1</span><span class='op'>]</span><span class='op'>.</span><span class='nam'>date</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t32' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t33' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_use_config_start_date_til_today_when_no_arg_is_pased</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t34' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>working_day_range</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t35' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>[</span><span class='num'>0</span><span class='op'>]</span><span class='op'>.</span><span class='nam'>date</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>next_working_day</span><span class='op'>(</span><span class='nam'>config</span><span class='op'>.</span><span class='nam'>START_DATE</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t36' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>[</span><span class='op'>-</span><span class='num'>1</span><span class='op'>]</span><span class='op'>.</span><span class='nam'>date</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t37' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t38' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_return_should_be_list_of_date_instances</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t39' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>working_day_range</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t40' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>result</span><span class='op'>[</span><span class='op'>-</span><span class='num'>1</span><span class='op'>]</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t41' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t42' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t43' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestRelativeWorkingDayFunction</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t44' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t45' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_negative_relative_day</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t46' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='op'>-</span><span class='num'>20</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>17</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>11</span><span class='op'>,</span> <span class='num'>19</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t47' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t48' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_positive_relative_day</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t49' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='num'>20</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>17</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2013</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>14</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t50' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t51' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_date_1_working_day_ago</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t52' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='op'>-</span><span class='num'>1</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='nam'>timedelta</span><span class='op'>(</span><span class='num'>1</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t53' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t54' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_use_today_if_no_argument_is_given</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t55' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='num'>0</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>.</span><span class='nam'>today</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t56' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t57' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_friday_date_if_weekend_and_0_as_arg</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t58' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>d</span> <span class='op'>=</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>16</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t59' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='num'>0</span><span class='op'>,</span> <span class='nam'>d</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='nam'>d</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t60' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t61' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_consider_last_working_day_if_weekend_date_was_given</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t62' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='op'>-</span><span class='num'>2</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>16</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t63' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t64' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_consider_last_working_day_if_weekend_date_was_given2</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t65' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='num'>2</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>15</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>18</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t66' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t67' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_return_should_be_instance_of_date</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t68' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>util</span><span class='op'>.</span><span class='nam'>relative_working_day</span><span class='op'>(</span><span class='num'>0</span><span class='op'>)</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t69' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t70' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t71' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestLastWorkingDayFunction</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t72' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t73' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_date_if_working_day</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t74' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>d</span> <span class='op'>=</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>07</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t75' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='nam'>d</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>d</span><span class='strut'>&nbsp;</span></p>\n<p id='t76' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t77' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_friday_date_if_date_is_saturday</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t78' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>8</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>7</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t79' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t80' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_friday_date_if_date_is_sunday</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t81' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>9</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>7</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t82' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t83' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_use_today_if_no_argument_is_given</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t84' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>d</span> <span class='op'>=</span> <span class='nam'>date</span><span class='op'>.</span><span class='nam'>today</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t85' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>w</span> <span class='op'>=</span> <span class='nam'>d</span><span class='op'>.</span><span class='nam'>weekday</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t86' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>d</span> <span class='key'>if</span> <span class='nam'>w</span> <span class='op'>&lt;=</span> <span class='num'>4</span> <span class='key'>else</span> <span class='nam'>d</span> <span class='op'>-</span> <span class='nam'>timedelta</span><span class='op'>(</span><span class='nam'>w</span> <span class='op'>-</span> <span class='num'>4</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t87' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t88' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_return_should_be_instance_of_date</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t89' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>util</span><span class='op'>.</span><span class='nam'>last_working_day</span><span class='op'>(</span><span class='op'>)</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t90' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t91' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t92' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestNextWorkingDayFunction</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t93' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t94' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_date_if_working_day</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t95' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>d</span> <span class='op'>=</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>07</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t96' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>next_working_day</span><span class='op'>(</span><span class='nam'>d</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>d</span><span class='strut'>&nbsp;</span></p>\n<p id='t97' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t98' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_monday_date_if_date_is_saturday</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t99' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>next_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>8</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>10</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t100' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t101' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_monday_date_if_date_is_sunday</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t102' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>next_working_day</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>9</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>10</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t103' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t104' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_use_today_if_no_argument_is_given</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t105' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>d</span> <span class='op'>=</span> <span class='nam'>date</span><span class='op'>.</span><span class='nam'>today</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t106' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>w</span> <span class='op'>=</span> <span class='nam'>d</span><span class='op'>.</span><span class='nam'>weekday</span><span class='op'>(</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t107' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>next_working_day</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>==</span> <span class='nam'>d</span> <span class='key'>if</span> <span class='nam'>w</span> <span class='op'>&lt;=</span> <span class='num'>4</span> <span class='key'>else</span> <span class='nam'>d</span> <span class='op'>+</span> <span class='nam'>timedelta</span><span class='op'>(</span><span class='num'>7</span> <span class='op'>-</span> <span class='nam'>w</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t108' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t109' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_return_should_be_instance_of_date</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t110' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>util</span><span class='op'>.</span><span class='nam'>next_working_day</span><span class='op'>(</span><span class='op'>)</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t111' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t112' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t113' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestToDate</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t114' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t115' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_equivalent_date_object</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t116' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>to_date</span><span class='op'>(</span><span class='nam'>datetime</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t117' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>.</span><span class='nam'>year</span> <span class='op'>==</span> <span class='num'>2012</span><span class='strut'>&nbsp;</span></p>\n<p id='t118' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>.</span><span class='nam'>month</span> <span class='op'>==</span> <span class='num'>12</span><span class='strut'>&nbsp;</span></p>\n<p id='t119' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>.</span><span class='nam'>day</span> <span class='op'>==</span> <span class='num'>12</span><span class='strut'>&nbsp;</span></p>\n<p id='t120' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t121' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_return_should_be_instance_of_date</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t122' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>to_date</span><span class='op'>(</span><span class='nam'>datetime</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t123' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>result</span><span class='op'>,</span> <span class='nam'>date</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t124' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t125' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t126' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestToDatetime</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t127' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t128' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_equivalent_datetime_object</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t129' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>to_datetime</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t130' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>.</span><span class='nam'>year</span> <span class='op'>==</span> <span class='num'>2012</span><span class='strut'>&nbsp;</span></p>\n<p id='t131' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>.</span><span class='nam'>month</span> <span class='op'>==</span> <span class='num'>12</span><span class='strut'>&nbsp;</span></p>\n<p id='t132' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span><span class='op'>.</span><span class='nam'>day</span> <span class='op'>==</span> <span class='num'>12</span><span class='strut'>&nbsp;</span></p>\n<p id='t133' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t134' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_return_should_be_instance_of_datetime</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t135' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>to_datetime</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2012</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>,</span> <span class='num'>12</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t136' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>result</span><span class='op'>,</span> <span class='nam'>datetime</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t137' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t138' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t139' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestDateToTimestamp</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t140' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t141' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_int_or_float_value</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t142' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>date_to_timestamp</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2000</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t143' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>result</span><span class='op'>,</span> <span class='nam'>int</span><span class='op'>)</span> <span class='key'>or</span> <span class='nam'>isinstance</span><span class='op'>(</span><span class='nam'>result</span><span class='op'>,</span> <span class='nam'>float</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t144' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t145' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_epoch_should_define_initial_timestamp_count</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t146' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>date_to_timestamp</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>1970</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t147' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span> <span class='op'>==</span> <span class='num'>10800000</span><span class='strut'>&nbsp;</span></p>\n<p id='t148' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t149' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_correct_millis_for_year_2k</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t150' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>date_to_timestamp</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2000</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t151' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span> <span class='op'>==</span> <span class='num'>946692000000</span><span class='strut'>&nbsp;</span></p>\n<p id='t152' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t153' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_each_day_add_correct_millis</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t154' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>date_to_timestamp</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2000</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>2</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t155' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span> <span class='op'>==</span> <span class='num'>946692000000</span> <span class='op'>+</span> <span class='num'>24</span> <span class='op'>*</span> <span class='num'>3600</span> <span class='op'>*</span> <span class='num'>1000</span><span class='strut'>&nbsp;</span></p>\n<p id='t156' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t157' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_accept_date_object_as_input</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t158' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>date_to_timestamp</span><span class='op'>(</span><span class='nam'>date</span><span class='op'>(</span><span class='num'>2000</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t159' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span> <span class='op'>==</span> <span class='num'>946692000000</span><span class='strut'>&nbsp;</span></p>\n<p id='t160' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t161' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_accept_datetime_object_as_input</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t162' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>date_to_timestamp</span><span class='op'>(</span><span class='nam'>datetime</span><span class='op'>(</span><span class='num'>2000</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>)</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t163' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span> <span class='op'>==</span> <span class='num'>946692000000</span><span class='strut'>&nbsp;</span></p>\n<p id='t164' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t165' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t166' class='stm run hide_run'><span class='key'>class</span> <span class='nam'>TestTimestampToDate</span><span class='op'>(</span><span class='nam'>unittest</span><span class='op'>.</span><span class='nam'>TestCase</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t167' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t168' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_should_return_date_object</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t169' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>timestamp_to_datetime</span><span class='op'>(</span><span class='num'>0</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t170' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span> <span class='op'>==</span> <span class='nam'>date</span><span class='op'>(</span><span class='num'>1970</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t171' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t172' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test_zero_should_equal_epoch</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t173' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='nam'>result</span> <span class='op'>=</span> <span class='nam'>util</span><span class='op'>.</span><span class='nam'>timestamp_to_datetime</span><span class='op'>(</span><span class='num'>10800000</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t174' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>result</span> <span class='op'>==</span> <span class='nam'>datetime</span><span class='op'>(</span><span class='num'>1970</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>,</span> <span class='num'>1</span><span class='op'>)</span><span class='strut'>&nbsp;</span></p>\n<p id='t175' class='pln'><span class='strut'>&nbsp;</span></p>\n<p id='t176' class='stm run hide_run'>&nbsp; &nbsp; <span class='key'>def</span> <span class='nam'>test</span><span class='op'>(</span><span class='nam'>self</span><span class='op'>)</span><span class='op'>:</span><span class='strut'>&nbsp;</span></p>\n<p id='t177' class='stm run hide_run'>&nbsp; &nbsp; &nbsp; &nbsp; <span class='key'>assert</span> <span class='nam'>False</span><span class='strut'>&nbsp;</span></p>\n                \n            </td>\n        </tr>\n    </table>\n</div>\n\n<div id='footer'>\n    <div class='content'>\n        <p>\n            <a class='nav' href='index.html'>&#xab; index</a> &nbsp; &nbsp; <a class='nav' href='http://nedbatchelder.com/code/coverage'>coverage.py v3.5.3</a>\n        </p>\n    </div>\n</div>\n\n</body>\n</html>\n",
-			"file": "coverage/stockExperiments_util_tests_dateutils_tests.html",
-			"file_size": 64182,
-			"file_write_time": 1358730461000000,
+			"file": "stockExperiments/providers/tests/base_tests.py",
 			"settings":
 			{
-				"buffer_size": 64190,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "{\n \"metadata\": {\n  \"name\": \"[INPROJ]datetime_to_timestamp\"\n },\n \"nbformat\": 3,\n \"nbformat_minor\": 0,\n \"worksheets\": [\n  {\n   \"cells\": [\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"import datetime\\n\",\n      \"import time\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 96\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"d = datetime.datetime.now()\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 97\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"def impl1(d):\\n\",\n      \"    epoch = datetime.datetime(1970, 1, 1)\\n\",\n      \"    since_epoch = d - epoch\\n\",\n      \"    return since_epoch.days * 86400000 + since_epoch.seconds\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 98\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"def impl2(d):\\n\",\n      \"    return time.mktime(d.timetuple())*1000\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 99\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"def impl3(dt):\\n\",\n      \"    epoch = datetime.datetime(1970, 1, 1)\\n\",\n      \"    delta = dt - epoch\\n\",\n      \"    return delta.total_seconds() * 1000\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 100\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"%timeit impl1(d)\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [\n      {\n       \"output_type\": \"stream\",\n       \"stream\": \"stdout\",\n       \"text\": [\n        \"1000000 loops, best of 3: 691 ns per loop\\n\"\n       ]\n      }\n     ],\n     \"prompt_number\": 101\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"%timeit impl2(d)\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [\n      {\n       \"output_type\": \"stream\",\n       \"stream\": \"stdout\",\n       \"text\": [\n        \"100000 loops, best of 3: 3.07 us per loop\\n\"\n       ]\n      }\n     ],\n     \"prompt_number\": 102\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"%timeit impl3(d)\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [\n      {\n       \"output_type\": \"stream\",\n       \"stream\": \"stdout\",\n       \"text\": [\n        \"1000000 loops, best of 3: 798 ns per loop\\n\"\n       ]\n      }\n     ],\n     \"prompt_number\": 103\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"def timestamp_to_datetime(ms):\\n\",\n      \"    return datetime.datetime.fromtimestamp(ms//1000)\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 104\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"d\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [\n      {\n       \"output_type\": \"pyout\",\n       \"prompt_number\": 105,\n       \"text\": [\n        \"datetime.datetime(2012, 12, 15, 21, 28, 48, 591601)\"\n       ]\n      }\n     ],\n     \"prompt_number\": 105\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"d - timestamp_to_datetime(impl1(d))\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [\n      {\n       \"output_type\": \"pyout\",\n       \"prompt_number\": 109,\n       \"text\": [\n        \"datetime.timedelta(0, 84451, 591601)\"\n       ]\n      }\n     ],\n     \"prompt_number\": 109\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"d- timestamp_to_datetime(impl2(d))\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [\n      {\n       \"output_type\": \"pyout\",\n       \"prompt_number\": 110,\n       \"text\": [\n        \"datetime.timedelta(0, 0, 591601)\"\n       ]\n      }\n     ],\n     \"prompt_number\": 110\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"d- timestamp_to_datetime(impl3(d))\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [\n      {\n       \"output_type\": \"pyout\",\n       \"prompt_number\": 111,\n       \"text\": [\n        \"datetime.timedelta(0, 7200, 591601)\"\n       ]\n      }\n     ],\n     \"prompt_number\": 111\n    },\n    {\n     \"cell_type\": \"markdown\",\n     \"metadata\": {},\n     \"source\": [\n      \"# OFFICIAL\"\n     ]\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"def date_to_timestamp(d):\\n\",\n      \"    return time.mktime(d.timetuple())*1000\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 112\n    },\n    {\n     \"cell_type\": \"code\",\n     \"collapsed\": false,\n     \"input\": [\n      \"def timestamp_to_datetime(ms):\\n\",\n      \"    return datetime.datetime.fromtimestamp(ms//1000)\"\n     ],\n     \"language\": \"python\",\n     \"metadata\": {},\n     \"outputs\": [],\n     \"prompt_number\": 117\n    }\n   ],\n   \"metadata\": {}\n  }\n ]\n}",
-			"file": "ipy-notebooks/[INPROJ]datetime_to_timestamp.ipynb",
-			"file_size": 5108,
-			"file_write_time": 1358700454000000,
-			"settings":
-			{
-				"buffer_size": 5128,
+				"buffer_size": 8025,
 				"line_ending": "Unix"
 			}
 		}
@@ -296,6 +271,17 @@
 	},
 	"file_history":
 	[
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/raw_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/pandasutils_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/pandasutils.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/sketches/pynvest.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/dateutils_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/dateutils.py",
+		"/data/dev/workspace-py/stockExperiments/ipy-notebooks/[INPROJ]datetime_to_timestamp.ipynb",
+		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_util_tests_dateutils_tests.html",
+		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_util_dateutils.html",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/tests/options_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/experiments.py",
 		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_ipyghstocks_tests_options_tests.html",
@@ -304,15 +290,11 @@
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/plotutils.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/options.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/chart.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/dateutils.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/cotahist.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/pynvest.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/tests/chart_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/bmfbovespa.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/loader.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/raw_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/base_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/locator_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments.sublime-project",
@@ -320,7 +302,6 @@
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/classutils_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/__init__.py",
 		"/data/dev/workspace-py/stockExperiments/bin/util/displayprofilestats.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/dateutils_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/ipythonutils.py",
 		"/data/resemblanceProfiles/oncast-linux-PC/config/.config/sublime-text-2/Packages/User/SublimeLinter.sublime-settings",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/ipython.py",
@@ -362,7 +343,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 95.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -373,6 +354,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_createMapOfLists",
 			"timestamp_to_date",
 			"_AbstractHighChartsOptionsJSONEncoder",
 			"HighChartsOptions",
@@ -427,49 +409,23 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "stockExperiments/util/tests/pandasutils_tests.py",
-					"settings":
-					{
-						"buffer_size": 1101,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1010,
-								1010
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "docs/TODO.md",
 					"settings":
 					{
-						"buffer_size": 1211,
+						"buffer_size": 1185,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								368,
+								368
 							]
 						],
 						"settings":
@@ -569,27 +525,21 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 2,
-					"file": "stockExperiments/util/tests/dateutils_tests.py",
+					"buffer": 1,
+					"file": "stockExperiments/sources/tests/cotahist_tests.py",
 					"settings":
 					{
-						"buffer_size": 6708,
+						"buffer_size": 156,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6708,
-								6708
+								143,
+								155
 							]
 						],
 						"settings":
@@ -685,25 +635,139 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2241.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "stockExperiments/providers/raw.py",
+					"settings":
+					{
+						"buffer_size": 881,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								118,
+								118
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "stockExperiments/ipyghstocks/options.py",
+					"file": "stockExperiments/providers/base.py",
 					"settings":
 					{
-						"buffer_size": 2524,
+						"buffer_size": 2090,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2311,
-								2311
+								1768,
+								1768
 							]
 						],
 						"settings":
@@ -799,17 +863,23 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1253.0,
+						"translation.y": 600.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
 				{
 					"buffer": 4,
-					"file": "stockExperiments/sources/sketches/pynvest.py",
+					"file": "stockExperiments/ipyghstocks/options.py",
 					"settings":
 					{
-						"buffer_size": 3318,
+						"buffer_size": 2524,
 						"regions":
 						{
 						},
@@ -917,31 +987,113 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 5,
-					"file": "stockExperiments/util/pandasutils.py",
+					"file": "stockExperiments/sources/cotahist.py",
 					"settings":
 					{
-						"buffer_size": 260,
+						"buffer_size": 146,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								60,
-								60
+								145,
+								145
 							]
 						],
 						"settings":
 						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -949,21 +1101,27 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
 				{
 					"buffer": 6,
-					"file": "stockExperiments/providers/raw.py",
+					"file": "stockExperiments/sources/yahoofinance.py",
 					"settings":
 					{
-						"buffer_size": 881,
+						"buffer_size": 1338,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								505,
-								505
+								75,
+								75
 							]
 						],
 						"settings":
@@ -1066,18 +1224,18 @@
 				},
 				{
 					"buffer": 7,
-					"file": "stockExperiments/sources/yahoofinance.py",
+					"file": "stockExperiments/util/tests/dateutils_tests.py",
 					"settings":
 					{
-						"buffer_size": 1338,
+						"buffer_size": 6720,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								423,
-								423
+								95,
+								95
 							]
 						],
 						"settings":
@@ -1180,18 +1338,18 @@
 				},
 				{
 					"buffer": 8,
-					"file": "stockExperiments/util/dateutils.py",
+					"file": "stockExperiments/providers/tests/locator_tests.py",
 					"settings":
 					{
-						"buffer_size": 1149,
+						"buffer_size": 3305,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								736,
-								736
+								1141,
+								1141
 							]
 						],
 						"settings":
@@ -1287,25 +1445,25 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 248.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 9,
-					"file": "coverage/stockExperiments_util_dateutils.html",
+					"file": "stockExperiments/providers/tests/base_tests.py",
 					"settings":
 					{
-						"buffer_size": 15895,
+						"buffer_size": 8025,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								296,
+								296
 							]
 						],
 						"settings":
@@ -1398,244 +1556,10 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "coverage/stockExperiments_util_tests_dateutils_tests.html",
-					"settings":
-					{
-						"buffer_size": 64190,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110.0
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2.0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "ipy-notebooks/[INPROJ]datetime_to_timestamp.ipynb",
-					"settings":
-					{
-						"buffer_size": 5128,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110.0
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2.0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 22.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1703,12 +1627,32 @@
 		"selected_items":
 		[
 			[
-				"op",
-				"stockExperiments/ipyghstocks/tests/options_tests.py"
+				"base",
+				"stockExperiments/providers/base.py"
+			],
+			[
+				"r",
+				"stockExperiments/providers/tests/raw_tests.py"
+			],
+			[
+				"providers.py",
+				"stockExperiments/providers/base.py"
+			],
+			[
+				"raw",
+				"stockExperiments/providers/raw.py"
 			],
 			[
 				"date",
 				"stockExperiments/util/tests/dateutils_tests.py"
+			],
+			[
+				"pandas",
+				"stockExperiments/util/tests/pandasutils_tests.py"
+			],
+			[
+				"op",
+				"stockExperiments/ipyghstocks/tests/options_tests.py"
 			],
 			[
 				"dateu",
@@ -1717,10 +1661,6 @@
 			[
 				"optio",
 				"stockExperiments/ipyghstocks/tests/options_tests.py"
-			],
-			[
-				"raw",
-				"stockExperiments/providers/raw.py"
 			],
 			[
 				"opt",
@@ -1753,10 +1693,6 @@
 			[
 				"ip",
 				"stockExperiments/util/ipythonutils.py"
-			],
-			[
-				"base",
-				"stockExperiments/providers/base.py"
 			],
 			[
 				"lo",

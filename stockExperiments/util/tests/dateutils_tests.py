@@ -49,7 +49,8 @@ class TestRelativeWorkingDayFunction(unittest.TestCase):
         assert util.relative_working_day(20, date(2012, 12, 17)) == date(2013, 1, 14)
 
     def test_should_return_date_1_working_day_ago(self):
-        assert util.relative_working_day(-1) == util.last_working_day(date.today() - timedelta(1))
+        dt_today = date.today()
+        assert util.relative_working_day(-1) == util.last_working_day(util.last_working_day(dt_today) - timedelta(1))
 
     def test_should_use_today_if_no_argument_is_given(self):
         assert util.relative_working_day(0) == util.last_working_day(date.today())

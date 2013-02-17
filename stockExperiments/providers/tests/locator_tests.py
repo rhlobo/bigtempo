@@ -7,10 +7,10 @@ import util.classutils as classutils
 
 class TestLocatorModuleFunctions(unittest.TestCase):
 
-    def test_module_should_have_get_method(self):
+    def test_module_should_have_stock_locator_retrieval_method(self):
         locator.stock()
 
-    def test_get_should_return_locator(self):
+    def test_method_should_return_stock_locator(self):
         c_locator = locator.stock()
         assert isinstance(c_locator, locator.Locator)
 
