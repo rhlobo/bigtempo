@@ -1,5 +1,6 @@
 import unittest
 from mockito import mock, when, verify, any as anya
+import inspect
 import providers.locator as locator
 import providers.base as base
 import util.classutils as classutils
@@ -8,7 +9,7 @@ import util.classutils as classutils
 class TestLocatorModuleFunctions(unittest.TestCase):
 
     def test_module_should_have_stock_locator_retrieval_method(self):
-        locator.stock()
+        assert 'stock' in [name for name, method in inspect.getmembers(locator, predicate=inspect.isfunction)]
 
     def test_method_should_return_stock_locator(self):
         c_locator = locator.stock()

@@ -4,8 +4,16 @@
 		"selected_items":
 		[
 			[
+				"ob",
+				"objectMock"
+			],
+			[
 				"_",
-				"_dataframe_to_list_of_lists_impl2"
+				"_MockFactory"
+			],
+			[
+				"is",
+				"isfunction  (function)"
 			],
 			[
 				"as",
@@ -124,10 +132,6 @@
 				"printStats"
 			],
 			[
-				"is",
-				"isinstance"
-			],
-			[
 				"S",
 				"SymbolMap"
 			],
@@ -144,14 +148,6 @@
 	"buffers":
 	[
 		{
-			"file": "docs/TODO.md",
-			"settings":
-			{
-				"buffer_size": 1185,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "stockExperiments/sources/tests/cotahist_tests.py",
 			"settings":
 			{
@@ -160,37 +156,45 @@
 			}
 		},
 		{
-			"file": "stockExperiments/providers/raw.py",
+			"contents": "import unittest\nfrom mockito import mock, when, verify\nimport util.datastructutils as util\n\n\nclass TestLazyDict(unittest.TestCase):\n\n    def test_should_have_no_keys_just_after_initialized(self):\n        ds = util.LazyDict(_MockFactory())\n        assert len(ds.keys()) == 0\n\n    def test_should_lazyload_value_using_factory(self):\n        key = \"key\"\n        objectMock = mock()\n        factoryMock = mock()\n        when(factoryMock).get(key).thenReturn(objectMock)\n        ds = util.LazyDict(factoryMock)\n        assert ds.get(key) == objectMock\n        verify(factoryMock, times=1).get()\n\n\nclass _MockFactory(object):\n\n    def get(self):\n        raise NotImplementedError\n",
+			"file": "stockExperiments/util/tests/datastructutils_tests.py",
+			"file_size": 701,
+			"file_write_time": 1361570773000000,
 			"settings":
 			{
-				"buffer_size": 881,
+				"buffer_size": 674,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "stockExperiments/providers/base.py",
+			"file": "docs/TODO.md",
 			"settings":
 			{
-				"buffer_size": 2090,
+				"buffer_size": 1185,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "stockExperiments/ipyghstocks/options.py",
+			"file": "stockExperiments/util/datastructutils.py",
 			"settings":
 			{
-				"buffer_size": 2524,
+				"buffer_size": 492,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "import providers.base as base\n\n\nclass CotahistImporter(base.RawProvider):\n\n    def load(self, s_symbol, da_start=None, da_end=None):\n        pass\n",
 			"file": "stockExperiments/sources/cotahist.py",
-			"file_size": 96,
-			"file_write_time": 1359585931000000,
 			"settings":
 			{
 				"buffer_size": 146,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "stockExperiments/util/dateutils.py",
+			"settings":
+			{
+				"buffer_size": 1149,
 				"line_ending": "Unix"
 			}
 		},
@@ -203,18 +207,10 @@
 			}
 		},
 		{
-			"file": "stockExperiments/util/tests/dateutils_tests.py",
-			"settings":
-			{
-				"buffer_size": 6720,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "stockExperiments/providers/tests/locator_tests.py",
 			"settings":
 			{
-				"buffer_size": 3305,
+				"buffer_size": 3407,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,13 +267,21 @@
 	},
 	"file_history":
 	[
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/raw_tests.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/dateutils_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/raw.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/base.py",
+		"/data/dev/workspace-py/stockExperiments/docs/TODO.md",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/options.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/fileutils.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/fileutils_tests.py",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/fileutils_tests_data/B.txt",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/fileutils_tests_data/b.txt",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/fileutils_tests_data/arquivo1",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/fileutils_tests_data/a.txt",
+		"/data/dev/workspace-py/stockExperiments/stockExperiments/providers/tests/raw_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/pandasutils_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/pandasutils.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/sketches/pynvest.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/tests/dateutils_tests.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/dateutils.py",
 		"/data/dev/workspace-py/stockExperiments/ipy-notebooks/[INPROJ]datetime_to_timestamp.ipynb",
 		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_util_tests_dateutils_tests.html",
@@ -288,7 +292,6 @@
 		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_ipyghstocks_options.html",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/yahoofinance.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/util/plotutils.py",
-		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/options.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/ipyghstocks/chart.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/cotahist.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/sources/pynvest.py",
@@ -314,7 +317,6 @@
 		"/data/dev/workspace-py/stockExperiments/docs/NAMING_CONVENTIONS.md",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/ystockquote.py",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/pynvest.py",
-		"/data/dev/workspace-py/stockExperiments/docs/TODO.md",
 		"/data/dev/workspace-py/stockExperiments/stockExperiments/data/yahoo/__init__.py",
 		"/data/resemblanceProfiles/oncast-linux-PC/config/.config/sublime-text-2/Packages/User/Python.sublime-settings",
 		"/data/dev/workspace-py/stockExperiments/coverage/stockExperiments_providers_base.html",
@@ -354,6 +356,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"B.txt",
 			"_createMapOfLists",
 			"timestamp_to_date",
 			"_AbstractHighChartsOptionsJSONEncoder",
@@ -394,6 +397,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"b.txt",
 			"timestamp_to_datetime",
 			"_HighChartsJSONEncoder",
 			"_",
@@ -414,6 +418,146 @@
 			[
 				{
 					"buffer": 0,
+					"file": "stockExperiments/sources/tests/cotahist_tests.py",
+					"settings":
+					{
+						"buffer_size": 156,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54,
+								54
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "stockExperiments/util/tests/datastructutils_tests.py",
+					"settings":
+					{
+						"buffer_size": 674,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								466,
+								466
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "docs/TODO.md",
 					"settings":
 					{
@@ -424,8 +568,8 @@
 						"selection":
 						[
 							[
-								368,
-								368
+								0,
+								0
 							]
 						],
 						"settings":
@@ -525,361 +669,19 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "stockExperiments/sources/tests/cotahist_tests.py",
-					"settings":
-					{
-						"buffer_size": 156,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								143,
-								155
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110.0
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2.0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "stockExperiments/providers/raw.py",
-					"settings":
-					{
-						"buffer_size": 881,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								118,
-								118
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110.0
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2.0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "stockExperiments/providers/base.py",
-					"settings":
-					{
-						"buffer_size": 2090,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1768,
-								1768
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110.0
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2.0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 600.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 4,
-					"file": "stockExperiments/ipyghstocks/options.py",
+					"buffer": 3,
+					"file": "stockExperiments/util/datastructutils.py",
 					"settings":
 					{
-						"buffer_size": 2524,
+						"buffer_size": 492,
 						"regions":
 						{
 						},
@@ -888,6 +690,32 @@
 							[
 								0,
 								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "stockExperiments/sources/cotahist.py",
+					"settings":
+					{
+						"buffer_size": 146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								30,
+								30
 							]
 						],
 						"settings":
@@ -990,18 +818,18 @@
 				},
 				{
 					"buffer": 5,
-					"file": "stockExperiments/sources/cotahist.py",
+					"file": "stockExperiments/util/dateutils.py",
 					"settings":
 					{
-						"buffer_size": 146,
+						"buffer_size": 1149,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								145,
-								145
+								556,
+								556
 							]
 						],
 						"settings":
@@ -1105,7 +933,7 @@
 			]
 		},
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1120,8 +948,8 @@
 						"selection":
 						[
 							[
-								75,
-								75
+								399,
+								399
 							]
 						],
 						"settings":
@@ -1224,18 +1052,18 @@
 				},
 				{
 					"buffer": 7,
-					"file": "stockExperiments/util/tests/dateutils_tests.py",
+					"file": "stockExperiments/providers/tests/locator_tests.py",
 					"settings":
 					{
-						"buffer_size": 6720,
+						"buffer_size": 3407,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								95,
-								95
+								387,
+								387
 							]
 						],
 						"settings":
@@ -1338,120 +1166,6 @@
 				},
 				{
 					"buffer": 8,
-					"file": "stockExperiments/providers/tests/locator_tests.py",
-					"settings":
-					{
-						"buffer_size": 3305,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1141,
-								1141
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110.0
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2.0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"C++": "c",
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
 					"file": "stockExperiments/providers/tests/base_tests.py",
 					"settings":
 					{
@@ -1462,8 +1176,8 @@
 						"selection":
 						[
 							[
-								296,
-								296
+								3194,
+								3194
 							]
 						],
 						"settings":
@@ -1559,7 +1273,7 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 22.0,
+						"translation.y": 870.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1626,6 +1340,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"todo",
+				"docs/TODO.md"
+			],
+			[
+				"dateutils",
+				"stockExperiments/util/dateutils.py"
+			],
 			[
 				"base",
 				"stockExperiments/providers/base.py"
