@@ -47,6 +47,20 @@ class TestGetAllSubclassesFunction(unittest.TestCase):
         result = utils.get_all_subclasses(_MockClass2A)
         assert len(result) == 0
 
+    def test_get_all_subclasses_should_return_no_subclasses_due_to_filter(self):
+        result = utils.get_all_subclasses(_MockClass, r'^Class$')
+        for r in result:
+            print r.__name__
+        assert len(result) == 0
+
+    def test_get_all_subclasses_should_return_subclasses_filtered_by_name(self):
+        result = utils.get_all_subclasses(_MockClass, r'_MockClass\d{1}B')
+        assert len(result) == 2
+        for r in result:
+            print r.__name__
+        assert _MockClass1B in result
+        assert _MockClass2B in result
+
 
 class _MockClass(object):
     pass
