@@ -16,10 +16,6 @@ Functional
 TASKS
 =====
 
-- Import cotahist data into existing providers
--- Create update method into providers
--- Test merging and updateing data into providers
-- Assure provider data cache is working (implement logging throughout the app)
 - Display graph in iPython from imported data
 - Create function to detect data errors, splits and joins
 -- Measurement by measurement, looking out for 20% + changes
@@ -30,6 +26,7 @@ TASKS
 - Create provider that provides normalized data
 - Create function that correct other data errors
 - Create provider that provides corrected data
+- Assure provider data cache is working (implement logging throughout the app)
 
-- Create CSV file containing quotation test data for yahoo
-- Test yahoo data
+-- Create update method into providers
+-- Test merging and updateing data into providers
