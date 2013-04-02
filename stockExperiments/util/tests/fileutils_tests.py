@@ -40,7 +40,7 @@ class TestFileutilsModuleFunctions(unittest.TestCase):
             assert os.path.basename(filepath) in expected_files
 
     def test_listdir_method_should_return_files_ordered_by_given_function(self):
-        expected_files = ['arquivo1', '1.1', '1.2', 'arquivo2', 'arquivo3', 'c.txt', 'data.dat', 'b.txt', 'a.txt']
+        expected_files = ['1.1', 'arquivo1', '1.2', 'arquivo2', 'arquivo3', 'data.dat', 'a.txt', 'b.txt', 'c.txt']
         result = util.listdir(_get_test_data_dir(), f_sort=_path_sort)
         assert len(result) == len(expected_files)
         for i in range(len(result)):
@@ -54,4 +54,4 @@ def _get_test_data_dir():
 
 
 def _path_sort(path):
-    return path[-1]
+    return path[::-1]
