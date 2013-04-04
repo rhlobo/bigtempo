@@ -17,20 +17,17 @@ def historical_prices(symbol, start_date=None, end_date=None):
 
 def splits(symbol, start_date=None, end_date=None):
     split_tuple = collections.namedtuple('split', 'date before after')
-    # What the hell is 'x'?  I really hate Yahoo API...
     response = _ichart_request(symbol, start_date, end_date, extra_params={'g': 'v'}, resource='x')
     try:
         raw = csv.reader(response)
 
-        next(raw)  # remove directives row. Useless AND wrong this time!
+        next(raw)
         splits = []
         for row in raw:
             if row[0].lower() != 'split':
                 continue
             type, date, value = row
-            # Can't use convert_string because date is in a different format...
             date = datetime.datetime.strptime(date.strip(), '%Y%m%d').date()
-            # Split 2:1 means 1 share turns into 2
             after, before = map(int, value.split(':'))
             splits.append(split_tuple(date, before, after))
         return splits
