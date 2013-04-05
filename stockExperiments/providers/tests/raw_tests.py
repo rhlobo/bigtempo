@@ -47,11 +47,11 @@ class TestCotahistProvider_load_data_selection(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.importer = cotahist.CotahistImporter
-        cotahist.CotahistImporter = _CotahistImporterMock
+        raw.cotahist.CotahistImporter = _CotahistImporterMock
 
     @classmethod
     def tearDownClass(cls):
-        cotahist.CotahistImporter = cls.importer
+        raw.cotahist.CotahistImporter = cls.importer
 
     def test_should_return_empty_dataFrame_when_period_not_available(self):
         provider = raw.CotahistProvider()

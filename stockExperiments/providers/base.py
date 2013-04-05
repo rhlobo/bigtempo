@@ -27,6 +27,16 @@ class RawProvider(AbstractProvider):
         return self.__class__
 
 
+class ByProductProvider(AbstractProvider):
+
+    def __init__(self):
+        # TODO: Should Receive a locator so that it can locate needed providers.
+        AbstractProvider.__init__(self)
+
+    def typifies(self):
+        return self.__class__
+
+
 class ProviderChainManager(AbstractProvider):
 
     def __init__(self, *providers):

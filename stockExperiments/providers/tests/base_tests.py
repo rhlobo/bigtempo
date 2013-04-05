@@ -36,6 +36,20 @@ class TestRawProvider(unittest.TestCase):
             assert isinstance(instance, RawProvider)
 
 
+class TestByProductProvider(unittest.TestCase):
+
+    def test_typifies_should_return_class(self):
+        p = RawProvider()
+        assert p.typifies() is p.__class__
+        assert p.typifies() is RawProvider
+
+    def test_subclasses_typifies_should_return_class(self):
+        l_instances = classutils.instantiate(classutils.get_all_subclasses(RawProvider))
+        for instance in l_instances:
+            assert instance.typifies() is instance.__class__
+            assert isinstance(instance, RawProvider)
+
+
 class TestProviderChainManager(unittest.TestCase):
 
     def test_should_subclass_abstractProvider(self):
