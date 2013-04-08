@@ -1,5 +1,5 @@
 import unittest
-from mockito import mock, when, verify, any as anya
+from mockito import mock, when, verify, any as _any
 import inspect
 import providers.locator as locator
 import providers.base as base
@@ -22,15 +22,24 @@ class TestProviderLoader(unittest.TestCase):
         m_builder = mock(locator.ProviderLazyLoadingChainBuider)
         l_class = classutils.get_all_subclasses(base.RawProvider)
         c_providerLoader = locator.ProviderLoader(m_builder)
-        c_providerLoader.load()
-        verify(m_builder, times=len(l_class)).build(anya())
+        c_providerLoader.load(base.RawProvider)
+        verify(m_builder, times=len(l_class)).build(_any())
 
     def test_load_should_return_every_raw_providers(self):
         l_class = classutils.get_all_subclasses(base.RawProvider)
         c_providerLoader = locator.ProviderLoader(locator.ProviderLazyLoadingChainBuider())
-        l_provider = c_providerLoader.load()
+        l_provider = c_providerLoader.load(base.RawProvider)
         for clazz in l_class:
             assert clazz in [provider.typifies() for provider in l_provider]
+
+    def test_load_should_return_objects_that_need_construction_params(self):
+        param1 = "string"
+        param2 = 42
+        c_providerLoader = locator.ProviderLoader(_FakeBuilder())
+        l_provider = c_providerLoader.load(_ProviderMock, param1, param2)
+        assert isinstance(l_provider[0], _ProviderMockImpl)
+        assert l_provider[0].string_param == param1
+        assert l_provider[0].integer_param == param2
 
 
 class TestProviderLazyLoadingChainBuider(unittest.TestCase):
@@ -88,4 +97,21 @@ class _Mock2(base.RawProvider):
 
 
 class _Mock3(base.RawProvider):
+    pass
+
+
+class _FakeBuilder(object):
+
+    def build(self, provider):
+        return provider
+
+
+class _ProviderMock(base.RawProvider):
+
+    def __init__(self, string_param, integer_param):
+        self.string_param = string_param
+        self.integer_param = integer_param
+
+
+class _ProviderMockImpl(_ProviderMock):
     pass

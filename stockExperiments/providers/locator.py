@@ -1,3 +1,5 @@
+import types
+from collections import namedtuple
 from providers.base import *
 from providers.raw import *
 import util.classutils as classutils
@@ -6,14 +8,28 @@ import util.classutils as classutils
 class Locator(object):
 
     def __init__(self, providerLoader):
-        self.providers = {}
-        for provider in providerLoader.load():
-            self.providers[provider.typifies()] = provider
+        _PROVIDER_TYPE = namedtuple('ProviderType', 'name base_class constructor_args')
+        _PROVIDER_DEFINITIONS = [
+                                 _PROVIDER_TYPE("raw", RawProvider, []),
+                                 _PROVIDER_TYPE("byproduct", ByproductProvider, [self])
+                                ]
 
-    def get(self, providerClass=None):
-        if not providerClass:
-            return self.providers.keys()
-        return self.providers.get(providerClass)
+        def _getter_creator(provider_map):
+            def _getter(self, providerClass=None):
+                return provider_map.keys() if not providerClass else provider_map.get(providerClass)
+            return _getter
+
+        self.providers = {}
+        setattr(self, 'get', types.MethodType(_getter_creator(self.providers), self))
+
+        for provider_type in _PROVIDER_DEFINITIONS:
+            setattr(self, provider_type.name, {})
+            provider_map = getattr(self, provider_type.name)
+            for provider in providerLoader.load(provider_type.base_class, *provider_type.constructor_args):
+                provider_reference = provider.typifies()
+                provider_map[provider_reference] = provider
+                self.providers[provider_reference] = provider
+            setattr(self, 'get_%s' % provider_type.name, types.MethodType(_getter_creator(provider_map), self))
 
 
 class ProviderLoader(object):
@@ -21,11 +37,11 @@ class ProviderLoader(object):
     def __init__(self, builder):
         self.builder = builder
 
-    def load(self):
-        return [self.builder.build(instance) for instance in self.__load(RawProvider)]
+    def load(self, base_class, *args):
+        return [self.builder.build(instance) for instance in self._create_instances(base_class, *args)]
 
-    def __load(self, baseClass):
-        return classutils.instantiate(classutils.get_all_subclasses(baseClass))
+    def _create_instances(self, base_class, *args):
+        return classutils.instantiate(classutils.get_all_subclasses(base_class), *args)
 
 
 class ProviderLazyLoadingChainBuider(object):

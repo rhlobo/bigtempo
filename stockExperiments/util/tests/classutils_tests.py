@@ -24,6 +24,18 @@ class TestInstantiateFunction(unittest.TestCase):
         assert type(result[1]) is _MockClass1
         assert type(result[2]) is _MockClass2
 
+    def test_instantiate_should_pass_on_given_construction_arguments(self):
+        self.assertRaises(TypeError, utils.instantiate, [_MockClass], "inapplicable construction param")
+
+    def test_instantiate_should_be_able_to_create_objects_that_need_parameters(self):
+        s_param1 = 'param1'
+        i_param2 = 42
+        result = utils.instantiate([_MockClassWithParam1, _MockClassWithParam2], s_param1, i_param2)
+        assert len(result) == 2
+        for instance in result:
+            assert instance.param1 == s_param1
+            assert instance.param2 == i_param2
+
 
 class TestGetAllSubclassesFunction(unittest.TestCase):
 
@@ -88,3 +100,17 @@ class _MockClass2A(_MockClass2):
 
 class _MockClass2B(_MockClass2):
     pass
+
+
+class _MockClassWithParam1(object):
+
+    def __init__(self, s_param, i_param):
+        self.param1 = s_param
+        self.param2 = i_param
+
+
+class _MockClassWithParam2(object):
+
+    def __init__(self, s_param, i_param):
+        self.param2 = i_param
+        self.param1 = s_param

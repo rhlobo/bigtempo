@@ -27,6 +27,16 @@ class RawProvider(AbstractProvider):
         return self.__class__
 
 
+class ByproductProvider(AbstractProvider):
+
+    def __init__(self, locator):
+        AbstractProvider.__init__(self)
+        self.locator = locator
+
+    def typifies(self):
+        return self.__class__
+
+
 class ProviderChainManager(AbstractProvider):
 
     def __init__(self, *providers):
