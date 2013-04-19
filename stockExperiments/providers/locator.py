@@ -1,5 +1,4 @@
 import types
-from collections import namedtuple
 from providers.base import *
 from providers.raw import *
 import util.classutils as classutils
@@ -8,28 +7,18 @@ import util.classutils as classutils
 class Locator(object):
 
     def __init__(self, providerLoader):
-        _PROVIDER_TYPE = namedtuple('ProviderType', 'name base_class constructor_args')
-        _PROVIDER_DEFINITIONS = [
-                                 _PROVIDER_TYPE("raw", RawProvider, []),
-                                 _PROVIDER_TYPE("byproduct", ByproductProvider, [self])
-                                ]
-
-        def _getter_creator(provider_map):
-            def _getter(self, providerClass=None):
-                return provider_map.keys() if not providerClass else provider_map.get(providerClass)
-            return _getter
-
         self.providers = {}
-        setattr(self, 'get', types.MethodType(_getter_creator(self.providers), self))
+        self.providerLoader = providerLoader
+        setattr(self, 'get', types.MethodType(self._getter_creator(self.providers), self))
 
-        for provider_type in _PROVIDER_DEFINITIONS:
-            setattr(self, provider_type.name, {})
-            provider_map = getattr(self, provider_type.name)
-            for provider in providerLoader.load(provider_type.base_class, *provider_type.constructor_args):
-                provider_reference = provider.typifies()
-                provider_map[provider_reference] = provider
-                self.providers[provider_reference] = provider
-            setattr(self, 'get_%s' % provider_type.name, types.MethodType(_getter_creator(provider_map), self))
+    def add_provider_definition(self, base_class, *args):
+        for provider in self.providerLoader.load(base_class, *args):
+            self.providers[provider.typifies()] = provider
+
+    def _getter_creator(self, provider_map):
+        def _getter(self, providerClass=None):
+            return provider_map.keys() if not providerClass else provider_map.get(providerClass)
+        return _getter
 
 
 class ProviderLoader(object):
@@ -55,7 +44,9 @@ class ProviderLazyLoadingChainBuider(object):
 
 
 def stock():
-    return _stock_locator
+    return _STOCK_LOCATOR
 
 
-_stock_locator = Locator(ProviderLoader(ProviderLazyLoadingChainBuider()))
+_STOCK_LOCATOR = Locator(ProviderLoader(ProviderLazyLoadingChainBuider()))
+_STOCK_LOCATOR.add_provider_definition(RawProvider)
+_STOCK_LOCATOR.add_provider_definition(ByproductProvider, _STOCK_LOCATOR)
