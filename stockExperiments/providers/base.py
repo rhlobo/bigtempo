@@ -5,6 +5,9 @@ class AbstractProvider(object):
     def load(self, s_symbol, da_start=None, da_end=None):
         raise NotImplementedError
 
+    def clear(self, s_symbol):
+        raise NotImplementedError
+
     def typifies(self):
         raise NotImplementedError
 
@@ -29,9 +32,9 @@ class RawProvider(AbstractProvider):
 
 class ByProductProvider(AbstractProvider):
 
-    def __init__(self):
-        # TODO: Should Receive a locator so that it can locate needed providers.
+    def __init__(self, locator):
         AbstractProvider.__init__(self)
+        self.locator = locator
 
     def typifies(self):
         return self.__class__

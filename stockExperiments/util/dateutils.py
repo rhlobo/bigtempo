@@ -4,10 +4,10 @@ import time
 import configurations as config
 
 
-def working_day_range(start_date=config.START_DATE, end_date=None):
-    if not end_date:
-        end_date = last_working_day()
-    return pandas.bdate_range(start_date, end_date, normalize=True)
+def working_day_range(start_date=None, end_date=None):
+    da_start = start_date if start_date else config.START_DATE
+    da_end = end_date if end_date else last_working_day()
+    return pandas.bdate_range(da_start, da_end, normalize=True)
 
 
 def relative_working_day(days, date=None):

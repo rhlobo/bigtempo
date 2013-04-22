@@ -10,6 +10,10 @@ class TestAbstractProvider(unittest.TestCase):
         p = AbstractProvider()
         self.assertRaises(NotImplementedError, p.load, "")
 
+    def test_should_have_clear_method_with_symbol_argument(self):
+        p = AbstractProvider()
+        self.assertRaises(NotImplementedError, p.clear, "")
+
     def test_should_have_typifies_method_without_arguments(self):
         p = AbstractProvider()
         self.assertRaises(NotImplementedError, p.typifies)

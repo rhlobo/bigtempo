@@ -17,6 +17,7 @@ class CotahistImporter(object):
             c_symbolData.append([date, f_open, f_max, f_min, f_close, i_vol])
 
         for s_symbol in c_dataMap.keys():
+            c_dataMap.get(s_symbol).sort()
             ll_data = zip(*c_dataMap.get(s_symbol))
             ldt_index = ll_data[0]
             ts_dict = dict((s_name, pandas.TimeSeries(ll_data[i_columnIndex], index=ldt_index, name=s_name)) for s_name, i_columnIndex in mapping)

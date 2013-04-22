@@ -6,6 +6,7 @@ import util.testutils as testutils
 import util.classutils as classutils
 import util.fileutils as fileutils
 import sources.cotahist as cotahist
+import sources.bmfbovespa as bovespa
 import providers.base as base
 import providers.raw as raw
 
@@ -17,7 +18,7 @@ def test_raw_providers_load_PETR4_should_return_dataFrame_object():
         result = provider.load('PETR4', date(2011, 11, 17), date(2011, 11, 17))
         assert isinstance(result, pandas.DataFrame)
 
-    for rawCls in _getScenarios():
+    for rawCls in _getProviderScenarios():
         yield assert_raw_providers_load_PETR4_should_return_dataFrame_object, rawCls
 
 
@@ -88,8 +89,20 @@ class TestCotahistProvider_load_data_selection(unittest.TestCase):
         assert data.ix[1].name == datetime(2013, 3, 26)
 
 
-def _getScenarios():
+@unittest.skipIf(testutils.should_skip_provider_deep_tests(), testutils.get_providers_deep_tests_skip_reason())
+def test_should_return_dataFrame_object_with_sorted_index():
+    provider = raw.CotahistProvider()
+    for s_symbol in _getSymbolScenarios():
+        data = provider.load(s_symbol)
+        yield testutils.assert_data_index_is_ordered, data
+
+
+def _getProviderScenarios():
     return classutils.get_all_subclasses(base.RawProvider, r'^[^_]+.*')
+
+
+def _getSymbolScenarios():
+    return bovespa.SymbolImporter().import_symbols('IBovespa')
 
 
 def _get_expected_dataframe_from_csv(filename):

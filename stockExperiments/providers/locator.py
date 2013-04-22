@@ -22,9 +22,9 @@ class ProviderLoader(object):
         self.builder = builder
 
     def load(self):
-        return [self.builder.build(instance) for instance in self.__load(RawProvider)]
+        return [self.builder.build(instance) for instance in self._load(RawProvider)]
 
-    def __load(self, baseClass):
+    def _load(self, baseClass):
         return classutils.instantiate(classutils.get_all_subclasses(baseClass))
 
 
