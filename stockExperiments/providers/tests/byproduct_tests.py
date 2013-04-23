@@ -1,5 +1,5 @@
 import unittest
-from mockito import mock, when
+from mockito import mock, when, any as _any
 import pandas
 import util.testutils as testutils
 import util.fileutils as fileutils
@@ -72,9 +72,9 @@ class TestNormalizationFactorProvider(unittest.TestCase):
 def _prepare_locator_mock(s_symbol, c_mocked_provider, s_data_filename):
     locator_mock = mock(locator.Locator)
     provider_mock = mock(c_mocked_provider)
-    df_raw = pandas.DataFrame.from_csv(fileutils.get_test_data_file_path(__file__, s_data_filename))
+    df_from_file = pandas.DataFrame.from_csv(fileutils.get_test_data_file_path(__file__, s_data_filename))
 
-    when(provider_mock).load(s_symbol, None, None).thenReturn(df_raw)
+    when(provider_mock).load(s_symbol, _any(), _any()).thenReturn(df_from_file)
     when(locator_mock).get(c_mocked_provider).thenReturn(provider_mock)
 
     return locator_mock

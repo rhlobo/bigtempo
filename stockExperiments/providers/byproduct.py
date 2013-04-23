@@ -5,7 +5,7 @@ import providers.base as base
 import providers.raw as raw
 
 
-class PercentualChangeProvider(base.ByProductProvider):
+class PercentualChangeProvider(base.ByproductProvider):
 
     def load(self, s_symbol, da_start=None, da_end=None):
         da_newStart = dateutils.relative_working_day(-1, da_start) if da_start else None
@@ -13,7 +13,7 @@ class PercentualChangeProvider(base.ByProductProvider):
         return provider.load(s_symbol, da_newStart, da_end).pct_change()[1:]
 
 
-class SplitInformationProvider(base.ByProductProvider):
+class SplitInformationProvider(base.ByproductProvider):
 
     def load(self, s_symbol, da_start=None, da_end=None):
         #TODO: self.locator.clear(s_symbol)
@@ -38,9 +38,11 @@ class SplitInformationProvider(base.ByProductProvider):
         return split_info
 
 
-class NormalizationFactorProvider(base.ByProductProvider):
+class NormalizationFactorProvider(base.ByproductProvider):
 
     def load(self, s_symbol, da_start=None, da_end=None):
+        print da_start
+        print da_end
         df_split_info = self.locator.get(SplitInformationProvider).load(s_symbol, da_start, da_end)
         df_normalization = pandas.DataFrame(index=dateutils.working_day_range(da_start, da_end))
 
@@ -56,7 +58,7 @@ class NormalizationFactorProvider(base.ByProductProvider):
         return df_normalization
 
 
-class NormalizedCotationProvider(base.ByProductProvider):
+class NormalizedCotationProvider(base.ByproductProvider):
 
     def load(self, s_symbol, da_start=None, da_end=None):
         df_raw = self.locator.get(raw.CotahistProvider).load(s_symbol, da_start, da_end)

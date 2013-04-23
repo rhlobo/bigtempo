@@ -30,7 +30,7 @@ class RawProvider(AbstractProvider):
         return self.__class__
 
 
-class ByProductProvider(AbstractProvider):
+class ByproductProvider(AbstractProvider):
 
     def __init__(self, locator):
         AbstractProvider.__init__(self)
