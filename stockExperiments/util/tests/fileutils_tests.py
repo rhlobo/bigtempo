@@ -46,6 +46,17 @@ class TestFileutilsModuleFunctions(unittest.TestCase):
         for i in range(len(result)):
             assert os.path.basename(result[i]) == expected_files[i]
 
+    def test_get_test_data_file_path_should_return_test_data_file_path(self):
+        filename = 'arquivo1'
+        expected_filepath = os.path.abspath(os.path.join(_get_test_data_dir(), filename))
+        assert util.get_test_data_file_path(__file__, filename) == expected_filepath
+
+    def test_get_test_data_files_path_should_return_multiple_test_data_file_path(self):
+        filenames = ['arquivo1', '1.1']
+        for filename in filenames:
+            expected_filepath = os.path.abspath(os.path.join(_get_test_data_dir(), filename))
+            assert util.get_test_data_file_path(__file__, filename) == expected_filepath
+
 
 def _get_test_data_dir():
     test_data_dir_name = 'fileutils_tests_data'
