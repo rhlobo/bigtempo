@@ -41,8 +41,6 @@ class SplitInformationProvider(base.ByproductProvider):
 class NormalizationFactorProvider(base.ByproductProvider):
 
     def load(self, s_symbol, da_start=None, da_end=None):
-        print da_start
-        print da_end
         df_split_info = self.locator.get(SplitInformationProvider).load(s_symbol, da_start, da_end)
         df_normalization = pandas.DataFrame(index=dateutils.working_day_range(da_start, da_end))
 

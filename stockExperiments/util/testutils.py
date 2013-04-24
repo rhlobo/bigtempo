@@ -28,8 +28,8 @@ def assert_dataframe_almost_equal(expected, actual, margin=0.0000000001):
     assert tmp.all().all() == True
 
 
-def assert_provider_correctness_using_datafiles(s_symbol, c_mocked_provider, s_mockdata_filename, c_provider, s_expecteddata_filename, test_file):
-    locator_mock = prepare_locator_using_datafile(s_symbol, c_mocked_provider, s_mockdata_filename, test_file)
+def assert_provider_correctness_using_datafiles(test_file, s_symbol, c_provider, s_expecteddata_filename, *locator_mock_infos):
+    locator_mock = prepare_locator_using_datafile(test_file, s_symbol, *locator_mock_infos)
 
     expected = pandas.DataFrame.from_csv(fileutils.get_test_data_file_path(test_file, s_expecteddata_filename))
     actual = c_provider(locator_mock).load(s_symbol, expected.ix[0].name, expected.ix[-1].name)
@@ -37,12 +37,14 @@ def assert_provider_correctness_using_datafiles(s_symbol, c_mocked_provider, s_m
     assert_dataframe_almost_equal(expected, actual)
 
 
-def prepare_locator_using_datafile(s_symbol, c_mocked_provider, s_data_filename, test_file):
+def prepare_locator_using_datafile(test_file, s_symbol, *locator_mock_infos):
     locator_mock = mock(locator.Locator)
-    provider_mock = mock(c_mocked_provider)
-    df_from_file = pandas.DataFrame.from_csv(fileutils.get_test_data_file_path(test_file, s_data_filename))
 
-    when(provider_mock).load(s_symbol, _any(), _any()).thenReturn(df_from_file)
-    when(locator_mock).get(c_mocked_provider).thenReturn(provider_mock)
+    for c_mocked_provider, s_data_filename in locator_mock_infos:
+        provider_mock = mock(c_mocked_provider)
+        df_from_file = pandas.DataFrame.from_csv(fileutils.get_test_data_file_path(test_file, s_data_filename))
+
+        when(provider_mock).load(s_symbol, _any(), _any()).thenReturn(df_from_file)
+        when(locator_mock).get(c_mocked_provider).thenReturn(provider_mock)
 
     return locator_mock

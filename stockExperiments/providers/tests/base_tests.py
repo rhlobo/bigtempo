@@ -40,7 +40,7 @@ class TestRawProvider(unittest.TestCase):
             assert isinstance(instance, RawProvider)
 
 
-class TestByProductProvider(unittest.TestCase):
+class TestByproductProvider(unittest.TestCase):
 
     def test_typifies_should_return_class(self):
         p = RawProvider()
