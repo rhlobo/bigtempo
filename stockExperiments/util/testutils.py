@@ -6,11 +6,11 @@ import providers.locator as locator
 
 
 def should_skip_provider_deep_tests():
-    return os.environ.get('TESTTYPE') == 'FAST'
+    return os.environ.get('TESTTYPE') == 'fast'
 
 
 def get_providers_deep_tests_skip_reason():
-    if os.environ.get('TESTTYPE') == 'FAST':
+    if os.environ.get('TESTTYPE') == 'fast':
         return 'Fast test execution requested through environment variable.'
     return 'Providers deep tests are disabled.'
 

@@ -1,0 +1,23 @@
+Cython==0.18
+Pygments==1.6
+TA-Lib==0.4.5
+argparse==1.2.1
+bovespaparser==0.3
+coverage==3.6
+h5py==2.1.2
+ipython==0.13.2
+matplotlib==1.2.1
+mockito==0.5.1
+nose==1.3.0
+numexpr==2.1-rc2
+numpy==1.7.1
+pandas==0.10.1
+python-dateutil==2.1
+pytz==2013b
+pyzmq==13.0.2
+scipy==0.12.0
+six==1.3.0
+statsmodels==0.5.0
+-e git+https://github.com/PyTables/PyTables.git@a51c549c1555050d72e0aeb2ff5e04d48a71b1b4#egg=tables-dev
+tornado==3.0.1
+wsgiref==0.1.2
