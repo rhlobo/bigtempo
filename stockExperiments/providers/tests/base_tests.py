@@ -11,7 +11,7 @@ class TestAbstractProvider(unittest.TestCase):
         self.assertRaises(NotImplementedError, p.load, "")
 
     def test_should_have_clear_method_with_symbol_argument(self):
-        p = AbstractProvider()
+        p = base.AbstractProvider()
         self.assertRaises(NotImplementedError, p.clear, "")
 
     def test_should_have_typifies_method_without_arguments(self):
@@ -62,15 +62,15 @@ class TestByproductProvider(unittest.TestCase):
 class TestByproductProvider(unittest.TestCase):
 
     def test_typifies_should_return_class(self):
-        p = RawProvider()
+        p = base.RawProvider()
         assert p.typifies() is p.__class__
-        assert p.typifies() is RawProvider
+        assert p.typifies() is base.RawProvider
 
     def test_subclasses_typifies_should_return_class(self):
-        l_instances = classutils.instantiate(classutils.get_all_subclasses(RawProvider))
+        l_instances = classutils.instantiate(classutils.get_all_subclasses(base.RawProvider))
         for instance in l_instances:
             assert instance.typifies() is instance.__class__
-            assert isinstance(instance, RawProvider)
+            assert isinstance(instance, base.RawProvider)
 
 
 class TestProviderChainManager(unittest.TestCase):
