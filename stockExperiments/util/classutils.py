@@ -1,8 +1,9 @@
 import re
 
 
-def instantiate(classes):
-    return [clazz() for clazz in classes]
+def instantiate(classes, *args):
+    print classes
+    return [clazz(*args) for clazz in classes]
 
 
 def get_all_subclasses(clazz, s_filter=r'.*'):

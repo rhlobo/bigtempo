@@ -1,3 +1,4 @@
+import types
 from providers.base import *
 from providers.raw import *
 import util.classutils as classutils
@@ -7,13 +8,17 @@ class Locator(object):
 
     def __init__(self, providerLoader):
         self.providers = {}
-        for provider in providerLoader.load():
+        self.providerLoader = providerLoader
+        setattr(self, 'get', types.MethodType(self._getter_creator(self.providers), self))
+
+    def add_provider_definition(self, base_class, *args):
+        for provider in self.providerLoader.load(base_class, *args):
             self.providers[provider.typifies()] = provider
 
-    def get(self, providerClass=None):
-        if not providerClass:
-            return self.providers.keys()
-        return self.providers.get(providerClass)
+    def _getter_creator(self, provider_map):
+        def _getter(self, providerClass=None):
+            return provider_map.keys() if not providerClass else provider_map.get(providerClass)
+        return _getter
 
 
 class ProviderLoader(object):
@@ -21,11 +26,11 @@ class ProviderLoader(object):
     def __init__(self, builder):
         self.builder = builder
 
-    def load(self):
-        return [self.builder.build(instance) for instance in self._load(RawProvider)]
+    def load(self, base_class, *args):
+        return [self.builder.build(instance) for instance in self._create_instances(base_class, *args)]
 
-    def _load(self, baseClass):
-        return classutils.instantiate(classutils.get_all_subclasses(baseClass))
+    def _create_instances(self, base_class, *args):
+        return classutils.instantiate(classutils.get_all_subclasses(base_class), *args)
 
 
 class ProviderLazyLoadingChainBuider(object):
@@ -39,7 +44,9 @@ class ProviderLazyLoadingChainBuider(object):
 
 
 def stock():
-    return _stock_locator
+    return _STOCK_LOCATOR
 
 
-_stock_locator = Locator(ProviderLoader(ProviderLazyLoadingChainBuider()))
+_STOCK_LOCATOR = Locator(ProviderLoader(ProviderLazyLoadingChainBuider()))
+_STOCK_LOCATOR.add_provider_definition(RawProvider)
+_STOCK_LOCATOR.add_provider_definition(ByproductProvider, _STOCK_LOCATOR)
