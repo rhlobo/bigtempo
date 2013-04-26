@@ -2,7 +2,6 @@ import re
 
 
 def instantiate(classes, *args):
-    print classes
     return [clazz(*args) for clazz in classes]
 
 

@@ -34,11 +34,15 @@ class CotahistProvider(base.RawProvider):
         return self.d_dataFrame
 
     def load(self, s_symbol, da_start=None, da_end=None):
-        df_symbol = self._get_dataFrameMap()[s_symbol]
+        df_symbol = self._get_dataFrameMap().get(s_symbol)
+
+        #TODO: What to do if there was no df for s_symbol?
+
         if da_start and da_end:
             return df_symbol[da_start:da_end]
         if da_start:
             return df_symbol[da_start:]
         if da_end:
             return df_symbol[:da_end]
+
         return df_symbol

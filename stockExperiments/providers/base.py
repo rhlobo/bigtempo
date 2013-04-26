@@ -67,6 +67,7 @@ class ProviderChainManager(AbstractProvider):
         return self.providers[-1].typifies()
 
 
+#TODO: Addapt this to dfs and test it
 class CachedProvider(AbstractCachingProvider):
 
     def __init__(self, c_dataMap):

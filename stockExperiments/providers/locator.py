@@ -1,5 +1,6 @@
 from providers.base import *
 from providers.raw import *
+from providers.byproduct import *
 import util.classutils as classutils
 
 
@@ -31,12 +32,8 @@ class ProviderLoader(object):
 
 class ProviderLazyLoadingChainBuider(object):
 
-    def __init__(self):
-        self.symbolMapFactory = SymbolMapFactory()
-
     def build(self, provider):
-        symbolMap = self.symbolMapFactory.get()
-        return ProviderChainManager(CachedProvider(symbolMap), provider)
+        return ProviderChainManager(provider)
 
 
 def stock():
