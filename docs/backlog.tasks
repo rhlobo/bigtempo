@@ -1,0 +1,98 @@
+
+
+--- ✄ -----------------------
+
+IMPLEMENTED
+
+	Features:
+
+		✔ Providers load raw bovespa historical series data @done (13-04-27 14:55)
+		✔ Providers are able to calculate data for given date interval @done (13-04-27 14:55)
+
+	Refactorings:
+
+		✔ Loads bovespa's historical series data @done (13-04-27 14:55)
+
+	Functional:
+
+		✔ Uses pandas lib @done (13-04-27 14:55)
+
+
+--- ✄ -----------------------
+
+SHORT TERM BACKLOG
+
+Finish current tests:
+
+ ☐ Test existing byproduct providers using fake data
+
+Create an MACD provider factory:
+
+ ☐ Create an single MACD provider
+ ☐ Test the created MACD provider
+
+Create Point:
+
+ ☐ Create Abstract class
+ ☐ Create point evaluation through generator
+ ☐ Create example point using MACD HISTOGRAM POSITIVE CROSS
+ ☐ Create example point using MACD HISTOGRAM NEGATIVE CROSS
+ ☐ Test evaluation
+ ☐ Test example points
+
+Create Strategy:
+
+ ☐ Create Abstract class
+ ☐ Create strategy evaluation through generator
+ ☐ Create example startegy using MACD example points
+ ☐ Test evaluation
+ ☐ Test example strategy
+
+Create Strategy statistics:
+
+ ☐ Accumulated return rate 			for periods [5, 15, 30, 60, 90, 180, 360, 720]
+ ☐ Average strategy duration			for periods [5, 15, 30, 60, 90, 180, 360, 720]
+ ☐ ?? Mean strategy duration			for periods [5, 15, 30, 60, 90, 180, 360, 720]
+ ☐ ?? Different Strategy trustability score (accumulated return rate / average duration - ocilates too much? )
+ ☐ ?? [Different] Strategy score - taking into account accumulated return rates, trustability and average duration
+
+Create Point statistics:
+
+ ☐ Chance 	for return rate [-15..15]	for durations []
+
+Adapt provider memory cache:
+
+ ☐ Test merging and updateing data into providers
+ ☐ Test data splicing when consulting cached data
+ ☐ Test provider memory cache
+
+Create provider decorator/metaclass:
+
+ ☐ Add logs to providers
+ ☐ Set provider reference (substitute typifyes)
+ ☐ Specify provider dependencies
+	 ☐ Capture dependencies specification
+	 ☐ Inject locator dependencies
+	 ☐ ?? Detect ciclical dependencies, log them, ignore provider
+ ☐ ?? Use decorator to register to locator 
+
+Create tags and tag selector:
+
+ ☐ ??
+
+Create function to detect data errors:
+
+ ☐ Measurement by measurement, looking out for 20% + changes
+ ☐ Verify if weard changes are pontual
+ ☐ Verify if potential errors are infact splits
+ ☐ Log pontential errors
+
+Clean up data when new splits are found:
+
+ ☐ Create update method into providers
+
+
+--- ✄ -----------------------
+
+LONG TERM FEATURES / IDEAS
+

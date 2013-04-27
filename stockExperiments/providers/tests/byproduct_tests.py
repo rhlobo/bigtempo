@@ -33,11 +33,23 @@ class TestPercentualChangeProvider(unittest.TestCase):
     def test_should_return_correct_percentual_change_using_mock_data(self):
         testutils.assert_provider_correctness_using_datafiles(__file__, 'PETR4', byproduct.PercentualChangeProvider, 'percentual_PETR4.csv', (raw.CotahistProvider, 'raw_PETR4.csv'))
 
+    def test_should_return_correct_percentual_change_using_mock_data_woth_no_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'NO-SPLITS', byproduct.PercentualChangeProvider, 'percentual_NO-SPLITS.csv', (raw.CotahistProvider, 'raw_NO-SPLITS.csv'))
+
+    def test_should_return_correct_percentual_change_using_mock_data_woth_with_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'WITH-SPLITS', byproduct.PercentualChangeProvider, 'percentual_WITH-SPLITS.csv', (raw.CotahistProvider, 'raw_WITH-SPLITS.csv'))
+
 
 class TestSplitInformationProvider(unittest.TestCase):
 
     def test_should_return_correct_split_and_join_data_using_mock_data(self):
         testutils.assert_provider_correctness_using_datafiles(__file__, 'PETR4', byproduct.SplitInformationProvider, 'splits_PETR4.csv', (byproduct.PercentualChangeProvider, 'percentual_PETR4.csv'))
+
+    def test_should_return_correct_split_and_join_data_using_mock_data_no_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'NO-SPLITS', byproduct.SplitInformationProvider, 'splits_NO-SPLITS.csv', (byproduct.PercentualChangeProvider, 'percentual_NO-SPLITS.csv'))
+
+    def test_should_return_correct_split_and_join_data_using_mock_data_with_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'PETR4', byproduct.SplitInformationProvider, 'splits_WITH-SPLITS.csv', (byproduct.PercentualChangeProvider, 'percentual_WITH-SPLITS.csv'))
 
 
 class TestNormalizationFactorProvider(unittest.TestCase):
@@ -45,8 +57,20 @@ class TestNormalizationFactorProvider(unittest.TestCase):
     def test_should_return_correct_normalization_factor_using_mock_data(self):
         testutils.assert_provider_correctness_using_datafiles(__file__, 'PETR4', byproduct.NormalizationFactorProvider, 'normalizationfactor_PETR4.csv', (byproduct.SplitInformationProvider, 'splits_PETR4.csv'))
 
+    def test_should_return_correct_normalization_factor_using_mock_data_no_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'NO-SPLITS', byproduct.NormalizationFactorProvider, 'normalizationfactor_NO-SPLITS.csv', (byproduct.SplitInformationProvider, 'splits_NO-SPLITS.csv'))
+
+    def test_should_return_correct_normalization_factor_using_mock_data_with_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'WITH-SPLITS', byproduct.NormalizationFactorProvider, 'normalizationfactor_WITH-SPLITS.csv', (byproduct.SplitInformationProvider, 'splits_WITH-SPLITS.csv'))
+
 
 class TestNormalizatedCotationProvider(unittest.TestCase):
 
     def test_should_return_correct_normalizated_cotation_using_mock_data(self):
         testutils.assert_provider_correctness_using_datafiles(__file__, 'PETR4', byproduct.NormalizedCotationProvider, 'normalized_PETR4.csv', (byproduct.NormalizationFactorProvider, 'normalizationfactor_PETR4.csv'), (raw.CotahistProvider, 'raw_PETR4.csv'))
+
+    def test_should_return_correct_normalizated_cotation_using_mock_data_no_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'NO-SPLITS', byproduct.NormalizedCotationProvider, 'normalized_NO-SPLITS.csv', (byproduct.NormalizationFactorProvider, 'normalizationfactor_NO-SPLITS.csv'), (raw.CotahistProvider, 'raw_NO-SPLITS.csv'))
+
+    def test_should_return_correct_normalizated_cotation_using_mock_data_with_splits(self):
+        testutils.assert_provider_correctness_using_datafiles(__file__, 'WITH-SPLITS', byproduct.NormalizedCotationProvider, 'normalized_WITH-SPLITS.csv', (byproduct.NormalizationFactorProvider, 'normalizationfactor_WITH-SPLITS.csv'), (raw.CotahistProvider, 'raw_WITH-SPLITS.csv'))

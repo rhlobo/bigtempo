@@ -32,7 +32,14 @@ def assert_provider_correctness_using_datafiles(test_file, s_symbol, c_provider,
     locator_mock = prepare_locator_using_datafile(test_file, s_symbol, *locator_mock_infos)
 
     expected = pandas.DataFrame.from_csv(fileutils.get_test_data_file_path(test_file, s_expecteddata_filename))
-    actual = c_provider(locator_mock).load(s_symbol, expected.ix[0].name, expected.ix[-1].name)
+    if len(expected) != 0:
+        actual = c_provider(locator_mock).load(s_symbol, expected.ix[0].name, expected.ix[-1].name)
+    else:
+        actual = c_provider(locator_mock).load(s_symbol)
+
+    print expected
+    print actual
+    print actual == expected
 
     assert_dataframe_almost_equal(expected, actual)
 
