@@ -24,10 +24,11 @@ SHORT TERM BACKLOG
 
 Finish current tests:
 
- ☐ Test existing byproduct providers using fake data
+ ✔ Test existing byproduct providers using fake data @done (13-04-27 18:26)
 
 Create an MACD provider factory:
 
+ ☐ Create an MACD provider prototype
  ☐ Create an single MACD provider
  ☐ Test the created MACD provider
 
