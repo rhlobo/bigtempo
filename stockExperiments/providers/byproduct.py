@@ -8,7 +8,7 @@ import providers.raw as raw
 class PercentualChangeProvider(base.ByproductProvider):
 
     def load(self, s_symbol, da_start=None, da_end=None):
-        da_newStart = dateutils.relative_working_day(-1, da_start) if da_start else None
+        da_newStart = None if not da_start else dateutils.relative_working_day(-1, da_start)
         provider = self.locator.get(raw.CotahistProvider)
         return provider.load(s_symbol, da_newStart, da_end).pct_change()[1:]
 
