@@ -28,7 +28,7 @@ Finish current tests:
 
 Create an MACD provider factory:
 
- ☐ Create an MACD provider prototype
+ ✔ Create an MACD provider prototype @done (13-04-27 20:06)
  ☐ Create an single MACD provider
  ☐ Test the created MACD provider
 
