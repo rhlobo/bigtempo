@@ -33,10 +33,9 @@ class CotahistProvider(base.RawProvider):
             self.d_dataFrame = cotahist.CotahistImporter(config.DATA_DIR).getDataFrameMap()
         return self.d_dataFrame
 
+    #TODO: What to do if there was no df for s_symbol?
     def load(self, s_symbol, da_start=None, da_end=None):
         df_symbol = self._get_dataFrameMap().get(s_symbol)
-
-        #TODO: What to do if there was no df for s_symbol?
 
         if da_start and da_end:
             return df_symbol[da_start:da_end]

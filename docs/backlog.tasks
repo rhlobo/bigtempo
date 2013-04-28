@@ -32,6 +32,20 @@ Create an MACD provider factory:
  ☐ Create an single MACD provider
  ☐ Test the created MACD provider
 
+Refactor everything to use only datetime:
+
+ ☐ Change bovespaParser to create datetime objects
+ ☐ Change everything that uses date objects to use datetime
+ ☐ Change utilitariam methods at dateutils
+ ☐ Avaliate creating utilitariam method that checks the use of date and makes conversions to datetime if needed
+
+Improve prodiver tests:
+
+ ☐ Create raw fake data for provider testes
+ ☐ Create test generator to test each provider for returning correct requested date range
+ ☐ Create test generator to test each provider for returning correct requested datetime range
+ ☐ Create test for provider chain manager for returning correct requested date and datetime range
+
 Create Point:
 
  ☐ Create Abstract class

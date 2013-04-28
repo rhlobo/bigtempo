@@ -30,6 +30,7 @@ class RawProvider(AbstractProvider):
         return self.__class__
 
 
+#TODO: Merge with rawProvider, so that both receive locator in its constructor
 class ByproductProvider(AbstractProvider):
 
     def __init__(self, locator):
@@ -49,7 +50,7 @@ class ProviderChainManager(AbstractProvider):
     def load(self, s_symbol, da_start=None, da_end=None):
         lc_providers = []
         for provider in self.providers:
-            result = provider.load(s_symbol)
+            result = provider.load(s_symbol, da_start, da_end)
 
             if result is None:
                 lc_providers.append(provider)
@@ -68,6 +69,7 @@ class ProviderChainManager(AbstractProvider):
 
 
 #TODO: Addapt this to dfs and test it
+#TODO: Use datastructs module LazyDict instead, together with a factory for WeakValueDictionary
 class CachedProvider(AbstractCachingProvider):
 
     def __init__(self, c_dataMap):
@@ -84,12 +86,14 @@ class CachedProvider(AbstractCachingProvider):
         self.c_dataMap.get(s_symbol).update(c_dataFrame)
 
 
+#TODO: Transfer to and use datastructs module instead
 class SymbolMapFactory(object):
 
     def get(self):
         return SymbolMap()
 
 
+#TODO: Transfer to and use datastructs module instead
 class SymbolMap(object):
 
     def __init__(self):
