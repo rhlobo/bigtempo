@@ -1,3 +1,4 @@
+import talib
 import pandas
 import configurations as config
 import util.dateutils as dateutils
@@ -62,3 +63,31 @@ class NormalizedCotationProvider(base.ByproductProvider):
         df_raw = self.locator.get(raw.CotahistProvider).load(s_symbol, da_start, da_end)
         df_factor = self.locator.get(NormalizationFactorProvider).load(s_symbol, da_start, da_end)
         return (df_raw * df_factor).dropna()
+
+
+class MACDProvider(base.ByproductProvider):
+
+    column = 'close'
+    fast_period = 12
+    slow_period = 26
+    signal_period = 9
+    lookback_period = 40
+
+    def load(self, s_symbol, da_start=None, da_end=None):
+        da_newStart = None if not da_start else dateutils.relative_working_day(-self.lookback_period, da_start)
+        df_norm = self.locator.get(NormalizedCotationProvider).load(s_symbol, da_newStart, da_end)
+
+        macd, macdsignal, macdhist = talib.MACD(
+                                                df_norm[self.column],
+                                                fastperiod=self.fast_period,
+                                                slowperiod=self.slow_period,
+                                                signalperiod=self.signal_period
+                                                )
+        return pandas.DataFrame(
+                                {
+                                    "macd": macd,
+                                    "macdsignal": macdsignal,
+                                    "macdhist": macdhist
+                                },
+                                df_norm.index
+                                )
