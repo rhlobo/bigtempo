@@ -67,7 +67,7 @@ class NormalizedCotationProvider(base.ByproductProvider):
 
 class MACDProvider(base.ByproductProvider):
 
-    column = 'close'
+    macd_reference = 'close'
     fast_period = 12
     slow_period = 26
     signal_period = 9
@@ -78,16 +78,16 @@ class MACDProvider(base.ByproductProvider):
         df_norm = self.locator.get(NormalizedCotationProvider).load(s_symbol, da_newStart, da_end)
 
         macd, macdsignal, macdhist = talib.MACD(
-                                                df_norm[self.column],
+                                                df_norm[self.macd_reference],
                                                 fastperiod=self.fast_period,
                                                 slowperiod=self.slow_period,
                                                 signalperiod=self.signal_period
                                                 )
         return pandas.DataFrame(
                                 {
-                                    "macd": macd,
-                                    "macdsignal": macdsignal,
-                                    "macdhist": macdhist
+                                  "macd": macd,
+                                  "macdsignal": macdsignal,
+                                  "macdhist": macdhist
                                 },
                                 df_norm.index
-                                )
+                               )
