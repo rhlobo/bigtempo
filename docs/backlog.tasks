@@ -34,6 +34,7 @@ Create an MACD provider factory:
 
 Create Point:
 
+ ✔ Prototype a point @done (13-04-29 23:23)
  ☐ Create Abstract class
  ☐ Create point evaluation through generator
  ☐ Create example point using MACD HISTOGRAM POSITIVE CROSS
