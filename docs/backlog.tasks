@@ -30,7 +30,7 @@ Create an MACD provider factory:
 
  ✔ Create an MACD provider prototype @done (13-04-27 20:06)
  ✔ Create an single MACD provider @done (13-04-29 13:43)
- ☐ Test the created MACD provider
+ ✔ Test the created MACD provider @done (13-04-29 21:24)
 
 Create Point:
 
