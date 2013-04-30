@@ -96,9 +96,9 @@ class TestProviderChainManager(unittest.TestCase):
         provider = base.ProviderChainManager(providerMock1, providerMock2, providerMock3)
         provider.load(s_symbol)
 
-        inorder.verify(providerMock1, times=1).load(s_symbol)
-        inorder.verify(providerMock2, times=1).load(s_symbol)
-        inorder.verify(providerMock3, times=1).load(s_symbol)
+        inorder.verify(providerMock1, times=1).load(s_symbol, None, None)
+        inorder.verify(providerMock2, times=1).load(s_symbol, None, None)
+        inorder.verify(providerMock3, times=1).load(s_symbol, None, None)
 
     def test_load_should_delegate_sequentially_till_one_returns_data(self):
         s_symbol = ""
@@ -107,17 +107,17 @@ class TestProviderChainManager(unittest.TestCase):
         providerMock1 = mock(base.AbstractProvider)
         providerMock2 = mock(base.AbstractProvider)
         providerMock3 = mock(base.AbstractProvider)
-        when(providerMock1).load(s_symbol).thenReturn(None)
-        when(providerMock2).load(s_symbol).thenReturn(l_data)
-        when(providerMock3).load(s_symbol).thenReturn(None)
+        when(providerMock1).load(s_symbol, None, None).thenReturn(None)
+        when(providerMock2).load(s_symbol, None, None).thenReturn(l_data)
+        when(providerMock3).load(s_symbol, None, None).thenReturn(None)
 
         provider = base.ProviderChainManager(providerMock1, providerMock2, providerMock3)
         result = provider.load(s_symbol)
 
         assert result == l_data
-        inorder.verify(providerMock1, times=1).load(s_symbol)
-        inorder.verify(providerMock2, times=1).load(s_symbol)
-        inorder.verify(providerMock3, times=0).load(s_symbol)
+        inorder.verify(providerMock1, times=1).load(s_symbol, None, None)
+        inorder.verify(providerMock2, times=1).load(s_symbol, None, None)
+        inorder.verify(providerMock3, times=0).load(s_symbol, None, None)
 
     def test_load_should_update_providers_that_had_no_data(self):
         s_symbol = ""
@@ -126,17 +126,19 @@ class TestProviderChainManager(unittest.TestCase):
         providerMock1 = mock(base.AbstractProvider)
         providerMock2 = mock(base.AbstractProvider)
         providerMock3 = mock(base.AbstractProvider)
-        when(providerMock1).load(s_symbol).thenReturn(None)
-        when(providerMock2).load(s_symbol).thenReturn(None)
-        when(providerMock3).load(s_symbol).thenReturn(l_data)
+        when(providerMock1).load(s_symbol, None, None).thenReturn(None)
+        when(providerMock2).load(s_symbol, None, None).thenReturn(None)
+        when(providerMock3).load(s_symbol, None, None).thenReturn(l_data)
 
         provider = base.ProviderChainManager(providerMock1, providerMock2, providerMock3)
         result = provider.load(s_symbol)
 
+        print result
+        print l_data
         assert result == l_data
-        inorder.verify(providerMock1, times=1).load(s_symbol)
-        inorder.verify(providerMock2, times=1).load(s_symbol)
-        inorder.verify(providerMock3, times=1).load(s_symbol)
+        inorder.verify(providerMock1, times=1).load(s_symbol, None, None)
+        inorder.verify(providerMock2, times=1).load(s_symbol, None, None)
+        inorder.verify(providerMock3, times=1).load(s_symbol, None, None)
 
         inorder.verify(providerMock3, times=0).update(anyv(), anyv())
         inorder.verify(providerMock2, times=1).update(s_symbol, l_data)
