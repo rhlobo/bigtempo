@@ -1,7 +1,3 @@
-
-
---- ✄ -----------------------
-
 IMPLEMENTED
 
 	Features:
@@ -43,6 +39,11 @@ Create Point:
  ☐ Test example points
 
 Create Strategy:
+
+	Create prototypes for approaches:
+	☐ Approach to receive data at once
+	☐ Aprroach to receive a rolling window, using object to command operations
+	☐ Aprroach to receive one data time at a time, using object to command operations
 
  ☐ Create Abstract class
  ☐ Create strategy evaluation through generator
@@ -107,6 +108,27 @@ Clean up data when new splits are found:
 
  ☐ Create update method into providers
 
+--- ✄ -----------------------
+
+DOCUMENTATION AND STYLE
+
+Document every function, class and methods:
+
+ ☐ Logic
+ ☐ Usage
+ ☐ big-O complexity
+
+Create documentation and its makefiles (for linux and win) using sphinx (inspired by https://github.com/quantopian/zipline):
+
+ ☐ Create simple example documentation
+ ☐ Create makefile for windows
+ ☐ Create makefile for linux
+ ☐ Update gitignore to ignore built files
+ ☐ Improve documentation (take a look at zipline)
+
+Verify Style:
+
+ ☐ Add suport to PEP8 style testing (found at https://github.com/jcrocholl/pep8/ also used by zipline)
 
 --- ✄ -----------------------
 
