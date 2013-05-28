@@ -25,12 +25,14 @@ class DatasourceEngine(object):
         return self._create_processor(reference)
 
     def _register(self, reference, cls, dependencies=None, lookback=0, tags=None):
+        tags = tags if tags else set()
+
         self.instances[reference] = None
         self.registrations[reference] = {
             'class': cls,
             'lookback': lookback,
             'dependencies': dependencies if dependencies else set(),
-            'tags': tags if tags else set()
+            'tags': tags
         }
         self.tag_selector.register(reference, tags)
 

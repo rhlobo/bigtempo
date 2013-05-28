@@ -1,11 +1,11 @@
-import colleactions.defaultdict as defaultdict
+import collections
 
 
 class TagSelector(object):
 
     def __init__(self, callable_factory):
         self.callable_factory = callable_factory
-        self.tag_mappings = defaultdict(set)
+        self.tag_mappings = collections.defaultdict(set)
 
     def register(self, reference, tags):
         for tag in tags:
