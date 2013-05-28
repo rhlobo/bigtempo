@@ -4,13 +4,12 @@ import bigtempo.defaults as defaults
 
 class DatasourceEngine(object):
 
-    registrations = {}
-    instances = {}
-
     def __init__(self, builder=defaults._builder, processing_task_factory=defaults._processing_task_factory):
+        self.registrations = {}
+        self.instances = {}
         self.builder = builder
-        self.processing_task_factory = processing_task_factory
         self.tag_selector = tagselection.TagSelector(self.get)
+        self.processing_task_factory = processing_task_factory
 
     def datasource(self, reference, dependencies=None, lookback=0, tags=None):
         def wrapper(cls):
