@@ -1,6 +1,8 @@
 import unittest
 from mockito import mock, when, any as anyx, verify
+import util.testutils as testutils
 
+import bigtempo.tagselection as tagselection
 import bigtempo.core as core
 
 
@@ -126,3 +128,57 @@ class TestDatasourceEngine_for_datasources_with_dependencies(unittest.TestCase):
             self.engine.get('REGISTERED_KEY_1')
         verify(self.builder_mock, times=1).build(self.classes[1])
         verify(self.builder_mock, times=1).build(self.classes[0])
+
+    def test_get_should_use_processing_task_factory_in_each_call_for_registered_references_including_dependencies(self):
+        self.engine.get('REGISTERED_KEY_1')
+        self.engine.get('REGISTERED_KEY_2')
+        verify(self.processing_task_factory_mock, times=3).create(self.instances[0])
+        verify(self.processing_task_factory_mock, times=2).create(self.instances[1])
+        verify(self.processing_task_factory_mock, times=1).create(self.instances[2])
+
+
+class TestDatasourceEngine_tag_related_behaviours(unittest.TestCase):
+
+    def setUp(self):
+        self.TagSelector = core.TagSelector
+
+        self.tagSelectorMock = mock(core.TagSelector)
+        when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
+        core.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+
+        self.engine = core.DatasourceEngine()
+
+    def tearDown(self):
+        core.TagSelector = self.TagSelector
+
+    def test_register_datasource_should_instantiate_tag_selector_on_initialization(self):
+        verify(self.tagSelectorMock, times=1).__call__(anyx())
+
+    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_empty_set_when_no_tags_where_given(self):
+        reference = 'REFERENCE'
+
+        @self.engine.datasource(reference)
+        class DatasourceWithTags(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, set())
+
+    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_given_list_as_set(self):
+        reference = 'REFERENCE'
+        expected_tags = ['tag1', 'tag2']
+
+        @self.engine.datasource(reference, tags=expected_tags)
+        class DatasourceWithTags(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, set(expected_tags))
+
+    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_given_set(self):
+        reference = 'REFERENCE'
+        expected_tags = set(['tag1', 'tag2'])
+
+        @self.engine.datasource(reference, tags=expected_tags)
+        class DatasourceWithTags(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, expected_tags)

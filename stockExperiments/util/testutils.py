@@ -1,9 +1,19 @@
 from mockito import mock, when, any as _any
 import os
-import numpy
 import pandas
 import util.fileutils as fileutils
 import providers.locator as locator
+
+
+class CallableMock(object):
+    def __init__(self, mock):
+        self.mock = mock
+
+    def __call__(self, *args, **kwargs):
+        return self.mock.__call__(*args, **kwargs)
+
+    def __getattr__(self, method_name):
+        return self.mock.__getattr__(method_name)
 
 
 def should_skip_provider_deep_tests():
