@@ -318,7 +318,7 @@ class TestTagSelector(unittest.TestCase):
     def tearDown(self):
         tagselection._TagSelection = self.TagSelection
 
-    def test_get_should_return_tag_selection(self):
+    def test_get_should_return_tag_selection_instance(self):
         result = tagselection.TagSelector(None).get()
         assert isinstance(result, tagselection._TagSelection)
 
@@ -333,3 +333,27 @@ class TestTagSelector(unittest.TestCase):
         tagselection.TagSelector(callable_factory).get(*args)
         verify(tagSelectionMock, times=1).__call__(anyx(collections.defaultdict), callable_factory)
         verify(tagSelectionMock, times=1).union(*args)
+
+    def test_register_should_add_reference_to_each_tag_set_in_tag_mappings(self):
+        reference = 'REFERENCE'
+        tags = ['TAG_A', 'TAG_B', 'TAG_C']
+
+        class TagSelectionMock(object):
+
+            def __init__(self, tag_mappings, *args, **kwargs):
+                self._tag_mappings = tag_mappings
+
+            def get_tag_mappings(self):
+                return self._tag_mappings
+
+            def union(self, *args, **kwargs):
+                return self
+
+        tagselection._TagSelection = TagSelectionMock
+
+        selector = tagselection.TagSelector(None)
+        selector.register(reference, tags)
+
+        result = selector.get().get_tag_mappings()
+        for tag in tags:
+            assert reference in result[tag]

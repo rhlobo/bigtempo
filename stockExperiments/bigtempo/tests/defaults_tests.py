@@ -1,5 +1,6 @@
 import unittest
-from mockito import mock, when, any as anyx, verify, verifyNoMoreInteractions
+from mockito import mock, when, any as anyx, verify
+import pandas
 
 import bigtempo.defaults as defaults
 
@@ -17,18 +18,95 @@ class TestModuleFunctions(unittest.TestCase):
     def test_processingtask_factory_should_return_processing_task(self):
         instance = mock()
         dependencies = mock()
-        lookback_period = mock()
 
-        result = defaults.processingtask_factory(instance, dependencies, lookback_period)
+        result = defaults.processingtask_factory(instance, dependencies)
         assert isinstance(result, defaults.DatasourceTask)
 
 
 class TestDatasourceTask(unittest.TestCase):
-    pass
+
+    def test_process_should_process_dependencies(self):
+        instance = mock()
+        dependencies = {
+            'a': mock(defaults.DatasourceTask),
+            'b': mock(defaults.DatasourceTask),
+            'c': mock(defaults.DatasourceTask),
+        }
+
+        defaults.DatasourceTask(instance, dependencies).process()
+
+        verify(dependencies['a'], times=1).process()
+        verify(dependencies['b'], times=1).process()
+        verify(dependencies['c'], times=1).process()
+        verify(instance, times=1).evaluate(anyx(dict))
+
+    def test_process_should_receive_dependencies_process_results_as_context(self):
+        class DatasourceMock():
+
+            def evaluate(self, context):
+                assert isinstance(context, dict)
+                assert len(context) is 2
+                assert context['a'] == '1'
+                assert context['b'] == '2'
+
+        dependencies = {
+            'a': mock(defaults.DatasourceTask),
+            'b': mock(defaults.DatasourceTask),
+        }
+        when(dependencies['a']).process().thenReturn('1')
+        when(dependencies['b']).process().thenReturn('2')
+
+        defaults.DatasourceTask(DatasourceMock(), dependencies).process()
 
 
 class TestDataFrameDatasourceTask(unittest.TestCase):
-    pass
+
+    def test_process_should_process_dependencies(self):
+        instance = mock()
+        symbol = 'symbol'
+        start = None
+        end = None
+        dependencies = {
+            'a': mock(defaults.DataFrameDatasourceTask),
+            'b': mock(defaults.DataFrameDatasourceTask),
+            'c': mock(defaults.DataFrameDatasourceTask),
+        }
+
+        defaults.DataFrameDatasourceTask(instance, dependencies).process(symbol, start, end)
+
+        verify(dependencies['a'], times=1).process(symbol, start, end)
+        verify(dependencies['b'], times=1).process(symbol, start, end)
+        verify(dependencies['c'], times=1).process(symbol, start, end)
+        verify(instance, times=1).evaluate(anyx(defaults.DatasourceContext), symbol, start, end)
+
+    def test_process_should_receive_dependencies_process_results_as_context(self):
+        symbol = 'symbol'
+        start = None
+        end = None
+        expected_a = pandas.DataFrame([1, 2, 3])
+        expected_b = pandas.DataFrame([9, 8, 7])
+
+        class DatasourceMock():
+
+            def evaluate(self, context, s, ds, de):
+                assert isinstance(context, defaults.DatasourceContext)
+                deps = context.dependencies()
+                assert isinstance(deps, dict)
+                assert len(deps) is 2
+                assert (deps['a'].values == expected_a.values).all()
+                assert (deps['b'].values == expected_b.values).all()
+                assert s == symbol
+                assert ds == start
+                assert de == end
+
+        dependencies = {
+            'a': mock(defaults.DataFrameDatasourceTask),
+            'b': mock(defaults.DataFrameDatasourceTask),
+        }
+        when(dependencies['a']).process(symbol, start, end).thenReturn(expected_a)
+        when(dependencies['b']).process(symbol, start, end).thenReturn(expected_b)
+
+        defaults.DataFrameDatasourceTask(DatasourceMock(), dependencies).process(symbol, start, end)
 
 
 class TestDatasourceContext(unittest.TestCase):

@@ -1,10 +1,10 @@
 
 
-def slice_dataframe(dataframe, start, end):
+def slice(slicable, start=None, end=None):
     if start and end:
-        return dataframe[start:end]
+        return slicable[start:end]
     if start:
-        return dataframe[start:]
+        return slicable[start:]
     if end:
-        return dataframe[:end]
-    return dataframe
+        return slicable[:end]
+    return slicable

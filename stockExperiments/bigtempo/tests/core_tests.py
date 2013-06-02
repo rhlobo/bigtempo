@@ -23,9 +23,6 @@ class TestDatasourceEngine_for_datasources_without_dependencies(unittest.TestCas
             def __init__(self, instance):
                 self.instance = instance
 
-            def get_instance(self):
-                return self.instance
-
         self.instances = []
         self.classes = []
         for i in range(3):
@@ -92,9 +89,6 @@ class TestDatasourceEngine_for_datasources_with_dependencies(unittest.TestCase):
 
             def __init__(self, instance):
                 self.instance = instance
-
-            def get_instance(self):
-                return self.instance
 
         self.classes = []
         self.instances = []
