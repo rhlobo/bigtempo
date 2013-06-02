@@ -2,48 +2,49 @@ import util.dateutils as dateutils
 import bigtempo.utils as utils
 
 
-def _builder(cls):
+def builder(cls):
     return cls()
 
 
-def _processing_task_factory(instance, dependencies, lookback_period):
-    return ProcessingTask(instance, dependencies, lookback_period)
+def processingtask_factory(instance, dependencies, lookback_period):
+    return DatasourceTask(instance, dependencies, lookback_period)
 
 
-class ProcessingTask(object):
+class DatasourceTask(object):
 
     def __init__(self, instance, dependencies, lookback_period):
-        self.instance = instance
-        self.dependencies = dependencies
-        self.lookback_period = lookback_period
+        self._instance = instance
+        self._dependencies = dependencies
+        self._lookback_period = lookback_period
 
     def process(self, **kwargs):
         context = self._evaluate_datasource_dependencies(**kwargs)
-        return self.instance.process(context, **kwargs)
+        return self._instance.evaluate(context, **kwargs)
 
     def _evaluate_datasource_dependencies(self, **kwargs):
-        result = {}
-        for reference, dependency in self.dependencies.iteritems():
-            result[reference] = dependency.process(**kwargs)
-        return result
+        return dict((reference, dependency.process(**kwargs)) for reference, dependency in self._dependencies.iteritems())
 
 
 class DataFrameDatasourceTask(object):
 
-    def __init__(self, instance, dependencies, lookback_period):
-        self.instance = instance
-        self.dependencies = dependencies
-        self.lookback_period = lookback_period
+    def __init__(self, instance, dependencies, lookback_period=0):
+        self._instance = instance
+        self._dependencies = dependencies
+        self._lookback_period = lookback_period
 
     def process(self, symbol, start=None, end=None):
-        context = self._evaluate_datasource_dependencies(symbol, start, end)
-        result = self.instance.process(context, symbol, start, end)
+        context = self._create_context_for(symbol, start, end)
+        result = self._instance.evaluate(context, symbol, start, end)
         return utils.slice_dataframe(result, start, end)
 
-    def _evaluate_datasource_dependencies(self, reference, symbol, start=None, end=None):
+    def _create_context_for(self, symbol, start=None, end=None):
+        evaluated_dependencies = self._evaluate_datasource_dependencies(symbol, start, end)
+        return DatasourceContext(evaluated_dependencies)
+
+    def _evaluate_datasource_dependencies(self, symbol, start=None, end=None):
         result = {}
-        for reference, dependency in self.dependencies.iteritems():
-            newStart = None if not start else dateutils.relative_working_day(-self.lookback_period, start)
+        for reference, dependency in self._dependencies.iteritems():
+            newStart = None if not start else dateutils.relative_working_day(-self._lookback_period, start)
             result[reference] = dependency.process(symbol, newStart, end)
         return result
 
@@ -51,7 +52,7 @@ class DataFrameDatasourceTask(object):
 class DatasourceContext(object):
 
     def __init__(self, dependencies):
-        self.dependencies = dependencies
+        self._dependencies = dependencies
 
-    def deps(self, reference=None):
-        return self.dependencies.get(reference) if reference else self.dependencies
+    def dependencies(self, reference=None):
+        return self._dependencies.get(reference) if reference else self._dependencies

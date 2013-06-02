@@ -76,7 +76,7 @@ class TestTagSelection(unittest.TestCase):
         assert isinstance(result, dict)
         assert len(result) == 3
 
-    def test_get_should_return_populted_dictiornary_when_something_was_selected(self):
+    def test_get_should_return_dictiornary_with_correct_data_when_something_was_selected(self):
         self.tag_mappings.update({
                                  'A': set(['a1', 'a2', 'a3'])
                                  })
@@ -108,7 +108,7 @@ class TestTagSelection(unittest.TestCase):
         verifyNoMoreInteractions(self.callable_factory)
 
     def test_initial_selection_should_be_empty(self):
-        assert len(self.tagSelection.selection) is 0
+        assert len(self.tagSelection._selection) is 0
 
     def test_all_should_select_every_reference_available(self):
         self.tag_mappings.update({
@@ -116,195 +116,195 @@ class TestTagSelection(unittest.TestCase):
                                  '2': set('defg'),
                                  '3': set('ghij')
                                  })
-        result = self.tagSelection.all().selection
+        result = self.tagSelection.all()._selection
         assert len(result) is 10
         for c in 'abcdefghij':
             assert c in result
 
     def test_union_should_select_references_for_given_tag(self):
-        self.tagSelection.selection = set('qwe ')
+        self.tagSelection._selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('abcd'),
                                  '2': set('defg'),
                                  '3': set('ghij')
                                  })
-        result = self.tagSelection.union('2').selection
+        result = self.tagSelection.union('2')._selection
         assert len(result) is 7
         for c in 'qwe defg':
             assert c in result
 
     def test_union_should_select_references_for_intersection_of_given_tags(self):
-        self.tagSelection.selection = set('qwe ')
+        self.tagSelection._selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.union('1', '2').selection
+        result = self.tagSelection.union('1', '2')._selection
         assert len(result) is 6
         for c in 'qwe xd':
             assert c in result
 
     def test_union_should_not_change_selection_when_no_tags_are_given(self):
-        self.tagSelection.selection = set('qwe ')
+        self.tagSelection._selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.union().selection
+        result = self.tagSelection.union()._selection
         assert len(result) is 4
         for c in 'qwe ':
             assert c in result
 
     def test_union_should_not_change_selection_when_non_registered_tags_are_given(self):
-        self.tagSelection.selection = set('qwe ')
+        self.tagSelection._selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.union('X').selection
+        result = self.tagSelection.union('X')._selection
         assert len(result) is 4
         for c in 'qwe ':
             assert c in result
 
     def test_intersection_should_filter_selection_with_references_for_given_tag(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('abcd'),
                                  '2': set('defg'),
                                  '3': set('ghij')
                                  })
-        result = self.tagSelection.intersection('2').selection
+        result = self.tagSelection.intersection('2')._selection
         assert len(result) is 4
         for c in 'defg':
             assert c in result
 
     def test_intersection_should_filter_selection_with_references_for_intersection_of_given_tags(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.intersection('1', '2').selection
+        result = self.tagSelection.intersection('1', '2')._selection
         assert len(result) is 1
         for c in 'd':
             assert c in result
 
     def test_intersection_should_filter_selection_when_no_tags_are_given(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.intersection().selection
+        result = self.tagSelection.intersection()._selection
         assert len(result) is 0
 
     def test_intersection_should_empty_out_selection_when_non_registered_tag_is_given(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.intersection('X').selection
+        result = self.tagSelection.intersection('X')._selection
         assert len(result) is 0
 
     def test_difference_should_subtract_from_selection_with_references_for_given_tag(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('abcd'),
                                  '2': set('defg'),
                                  '3': set('ghij')
                                  })
-        result = self.tagSelection.difference('2').selection
+        result = self.tagSelection.difference('2')._selection
         assert len(result) is 6
         for c in 'abchij':
             assert c in result
 
     def test_difference_should_subtract_from_selection_with_references_of_intersection_of_given_tags(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.difference('1', '2').selection
+        result = self.tagSelection.difference('1', '2')._selection
         assert len(result) is 9
         for c in 'abcefghij':
             assert c in result
 
     def test_difference_should_not_subtract_from_selection_when_no_tags_are_given(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.difference().selection
+        result = self.tagSelection.difference()._selection
         assert len(result) is 10
         for c in 'abcdefghij':
             assert c in result
 
     def test_difference_should_not_subtract_from_selection_when_non_registered_tag_is_given(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.difference('X').selection
+        result = self.tagSelection.difference('X')._selection
         assert len(result) is 10
         for c in 'abcdefghij':
             assert c in result
 
     def test_symmetric_difference_for_given_tag(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.symmetric_difference('2').selection
+        result = self.tagSelection.symmetric_difference('2')._selection
         assert len(result) is 7
         for c in 'xabchij':
             assert c in result
 
     def test_symmetric_difference_using_intersection_of_given_tags(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.symmetric_difference('1', '2').selection
+        result = self.tagSelection.symmetric_difference('1', '2')._selection
         assert len(result) is 10
         for c in 'xabcefghij':
             assert c in result
 
     def test_symmetric_difference_should_not_change_selection_when_no_tags_are_given(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.symmetric_difference().selection
+        result = self.tagSelection.symmetric_difference()._selection
         assert len(result) is 10
         for c in 'abcdefghij':
             assert c in result
 
     def test_symmetric_difference_should_not_change_selection_when_non_registered_tag_is_given(self):
-        self.tagSelection.selection = set('abcdefghij')
+        self.tagSelection._selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
                                  '3': set('xghij')
                                  })
-        result = self.tagSelection.symmetric_difference('X').selection
+        result = self.tagSelection.symmetric_difference('X')._selection
         assert len(result) is 10
         for c in 'abcdefghij':
             assert c in result
