@@ -1,8 +1,7 @@
 import unittest
 from mockito import mock, when, any as anyx, verify
-import util.testutils as testutils
 
-import bigtempo.tagselection as tagselection
+import util.testutils as testutils
 import bigtempo.core as core
 
 
@@ -182,3 +181,14 @@ class TestDatasourceEngine_tag_related_behaviours(unittest.TestCase):
             pass
 
         verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
+
+    def test_select_should_delegate_to_tag_selector(self):
+        args = ['a', 'b', 'c']
+
+        expected = object()
+        when(self.tagSelectorMock).get(*args).thenReturn(expected)
+
+        result = self.engine.select(*args)
+
+        verify(self.tagSelectorMock, times=1).get(*args)
+        assert expected is result

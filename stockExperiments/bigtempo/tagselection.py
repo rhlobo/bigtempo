@@ -12,7 +12,7 @@ class TagSelector(object):
             self.tag_mappings[tag].add(reference)
 
     def get(self, *selectors):
-        return _TagSelection(self.tag_mappings, self.callable_factory).add(*selectors)
+        return _TagSelection(self.tag_mappings, self.callable_factory).union(*selectors)
 
 
 class _TagSelection(object):
@@ -28,20 +28,31 @@ class _TagSelection(object):
             result[selected] = self.callable_factory(selected)
         return result
 
-    def add(self, *selectors):
+    def all(self):
+        group = set()
+        for values in self.tag_mappings.itervalues():
+            group |= values
+        self.selection = group
+        return self
+
+    def union(self, *selectors):
         self.selection |= self._evaluate_selectors(*selectors)
         return self
 
-    def select(self, *selectors):
+    def intersection(self, *selectors):
         self.selection &= self._evaluate_selectors(*selectors)
         return self
 
-    def filter(self, *selectors):
+    def difference(self, *selectors):
         self.selection -= self._evaluate_selectors(*selectors)
         return self
 
+    def symmetric_difference(self, *selectors):
+        self.selection ^= self._evaluate_selectors(*selectors)
+        return self
+
     def _evaluate_selectors(self, *selectors):
-        group = set()
-        for selector in selectors:
-            group &= self.tag_mappings.get(selector)
+        group = self.tag_mappings[selectors[0]] if len(selectors) > 0 else set()
+        for selector in selectors[1:]:
+            group &= self.tag_mappings[selector]
         return group
