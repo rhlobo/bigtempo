@@ -17,18 +17,14 @@ class ProcessingTask(object):
         self.dependencies = dependencies
         self.lookback_period = lookback_period
 
-    def process(self, reference, **kwargs):
-        context = self._evaluate_datasource_dependencies(reference, **kwargs)
-        return self.instance.evaluate(context, **kwargs)
+    def process(self, **kwargs):
+        context = self._evaluate_datasource_dependencies(**kwargs)
+        return self.instance.process(context, **kwargs)
 
-    def _evaluate_datasource_dependencies(self, reference, symbol, start=None, end=None):
-        if not self.registrations.get(reference):
-            raise ValueError()
-
+    def _evaluate_datasource_dependencies(self, **kwargs):
         result = {}
-        for dependency in self.dependencies:
-            newStart = None if not start else dateutils.relative_working_day(-lookback_period, start)
-            result[reference] = self.evaluate(reference, symbol, newStart, end)
+        for reference, dependency in self.dependencies.iteritems():
+            result[reference] = dependency.process(**kwargs)
         return result
 
 
@@ -39,17 +35,16 @@ class DataFrameDatasourceTask(object):
         self.dependencies = dependencies
         self.lookback_period = lookback_period
 
-    def evaluate(self, reference, symbol, start=None, end=None):
-        context = self._evaluate_datasource_dependencies(reference, symbol, start, end)
-        result = self._get_datasource(reference).evaluate(context, symbol, start, end)
+    def process(self, symbol, start=None, end=None):
+        context = self._evaluate_datasource_dependencies(symbol, start, end)
+        result = self.instance.process(context, symbol, start, end)
         return utils.slice_dataframe(result, start, end)
 
     def _evaluate_datasource_dependencies(self, reference, symbol, start=None, end=None):
         result = {}
-        for dependency in self.registrations[reference]['dependencies']:
-            reference, lookback_period = (dependency, 0) if isinstance(dependency, str) else (dependency[0], dependency[1])
-            newStart = None if not start else dateutils.relative_working_day(-lookback_period, start)
-            result[reference] = self.evaluate(reference, symbol, newStart, end)
+        for reference, dependency in self.dependencies.iteritems():
+            newStart = None if not start else dateutils.relative_working_day(-self.lookback_period, start)
+            result[reference] = dependency.process(symbol, newStart, end)
         return result
 
 

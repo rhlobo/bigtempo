@@ -40,7 +40,8 @@ class DatasourceEngine(object):
 
     def _create_processor(self, reference):
         instance = self._lazyload_datasource(reference)
-        dependencies = map(self._create_processor, self.registrations[reference]['dependencies'])
+        #dependencies = map(self._create_processor, self.registrations[reference]['dependencies'])
+        dependencies = dict((dependency, self._create_processor(dependency)) for dependency in self.registrations[reference]['dependencies'])
         lookback_period = self.registrations[reference]['class']
         return self.processing_task_factory(instance, dependencies, lookback_period)
 
