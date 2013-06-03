@@ -48,7 +48,7 @@ class _TagSelection(object):
         return self
 
     def symmetric_difference(self, *selectors):
-        self._selection ^= self._evaluate_selectors(*selectors)
+        self.selection ^= self._evaluate_selectors(*selectors)
         return self
 
     def _evaluate_selectors(self, *selectors):
