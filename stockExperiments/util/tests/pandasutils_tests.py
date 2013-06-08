@@ -26,9 +26,9 @@ class TestDataframeToListOfListsFunction(unittest.TestCase):
 
     def _createMapOfLists(self):
         return {
-                'one': [1., 2., 3., 4.],
-                'two': [4., 3., 2., 1.]
-               }
+            'one': [1., 2., 3., 4.],
+            'two': [4., 3., 2., 1.]
+        }
 
     def _createDataframe(self):
         return pandas.DataFrame(self._createMapOfLists())

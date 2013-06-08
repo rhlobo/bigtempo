@@ -27,7 +27,10 @@ class SplitInformationProvider(base.ByproductProvider):
         def _calculateBefore(x):
             return 1 if x <= 0 else (abs(x) + 1).round(decimals=0)
 
-        df_split_join = df_pct_change[(abs(df_pct_change['open']) > limit) & (abs(df_pct_change['high']) > limit) & (abs(df_pct_change['low']) > limit) & (abs(df_pct_change['close']) > limit)]
+        df_split_join = (df_pct_change[(abs(df_pct_change['open']) > limit) &
+                         (abs(df_pct_change['high']) > limit) &
+                         (abs(df_pct_change['low']) > limit) &
+                         (abs(df_pct_change['close']) > limit)])
 
         split_info = pandas.DataFrame(index=df_split_join.index, columns=['factor'])
         if len(df_split_join) != 0:
@@ -77,17 +80,12 @@ class MACDProvider(base.ByproductProvider):
         da_newStart = None if not da_start else dateutils.relative_working_day(-self.lookback_period, da_start)
         df_norm = self.locator.get(NormalizedCotationProvider).load(s_symbol, da_newStart, da_end)
 
-        macd, macdsignal, macdhist = talib.MACD(
-                                                df_norm[self.macd_reference],
+        macd, macdsignal, macdhist = talib.MACD(df_norm[self.macd_reference],
                                                 fastperiod=self.fast_period,
                                                 slowperiod=self.slow_period,
-                                                signalperiod=self.signal_period
-                                                )
-        return pandas.DataFrame(
-                                {
-                                  "macd": macd,
-                                  "macdsignal": macdsignal,
-                                  "macdhist": macdhist
-                                },
-                                df_norm.index
-                               )
+                                                signalperiod=self.signal_period)
+        return pandas.DataFrame({
+            "macd": macd,
+            "macdsignal": macdsignal,
+            "macdhist": macdhist
+        }, df_norm.index)
