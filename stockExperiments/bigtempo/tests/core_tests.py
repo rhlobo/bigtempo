@@ -139,7 +139,10 @@ class TestDatasourceEngine_tag_related_behaviours(unittest.TestCase):
         when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
         core.TagSelector = testutils.CallableMock(self.tagSelectorMock)
 
-        self.engine = core.DatasourceEngine()
+        def tag_declarator(*args, **kwargs):
+            pass
+
+        self.engine = core.DatasourceEngine(tag_declarator=tag_declarator)
 
     def tearDown(self):
         core.TagSelector = self.TagSelector

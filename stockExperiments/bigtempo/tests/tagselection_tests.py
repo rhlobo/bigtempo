@@ -122,7 +122,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_union_should_select_references_for_given_tag(self):
-        self.tagSelection._selection = set('qwe ')
+        self.tagSelection._initial_selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('abcd'),
                                  '2': set('defg'),
@@ -134,7 +134,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_union_should_select_references_for_intersection_of_given_tags(self):
-        self.tagSelection._selection = set('qwe ')
+        self.tagSelection._initial_selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -146,7 +146,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_union_should_not_change_selection_when_no_tags_are_given(self):
-        self.tagSelection._selection = set('qwe ')
+        self.tagSelection._initial_selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -158,7 +158,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_union_should_not_change_selection_when_non_registered_tags_are_given(self):
-        self.tagSelection._selection = set('qwe ')
+        self.tagSelection._initial_selection = set('qwe ')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -170,7 +170,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_intersection_should_filter_selection_with_references_for_given_tag(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('abcd'),
                                  '2': set('defg'),
@@ -182,7 +182,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_intersection_should_filter_selection_with_references_for_intersection_of_given_tags(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -194,7 +194,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_intersection_should_filter_selection_when_no_tags_are_given(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -204,7 +204,7 @@ class TestTagSelection(unittest.TestCase):
         assert len(result) is 0
 
     def test_intersection_should_empty_out_selection_when_non_registered_tag_is_given(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -214,7 +214,7 @@ class TestTagSelection(unittest.TestCase):
         assert len(result) is 0
 
     def test_difference_should_subtract_from_selection_with_references_for_given_tag(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('abcd'),
                                  '2': set('defg'),
@@ -226,7 +226,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_difference_should_subtract_from_selection_with_references_of_intersection_of_given_tags(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -238,7 +238,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_difference_should_not_subtract_from_selection_when_no_tags_are_given(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -250,7 +250,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_difference_should_not_subtract_from_selection_when_non_registered_tag_is_given(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -262,7 +262,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_symmetric_difference_for_given_tag(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -274,7 +274,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_symmetric_difference_using_intersection_of_given_tags(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -286,7 +286,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_symmetric_difference_should_not_change_selection_when_no_tags_are_given(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
@@ -298,7 +298,7 @@ class TestTagSelection(unittest.TestCase):
             assert c in result
 
     def test_symmetric_difference_should_not_change_selection_when_non_registered_tag_is_given(self):
-        self.tagSelection._selection = set('abcdefghij')
+        self.tagSelection._initial_selection = set('abcdefghij')
         self.tag_mappings.update({
                                  '1': set('xabcd'),
                                  '2': set('xdefg'),
