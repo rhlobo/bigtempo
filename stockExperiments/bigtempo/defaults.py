@@ -10,6 +10,15 @@ def processingtask_factory(instance, dependencies, **kwargs):
     return DatasourceTask(instance, dependencies)
 
 
+def tag_declarator(reference, cls, dependencies, lookback):
+    result = set()
+    result.add(reference)
+    if dependencies is not None:
+        for dependency in dependencies:
+            result.add("{%s}" % dependency)
+    return result
+
+
 class DatasourceTask(object):
 
     def __init__(self, instance, dependencies):

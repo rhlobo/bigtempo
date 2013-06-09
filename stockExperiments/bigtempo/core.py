@@ -4,24 +4,30 @@ import bigtempo.defaults as defaults
 
 class DatasourceEngine(object):
 
-    def __init__(self, builder=defaults.builder, processingtask_factory=defaults.processingtask_factory):
+    def __init__(self, builder=defaults.builder, processingtask_factory=defaults.processingtask_factory, tag_declarator=defaults.tag_declarator):
+        self._factory_manager = FactoryManager()
         self._registrations = {}
         self._instances = {}
-        self._builder = builder
         self._tag_selector = TagSelector(self.get)
+        self._tag_declarator = tag_declarator
         self._processingtask_factory = processingtask_factory
+        self._builder = builder
+
+    def datasource_factory(self, selection):
+        def wrapper(factory):
+            self._factory_manager.register(factory, selection)
+            return factory
+        return wrapper
 
     def datasource(self, reference, dependencies=None, lookback=0, tags=None):
         def wrapper(cls):
-            self._register_datasource(reference, cls, dependencies=dependencies, lookback=lookback, tags=tags)
+            self._register_datasource(reference, cls, dependencies=dependencies, lookback=lookback, declared_tags=tags)
             return cls
         return wrapper
 
-    def _register_datasource(self, reference, cls, dependencies=None, lookback=0, tags=None):
-        if not tags:
-            tags = set()
-        if not isinstance(tags, set):
-            tags = set(tags)
+    def _register_datasource(self, reference, cls, dependencies=None, lookback=0, declared_tags=None):
+        infered_tags = self._tag_declarator(reference, cls, dependencies, lookback)
+        tags = _assure_is_valid_set(declared_tags) | _assure_is_valid_set(infered_tags)
 
         self._instances[reference] = None
         self._registrations[reference] = {
@@ -31,6 +37,7 @@ class DatasourceEngine(object):
             'tags': tags
         }
         self._tag_selector.register(reference, tags)
+        self._factory_manager.evaluate_new_candidate(reference)
 
     def select(self, *selectors):
         return self._tag_selector.get(*selectors)
@@ -50,3 +57,36 @@ class DatasourceEngine(object):
                 raise KeyError()
             self._instances[reference] = self._builder(self._registrations[reference]['class'])
         return self._instances[reference]
+
+
+def _assure_is_valid_set(obj):
+    if not obj:
+        obj = set()
+    elif not isinstance(obj, set):
+        try:
+            obj = set(obj)
+        except:
+            obj = set()
+    return obj
+
+
+class FactoryManager(object):
+
+    def __init__(self):
+        self.mappings = []
+
+    def register(self, factory, selection):
+        self.mappings.append((factory, selection))
+        self._evaluate_current_selection(factory, selection)
+
+    def evaluate_new_candidate(self, reference):
+        for factory, selection in self.mappings:
+            if selection.is_elegible(reference):
+                self._execute_factory(factory, reference)
+
+    def _evaluate_current_selection(self, factory, selection):
+        for reference in selection:
+            self._execute_factory(factory, reference)
+
+    def _execute_factory(self, factory, reference):
+        factory(reference)

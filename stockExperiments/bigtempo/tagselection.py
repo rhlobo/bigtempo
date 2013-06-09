@@ -1,3 +1,4 @@
+import json
 import collections
 
 
@@ -21,6 +22,18 @@ class _TagSelection(object):
         self._tag_mappings = tag_mappings
         self._callable_factory = callable_factory
         self._selection = set()
+
+    def __iter__(self):
+        return iter(self._selection)
+
+    def __str__(self):
+        return self._to_string()
+
+    def __repr__(self):
+        return self._to_string()
+
+    def _to_string(self):
+        return json.dumps(list(self._selection), indent=4)
 
     def get(self):
         result = {}
@@ -56,3 +69,6 @@ class _TagSelection(object):
         for selector in selectors[1:]:
             group &= self._tag_mappings[selector]
         return group
+
+    def is_elegible(self, reference):
+        raise NotImplementedError()
