@@ -1,6 +1,7 @@
 from instances import data_engine
 
 
+@data_engine.datasource_factory(data_engine.select('RAW_PCT_CHANGE'))
 def _create_datasource(source_reference):
     reference = 'SPLITS:%s' % (source_reference)
 
@@ -10,7 +11,3 @@ def _create_datasource(source_reference):
     class RawSplits(object):
         def evaluate(self, context, symbol, start=None, end=None):
             return context.dependencies(source_reference).pct_change()
-
-
-for ds_ref in data_engine.select('RAW_PCT_CHANGE'):
-    _create_datasource(ds_ref, 1)

@@ -1,7 +1,8 @@
 from instances import data_engine
 
 
-def _create_datasource(source_reference, pct_periods):
+@data_engine.datasource_factory(data_engine.select('RAW'))
+def _create_datasource(source_reference, pct_periods=1):
     reference = 'PCT_CHANGE(%i):%s' % (pct_periods, source_reference)
 
     @data_engine.datasource(reference,
@@ -11,7 +12,3 @@ def _create_datasource(source_reference, pct_periods):
     class RawPctChange(object):
         def evaluate(self, context, symbol, start=None, end=None):
             return context.dependencies(source_reference).pct_change()
-
-
-for ds_ref in data_engine.select('RAW'):
-    _create_datasource(ds_ref, 1)
