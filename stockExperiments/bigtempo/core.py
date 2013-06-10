@@ -1,3 +1,5 @@
+import itertools
+
 from bigtempo.tagselection import TagSelector as TagSelector
 import bigtempo.defaults as defaults
 
@@ -13,9 +15,9 @@ class DatasourceEngine(object):
         self._processingtask_factory = processingtask_factory
         self._builder = builder
 
-    def for_each(self, selection):
+    def for_each(self, *selection, **kwargs):
         def wrapper(fn):
-            self._tag_iteration_manager.register(fn, selection)
+            self._tag_iteration_manager.register(fn, selection, kwargs.get('sync_by', None))
             return fn
         return wrapper
 
@@ -75,18 +77,43 @@ class TagSelectionIterationManager(object):
     def __init__(self):
         self.mappings = []
 
-    def register(self, fn, selection):
-        self.mappings.append((fn, selection))
-        self._evaluate_current_selection(fn, selection)
+    def register(self, fn, selections, sync_by=None):
+        self.mappings.append((fn, selections, sync_by))
+        self._evaluate_current_selections(fn, selections, sync_by)
 
-    def evaluate_new_candidate(self, reference):
-        for fn, selection in self.mappings:
-            if selection.is_elegible(reference):
-                self._execute_fn(fn, reference)
+    def evaluate_new_candidate(self, new_reference):
+        for fn, selections, sync_by in self.mappings:
+            self._evaluate_existing_selections(fn, selections, new_reference, sync_by)
 
-    def _evaluate_current_selection(self, fn, selection):
-        for reference in selection:
-            self._execute_fn(fn, reference)
+    def _evaluate_existing_selections(self, fn, selections, new_reference, sync_by=None):
+        partial_elegible_references_list = []
+        current_partial_references_list = []
 
-    def _execute_fn(self, fn, reference):
-        fn(reference)
+        for selection in selections:
+            partial_references_list_copy = None
+
+            if selection.is_elegible(new_reference):
+                partial_references_list_copy = current_partial_references_list[:]
+                partial_references_list_copy.append([new_reference])
+
+            references = [reference for reference in selection]
+            current_partial_references_list.append(references)
+            for partial_elegible_references in partial_elegible_references_list:
+                partial_elegible_references.append(references)
+
+            if partial_references_list_copy:
+                partial_elegible_references_list.append(partial_references_list_copy)
+
+        for elegible_references_list in partial_elegible_references_list:
+            combinations = itertools.product(*elegible_references_list)
+            for combination in combinations:
+                self._execute_fn(fn, *combination)
+
+    def _evaluate_current_selections(self, fn, selections, sync_by=None):
+        references = [[reference for reference in selection] for selection in selections]
+        combinations = itertools.product(*references)
+        for combination in combinations:
+            self._execute_fn(fn, *combination)
+
+    def _execute_fn(self, fn, *references):
+        fn(*references)

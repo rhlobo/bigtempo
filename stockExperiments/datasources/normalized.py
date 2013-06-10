@@ -1,6 +1,6 @@
 from instances import data_engine
 
-'''
+
 @data_engine.for_each(data_engine.select('RAW'),
                       data_engine.select('RAW_NORMALIZATION_FACTOR'),
                       sync_by='RAW')
@@ -16,4 +16,3 @@ def _create_datasource(raw_reference, normalization_reference):
             df_raw = context.dependencies(raw_reference)
             df_factor = context.dependencies(normalization_reference)
             return (df_raw * df_factor).dropna()
-'''
