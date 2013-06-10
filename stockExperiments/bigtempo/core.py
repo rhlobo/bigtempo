@@ -5,7 +5,7 @@ import bigtempo.defaults as defaults
 class DatasourceEngine(object):
 
     def __init__(self, builder=defaults.builder, processingtask_factory=defaults.processingtask_factory, tag_declarator=defaults.tag_declarator):
-        self._factory_manager = FactoryManager()
+        self._tag_iteration_manager = TagSelectionIterationManager()
         self._registrations = {}
         self._instances = {}
         self._tag_selector = TagSelector(self.get)
@@ -13,10 +13,10 @@ class DatasourceEngine(object):
         self._processingtask_factory = processingtask_factory
         self._builder = builder
 
-    def datasource_factory(self, selection):
-        def wrapper(factory):
-            self._factory_manager.register(factory, selection)
-            return factory
+    def for_each(self, selection):
+        def wrapper(fn):
+            self._tag_iteration_manager.register(fn, selection)
+            return fn
         return wrapper
 
     def datasource(self, reference, dependencies=None, lookback=0, tags=None):
@@ -37,7 +37,7 @@ class DatasourceEngine(object):
             'tags': tags
         }
         self._tag_selector.register(reference, tags)
-        self._factory_manager.evaluate_new_candidate(reference)
+        self._tag_iteration_manager.evaluate_new_candidate(reference)
 
     def select(self, *selectors):
         return self._tag_selector.get(*selectors)
@@ -70,23 +70,23 @@ def _assure_is_valid_set(obj):
     return obj
 
 
-class FactoryManager(object):
+class TagSelectionIterationManager(object):
 
     def __init__(self):
         self.mappings = []
 
-    def register(self, factory, selection):
-        self.mappings.append((factory, selection))
-        self._evaluate_current_selection(factory, selection)
+    def register(self, fn, selection):
+        self.mappings.append((fn, selection))
+        self._evaluate_current_selection(fn, selection)
 
     def evaluate_new_candidate(self, reference):
-        for factory, selection in self.mappings:
+        for fn, selection in self.mappings:
             if selection.is_elegible(reference):
-                self._execute_factory(factory, reference)
+                self._execute_fn(fn, reference)
 
-    def _evaluate_current_selection(self, factory, selection):
+    def _evaluate_current_selection(self, fn, selection):
         for reference in selection:
-            self._execute_factory(factory, reference)
+            self._execute_fn(fn, reference)
 
-    def _execute_factory(self, factory, reference):
-        factory(reference)
+    def _execute_fn(self, fn, reference):
+        fn(reference)
