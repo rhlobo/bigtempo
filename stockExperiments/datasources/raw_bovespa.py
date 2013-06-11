@@ -4,7 +4,8 @@ import sources.cotahist as cotahist
 from instances import data_engine
 
 
-@data_engine.datasource('RAW_BOVESPA', tags=['RAW'])
+@data_engine.datasource('RAW_BOVESPA',
+                        tags=['RAW'])
 class RawBovespa(object):
 
     def __init__(self):

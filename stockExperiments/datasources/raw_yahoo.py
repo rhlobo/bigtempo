@@ -4,7 +4,8 @@ import sources.yahoofinance as yahoofinance
 from instances import data_engine
 
 
-@data_engine.datasource('RAW_YAHOO_BR', tags=['RAW'])
+@data_engine.datasource('RAW_YAHOO_BR',
+                        tags=['RAW'])
 class RawYahoo(object):
 
     _columns = ['open', 'high', 'low', 'close', 'volume']

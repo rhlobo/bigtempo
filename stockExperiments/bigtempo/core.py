@@ -7,11 +7,11 @@ import bigtempo.defaults as defaults
 class DatasourceEngine(object):
 
     def __init__(self, builder=defaults.builder, processingtask_factory=defaults.processingtask_factory, tag_declarator=defaults.tag_declarator):
-        self._tag_iteration_manager = TagSelectionIterationManager()
         self._registrations = {}
         self._instances = {}
         self._tag_selector = TagSelector(self.get)
         self._tag_declarator = tag_declarator
+        self._tag_iteration_manager = TagSelectionIterationManager(self._registrations)
         self._processingtask_factory = processingtask_factory
         self._builder = builder
 
@@ -28,7 +28,7 @@ class DatasourceEngine(object):
         return wrapper
 
     def _register_datasource(self, reference, cls, dependencies=None, lookback=0, declared_tags=None):
-        infered_tags = self._tag_declarator(reference, cls, dependencies, lookback)
+        infered_tags = self._tag_declarator(reference, self._registrations)
         tags = _assure_is_valid_set(declared_tags) | _assure_is_valid_set(infered_tags)
 
         self._instances[reference] = None
@@ -74,15 +74,16 @@ def _assure_is_valid_set(obj):
 
 class TagSelectionIterationManager(object):
 
-    def __init__(self):
-        self.mappings = []
+    def __init__(self, registrations):
+        self._registrations = registrations
+        self._mappings = []
 
     def register(self, fn, selections, sync_by=None):
-        self.mappings.append((fn, selections, sync_by))
+        self._mappings.append((fn, selections, sync_by))
         self._evaluate_current_selections(fn, selections, sync_by)
 
     def evaluate_new_candidate(self, new_reference):
-        for fn, selections, sync_by in self.mappings:
+        for fn, selections, sync_by in self._mappings:
             self._evaluate_existing_selections(fn, selections, new_reference, sync_by)
 
     def _evaluate_existing_selections(self, fn, selections, new_reference, sync_by=None):
@@ -107,6 +108,13 @@ class TagSelectionIterationManager(object):
         for elegible_references_list in partial_elegible_references_list:
             combinations = itertools.product(*elegible_references_list)
             for combination in combinations:
+                if sync_by is not None:
+                    print 'Sync: ', sync_by
+                    for reference in combination:
+                        print reference,
+                        print ' -> ',
+                        print '?'
+                    print ''
                 self._execute_fn(fn, *combination)
 
     def _evaluate_current_selections(self, fn, selections, sync_by=None):

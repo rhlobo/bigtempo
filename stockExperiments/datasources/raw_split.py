@@ -7,9 +7,8 @@ from instances import data_engine
 
 @data_engine.for_each(data_engine.select('RAW_PCT_CHANGE'))
 def _create_datasource(source_reference):
-    reference = 'SPLITS:%s' % (source_reference)
 
-    @data_engine.datasource(reference,
+    @data_engine.datasource('SPLITS:%s' % (source_reference),
                             dependencies=[source_reference],
                             tags=['RAW_SPLITS'])
     class RawSplits(object):

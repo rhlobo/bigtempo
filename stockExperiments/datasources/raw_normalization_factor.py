@@ -7,9 +7,8 @@ from instances import data_engine
 
 @data_engine.for_each(data_engine.select('RAW_SPLITS'))
 def _create_datasource(source_reference):
-    reference = 'NORMALIZATION_FACTOR:%s' % (source_reference)
 
-    @data_engine.datasource(reference,
+    @data_engine.datasource('NORMALIZATION_FACTOR:%s' % (source_reference),
                             dependencies=[source_reference],
                             tags=['RAW_NORMALIZATION_FACTOR'])
     class RawNormalizationFactor(object):

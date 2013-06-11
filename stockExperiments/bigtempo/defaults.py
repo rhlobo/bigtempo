@@ -10,12 +10,22 @@ def processingtask_factory(instance, dependencies, **kwargs):
     return DatasourceTask(instance, dependencies)
 
 
-def tag_declarator(reference, cls, dependencies, lookback):
+def tag_declarator(reference, registrations):
     result = set()
     result.add(reference)
-    if dependencies is not None:
-        for dependency in dependencies:
-            result.add("{%s}" % dependency)
+    result |= _create_dependencies(reference, registrations)
+    return result
+
+
+def _create_dependencies(reference, registrations):
+    result = set()
+    if not registrations.get(reference):
+        return result
+
+    for dependency in registrations[reference]['dependencies']:
+        result.add("{%s}" % dependency)
+        result |= _create_dependencies(dependency, registrations)
+
     return result
 
 

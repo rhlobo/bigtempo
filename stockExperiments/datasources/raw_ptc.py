@@ -3,9 +3,8 @@ from instances import data_engine
 
 @data_engine.for_each(data_engine.select('RAW'))
 def _create_datasource(source_reference, pct_periods=1):
-    reference = 'PCT_CHANGE(%i):%s' % (pct_periods, source_reference)
 
-    @data_engine.datasource(reference,
+    @data_engine.datasource('PCT_CHANGE(%i):%s' % (pct_periods, source_reference),
                             dependencies=[source_reference],
                             lookback=pct_periods,
                             tags=['RAW_PCT_CHANGE'])

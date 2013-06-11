@@ -6,9 +6,7 @@ from instances import data_engine
                       sync_by='RAW')
 def _create_datasource(raw_reference, normalization_reference):
 
-    reference = 'NORMALIZATION:(%s, %s)' % (raw_reference, normalization_reference)
-
-    @data_engine.datasource(reference,
+    @data_engine.datasource('NORMALIZATION:(%s, %s)' % (raw_reference, normalization_reference),
                             dependencies=[raw_reference, normalization_reference],
                             tags=['NORMALIZATED'])
     class RawNormalizationFactor(object):
