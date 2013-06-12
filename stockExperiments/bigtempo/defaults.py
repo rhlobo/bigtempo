@@ -12,7 +12,7 @@ def processingtask_factory(instance, dependencies, **kwargs):
 
 def tag_declarator(reference, registrations):
     result = set()
-    result.add(reference)
+    result.add('<%s>' % reference)
     result |= _create_dependencies(reference, registrations)
     return result
 

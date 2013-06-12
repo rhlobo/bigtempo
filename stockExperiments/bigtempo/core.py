@@ -28,21 +28,24 @@ class DatasourceEngine(object):
         return wrapper
 
     def _register_datasource(self, reference, cls, dependencies=None, lookback=0, declared_tags=None):
-        infered_tags = self._tag_declarator(reference, self._registrations)
-        tags = _assure_is_valid_set(declared_tags) | _assure_is_valid_set(infered_tags)
-
         self._instances[reference] = None
         self._registrations[reference] = {
             'class': cls,
             'lookback': lookback,
-            'dependencies': dependencies if dependencies else set(),
-            'tags': tags
+            'dependencies': dependencies if dependencies else set()
         }
+
+        infered_tags = self._tag_declarator(reference, self._registrations)
+        tags = _assure_is_valid_set(declared_tags) | _assure_is_valid_set(infered_tags)
+
         self._tag_selector.register(reference, tags)
         self._tag_iteration_manager.evaluate_new_candidate(reference)
 
     def select(self, *selectors):
         return self._tag_selector.get(*selectors)
+
+    def tags(self, *references):
+        return self._tag_selector.tags(*references)
 
     def get(self, reference):
         return self._create_processor(reference)

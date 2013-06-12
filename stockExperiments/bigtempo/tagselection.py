@@ -8,13 +8,18 @@ class TagSelector(object):
     def __init__(self, callable_factory):
         self._callable_factory = callable_factory
         self._tag_mappings = collections.defaultdict(set)
+        self._reference_mappings = collections.defaultdict(set)
 
     def register(self, reference, tags):
+        self._reference_mappings[reference] = tags
         for tag in tags:
             self._tag_mappings[tag].add(reference)
 
     def get(self, *selectors):
         return _TagSelection(self._tag_mappings, self._callable_factory).union(*selectors)
+
+    def tags(self, *references):
+        return _TagSelection(self._reference_mappings, self.get).union(*references)
 
 
 class _TagSelection(object):
