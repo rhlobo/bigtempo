@@ -24,11 +24,11 @@ class TagSelector(object):
 
 class _TagSelection(object):
 
-    def __init__(self, tag_mappings, callable_factory):
+    def __init__(self, tag_mappings, callable_factory, operations=[], initial=[]):
         self._tag_mappings = tag_mappings
         self._callable_factory = callable_factory
-        self._operations = []
-        self._initial_selection = []
+        self._operations = operations
+        self._initial_selection = initial
 
     def __iter__(self):
         return iter(self._selection)
@@ -49,29 +49,38 @@ class _TagSelection(object):
         return result
 
     def all(self):
-        self._operations[:] = []
-        self._operations.append(self._evaluate_all)
-        return self
+        return _TagSelection(self._tag_mappings,
+                             self._callable_factory,
+                             [self._evaluate_all],
+                             self._initial_selection)
 
     def union(self, *selectors):
         operation = functools.partial(self._evaluate_union, selectors)
-        self._operations.append(operation)
-        return self
+        return _TagSelection(self._tag_mappings,
+                             self._callable_factory,
+                             self._operations + [operation],
+                             self._initial_selection)
 
     def intersection(self, *selectors):
         operation = functools.partial(self._evaluate_intersection, selectors)
-        self._operations.append(operation)
-        return self
+        return _TagSelection(self._tag_mappings,
+                             self._callable_factory,
+                             self._operations + [operation],
+                             self._initial_selection)
 
     def difference(self, *selectors):
         operation = functools.partial(self._evaluate_difference, selectors)
-        self._operations.append(operation)
-        return self
+        return _TagSelection(self._tag_mappings,
+                             self._callable_factory,
+                             self._operations + [operation],
+                             self._initial_selection)
 
     def symmetric_difference(self, *selectors):
         operation = functools.partial(self._evaluate_symmetric_difference, selectors)
-        self._operations.append(operation)
-        return self
+        return _TagSelection(self._tag_mappings,
+                             self._callable_factory,
+                             self._operations + [operation],
+                             self._initial_selection)
 
     @property
     def _selection(self):
@@ -103,7 +112,10 @@ class _TagSelection(object):
         return selection
 
     def _evaluate_selectors(self, *selectors):
-        group = self._tag_mappings[selectors[0]] if len(selectors) > 0 else set()
+        if len(selectors) is 0:
+            return set()
+
+        group = self._tag_mappings[selectors[0]].copy()
         for selector in selectors[1:]:
             group &= self._tag_mappings[selector]
         return group

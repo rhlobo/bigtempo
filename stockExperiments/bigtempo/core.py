@@ -15,9 +15,15 @@ class DatasourceEngine(object):
         self._processingtask_factory = processingtask_factory
         self._builder = builder
 
-    def for_each(self, *selection, **kwargs):
+    def for_each(self, *selection):
         def wrapper(fn):
-            self._tag_iteration_manager.register(fn, selection, kwargs.get('sync_by', None))
+            self._tag_iteration_manager.register(fn, *selection)
+            return fn
+        return wrapper
+
+    def for_synched(self, *selection):
+        def wrapper(fn):
+            self._tag_iteration_manager.register_synched(fn, *selection)
             return fn
         return wrapper
 
@@ -81,15 +87,37 @@ class TagSelectionIterationManager(object):
         self._registrations = registrations
         self._mappings = []
 
-    def register(self, fn, selections, sync_by=None):
-        self._mappings.append((fn, selections, sync_by))
-        self._evaluate_current_selections(fn, selections, sync_by)
+    def register(self, fn, *selections):
+        if len(selections) is 0:
+            return
+
+        self._mappings.append((fn, selections))
+        self._evaluate_current_selections(fn, selections)
+
+    def register_synched(self, fn, *selections):
+        number_of_selections = len(selections)
+        if number_of_selections is 0:
+            return
+
+        if number_of_selections is 1:
+            self.register(fn, *selections)
+            return
+
+        selection = selections[0]
+        sub_selections = selections[1:]
+
+        def outter_wrapper(*outter_references):
+            def inner_wrapper(*inner_references):
+                return fn(selections[0], *sub_selections)
+
+        self.register(wrapper, selection)
+        self.register_synched(wrapper, sub_selections)
 
     def evaluate_new_candidate(self, new_reference):
-        for fn, selections, sync_by in self._mappings:
-            self._evaluate_existing_selections(fn, selections, new_reference, sync_by)
+        for fn, selections in self._mappings:
+            self._evaluate_existing_selections(fn, selections, new_reference)
 
-    def _evaluate_existing_selections(self, fn, selections, new_reference, sync_by=None):
+    def _evaluate_existing_selections(self, fn, selections, new_reference):
         partial_elegible_references_list = []
         current_partial_references_list = []
 
@@ -111,16 +139,9 @@ class TagSelectionIterationManager(object):
         for elegible_references_list in partial_elegible_references_list:
             combinations = itertools.product(*elegible_references_list)
             for combination in combinations:
-                if sync_by is not None:
-                    print 'Sync: ', sync_by
-                    for reference in combination:
-                        print reference,
-                        print ' -> ',
-                        print '?'
-                    print ''
                 self._execute_fn(fn, *combination)
 
-    def _evaluate_current_selections(self, fn, selections, sync_by=None):
+    def _evaluate_current_selections(self, fn, selections):
         references = [[reference for reference in selection] for selection in selections]
         combinations = itertools.product(*references)
         for combination in combinations:
