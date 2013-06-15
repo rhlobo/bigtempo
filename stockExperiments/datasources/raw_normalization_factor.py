@@ -12,6 +12,7 @@ def _create_datasource(source_reference):
                             dependencies=[source_reference],
                             tags=['RAW_NORMALIZATION_FACTOR'])
     class RawNormalizationFactor(object):
+
         def evaluate(self, context, symbol, start=None, end=None):
             df_split = context.dependencies(source_reference)
             df_normalization = pandas.DataFrame(index=dateutils.working_day_range(start, end))

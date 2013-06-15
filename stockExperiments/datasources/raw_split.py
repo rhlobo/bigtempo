@@ -12,6 +12,7 @@ def _create_datasource(source_reference):
                             dependencies=[source_reference],
                             tags=['RAW_SPLITS'])
     class RawSplits(object):
+
         def evaluate(self, context, symbol, start=None, end=None):
             df_pct_change = context.dependencies(source_reference)
             limit = config.NORMALIZATION_PCT_CHANGE_LIMIT

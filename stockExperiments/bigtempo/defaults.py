@@ -6,8 +6,8 @@ def builder(cls):
     return cls()
 
 
-def processingtask_factory(instance, dependencies, **kwargs):
-    return DatasourceTask(instance, dependencies)
+def processingtask_factory(instance, dependencies, *args, **kwargs):
+    return DataFrameDatasourceTask(instance, dependencies, *args, **kwargs)
 
 
 def tag_declarator(reference, registrations):

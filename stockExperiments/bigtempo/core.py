@@ -23,7 +23,7 @@ class DatasourceEngine(object):
 
     def for_synched(self, *selection):
         def wrapper(fn):
-            self._tag_iteration_manager.register_synched(fn, *selection)
+            self._tag_iteration_manager.register_synched(fn, selection)
             return fn
         return wrapper
 
@@ -94,24 +94,19 @@ class TagSelectionIterationManager(object):
         self._mappings.append((fn, selections))
         self._evaluate_current_selections(fn, selections)
 
-    def register_synched(self, fn, *selections):
-        number_of_selections = len(selections)
-        if number_of_selections is 0:
-            return
-
-        if number_of_selections is 1:
-            self.register(fn, *selections)
+    def register_synched(self, fn, selections, references=[]):
+        if len(selections) is 0:
+            self._execute_fn(fn, *references)
             return
 
         selection = selections[0]
-        sub_selections = selections[1:]
+        for reference in references:
+            selection = selection.intersection('{%s}' % reference)
 
-        def outter_wrapper(*outter_references):
-            def inner_wrapper(*inner_references):
-                return fn(selections[0], *sub_selections)
+        def _wrapper(reference):
+            self.register_synched(fn, selections[1:], references + [reference])
 
-        self.register(wrapper, selection)
-        self.register_synched(wrapper, sub_selections)
+        self.register(_wrapper, selection)
 
     def evaluate_new_candidate(self, new_reference):
         for fn, selections in self._mappings:
@@ -143,6 +138,9 @@ class TagSelectionIterationManager(object):
 
     def _evaluate_current_selections(self, fn, selections):
         references = [[reference for reference in selection] for selection in selections]
+        if len(references) is 0:
+            return
+
         combinations = itertools.product(*references)
         for combination in combinations:
             self._execute_fn(fn, *combination)

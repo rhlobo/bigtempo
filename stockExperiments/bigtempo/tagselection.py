@@ -39,12 +39,18 @@ class _TagSelection(object):
     def __repr__(self):
         return self._to_string()
 
+    def __len__(self):
+        return len(self._selection)
+
     def is_elegible(self, reference):
         return reference in self._selection
 
-    def get(self):
+    def get(self, index=None):
+        if index is not None:
+            return sorted(self._selection)[index]
+
         result = {}
-        for selected in self._selection:
+        for selected in sorted(self._selection):
             result[selected] = self._callable_factory(selected)
         return result
 
@@ -121,4 +127,4 @@ class _TagSelection(object):
         return group
 
     def _to_string(self):
-        return json.dumps(list(self._selection), indent=4)
+        return '<selection:' + json.dumps(list(self._selection), indent=4) + '>'
