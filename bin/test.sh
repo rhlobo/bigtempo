@@ -6,7 +6,7 @@ cd "${PROJECT_HOME}/stockExperiments"
 
 
 echo
-echo "UNIT TESTS"
+echo "TESTS"
 echo "--------------------------------------------------------------------------------"
 nosetests -v --with-coverage --cover-erase --cover-inclusive --cover-branches --cover-package=stockExperiments --cover-html --cover-html-dir="../coverage/" -w stockExperiments
 echo
