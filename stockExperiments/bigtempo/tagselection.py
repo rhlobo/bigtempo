@@ -47,7 +47,7 @@ class _TagSelection(object):
 
     def get(self, index=None):
         if index is not None:
-            return sorted(self._selection)[index]
+            return self._callable_factory(sorted(self._selection)[index])
 
         result = {}
         for selected in sorted(self._selection):

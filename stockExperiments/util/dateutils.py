@@ -10,6 +10,12 @@ def working_day_range(start_date=None, end_date=None):
     return pandas.bdate_range(da_start, da_end, normalize=True)
 
 
+def week_range(start_date=None, end_date=None):
+    da_start = start_date if start_date else config.START_DATE
+    da_end = end_date if end_date else last_working_day()
+    return pandas.bdate_range(da_start, da_end, normalize=True, freq='W-FRI')
+
+
 def relative_working_day(days, date=None):
     wday = last_working_day() if not date else last_working_day(date)
     return to_date(to_datetime(wday) + days * pandas.tseries.offsets.BDay())
