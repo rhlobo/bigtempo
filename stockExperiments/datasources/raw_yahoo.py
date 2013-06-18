@@ -1,3 +1,4 @@
+'''
 import pandas
 import sources.yahoofinance as yahoofinance
 
@@ -26,3 +27,4 @@ class RawYahoo(object):
 
     def _createTimeSeries(self, data, dates, column_name):
         return pandas.TimeSeries(data, index=dates, name=column_name)
+'''

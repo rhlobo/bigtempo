@@ -44,6 +44,7 @@ class DatasourceEngine(object):
         infered_tags = self._tag_declarator(reference, self._registrations)
         tags = _assure_is_valid_set(declared_tags) | _assure_is_valid_set(infered_tags)
 
+        self._registrations[reference]['tags'] = tags
         self._tag_selector.register(reference, tags)
         self._tag_iteration_manager.evaluate_new_candidate(reference)
 
