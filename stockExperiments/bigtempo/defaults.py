@@ -24,6 +24,11 @@ def _create_dependencies(reference, registrations):
 
     for dependency in registrations[reference]['dependencies']:
         result.add("{%s}" % dependency)
+
+        if registrations[reference].get('tags') is not None:
+            for tag in registrations[reference]['tags']:
+                result.add("{%s}" % tag)
+
         result |= _create_dependencies(dependency, registrations)
 
     return result

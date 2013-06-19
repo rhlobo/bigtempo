@@ -20,7 +20,7 @@ class TestModuleFunctions(unittest.TestCase):
         dependencies = mock()
 
         result = defaults.processingtask_factory(instance, dependencies)
-        assert isinstance(result, defaults.DatasourceTask)
+        assert isinstance(result, defaults.DataFrameDatasourceTask)
 
 
 class TestDatasourceTask(unittest.TestCase):
