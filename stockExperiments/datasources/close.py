@@ -3,7 +3,7 @@ import pandas
 from instances import data_engine
 
 
-@data_engine.for_synched(data_engine.select('NORMALIZED').union('WEEKLY').union('MONTHLY'))
+@data_engine.for_synched(data_engine.select('STOCK_TICKS'))
 def _datasource_factory(source_reference):
 
     @data_engine.datasource('CLOSE:%s' % (source_reference),

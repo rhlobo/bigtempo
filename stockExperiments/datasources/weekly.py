@@ -10,7 +10,7 @@ def _datasource_factory(source_reference):
     @data_engine.datasource('WEEKLY:%s' % (source_reference),
                             dependencies=[source_reference],
                             lookback=6,
-                            tags=['WEEKLY'])
+                            tags=['WEEKLY', 'STOCK_TICKS'])
     class Weekly(object):
 
         def evaluate(self, context, symbol, start=None, end=None):

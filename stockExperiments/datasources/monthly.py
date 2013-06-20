@@ -10,7 +10,7 @@ def _datasource_factory(source_reference):
     @data_engine.datasource('MONTHLY:%s' % (source_reference),
                             dependencies=[source_reference],
                             lookback=31,
-                            tags=['MONTHLY'])
+                            tags=['MONTHLY', 'STOCK_TICKS'])
     class Monthly(object):
 
         def evaluate(self, context, symbol, start=None, end=None):

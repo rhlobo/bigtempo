@@ -16,7 +16,8 @@ class TagSelector(object):
             self._tag_mappings[tag].add(reference)
 
     def get(self, *selectors):
-        return _TagSelection(self._tag_mappings, self._callable_factory).union(*selectors)
+        selection = _TagSelection(self._tag_mappings, self._callable_factory)
+        return selection if len(selectors) == 0 else selection.union(*selectors)
 
     def tags(self, *references):
         return _TagSelection(self._reference_mappings, self.get).union(*references)
