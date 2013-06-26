@@ -1,10 +1,14 @@
 #!/bin/bash
+
+
 CURRDIR="$(pwd)"
-TESTTYPE=${1:-full}
+PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+export PYTHONPATH="${PROJECT_LOCATION}/stockExperiments"
+
+TESTTYPE=${1:-fast}
 export TESTTYPE
-cd "${PROJECT_HOME}/stockExperiments"
 
-
+cd "${PROJECT_LOCATION}"
 echo
 echo "TESTS"
 echo "--------------------------------------------------------------------------------"

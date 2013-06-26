@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+CURRDIR="$(pwd)"
+PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+export PYTHONPATH="${PROJECT_LOCATION}/stockExperiments"
+
 profile() {
 	local PSTATSFILE IMGFILE
 	PSTATSFILE="profile/profile.pstats"
@@ -12,8 +17,7 @@ profile() {
 	python bin/util/displayprofilestats.py "${PSTATSFILE}"
 }
 
-CURRDIR="$(pwd)"
-cd "${PROJECT_HOME}/stockExperiments"
+cd "${PROJECT_LOCATION}"
 profile
 find . -type f -name "*.pyc" -exec rm -f {} \;
 cd "${CURRDIR}"

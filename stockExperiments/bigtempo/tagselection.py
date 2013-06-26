@@ -128,4 +128,4 @@ class _TagSelection(object):
         return group
 
     def _to_string(self):
-        return '<selection %s currently-with="%s">' % (self.__repr__(), json.dumps(list(self._selection), indent=4))
+        return '<selection %s currently-with="%s">' % (id(self), json.dumps(list(self._selection), indent=4))
