@@ -10,30 +10,6 @@ def processingtask_factory(instance, dependencies, *args, **kwargs):
     return DataFrameDatasourceTask(instance, dependencies, *args, **kwargs)
 
 
-def tag_declarator(reference, registrations):
-    result = set()
-    result.add(reference)
-    result |= _create_dependencies(reference, registrations)
-    return result
-
-
-def _create_dependencies(reference, registrations):
-    result = set()
-    if not registrations.get(reference):
-        return result
-
-    for dependency in registrations[reference]['dependencies']:
-        result.add("{%s}" % dependency)
-
-        if registrations[reference].get('tags') is not None:
-            for tag in registrations[reference]['tags']:
-                result.add("{%s}" % tag)
-
-        result |= _create_dependencies(dependency, registrations)
-
-    return result
-
-
 class DatasourceTask(object):
 
     def __init__(self, instance, dependencies):

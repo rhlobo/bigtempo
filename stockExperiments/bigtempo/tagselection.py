@@ -1,6 +1,97 @@
 import json
 import functools
+import itertools
 import collections
+
+
+class TagSelectionIterationManager(object):
+
+    def __init__(self, registrations):
+        self._registrations = registrations
+        self._mappings = []
+
+    def infere_tags_for(self, reference):
+        result = set()
+        result.add(reference)
+        result |= self._infere_tags_for_dependencies(reference)
+        return result
+
+    def _infere_tags_for_dependencies(self, reference):
+        result = set()
+        if not self._registrations.get(reference):
+            return result
+
+        for dependency in self._registrations[reference]['dependencies']:
+            result.add("{%s}" % dependency)
+
+            if self._registrations[reference].get('tags') is not None:
+                for tag in self._registrations[reference]['tags']:
+                    result.add("{%s}" % tag)
+
+            result |= self._infere_tags_for_dependencies(dependency)
+
+        return result
+
+    def register(self, fn, *selections):
+        if len(selections) is 0:
+            return
+
+        self._mappings.append((fn, selections))
+        self._evaluate_current_selections(fn, selections)
+
+    def register_synched(self, fn, selections, references=[]):
+        if len(selections) is 0:
+            self._execute_fn(fn, *references)
+            return
+
+        selection = selections[0]
+        for reference in references:
+            selection = selection.intersection('{%s}' % reference)
+
+        def _wrapper(reference):
+            self.register_synched(fn, selections[1:], references + [reference])
+
+        self.register(_wrapper, selection)
+
+    def evaluate_new_candidate(self, new_reference):
+        for fn, selections in self._mappings:
+            self._evaluate_existing_selections(fn, selections, new_reference)
+
+    def _evaluate_existing_selections(self, fn, selections, new_reference):
+        partial_elegible_references_list = []
+        current_partial_references_list = []
+
+        for selection in selections:
+            partial_references_list_copy = None
+
+            if selection.is_elegible(new_reference):
+                partial_references_list_copy = current_partial_references_list[:]
+                partial_references_list_copy.append([new_reference])
+
+            references = [reference for reference in selection]
+            current_partial_references_list.append(references)
+            for partial_elegible_references in partial_elegible_references_list:
+                partial_elegible_references.append(references)
+
+            if partial_references_list_copy:
+                partial_elegible_references_list.append(partial_references_list_copy)
+
+        for elegible_references_list in partial_elegible_references_list:
+            combinations = itertools.product(*elegible_references_list)
+            for combination in combinations:
+                self._execute_fn(fn, *combination)
+
+    def _evaluate_current_selections(self, fn, selections):
+        references = [[reference for reference in selection] for selection in selections]
+        if len(references) is 0:
+            return
+
+        combinations = itertools.product(*references)
+        for combination in combinations:
+            self._execute_fn(fn, *combination)
+
+    def _execute_fn(self, fn, *references):
+        fn(*references)
 
 
 class TagSelector(object):

@@ -130,22 +130,25 @@ class TestDatasourceEngine_for_datasources_with_dependencies(unittest.TestCase):
         verify(self.processing_task_factory_mock, times=1).create(self.instances[2])
 
 
-class TestDatasourceEngine_tag_related_behaviours(unittest.TestCase):
+class TestDatasourceEngine_tag_related_behaviours_not_considering_tag_inference(unittest.TestCase):
 
     def setUp(self):
-        self.TagSelector = core.TagSelector
-
-        self.tagSelectorMock = mock(core.TagSelector)
+        self.TagSelector = core.tagselection.TagSelector
+        self.tagSelectorMock = mock(core.tagselection.TagSelector)
+        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
         when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
-        core.TagSelector = testutils.CallableMock(self.tagSelectorMock)
 
-        def tag_declarator(*args, **kwargs):
-            pass
+        self.TagSelectionIterationManager = core.tagselection.TagSelectionIterationManager
+        self.tagSelectionIterationManagerMock = mock(core.tagselection.TagSelectionIterationManager)
+        core.tagselection.TagSelectionIterationManager = testutils.CallableMock(self.tagSelectionIterationManagerMock)
+        when(self.tagSelectionIterationManagerMock).__call__(anyx()).thenReturn(self.tagSelectionIterationManagerMock)
+        when(self.tagSelectionIterationManagerMock).infere_tags_for(anyx()).thenReturn(set())
 
-        self.engine = core.DatasourceEngine(tag_declarator=tag_declarator)
+        self.engine = core.DatasourceEngine()
 
     def tearDown(self):
-        core.TagSelector = self.TagSelector
+        core.tagselection.TagSelectionIterationManager = self.TagSelectionIterationManager
+        core.tagselection.TagSelector = self.TagSelector
 
     def test_register_datasource_should_instantiate_tag_selector_on_initialization(self):
         verify(self.tagSelectorMock, times=1).__call__(anyx())
@@ -189,3 +192,48 @@ class TestDatasourceEngine_tag_related_behaviours(unittest.TestCase):
 
         verify(self.tagSelectorMock, times=1).get(*args)
         assert expected is result
+
+
+class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unittest.TestCase):
+
+    def setUp(self):
+        self.TagSelector = core.tagselection.TagSelector
+        self.tagSelectorMock = mock(core.tagselection.TagSelector)
+        when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
+        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+
+        self.engine = core.DatasourceEngine()
+
+    def tearDown(self):
+        core.tagselection.TagSelector = self.TagSelector
+
+    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_empty_set_when_no_tags_where_given(self):
+        reference = 'REFERENCE'
+
+        @self.engine.datasource(reference)
+        class DatasourceWithTags(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, set([reference]))
+
+    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_given_list_as_set(self):
+        reference = 'REFERENCE'
+        declared_tags = ['tag1', 'tag2']
+        expected_tags = ['tag1', 'tag2', 'REFERENCE']
+
+        @self.engine.datasource(reference, tags=declared_tags)
+        class DatasourceWithTags(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, set(expected_tags))
+
+    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_given_set(self):
+        reference = 'REFERENCE'
+        declared_tags = set(['tag1', 'tag2'])
+        expected_tags = set(['tag1', 'tag2', 'REFERENCE'])
+
+        @self.engine.datasource(reference, tags=declared_tags)
+        class DatasourceWithTags(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
