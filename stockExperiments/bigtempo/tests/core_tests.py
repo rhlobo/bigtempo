@@ -265,11 +265,11 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
             pass
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_B')
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyB(object):
             pass
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_C')
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyC(object):
             pass
 
         @self.engine.datasource(reference,
@@ -293,12 +293,12 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_B',
                                 dependencies=['REFERENCE_DEPENDENCY_A'])
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyB(object):
             pass
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_C',
                                 dependencies=['REFERENCE_DEPENDENCY_B'])
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyC(object):
             pass
 
         @self.engine.datasource(reference,
@@ -343,12 +343,12 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_B',
                                 tags=['tag1B', 'tag2B'])
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyB(object):
             pass
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_C',
                                 tags=['tag1C', 'tag2C'])
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyC(object):
             pass
 
         @self.engine.datasource(reference,
@@ -375,13 +375,13 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
         @self.engine.datasource('REFERENCE_DEPENDENCY_B',
                                 dependencies=['REFERENCE_DEPENDENCY_A'],
                                 tags=['tag1B', 'tag2B'])
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyB(object):
             pass
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_C',
                                 dependencies=['REFERENCE_DEPENDENCY_B'],
                                 tags=['tag1C', 'tag2C'])
-        class DatasourceDependencyA(object):
+        class DatasourceDependencyC(object):
             pass
 
         @self.engine.datasource(reference,
