@@ -207,7 +207,7 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
     def tearDown(self):
         core.tagselection.TagSelector = self.TagSelector
 
-    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_empty_set_when_no_tags_where_given(self):
+    def test_register_datasource_should_trigger_tag_registration_with_reference_itself_as_a_tag(self):
         reference = 'REFERENCE'
 
         @self.engine.datasource(reference)
@@ -216,7 +216,7 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
 
         verify(self.tagSelectorMock, times=1).register(reference, set([reference]))
 
-    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_given_list_as_set(self):
+    def test_register_datasource_should_trigger_tag_registration_with_reference_itself_as_a_tag_plus_declared_tags(self):
         reference = 'REFERENCE'
         declared_tags = ['tag1', 'tag2']
         expected_tags = ['tag1', 'tag2', 'REFERENCE']
@@ -227,7 +227,7 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
 
         verify(self.tagSelectorMock, times=1).register(reference, set(expected_tags))
 
-    def test_register_datasource_should_trigger_tag_registration_on_tag_selector_passing_given_set(self):
+    def test_register_datasource_should_trigger_tag_registration_with_reference_itself_as_a_tag_plus_declared_tags_using_set(self):
         reference = 'REFERENCE'
         declared_tags = set(['tag1', 'tag2'])
         expected_tags = set(['tag1', 'tag2', 'REFERENCE'])
@@ -237,3 +237,172 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
             pass
 
         verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
+
+    def test_register_datasource_should_trigger_tag_registration_with_dependency_as_tag_when_datasources_has_one_dependency(self):
+        reference = 'REFERENCE'
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_A')
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource(reference,
+                                dependencies=['REFERENCE_DEPENDENCY_A'],
+                                tags=['tag1', 'tag2'])
+        class Datasource(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, set(['tag1', 'tag2', 'REFERENCE', '{REFERENCE_DEPENDENCY_A}']))
+
+    def test_register_datasource_should_trigger_tag_registration_with_dependencies_as_tags_when_datasources_has_multiple_dependencies(self):
+        reference = 'REFERENCE'
+        expected_tags = set(['tag1', 'tag2', 'REFERENCE',
+                            '{REFERENCE_DEPENDENCY_A}',
+                            '{REFERENCE_DEPENDENCY_B}',
+                            '{REFERENCE_DEPENDENCY_C}'])
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_A')
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_B')
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_C')
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource(reference,
+                                dependencies=['REFERENCE_DEPENDENCY_A', 'REFERENCE_DEPENDENCY_B', 'REFERENCE_DEPENDENCY_C'],
+                                tags=['tag1', 'tag2'])
+        class Datasource(object):
+            pass
+
+        verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
+
+    def test_register_datasource_should_trigger_tag_registration_with_dependencies_and_subdependencies_as_tags(self):
+        reference = 'REFERENCE'
+        expected_tags = set(['tag1', 'tag2', 'REFERENCE',
+                            '{REFERENCE_DEPENDENCY_A}',
+                            '{REFERENCE_DEPENDENCY_B}',
+                            '{REFERENCE_DEPENDENCY_C}'])
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_A')
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_B',
+                                dependencies=['REFERENCE_DEPENDENCY_A'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_C',
+                                dependencies=['REFERENCE_DEPENDENCY_B'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource(reference,
+                                dependencies=['REFERENCE_DEPENDENCY_C'],
+                                tags=['tag1', 'tag2'])
+        class Datasource(object):
+            pass
+
+        print self.engine._registrations[reference]['tags']
+        verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
+
+    def test_register_datasource_should_trigger_tag_registration_with_dependencies_and_its_tags_as_tags_when_datasources_has_dependencies_with_tags(self):
+        reference = 'REFERENCE'
+        expected_tags = set(['tag1', 'tag2', 'REFERENCE',
+                            '{tag1A}', '{tag2A}', '{REFERENCE_DEPENDENCY_A}'])
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_A',
+                                tags=['tag1A', 'tag2A'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource(reference,
+                                dependencies=['REFERENCE_DEPENDENCY_A'],
+                                tags=['tag1', 'tag2'])
+        class Datasource(object):
+            pass
+
+        print self.engine._registrations[reference]['tags']
+        verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
+
+    def test_register_datasource_should_trigger_tag_registration_with_multiple_dependencies_and_its_tags_as_tags_when(self):
+        reference = 'REFERENCE'
+        expected_tags = set(['tag1', 'tag2', 'REFERENCE',
+                            '{tag1A}', '{tag2A}', '{REFERENCE_DEPENDENCY_A}',
+                            '{tag1B}', '{tag2B}', '{REFERENCE_DEPENDENCY_B}',
+                            '{tag1C}', '{tag2C}', '{REFERENCE_DEPENDENCY_C}'])
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_A',
+                                tags=['tag1A', 'tag2A'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_B',
+                                tags=['tag1B', 'tag2B'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_C',
+                                tags=['tag1C', 'tag2C'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource(reference,
+                                dependencies=['REFERENCE_DEPENDENCY_A', 'REFERENCE_DEPENDENCY_B', 'REFERENCE_DEPENDENCY_C'],
+                                tags=['tag1', 'tag2'])
+        class Datasource(object):
+            pass
+
+        print self.engine._registrations[reference]['tags']
+        verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
+
+    def test_register_datasource_should_trigger_tag_registration_with_multiple_nested_dependencies_and_its_tags_as_tags(self):
+        reference = 'REFERENCE'
+        expected_tags = set(['tag1', 'tag2', 'REFERENCE',
+                            '{tag1A}', '{tag2A}', '{REFERENCE_DEPENDENCY_A}',
+                            '{tag1B}', '{tag2B}', '{REFERENCE_DEPENDENCY_B}',
+                            '{tag1C}', '{tag2C}', '{REFERENCE_DEPENDENCY_C}'])
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_A',
+                                tags=['tag1A', 'tag2A'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_B',
+                                dependencies=['REFERENCE_DEPENDENCY_A'],
+                                tags=['tag1B', 'tag2B'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource('REFERENCE_DEPENDENCY_C',
+                                dependencies=['REFERENCE_DEPENDENCY_B'],
+                                tags=['tag1C', 'tag2C'])
+        class DatasourceDependencyA(object):
+            pass
+
+        @self.engine.datasource(reference,
+                                dependencies=['REFERENCE_DEPENDENCY_C'],
+                                tags=['tag1', 'tag2'])
+        class Datasource(object):
+            pass
+
+        print self.engine._registrations[reference]['tags']
+        verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
+
+
+class TestDatasourceEngine_tag_inference_and_declaration(unittest.TestCase):
+
+    def setUp(self):
+        self.TagSelector = core.tagselection.TagSelector
+        self.tagSelectorMock = mock(core.tagselection.TagSelector)
+        when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
+        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+
+        self.engine = core.DatasourceEngine()
+
+    def tearDown(self):
+        core.tagselection.TagSelector = self.TagSelector

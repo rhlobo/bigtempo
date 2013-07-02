@@ -1,3 +1,4 @@
+import re
 import json
 import functools
 import itertools
@@ -108,10 +109,11 @@ class TagSelector(object):
 
     def get(self, *selectors):
         selection = _TagSelection(self._tag_mappings, self._callable_factory)
-        return selection if len(selectors) == 0 else selection.union(*selectors)
+        return selection if len(selectors) is 0 else selection.union(*selectors)
 
     def tags(self, *references):
-        return _TagSelection(self._reference_mappings, self.get).union(*references)
+        selection = _TagSelection(self._reference_mappings, self.get)
+        return selection if len(references) is 0 else selection.union(*references)
 
 
 class _TagSelection(object):

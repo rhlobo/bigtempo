@@ -1,17 +1,94 @@
-IMPLEMENTED
+CURRENT BACKLOG - TESTING
 
-	Features:
+#stockExperiments/bigtempo/core.py
+DatasourceEngine:
+ ☐ tags being union of infered and declared
+ ☐ tags method returns reference selection
+ ☐ for_each delegates to TagSelectionIterationManager register
+ ☐ for_synched delegates to TagSelectionIterationManager register_synched
 
-		✔ Providers load raw bovespa historical series data @done (13-04-27 14:55)
-		✔ Providers are able to calculate data for given date interval @done (13-04-27 14:55)
+#stockExperiments/bigtempo/tagselection.py
+TagSelectionIterationManager:
+ ☐ infere_tags_for creates tag for reference
+ ☐ infere_tags_for creates tag for dependencies tags (with {})
+ ☐ infere_tags_for creates tag for dependencies references (with {})
+ ☐ register method can be used as listener registration for every occurence of reference
+ ☐ register method can be used as listener registration for every occurence of selection
+ ☐ register method can be used as listener registration for every occurence of tag
+ ☐ register method can be used as listener registration for every combination of references
+ ☐ register method can be used as listener registration for every combination of tags
+ ☐ register method can be used as listener registration for every combination of selections
+ ☐ register method can be used as listener registration for every combination of selections, references and tags
+ ☐ register_synched method can be used as listener registration for every occurence of reference
+ ☐ register_synched method can be used as listener registration for every occurence of selection
+ ☐ register_synched method can be used as listener registration for every occurence of tag
+ ☐ register_synched method can be used as listener registration for every sincronized combination of references
+ ☐ register_synched method can be used as listener registration for every sincronized combination of selections
+ ☐ register_synched method can be used as listener registration for every sincronized combination of tags
+ ☐ register_synched method can be used as listener registration for every sincronized combination of selections, references and tags
 
-	Refactorings:
+Integration Tests:
+	use cases: tag selections:
+	 ☐ nothing results in nothing
+	 ☐ unknown tag results in nothing
+	 ☐ tag selector results in all occurences of that tag
+	 ☐ reference as selector results in one ocurrence
+	 ☐ multiple tag selector results all references that have that tags in common
+	 ☐ getting references that have certain tags but do not have others
+	 ☐ getting all 'points' that are based on a certain raw tipe
+	 ☐ getting all 'points' that are not based on a certain raw tipe
+	 ☐ finding every reference that directly or indirectly uses certain datasource as dependency
+	
+	use cases: reference selections:
+	 ☐ search for all tags for a reference
+	 ☐ search for all tags in common between two references
+	 ☐ search for all tags in common between multiple references
+	 ☐ converting reference selection in a tag selection and filtering it by a certain tag
 
-		✔ Loads bovespa's historical series data @done (13-04-27 14:55)
+	use cases: for_each method:
+	 ☐ for_each method can be used as loop for every registered occurence of reference
+	 ☐ for_each method can be used as loop for every registered occurence of selection
+	 ☐ for_each method can be used as loop for every registered occurence of tag
+	 ☐ for_each method can be used as loop for every combination of references
+	 ☐ for_each method can be used as loop for every combination of tags
+	 ☐ for_each method can be used as loop for every combination of selections
+	 ☐ for_each method can be used as loop for every combination of selections, references and tags
+	 ☐ for_each method can be used in combination (nested) with for_synched method
 
-	Functional:
+	use cases: for_synched method:
+	 ☐ for_synched method can be used as loop for every registered occurence of reference
+	 ☐ for_synched method can be used as loop for every registered occurence of selection
+	 ☐ for_synched method can be used as loop for every registered occurence of tag
+	 ☐ for_synched method can be used as loop for every sincronized combination of references
+	 ☐ for_synched method can be used as loop for every sincronized combination of selections
+	 ☐ for_synched method can be used as loop for every sincronized combination of tags
+	 ☐ for_synched method can be used as loop for every sincronized combination of selections, references and tags
+	 ☐ for_synched method can be used in combination (nested) with for_each method
 
-		✔ Uses pandas lib @done (13-04-27 14:55)
+
+Datasources:
+ ☐ raw_bovespa
+ ☐ raw_pct
+ ☐ raw_split
+ ☐ raw_normalization_factor
+ ☐ normalized
+ ☐ weekly
+ ☐ monthly
+ ☐ daily close
+ ☐ weekly close
+ ☐ monthly close
+ ☐ daily macd
+ ☐ weekly macd
+ ☐ monthly macd
+ ☐ point cross up daily macd
+ ☐ point cross up weekly macd
+ ☐ point cross up monthly macd
+
+#stockExperiments/util/dateutils.py
+ ☐ week_range
+ ☐ month_range
+ ☐ daily_range
+ ☐ range
 
 
 --- ✄ -----------------------
@@ -41,9 +118,9 @@ Create Point:
 Create Strategy:
 
 	Create prototypes for approaches:
-	☐ Approach to receive data at once
-	☐ Aprroach to receive a rolling window, using object to command operations
-	☐ Aprroach to receive one data time at a time, using object to command operations
+ ☐ Approach to receive data at once
+ ☐ Aprroach to receive a rolling window, using object to command operations
+ ☐ Aprroach to receive one data time at a time, using object to command operations
 
  ☐ Create Abstract class
  ☐ Create strategy evaluation through generator
@@ -142,5 +219,5 @@ LONG TERM FEATURES / IDEAS
 REFACTORINGS
 
 Separate each provider in its own file module:
- ☐ Separate each provider in its own file module
- ☐ Import all modules from a specific folder automatically (maybe use providers as plugins)
+ ✔ Separate each provider in its own file module @done (13-07-02 14:02)
+ ✔ Import all modules from a specific folder automatically (maybe use providers as plugins) @done (13-07-02 14:02)

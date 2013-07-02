@@ -309,6 +309,104 @@ class TestTagSelection(unittest.TestCase):
         for c in 'abcdefghij':
             assert c in result
 
+    def test_selection_iterator(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+
+        iterated = set()
+        for item in self.tagSelection:
+            assert item not in iterated
+            iterated.add(item)
+
+        assert len(iterated) is 10
+
+    def test_selection_iterator_with_operations(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        self.tag_mappings.update({
+                                 '1': set('abcd'),
+                                 '2': set('defg'),
+                                 '3': set('ghij')
+                                 })
+
+        selection = self.tagSelection.intersection('2')
+
+        iterated = set()
+        for item in selection:
+            assert item not in iterated
+            iterated.add(item)
+
+        for c in 'defg':
+            assert c in iterated
+
+        assert len(iterated) is 4
+
+    def test_selection_length(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        assert len(self.tagSelection) is 10
+
+    def test_selection_length_with_operations(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        self.tag_mappings.update({
+                                 '1': set('abcd'),
+                                 '2': set('defg'),
+                                 '3': set('ghij')
+                                 })
+
+        selection = self.tagSelection.intersection('2')
+        assert len(selection) is 4
+
+    def test_is_elegible(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        self.tag_mappings.update({
+                                 '1': set('abcd'),
+                                 '2': set('defg'),
+                                 '3': set('ghij')
+                                 })
+        selection = self.tagSelection.intersection('2')
+
+        for c in 'defg':
+            assert selection.is_elegible(c)
+
+        for c in 'abchij':
+            assert not selection.is_elegible(c)
+
+    def test_operation_returns_new_instance(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        self.tag_mappings.update({
+                                 '1': set('abcd'),
+                                 '2': set('defg'),
+                                 '3': set('ghij')
+                                 })
+
+        selection = self.tagSelection.intersection('2')
+        assert not selection in self.tagSelection
+
+    def test_instance_is_not_changed_upon_operation_being_able_to_be_execute_multiple_times(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        self.tag_mappings.update({'2': set('defg')})
+
+        self.tagSelection.union('2')
+        self.tagSelection.symmetric_difference('2')
+        self.tagSelection.intersection('2')
+        self.tagSelection.difference('2')
+        assert len(self.tagSelection) is 10
+
+    def test_get_without_passing_index_should_return_dict_with_each_item_result_from_callable(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        self.tag_mappings.update({'2': set('defg')})
+
+        result = self.tagSelection.difference('2').get()
+        assert isinstance(result, dict)
+        assert len(result) is 6
+
+        verify(self.callable_factory, times=6).__call__(anyx())
+
+    def test_get_passing_index_should_return_item_result_from_callable(self):
+        self.tagSelection._initial_selection = set('abcdefghij')
+        self.tag_mappings.update({'2': set('defg')})
+
+        self.tagSelection.difference('2').get(2)
+        verify(self.callable_factory, times=1).__call__(anyx())
+
 
 class TestTagSelector(unittest.TestCase):
 
@@ -357,3 +455,7 @@ class TestTagSelector(unittest.TestCase):
         result = selector.get().get_tag_mappings()
         for tag in tags:
             assert reference in result[tag]
+
+    def test_tags_should_return_reference_selection_instance(self):
+        result = tagselection.TagSelector(None).tags()
+        assert isinstance(result, tagselection._TagSelection)
