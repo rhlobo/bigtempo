@@ -6,7 +6,7 @@ import util.testutils as testutils
 import bigtempo.tagselection as tagselection
 
 
-class TestTagRegistrationManager(unittest.TestCase):
+class TestTagRegistrationManager_tag_inference(unittest.TestCase):
 
     def setUp(self):
         self.registrations = {}
@@ -55,9 +55,6 @@ class TestTagRegistrationManager(unittest.TestCase):
 
         self._process_dependencies(['X2', 'X1', 'SDC2', 'SDC1', 'SDB2', 'SDB1', 'SDA2', 'SDA1', 'D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
-
-        print 'Expected: \t', expected
-        print 'Result: \t', result
 
         assert isinstance(result, set)
         assert len(result) is len(expected)
@@ -133,9 +130,6 @@ class TestTagRegistrationManager(unittest.TestCase):
         self._process_dependencies(['X3', 'X2', 'X1', 'D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
 
-        print 'Expected: \t', expected
-        print 'Result: \t', result
-
         assert isinstance(result, set)
         assert len(result) is len(expected)
         for tag in expected:
@@ -150,7 +144,6 @@ class TestTagRegistrationManager(unittest.TestCase):
                 self.registrations[key]['tags'] = set()
 
             self.registrations[key]['tags'] |= self.manager.infere_tags(key)
-            print '%s: \t%s' % (key, self.registrations[key]['tags'])
 
 
 class TestTagSelection(unittest.TestCase):
