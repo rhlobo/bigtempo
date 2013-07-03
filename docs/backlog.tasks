@@ -9,9 +9,9 @@ DatasourceEngine:
 
 #stockExperiments/bigtempo/tagselection.py
 TagRegistrationManager:
- ☐ infere_tags_for creates tag for reference
- ☐ infere_tags_for creates tag for dependencies tags (with {})
- ☐ infere_tags_for creates tag for dependencies references (with {})
+ ✔ infere_tags_for creates tag for reference @done (13-07-02 21:21)
+ ✔ infere_tags_for creates tag for dependencies tags (with {}) @done (13-07-02 21:59)
+ ✔ infere_tags_for creates tag for dependencies references (with {}) @done (13-07-02 21:59)
  ☐ register method can be used as listener registration for every occurence of reference
  ☐ register method can be used as listener registration for every occurence of selection
  ☐ register method can be used as listener registration for every occurence of tag

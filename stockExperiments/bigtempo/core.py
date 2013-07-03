@@ -39,7 +39,7 @@ class DatasourceEngine(object):
             'dependencies': dependencies if dependencies else set()
         }
 
-        infered_tags = self._tag_iteration_manager.infere_tags_for(reference)
+        infered_tags = self._tag_iteration_manager.infere_tags(reference)
         tags = utils.assure_is_valid_set(declared_tags) | utils.assure_is_valid_set(infered_tags)
 
         self._registrations[reference]['tags'] = tags

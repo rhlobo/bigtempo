@@ -142,7 +142,7 @@ class TestDatasourceEngine_tag_related_behaviours_not_considering_tag_inference(
         self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
         core.tagselection.TagRegistrationManager = testutils.CallableMock(self.tagRegistrationManagerMock)
         when(self.tagRegistrationManagerMock).__call__(anyx()).thenReturn(self.tagRegistrationManagerMock)
-        when(self.tagRegistrationManagerMock).infere_tags_for(anyx()).thenReturn(set())
+        when(self.tagRegistrationManagerMock).infere_tags(anyx()).thenReturn(set())
 
         self.engine = core.DatasourceEngine()
 
@@ -195,7 +195,7 @@ class TestDatasourceEngine_delegators(unittest.TestCase):
         self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
         core.tagselection.TagRegistrationManager = testutils.CallableMock(self.tagRegistrationManagerMock)
         when(self.tagRegistrationManagerMock).__call__(anyx()).thenReturn(self.tagRegistrationManagerMock)
-        when(self.tagRegistrationManagerMock).infere_tags_for(anyx()).thenReturn(set())
+        when(self.tagRegistrationManagerMock).infere_tags(anyx()).thenReturn(set())
 
         self.engine = core.DatasourceEngine()
 
@@ -465,7 +465,7 @@ class TestDatasourceEngine_tag_inference_and_declaration(unittest.TestCase):
         infered_tags = set(['infered1', 'infered2'])
         declared_tags = set(['declared1', 'declared2'])
 
-        when(self.tagRegistrationManagerMock).infere_tags_for(reference).thenReturn(infered_tags)
+        when(self.tagRegistrationManagerMock).infere_tags(reference).thenReturn(infered_tags)
 
         @self.engine.datasource(reference,
                                 tags=declared_tags)

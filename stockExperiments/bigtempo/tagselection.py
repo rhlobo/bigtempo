@@ -10,7 +10,7 @@ class TagRegistrationManager(object):
         self._registrations = registrations
         self._mappings = []
 
-    def infere_tags_for(self, reference):
+    def infere_tags(self, reference):
         result = set()
         result.add(reference)
         result |= self._infere_tags_for_dependencies(reference)

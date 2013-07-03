@@ -7,7 +7,127 @@ import bigtempo.tagselection as tagselection
 
 
 class TestTagRegistrationManager(unittest.TestCase):
-    pass
+
+    def setUp(self):
+        self.registrations = {}
+        self.manager = tagselection.TagRegistrationManager(self.registrations)
+
+    def test_infere_tags_should_infere_tag_using_reference_name(self):
+        reference = 'REFERENCE'
+
+        result = self.manager.infere_tags(reference)
+
+        assert isinstance(result, set)
+        assert len(result) is 1
+        assert reference in result
+
+    def test_infere_tags_should_infere_tags_using_reference_depencies(self):
+        reference = 'REFERENCE'
+        expected = ['{D1}', '{D2}', '{D3}', 'REFERENCE']
+
+        self.registrations.update({
+            reference: {'dependencies': set(['D1', 'D2', 'D3'])}
+        })
+
+        result = self.manager.infere_tags(reference)
+
+        assert isinstance(result, set)
+        assert len(result) is len(expected)
+        for tag in expected:
+            assert tag in result
+
+    def test_infere_tags_should_infere_tags_using_reference_depencies_recursively(self):
+        reference = 'REFERENCE'
+        expected = ['{D1}', '{D2}', '{D3}', 'REFERENCE',
+                    '{SDA1}', '{SDA2}',
+                    '{SDC1}', '{SDC2}',
+                    '{SDC1}', '{SDC2}',
+                    '{X1}', '{X2}']
+
+        self.registrations.update({
+            reference: {'dependencies': set(['D1', 'D2', 'D3'])},
+            'D1': {'dependencies': set(['SDA1', 'SDA2'])},
+            'D2': {'dependencies': set(['SDB1', 'SDB2'])},
+            'D3': {'dependencies': set(['SDC1', 'SDC2'])},
+            'SDA1': {'dependencies': set(['X1', 'X2'])}
+        })
+
+        result = self.manager.infere_tags(reference)
+
+        assert isinstance(result, set)
+        assert len(result) is len(expected)
+        for tag in expected:
+            assert tag in result
+
+    def test_infere_tags_should_infere_tags_using_reference_depencies_tags(self):
+        reference = 'REFERENCE'
+        expected = ['REFERENCE',
+                    '{D1}', '{TD1A}', '{TD1B}',
+                    '{D2}', '{TD2A}', '{TD2B}']
+
+        self.registrations.update({
+            reference: {'dependencies': set(['D1', 'D2'])},
+            'D1': {
+                'dependencies': set(),
+                'tags': set(['TD1A', 'TD1B'])
+            },
+            'D2': {
+                'dependencies': set(),
+                'tags': set(['TD2A', 'TD2B'])
+            }
+        })
+
+        result = self.manager.infere_tags(reference)
+
+        assert isinstance(result, set)
+        assert len(result) is len(expected)
+        for tag in expected:
+            assert tag in result
+
+    def test_infere_tags_should_infere_tags_using_reference_depencies_tags_recursively(self):
+        reference = 'REFERENCE'
+        expected = ['REFERENCE',
+                    '{D1}', '{TD1A}', '{TD1B}',
+                    '{D2}', '{TD2A}', '{TD2B}',
+                    '{D3}', '{TD3A}', '{TD3B}',
+                    '{X1}', '{TX1A}', '{TX1B}',
+                    '{X2}', '{TX2A}', '{TX2B}',
+                    '{X3}', '{TX3A}', '{TX3B}']
+
+        self.registrations.update({
+            reference: {'dependencies': set(['D1', 'D2', 'D3'])},
+            'D1': {
+                'dependencies': set(['X1']),
+                'tags': set(['TD1A', 'TD1B'])
+            },
+            'D2': {
+                'dependencies': set(['X2']),
+                'tags': set(['TD2A', 'TD2B'])
+            },
+            'D3': {
+                'dependencies': set(['X3']),
+                'tags': set(['TD3A', 'TD3B'])
+            },
+            'X1': {
+                'dependencies': set(),
+                'tags': set(['TX1A', 'TX1B'])
+            },
+            'X2': {
+                'dependencies': set(),
+                'tags': set(['TX2A', 'TX2B'])
+            },
+            'X3': {
+                'dependencies': set(),
+                'tags': set(['TX3A', 'TX3B'])
+            }
+        })
+
+        result = self.manager.infere_tags(reference)
+
+        assert isinstance(result, set)
+        assert len(result) is len(expected)
+        for tag in expected:
+            assert tag in result
 
 
 class TestTagSelection(unittest.TestCase):
