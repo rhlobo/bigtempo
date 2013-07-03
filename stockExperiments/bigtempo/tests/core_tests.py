@@ -182,16 +182,68 @@ class TestDatasourceEngine_tag_related_behaviours_not_considering_tag_inference(
 
         verify(self.tagSelectorMock, times=1).register(reference, expected_tags)
 
+
+class TestDatasourceEngine_delegators(unittest.TestCase):
+
+    def setUp(self):
+        self.TagSelector = core.tagselection.TagSelector
+        self.tagSelectorMock = mock(core.tagselection.TagSelector)
+        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+        when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
+
+        self.TagSelectionIterationManager = core.tagselection.TagSelectionIterationManager
+        self.tagSelectionIterationManagerMock = mock(core.tagselection.TagSelectionIterationManager)
+        core.tagselection.TagSelectionIterationManager = testutils.CallableMock(self.tagSelectionIterationManagerMock)
+        when(self.tagSelectionIterationManagerMock).__call__(anyx()).thenReturn(self.tagSelectionIterationManagerMock)
+        when(self.tagSelectionIterationManagerMock).infere_tags_for(anyx()).thenReturn(set())
+
+        self.engine = core.DatasourceEngine()
+
+    def tearDown(self):
+        core.tagselection.TagSelectionIterationManager = self.TagSelectionIterationManager
+        core.tagselection.TagSelector = self.TagSelector
+
     def test_select_should_delegate_to_tag_selector(self):
         args = ['a', 'b', 'c']
-
         expected = object()
+
         when(self.tagSelectorMock).get(*args).thenReturn(expected)
 
         result = self.engine.select(*args)
 
         verify(self.tagSelectorMock, times=1).get(*args)
         assert expected is result
+
+    def test_tags_should_delegate_to_tag_selector(self):
+        args = ['a', 'b', 'c']
+        expected = object()
+
+        when(self.tagSelectorMock).tags(*args).thenReturn(expected)
+
+        result = self.engine.tags(*args)
+
+        verify(self.tagSelectorMock, times=1).tags(*args)
+        assert expected is result
+
+    def test_for_each_should_delegate_to_tagSelectionIterationManager_register_method(self):
+        selection = object()
+
+        def function():
+            pass
+
+        self.engine.for_each(selection)(function)
+
+        verify(self.tagSelectionIterationManagerMock, times=1).register(function, selection)
+
+    def test_for_synched_should_delegate_to_tagSelectionIterationManager_register_synched_method(self):
+        selection = object()
+
+        def function():
+            pass
+
+        self.engine.for_synched(selection)(function)
+
+        verify(self.tagSelectionIterationManagerMock, times=1).register_synched(function, anyx())
 
 
 class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unittest.TestCase):
@@ -397,12 +449,27 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
 class TestDatasourceEngine_tag_inference_and_declaration(unittest.TestCase):
 
     def setUp(self):
-        self.TagSelector = core.tagselection.TagSelector
-        self.tagSelectorMock = mock(core.tagselection.TagSelector)
-        when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
-        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+        self.TagSelectionIterationManager = core.tagselection.TagSelectionIterationManager
+
+        self.tagSelectionIterationManagerMock = mock(core.tagselection.TagSelectionIterationManager)
+        when(self.tagSelectionIterationManagerMock).__call__(anyx(dict)).thenReturn(self.tagSelectionIterationManagerMock)
+        core.tagselection.TagSelectionIterationManager = testutils.CallableMock(self.tagSelectionIterationManagerMock)
 
         self.engine = core.DatasourceEngine()
 
     def tearDown(self):
-        core.tagselection.TagSelector = self.TagSelector
+        core.tagselection.TagSelectionIterationManager = self.TagSelectionIterationManager
+
+    def test_register_datasource_should_register_tags_based_on_declared_and_infered(self):
+        reference = 'REFERENCE'
+        infered_tags = set(['infered1', 'infered2'])
+        declared_tags = set(['declared1', 'declared2'])
+
+        when(self.tagSelectionIterationManagerMock).infere_tags_for(reference).thenReturn(infered_tags)
+
+        @self.engine.datasource(reference,
+                                tags=declared_tags)
+        class Datasource(object):
+            pass
+
+        assert self.engine._registrations[reference]['tags'] == (infered_tags | declared_tags)
