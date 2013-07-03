@@ -12,9 +12,10 @@ TagRegistrationManager:
  ✔ infere_tags_for creates tag for reference @done (13-07-02 21:21)
  ✔ infere_tags_for creates tag for dependencies tags (with {}) @done (13-07-02 21:59)
  ✔ infere_tags_for creates tag for dependencies references (with {}) @done (13-07-02 21:59)
- ☐ register method can be used as listener registration for every occurence of reference
- ☐ register method can be used as listener registration for every occurence of selection
- ☐ register method can be used as listener registration for every occurence of tag
+ ✔ register method does not call listener when there is no reference in selection @done (13-07-03 14:12)
+ ✔ register method does call listener for every reference in selection @done (13-07-03 14:12)
+ ✔ register method does call listener for every combination reference in given selections @done (13-07-03 14:12)
+
  ☐ register method can be used as listener registration for every combination of references
  ☐ register method can be used as listener registration for every combination of tags
  ☐ register method can be used as listener registration for every combination of selections

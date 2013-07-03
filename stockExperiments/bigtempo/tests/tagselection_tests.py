@@ -6,6 +6,56 @@ import util.testutils as testutils
 import bigtempo.tagselection as tagselection
 
 
+class TestTagRegistrationManager_registrations(unittest.TestCase):
+
+    def setUp(self):
+        self.registrations = {}
+        self.manager = tagselection.TagRegistrationManager(self.registrations)
+        self.listener_mock = mock()
+        self.listener_callable_mock = testutils.CallableMock(self.listener_mock)
+
+    def test_register_should_not_call_listener_when_there_is_no_existent_reference(self):
+        reference = 'REFERENCE'
+        selection = []
+
+        self.manager.register(self.listener_callable_mock, selection)
+        verify(self.listener_mock, times=0).__call__(anyx())
+
+    def test_register_should_call_listener_for_existent_reference_when_there_is_one_selector(self):
+        reference = 'REFERENCE'
+        selection = [reference]
+
+        self.manager.register(self.listener_callable_mock, selection)
+        verify(self.listener_mock, times=1).__call__(reference)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_should_call_listener_for_each_existent_reference_when_there_is_one_selector(self):
+        reference1 = 'REFERENCE1'
+        reference2 = 'REFERENCE2'
+        selection = [reference1, reference2]
+
+        self.manager.register(self.listener_callable_mock, selection)
+        verify(self.listener_mock, times=1).__call__(reference1)
+        verify(self.listener_mock, times=1).__call__(reference2)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_should_call_listener_for_each_existent_combination_of_references_when_there_are_multiple_selectors(self):
+        reference1a = 'REFERENCE1a'
+        reference2a = 'REFERENCE2a'
+        selection_a = [reference1a, reference2a]
+
+        reference1b = 'REFERENCE1b'
+        reference2b = 'REFERENCE2b'
+        selection_b = [reference1b, reference2b]
+
+        self.manager.register(self.listener_callable_mock, selection_a, selection_b)
+        verify(self.listener_mock, times=1).__call__(reference1a, reference1b)
+        verify(self.listener_mock, times=1).__call__(reference1a, reference2b)
+        verify(self.listener_mock, times=1).__call__(reference2a, reference1b)
+        verify(self.listener_mock, times=1).__call__(reference2a, reference2b)
+        verifyNoMoreInteractions(self.listener_mock)
+
+
 class TestTagRegistrationManager_tag_inference(unittest.TestCase):
 
     def setUp(self):
