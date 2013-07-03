@@ -29,6 +29,7 @@ class TestTagRegistrationManager(unittest.TestCase):
             reference: {'dependencies': set(['D1', 'D2', 'D3'])}
         })
 
+        self._process_dependencies(['D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
 
         assert isinstance(result, set)
@@ -52,7 +53,11 @@ class TestTagRegistrationManager(unittest.TestCase):
             'SDA1': {'dependencies': set(['X1', 'X2'])}
         })
 
+        self._process_dependencies(['X2', 'X1', 'SDC2', 'SDC1', 'SDB2', 'SDB1', 'SDA2', 'SDA1', 'D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
+
+        print 'Expected: \t', expected
+        print 'Result: \t', result
 
         assert isinstance(result, set)
         assert len(result) is len(expected)
@@ -66,7 +71,9 @@ class TestTagRegistrationManager(unittest.TestCase):
                     '{D2}', '{TD2A}', '{TD2B}']
 
         self.registrations.update({
-            reference: {'dependencies': set(['D1', 'D2'])},
+            reference: {
+                'dependencies': set(['D1', 'D2'])
+            },
             'D1': {
                 'dependencies': set(),
                 'tags': set(['TD1A', 'TD1B'])
@@ -77,6 +84,7 @@ class TestTagRegistrationManager(unittest.TestCase):
             }
         })
 
+        self._process_dependencies(['D2', 'D1'])
         result = self.manager.infere_tags(reference)
 
         assert isinstance(result, set)
@@ -122,12 +130,27 @@ class TestTagRegistrationManager(unittest.TestCase):
             }
         })
 
+        self._process_dependencies(['X3', 'X2', 'X1', 'D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
+
+        print 'Expected: \t', expected
+        print 'Result: \t', result
 
         assert isinstance(result, set)
         assert len(result) is len(expected)
         for tag in expected:
             assert tag in result
+
+    def _process_dependencies(self, references):
+        for key in references:
+            if not self.registrations.get(key):
+                self.registrations[key] = {}
+
+            if not self.registrations[key].get('tags'):
+                self.registrations[key]['tags'] = set()
+
+            self.registrations[key]['tags'] |= self.manager.infere_tags(key)
+            print '%s: \t%s' % (key, self.registrations[key]['tags'])
 
 
 class TestTagSelection(unittest.TestCase):

@@ -13,22 +13,23 @@ class TagRegistrationManager(object):
     def infere_tags(self, reference):
         result = set()
         result.add(reference)
-        result |= self._infere_tags_for_dependencies(reference)
-        return result
 
-    def _infere_tags_for_dependencies(self, reference):
-        result = set()
-        if not self._registrations.get(reference):
+        if not self._registrations.get(reference) or not self._registrations[reference].get('dependencies'):
             return result
 
-        for dependency in self._registrations[reference]['dependencies']:
-            result.add("{%s}" % dependency)
+        for dependency_reference in self._registrations[reference]['dependencies']:
 
-            if self._registrations[reference].get('tags') is not None:
-                for tag in self._registrations[reference]['tags']:
-                    result.add("{%s}" % tag)
+            dependency = self._registrations.get(dependency_reference)
+            if not dependency:
+                continue
 
-            result |= self._infere_tags_for_dependencies(dependency)
+            dependency_tags = dependency.get('tags')
+            if not dependency_tags:
+                continue
+
+            for tag in dependency_tags:
+                inherited_tag = ('{%s}' % tag) if tag[0] != '{' or tag[-1] != '}' else tag
+                result.add(inherited_tag)
 
         return result
 

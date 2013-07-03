@@ -36,7 +36,7 @@ class DatasourceEngine(object):
         self._registrations[reference] = {
             'class': cls,
             'lookback': lookback,
-            'dependencies': dependencies if dependencies else set()
+            'dependencies': set(dependencies) if dependencies else set()
         }
 
         infered_tags = self._tag_iteration_manager.infere_tags(reference)
