@@ -16,6 +16,17 @@ class CallableMock(object):
         return self.mock.__getattr__(method_name)
 
 
+class IterableMock(object):
+    def __init__(self, mock):
+        self.mock = mock
+
+    def __iter__(self, *args, **kwargs):
+        return self.mock.__iter__(*args, **kwargs)
+
+    def __getattr__(self, method_name):
+        return self.mock.__getattr__(method_name)
+
+
 def should_skip_provider_deep_tests():
     return os.environ.get('TESTTYPE') == 'fast'
 

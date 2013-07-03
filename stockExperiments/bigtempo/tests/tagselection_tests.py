@@ -15,11 +15,10 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         self.listener_callable_mock = testutils.CallableMock(self.listener_mock)
 
     def test_register_should_not_call_listener_when_there_is_no_existent_reference(self):
-        reference = 'REFERENCE'
         selection = []
 
         self.manager.register(self.listener_callable_mock, selection)
-        verify(self.listener_mock, times=0).__call__(anyx())
+        verifyNoMoreInteractions(self.listener_mock)
 
     def test_register_should_call_listener_for_existent_reference_when_there_is_one_selector(self):
         reference = 'REFERENCE'
@@ -52,6 +51,78 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         verify(self.listener_mock, times=1).__call__(reference1a, reference1b)
         verify(self.listener_mock, times=1).__call__(reference1a, reference2b)
         verify(self.listener_mock, times=1).__call__(reference2a, reference1b)
+        verify(self.listener_mock, times=1).__call__(reference2a, reference2b)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_should_call_listener_for_late_reference_when_there_is_one_selector(self):
+        reference = 'REFERENCE'
+
+        selection = mock()
+        when(selection).__iter__().thenReturn([].__iter__()).thenReturn([reference].__iter__())
+        when(selection).is_elegible(reference).thenReturn(True)
+
+        self.manager.register(self.listener_callable_mock, testutils.IterableMock(selection))
+        verify(self.listener_mock, times=0).__call__(anyx())
+        verifyNoMoreInteractions(self.listener_mock)
+
+        self.manager.evaluate_new_candidate(reference)
+        verify(self.listener_mock, times=1).__call__(reference)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_should_call_listener_for_each_late_reference_when_there_is_one_selector(self):
+        reference1 = 'REFERENCE1'
+        reference2 = 'REFERENCE2'
+        reference3 = 'REFERENCE3'
+
+        selection = mock()
+        (when(selection).__iter__().thenReturn([reference1].__iter__())
+            .thenReturn([reference1, reference2].__iter__())
+            .thenReturn([reference1, reference2, reference3].__iter__()))
+        when(selection).is_elegible(reference2).thenReturn(True)
+        when(selection).is_elegible(reference3).thenReturn(True)
+
+        self.manager.register(self.listener_callable_mock, testutils.IterableMock(selection))
+        verify(self.listener_mock, times=1).__call__(reference1)
+        verifyNoMoreInteractions(self.listener_mock)
+
+        self.manager.evaluate_new_candidate(reference2)
+        verify(self.listener_mock, times=1).__call__(reference2)
+        verifyNoMoreInteractions(self.listener_mock)
+
+        self.manager.evaluate_new_candidate(reference3)
+        verify(self.listener_mock, times=1).__call__(reference3)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_should_call_listener_for_each_existent_combination_of_references_when_there_are_multiple_selectors(self):
+        reference1a = 'REFERENCE1a'
+        reference2a = 'REFERENCE2a'
+        reference1b = 'REFERENCE1b'
+        reference2b = 'REFERENCE2b'
+
+        selection_a = mock()
+        (when(selection_a).__iter__()
+            .thenReturn([reference1a].__iter__())
+            .thenReturn([reference1a, reference2a].__iter__())
+            .thenReturn([reference1a, reference2a].__iter__()))
+        when(selection_a).is_elegible(reference2a).thenReturn(True)
+
+        selection_b = mock()
+        (when(selection_b).__iter__()
+            .thenReturn([reference1b].__iter__())
+            .thenReturn([reference1b].__iter__())
+            .thenReturn([reference1b, reference2b].__iter__()))
+        when(selection_b).is_elegible(reference2b).thenReturn(True)
+
+        self.manager.register(self.listener_callable_mock, testutils.IterableMock(selection_a), testutils.IterableMock(selection_b))
+        verify(self.listener_mock, times=1).__call__(reference1a, reference1b)
+        verifyNoMoreInteractions(self.listener_mock)
+
+        self.manager.evaluate_new_candidate(reference2a)
+        verify(self.listener_mock, times=1).__call__(reference2a, reference1b)
+        verifyNoMoreInteractions(self.listener_mock)
+
+        self.manager.evaluate_new_candidate(reference2b)
+        verify(self.listener_mock, times=1).__call__(reference1a, reference2b)
         verify(self.listener_mock, times=1).__call__(reference2a, reference2b)
         verifyNoMoreInteractions(self.listener_mock)
 
