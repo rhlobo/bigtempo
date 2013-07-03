@@ -212,6 +212,28 @@ Verify Style:
 LONG TERM FEATURES / IDEAS
 
 
+--- ✄ -----------------------
+
+BAG OF IDEAS
+
+Calculate and compare with benchmark
+Use spiderweb chart to display grade grouppings http://www.highcharts.com/demo/polar-spider
+Gauge charts can display the risk and the potential
+The correlation of potential / risk can be calculated to try to find the best combination
+Combo can display each symbols vs strategy, the average and a pie chart indicating symbol / strategy propension
+Buble chart can be used to demonstrate each strategy potential vs chance (chence being the bubble size)
+Bar chart can display rankings (http://www.highcharts.com/demo/column-rotated-labels)
+Stacked area can be used to show profit from several sources (symbols or strategies or points) (http://www.highcharts.com/demo/area-stacked)
+Logarithmic axis can be used to show cotation graphs http://www.highcharts.com/demo/line-log-axis
+
+Several grade grouppings can be created, using different formulas to calculate rankings an so to be used in different portiolio_strategies
+
+
+ ☐ Get insprations at https://www.quantopian.com/
+ 	☐ Weather / Mood influence https://www.quantopian.com/posts/using-weather-as-a-trading-signal
+ 	☐ Use google trends - https://github.com/suryasev/unofficial-google-trends-api/blob/master/pyGTrends.py 	
+
+
 
 
 --- ✄ -----------------------
