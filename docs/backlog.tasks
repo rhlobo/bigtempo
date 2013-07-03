@@ -15,18 +15,13 @@ TagRegistrationManager:
  ✔ register method does not call listener when there is no reference in selection @done (13-07-03 14:12)
  ✔ register method does call listener for every reference in selection @done (13-07-03 14:12)
  ✔ register method does call listener for every combination reference in given selections @done (13-07-03 14:12)
-
- ☐ register method can be used as listener registration for every combination of references
- ☐ register method can be used as listener registration for every combination of tags
- ☐ register method can be used as listener registration for every combination of selections
- ☐ register method can be used as listener registration for every combination of selections, references and tags
- ☐ register_synched method can be used as listener registration for every occurence of reference
- ☐ register_synched method can be used as listener registration for every occurence of selection
- ☐ register_synched method can be used as listener registration for every occurence of tag
- ☐ register_synched method can be used as listener registration for every sincronized combination of references
- ☐ register_synched method can be used as listener registration for every sincronized combination of selections
- ☐ register_synched method can be used as listener registration for every sincronized combination of tags
- ☐ register_synched method can be used as listener registration for every sincronized combination of selections, references and tags
+ ☐ register method does call listener for every new reference that matches selection
+ ☐ register method does call listener for every combination reference formed by new references that matches given selections
+ ☐ register_synched method does not call listener when there is no reference in selection
+ ☐ register_synched does call listener for every reference in selection
+ ☐ register_synched method does call listener for every synched combination reference in given selections
+ ☐ register_synched method does call listener for every new reference that matches selection
+ ☐ register_synched method does call listener for every combination reference formed by new references that matches given selections
 
 Integration Tests:
 	use cases: tag selections:
