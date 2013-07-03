@@ -6,6 +6,10 @@ import util.testutils as testutils
 import bigtempo.tagselection as tagselection
 
 
+class TestTagRegistrationManager(unittest.TestCase):
+    pass
+
+
 class TestTagSelection(unittest.TestCase):
 
     def setUp(self):

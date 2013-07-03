@@ -1,11 +1,10 @@
-import re
 import json
 import functools
 import itertools
 import collections
 
 
-class TagSelectionIterationManager(object):
+class TagRegistrationManager(object):
 
     def __init__(self, registrations):
         self._registrations = registrations

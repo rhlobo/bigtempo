@@ -4,11 +4,11 @@ CURRENT BACKLOG - TESTING
 DatasourceEngine:
  ✔ tags being union of infered and declared @done (13-07-02 20:43)
  ✔ tags method returns reference selection @done (13-07-02 20:47)
- ✔ for_each delegates to TagSelectionIterationManager register @done (13-07-02 21:03)
- ✔ for_synched delegates to TagSelectionIterationManager register_synched @done (13-07-02 21:03)
+ ✔ for_each delegates to TagRegistrationManager register @done (13-07-02 21:03)
+ ✔ for_synched delegates to TagRegistrationManager register_synched @done (13-07-02 21:03)
 
 #stockExperiments/bigtempo/tagselection.py
-TagSelectionIterationManager:
+TagRegistrationManager:
  ☐ infere_tags_for creates tag for reference
  ☐ infere_tags_for creates tag for dependencies tags (with {})
  ☐ infere_tags_for creates tag for dependencies references (with {})
