@@ -15,10 +15,10 @@ TagRegistrationManager:
  ✔ register method does not call listener when there is no reference in selection @done (13-07-03 14:12)
  ✔ register method does call listener for every reference in selection @done (13-07-03 14:12)
  ✔ register method does call listener for every combination reference in given selections @done (13-07-03 14:12)
- ☐ register method does call listener for every new reference that matches selection
- ☐ register method does call listener for every combination reference formed by new references that matches given selections
- ☐ register_synched method does not call listener when there is no reference in selection
- ☐ register_synched does call listener for every reference in selection
+ ✔ register method does call listener for every new reference that matches selection @done (13-07-03 20:46)
+ ✔ register method does call listener for every combination reference formed by new references that matches given selections @done (13-07-03 20:46)
+ ✔ register_synched method does not call listener when there is no reference in selection @done (13-07-03 20:59)
+ ✔ register_synched does call listener for every reference in selection @done (13-07-03 21:00)
  ☐ register_synched method does call listener for every synched combination reference in given selections
  ☐ register_synched method does call listener for every new reference that matches selection
  ☐ register_synched method does call listener for every combination reference formed by new references that matches given selections

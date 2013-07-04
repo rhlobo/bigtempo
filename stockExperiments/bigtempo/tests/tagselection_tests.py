@@ -93,7 +93,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         verify(self.listener_mock, times=1).__call__(reference3)
         verifyNoMoreInteractions(self.listener_mock)
 
-    def test_register_should_call_listener_for_each_existent_combination_of_references_when_there_are_multiple_selectors(self):
+    def test_register_should_call_listener_for_each_late_combination_of_references_when_there_are_multiple_selectors(self):
         reference1a = 'REFERENCE1a'
         reference2a = 'REFERENCE2a'
         reference1b = 'REFERENCE1b'
@@ -124,6 +124,30 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         self.manager.evaluate_new_candidate(reference2b)
         verify(self.listener_mock, times=1).__call__(reference1a, reference2b)
         verify(self.listener_mock, times=1).__call__(reference2a, reference2b)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_synched_should_not_call_listener_when_there_is_no_existent_reference(self):
+        selection = [[]]
+
+        self.manager.register_synched(self.listener_callable_mock, selection)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_synched_should_call_listener_for_existent_reference_when_there_is_one_selector(self):
+        reference = 'REFERENCE'
+        selection = [[reference]]
+
+        self.manager.register_synched(self.listener_callable_mock, selection)
+        verify(self.listener_mock, times=1).__call__(reference)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_synched_should_call_listener_for_each_existent_reference_when_there_is_one_selector(self):
+        reference1 = 'REFERENCE1'
+        reference2 = 'REFERENCE2'
+        selection = [[reference1, reference2]]
+
+        self.manager.register_synched(self.listener_callable_mock, selection)
+        verify(self.listener_mock, times=1).__call__(reference1)
+        verify(self.listener_mock, times=1).__call__(reference2)
         verifyNoMoreInteractions(self.listener_mock)
 
 
