@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+CURRDIR="$(pwd)"
+PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+export PYTHONPATH="${PROJECT_LOCATION}/stockExperiments"
+
+
+cd "${PROJECT_LOCATION}"
+echo "" > code.report
+echo "PEP8 CODE STYLE CHECK" >> code.report
+echo "--------------------------------------------------------------------------------" >> code.report
+find "stockExperiments" -type f -name "*.py" -exec pep8 --first --max-line-length=160 {}  >> code.report \;
+echo >> code.report
+echo "#     Err  Description" >> code.report
+echo "--------------------------------------------------------------------------------" >> code.report
+pep8 --statistics --max-line-length=160 -qq "./stockExperiments" | sort -nr >> code.report
+echo >> code.report
+echo "LINE COUNT" >> code.report
+echo "--------------------------------------------------------------------------------" >> code.report
+for n in $(find stockExperiments -name "*.py")
+do 
+	echo "$(cat $n | wc -l)  >  $n" >> code.report
+done
+cat `find stockExperiments -name "*.py" -print` | wc -l >> code.report
+echo >> code.report
+cd "${CURRDIR}"
+
+less code.report
