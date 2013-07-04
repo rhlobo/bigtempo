@@ -86,6 +86,9 @@ Datasources:
  ☐ daily_range
  ☐ range
 
+#stockExperiments/datasources/point .py
+ ☐ point validates buy order out of period range
+...
 
 --- ✄ -----------------------
 
