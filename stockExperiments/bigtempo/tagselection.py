@@ -92,6 +92,8 @@ class TagRegistrationManager(object):
             self._execute_fn(fn, *combination)
 
     def _execute_fn(self, fn, *references):
+        print fn,
+        print references
         fn(*references)
 
 

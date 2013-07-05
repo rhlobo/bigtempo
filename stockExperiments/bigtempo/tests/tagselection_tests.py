@@ -150,6 +150,45 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         verify(self.listener_mock, times=1).__call__(reference2)
         verifyNoMoreInteractions(self.listener_mock)
 
+    def test_register_synched_should_call_listener_for_each_existent_combination_of_references_when_there_are_multiple_selectors(self):
+        reference1a = 'X1'
+        reference2a = 'X2'
+        reference3a = 'X3'
+        selection_a = [reference1a, reference2a, reference3a]
+
+        reference1b = 'R1'
+        reference2b = 'R2'
+        reference3b = 'R3'
+
+        selection_b = mock()
+        (when(selection_b).__iter__()
+            .thenReturn([reference1b, reference2b, reference3b].__iter__()))
+        when(selection_b).intersection('{%s}' % reference1a).thenReturn([reference1b])
+        when(selection_b).intersection('{%s}' % reference2a).thenReturn([reference2b])
+        when(selection_b).intersection('{%s}' % reference3a).thenReturn([reference3b])
+
+        self.manager.register_synched(self.listener_callable_mock,
+                              [selection_a, testutils.IterableMock(selection_b)])
+        verify(self.listener_mock, times=1).__call__(reference1a, reference1b)
+        verify(self.listener_mock, times=1).__call__(reference2a, reference2b)
+        verify(self.listener_mock, times=1).__call__(reference3a, reference3b)
+        verifyNoMoreInteractions(self.listener_mock)
+
+    def test_register_synched_should_call_listener_for_late_reference_when_there_is_one_selector(self):
+        reference = 'REFERENCE'
+
+        selection = mock()
+        when(selection).__iter__().thenReturn([].__iter__()).thenReturn([reference].__iter__())
+        when(selection).is_elegible(reference).thenReturn(True)
+
+        self.manager.register_synched(self.listener_callable_mock, [testutils.IterableMock(selection)])
+        verify(self.listener_mock, times=0).__call__(anyx())
+        verifyNoMoreInteractions(self.listener_mock)
+
+        self.manager.evaluate_new_candidate(reference)
+        verify(self.listener_mock, times=1).__call__(reference)
+        verifyNoMoreInteractions(self.listener_mock)
+
 
 class TestTagRegistrationManager_tag_inference(unittest.TestCase):
 
@@ -174,7 +213,7 @@ class TestTagRegistrationManager_tag_inference(unittest.TestCase):
             reference: {'dependencies': set(['D1', 'D2', 'D3'])}
         })
 
-        self._process_dependencies(['D3', 'D2', 'D1'])
+        _process_dependencies(self, ['D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
 
         assert isinstance(result, set)
@@ -198,7 +237,7 @@ class TestTagRegistrationManager_tag_inference(unittest.TestCase):
             'SDA1': {'dependencies': set(['X1', 'X2'])}
         })
 
-        self._process_dependencies(['X2', 'X1', 'SDC2', 'SDC1', 'SDB2', 'SDB1', 'SDA2', 'SDA1', 'D3', 'D2', 'D1'])
+        _process_dependencies(self, ['X2', 'X1', 'SDC2', 'SDC1', 'SDB2', 'SDB1', 'SDA2', 'SDA1', 'D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
 
         assert isinstance(result, set)
@@ -226,7 +265,7 @@ class TestTagRegistrationManager_tag_inference(unittest.TestCase):
             }
         })
 
-        self._process_dependencies(['D2', 'D1'])
+        _process_dependencies(self, ['D2', 'D1'])
         result = self.manager.infere_tags(reference)
 
         assert isinstance(result, set)
@@ -272,23 +311,13 @@ class TestTagRegistrationManager_tag_inference(unittest.TestCase):
             }
         })
 
-        self._process_dependencies(['X3', 'X2', 'X1', 'D3', 'D2', 'D1'])
+        _process_dependencies(self, ['X3', 'X2', 'X1', 'D3', 'D2', 'D1'])
         result = self.manager.infere_tags(reference)
 
         assert isinstance(result, set)
         assert len(result) is len(expected)
         for tag in expected:
             assert tag in result
-
-    def _process_dependencies(self, references):
-        for key in references:
-            if not self.registrations.get(key):
-                self.registrations[key] = {}
-
-            if not self.registrations[key].get('tags'):
-                self.registrations[key]['tags'] = set()
-
-            self.registrations[key]['tags'] |= self.manager.infere_tags(key)
 
 
 class TestTagSelection(unittest.TestCase):
@@ -744,3 +773,14 @@ class TestTagSelector(unittest.TestCase):
     def test_tags_should_return_reference_selection_instance(self):
         result = tagselection.TagSelector(None).tags()
         assert isinstance(result, tagselection._TagSelection)
+
+
+def _process_dependencies(self, references):
+    for key in references:
+        if not self.registrations.get(key):
+            self.registrations[key] = {}
+
+        if not self.registrations[key].get('tags'):
+            self.registrations[key]['tags'] = set()
+
+        self.registrations[key]['tags'] |= self.manager.infere_tags(key)
