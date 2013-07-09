@@ -1,7 +1,5 @@
 import unittest
-from mockito import mock, when, any as anyx, verify, verifyNoMoreInteractions
 
-import util.testutils as testutils
 import bigtempo.core as core
 
 
@@ -68,7 +66,7 @@ class TestIntegration_TagSelector_use_cases(unittest.TestCase):
         assert len(selection) is 1
         assert selection.get(0).process('SYMBOL') == 'POINT:(RAW_QUOTE_01,FOREACH_BYPRODUCT_01:RAW_QUOTE_01)_RESULT_FOR_SYMBOL'
 
-    def test_select_should_return_existing_point_reference_based_on_certain_reference(self):
+    def test_select_should_return_existing_point_reference_not_based_on_certain_reference(self):
         selection = self.engine.select('POINT').difference('{NOT_TRUSTABLE_SOURCE}')
         assert len(selection) is 4
 

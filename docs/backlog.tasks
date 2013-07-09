@@ -42,24 +42,24 @@ Integration Tests:
 	 ✘ converting reference selection in a tag selection and filtering it by a certain tag @cancelled (13-07-08 21:25)
 
 	use cases: for_each method:
-	 ☐ for_each method can be used as loop for every registered occurence of reference
-	 ☐ for_each method can be used as loop for every registered occurence of selection
-	 ☐ for_each method can be used as loop for every registered occurence of tag
-	 ☐ for_each method can be used as loop for every combination of references
-	 ☐ for_each method can be used as loop for every combination of tags
-	 ☐ for_each method can be used as loop for every combination of selections
-	 ☐ for_each method can be used as loop for every combination of selections, references and tags
-	 ☐ for_each method can be used in combination (nested) with for_synched method
+	 ✘ for_each method can be used as loop for every registered occurence of reference @cancelled (13-07-09 13:11)
+	 ✘ for_each method can be used as loop for every registered occurence of selection @cancelled (13-07-09 13:11)
+	 ✘ for_each method can be used as loop for every registered occurence of tag @cancelled (13-07-09 13:11)
+	 ✘ for_each method can be used as loop for every combination of references @cancelled (13-07-09 13:11)
+	 ✘ for_each method can be used as loop for every combination of tags @cancelled (13-07-09 13:11)
+	 ✘ for_each method can be used as loop for every combination of selections @cancelled (13-07-09 13:11)
+	 ✘ for_each method can be used as loop for every combination of selections, references and tags @cancelled (13-07-09 13:11)
+	 ✘ for_each method can be used in combination (nested) with for_synched method @cancelled (13-07-09 13:11)
 
 	use cases: for_synched method:
-	 ☐ for_synched method can be used as loop for every registered occurence of reference
-	 ☐ for_synched method can be used as loop for every registered occurence of selection
-	 ☐ for_synched method can be used as loop for every registered occurence of tag
-	 ☐ for_synched method can be used as loop for every sincronized combination of references
-	 ☐ for_synched method can be used as loop for every sincronized combination of selections
-	 ☐ for_synched method can be used as loop for every sincronized combination of tags
-	 ☐ for_synched method can be used as loop for every sincronized combination of selections, references and tags
-	 ☐ for_synched method can be used in combination (nested) with for_each method
+	 ✘ for_synched method can be used as loop for every registered occurence of reference @cancelled (13-07-09 13:11)
+	 ✘ for_synched method can be used as loop for every registered occurence of selection @cancelled (13-07-09 13:11)
+	 ✘ for_synched method can be used as loop for every registered occurence of tag @cancelled (13-07-09 13:11)
+	 ✘ for_synched method can be used as loop for every sincronized combination of references @cancelled (13-07-09 13:11)
+	 ✘ for_synched method can be used as loop for every sincronized combination of selections @cancelled (13-07-09 13:11)
+	 ✘ for_synched method can be used as loop for every sincronized combination of tags @cancelled (13-07-09 13:11)
+	 ✘ for_synched method can be used as loop for every sincronized combination of selections, references and tags @cancelled (13-07-09 13:11)
+	 ✘ for_synched method can be used in combination (nested) with for_each method @cancelled (13-07-09 13:11)
 
 
 Datasources:
