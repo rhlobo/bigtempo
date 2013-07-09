@@ -36,10 +36,10 @@ Integration Tests:
 	 ✔ finding every reference that directly or indirectly uses certain datasource as dependency @done (13-07-08 21:04)
 	
 	use cases: reference selections:
-	 ☐ search for all tags for a reference
-	 ☐ search for all tags in common between two references
-	 ☐ search for all tags in common between multiple references
-	 ☐ converting reference selection in a tag selection and filtering it by a certain tag
+	 ✔ search for all tags for a reference @done (13-07-08 21:24)
+	 ✘ search for all tags in common between two references @cancelled (13-07-08 21:25)
+	 ✘ search for all tags in common between multiple references @cancelled (13-07-08 21:25)
+	 ✘ converting reference selection in a tag selection and filtering it by a certain tag @cancelled (13-07-08 21:25)
 
 	use cases: for_each method:
 	 ☐ for_each method can be used as loop for every registered occurence of reference

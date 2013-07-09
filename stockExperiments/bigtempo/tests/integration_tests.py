@@ -78,6 +78,18 @@ class TestIntegration_TagSelector_use_cases(unittest.TestCase):
         for reference in selection:
             assert reference in ['FOREACH_BYPRODUCT_01:RAW_QUOTE_01', 'POINT:(RAW_QUOTE_01,FOREACH_BYPRODUCT_01:RAW_QUOTE_01)']
 
+    def test_tags_should_return_every_tag_for_given_reference(self):
+        selection = self.engine.tags('POINT:(RAW_QUOTE_01,FOREACH_BYPRODUCT_01:RAW_QUOTE_01)')
+        assert len(selection) is 8
+        for reference in selection:
+            assert reference in ["{NOT_TRUSTABLE_SOURCE}",
+                                 "POINT",
+                                 "{RAW_QUOTE_01}",
+                                 "POINT:(RAW_QUOTE_01,FOREACH_BYPRODUCT_01:RAW_QUOTE_01)",
+                                 "{INDICATOR}",
+                                 "{FOREACH_BYPRODUCT_01:RAW_QUOTE_01}",
+                                 "{BYPRODUCT}",
+                                 "{RAW_QUOTE}"]
 
 
 def _create_test_scenario(engine):
