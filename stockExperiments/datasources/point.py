@@ -69,7 +69,7 @@ class _PointRegistror(object):
 
         current_values = self._current_context.base_reference_values()
         if value < current_values['low'] or value > current_values['high']:
-            raise NotImplementedError            
+            raise NotImplementedError
 
         self._points.append((date, value))
 

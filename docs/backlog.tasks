@@ -25,15 +25,15 @@ TagRegistrationManager:
 
 Integration Tests:
 	use cases: tag selections:
-	 ☐ nothing results in nothing
-	 ☐ unknown tag results in nothing
-	 ☐ tag selector results in all occurences of that tag
-	 ☐ reference as selector results in one ocurrence
-	 ☐ multiple tag selector results all references that have that tags in common
-	 ☐ getting references that have certain tags but do not have others
-	 ☐ getting all 'points' that are based on a certain raw tipe
-	 ☐ getting all 'points' that are not based on a certain raw tipe
-	 ☐ finding every reference that directly or indirectly uses certain datasource as dependency
+	 ✔ nothing results in nothing @done (13-07-08 13:17)
+	 ✔ unknown tag results in nothing @done (13-07-08 13:17)
+	 ✔ tag selector results in all occurences of that tag @done (13-07-08 13:23)
+	 ✔ reference as selector results in one ocurrence @done (13-07-08 13:17)
+	 ✔ multiple tag selector results all references that have that tags in common @done (13-07-08 13:34)
+	 ✔ getting references that have certain tags but do not have others @done (13-07-08 13:38)
+	 ✔ getting all 'points' that are based on a certain raw tipe @done (13-07-08 20:44)
+	 ✔ getting all 'points' that are not based on a certain raw tipe @done (13-07-08 21:00)
+	 ✔ finding every reference that directly or indirectly uses certain datasource as dependency @done (13-07-08 21:04)
 	
 	use cases: reference selections:
 	 ☐ search for all tags for a reference

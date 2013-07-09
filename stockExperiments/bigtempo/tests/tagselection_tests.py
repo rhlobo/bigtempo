@@ -168,7 +168,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         when(selection_b).intersection('{%s}' % reference3a).thenReturn([reference3b])
 
         self.manager.register_synched(self.listener_callable_mock,
-                              [selection_a, testutils.IterableMock(selection_b)])
+                                      [selection_a, testutils.IterableMock(selection_b)])
         verify(self.listener_mock, times=1).__call__(reference1a, reference1b)
         verify(self.listener_mock, times=1).__call__(reference2a, reference2b)
         verify(self.listener_mock, times=1).__call__(reference3a, reference3b)
