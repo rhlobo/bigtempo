@@ -1,8 +1,83 @@
-from mockito import mock, when, any as _any
 import os
 import pandas
+import inspect
+import unittest
+from mockito import mock, when, any as _any, unstub
+
+import instances
+import bigtempo.core as core
 import util.fileutils as fileutils
+import util.moduleutils as moduleutils
 import providers.locator as locator
+
+
+def assert_datasource_correctness_using_datafiles(test_instance, symbol, tested_reference, expected_result_file, *mock_infos):
+    test_file = inspect.getfile(test_instance.__class__)
+
+    def _create_mock_datasource(data_file):
+        data = get_dataframe_from_csv(test_file, mock_data_file)
+
+        class DatasourceMock(object):
+
+            def evaluate(self, context, symbol, start=None, end=None):
+                return data
+
+        return DatasourceMock
+
+    for mock_reference, mock_data_file in mock_infos:
+        datasource_mock_cls = _create_mock_datasource(mock_data_file)
+
+        instances.data_engine._instances[mock_reference] = None
+        new_registration = {
+            'class': datasource_mock_cls,
+            'lookback': 0,
+            'dependencies': set()
+        }
+
+        if not instances.data_engine._registrations.get(mock_reference):
+            instances.data_engine._registrations[mock_reference] = {}
+        instances.data_engine._registrations[mock_reference].update(new_registration)
+
+    actual = instances.data_engine.get(tested_reference).process(symbol)
+    expected = get_dataframe_from_csv(test_file, expected_result_file)
+    assert_dataframe_almost_equal(expected, actual)
+
+
+class DatasourceTestCase(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.data_engine = instances.data_engine
+
+        testing_builder_mock = mock()
+
+        def testing_builder(cls):
+            mock_result = testing_builder_mock.build(cls)
+            if mock_result:
+                return mock_result
+            return cls()
+
+        engine = core.DatasourceEngine(builder=testing_builder)
+
+        instances.data_engine = engine
+        cls.testing_builder_mock = testing_builder_mock
+
+        moduleutils.reload_modules(r'datasources\..*')
+
+    @classmethod
+    def tearDownClass(cls):
+        instances.data_engine = cls.data_engine
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        unstub()
+
+
+def get_dataframe_from_csv(test_file, filename):
+    filepath = fileutils.get_test_data_file_path(test_file, filename)
+    return pandas.DataFrame.from_csv(filepath)
 
 
 class CallableMock(object):

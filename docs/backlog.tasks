@@ -63,8 +63,8 @@ Integration Tests:
 
 
 Datasources:
- ☐ raw_bovespa
- ☐ raw_pct
+ ✔ raw_bovespa @done (13-07-11 13:36)
+ ✔ raw_pct @done (13-07-11 13:36)
  ☐ raw_split
  ☐ raw_normalization_factor
  ☐ normalized
