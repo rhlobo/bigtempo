@@ -1,6 +1,7 @@
 from datetime import datetime as dt
 
 import util.testutils as testutils
+import util.fileutils as fileutils
 
 import instances
 import datasources.raw_bovespa as raw_bovespa
@@ -58,7 +59,7 @@ class _CotahistImporterMock(object):
 
     def __init__(self, s_data_dir):
         self.d_dataFrame = {}
-        self.d_dataFrame['PETR4'] = testutils.get_dataframe_from_csv(__file__, 'petr4.csv')
+        self.d_dataFrame['PETR4'] = testutils.get_dataframe_from_csv(__file__, 'petr4.csv', test_filename_to_data_dir_function=fileutils.get_commum_test_data_dir)
 
     def getDataFrameMap(self):
         return self.d_dataFrame

@@ -15,7 +15,7 @@ def assert_datasource_correctness_using_datafiles(test_instance, symbol, tested_
     test_file = inspect.getfile(test_instance.__class__)
 
     def _create_mock_datasource(data_file):
-        data = get_dataframe_from_csv(test_file, mock_data_file)
+        data = get_dataframe_from_csv(test_file, mock_data_file, test_filename_to_data_dir_function=fileutils.get_commum_test_data_dir)
 
         class DatasourceMock(object):
 
@@ -39,7 +39,7 @@ def assert_datasource_correctness_using_datafiles(test_instance, symbol, tested_
         instances.data_engine._registrations[mock_reference].update(new_registration)
 
     actual = instances.data_engine.get(tested_reference).process(symbol)
-    expected = get_dataframe_from_csv(test_file, expected_result_file)
+    expected = get_dataframe_from_csv(test_file, expected_result_file, test_filename_to_data_dir_function=fileutils.get_commum_test_data_dir)
     assert_dataframe_almost_equal(expected, actual)
 
 
@@ -75,8 +75,8 @@ class DatasourceTestCase(unittest.TestCase):
         unstub()
 
 
-def get_dataframe_from_csv(test_file, filename):
-    filepath = fileutils.get_test_data_file_path(test_file, filename)
+def get_dataframe_from_csv(test_file, filename, test_filename_to_data_dir_function=None):
+    filepath = fileutils.get_test_data_file_path(test_file, filename, test_filename_to_data_dir_function)
     return pandas.DataFrame.from_csv(filepath)
 
 
