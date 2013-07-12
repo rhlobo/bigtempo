@@ -122,7 +122,7 @@ def assert_data_index_is_ordered(data):
 
 def assert_dataframe_almost_equal(expected, actual, margin=0.0000000001):
     tmp = ((expected.dropna() - actual.dropna()).abs() < margin)
-    assert tmp.all().all() == True
+    assert tmp.all().all()
 
 
 def assert_provider_correctness_using_datafiles(test_file, s_symbol, c_provider, s_expecteddata_filename, *locator_mock_infos):

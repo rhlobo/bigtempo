@@ -145,7 +145,6 @@ def _create_test_scenario(engine):
         def evaluate(self, context, symbol, start=None, end=None):
             return 'YET_ANOTHER_RAW_QUOTE_RESULT_FOR_%s' % (symbol)
 
-
     for i in range(3):
         @engine.datasource('QUOTE_0%i' % i,
                            tags=['QUOTE'])
