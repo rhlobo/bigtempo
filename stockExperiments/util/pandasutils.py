@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 
 
 def dataframe_to_list_of_lists(dataframe):

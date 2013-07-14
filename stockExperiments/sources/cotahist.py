@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import pandas
 import util.fileutils as fileutils
 import util.datastructutils as structutils

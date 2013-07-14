@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from providers.base import *
 from providers.raw import *
 from providers.byproduct import *

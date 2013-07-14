@@ -1,7 +1,7 @@
 import util.testutils as testutils
 
 
-class TestSplitInformationProvider(testutils.DatasourceTestCase):
+class TestSplitInformationDatasource(testutils.DatasourceTestCase):
 
     def test_should_return_correct_split_and_join_data_using_mocked_data(self):
         testutils.assert_datasource_correctness_using_datafiles(self,

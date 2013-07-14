@@ -1,4 +1,6 @@
 #!/usr/bin/python2.7 -tt
+# -*- coding: utf-8 -*-
+
 
 from datasources import *
 

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import configurations as config
 import sources.cotahist as cotahist
 

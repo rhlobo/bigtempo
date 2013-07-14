@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from ipyghstocks.chart import *
 from ipyghstocks.options import *
 

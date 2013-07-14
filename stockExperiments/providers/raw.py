@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import pandas
 import configurations as config
 import sources.yahoofinance as yahoofinance

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import bigtempo.utils as utils
 import bigtempo.defaults as defaults
 import bigtempo.tagselection as tagselection

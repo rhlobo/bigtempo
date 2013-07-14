@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 
 def assure_is_valid_set(obj):

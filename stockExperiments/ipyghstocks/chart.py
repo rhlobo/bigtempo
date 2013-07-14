@@ -1,4 +1,5 @@
-# *-* encoding: UTF-8 *-*
+# -*- coding: utf-8 -*-
+
 
 from IPython.display import HTML as export
 import random

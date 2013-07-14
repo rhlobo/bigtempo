@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import os
 import pandas
 import inspect
@@ -11,7 +14,7 @@ import util.moduleutils as moduleutils
 import providers.locator as locator
 
 
-def assert_datasource_correctness_using_datafiles(test_instance, symbol, tested_reference, expected_result_file, *mock_infos):
+def assert_datasource_correctness_using_datafiles(test_instance, symbol, start, end, tested_reference, expected_result_file, *mock_infos):
     test_file = inspect.getfile(test_instance.__class__)
 
     def _create_mock_datasource(data_file):
@@ -38,7 +41,7 @@ def assert_datasource_correctness_using_datafiles(test_instance, symbol, tested_
             instances.data_engine._registrations[mock_reference] = {}
         instances.data_engine._registrations[mock_reference].update(new_registration)
 
-    actual = instances.data_engine.get(tested_reference).process(symbol)
+    actual = instances.data_engine.get(tested_reference).process(symbol, start, end)
     expected = get_dataframe_from_csv(test_file, expected_result_file, test_filename_to_data_dir_function=fileutils.get_commum_test_data_dir)
     assert_dataframe_almost_equal(expected, actual)
 
@@ -122,6 +125,8 @@ def assert_data_index_is_ordered(data):
 
 def assert_dataframe_almost_equal(expected, actual, margin=0.0000000001):
     tmp = ((expected.dropna() - actual.dropna()).abs() < margin)
+    print expected.dropna()
+    print actual.dropna()
     assert tmp.all().all()
 
 
