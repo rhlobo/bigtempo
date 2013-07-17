@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
+import time
 import pandas
 import datetime
-import time
+import dateutil
 import configurations as config
 
 
@@ -58,3 +59,13 @@ def date_to_timestamp(date):
 
 def timestamp_to_datetime(millis):
     return datetime.datetime.fromtimestamp(millis // 1000)
+
+
+def datetime_to_string(datetime):
+    return datetime.strftime("%Y-%m-%dT%H:%M:%S")
+
+
+def string_to_datetime(string):
+    if not string:
+        return None
+    return dateutil.parser.parse(string, yearfirst=True, dayfirst=True)

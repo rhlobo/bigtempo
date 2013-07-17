@@ -5,11 +5,11 @@ CURRDIR="$(pwd)"
 PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 export PYTHONPATH="${PROJECT_LOCATION}/stockExperiments"
 
-cd "${PROJECT_LOCATION}"
+cd "${PROJECT_LOCATION}/stockExperiments"
 echo
 echo "RUNNING"
 echo "--------------------------------------------------------------------------------"
-python stockExperiments/experiments.py $@
+python ./experiments.py $@
 echo
 
 find . -type f -name "*.pyc" -exec rm -f {} \;
