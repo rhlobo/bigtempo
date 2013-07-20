@@ -19,16 +19,11 @@ def process(reference, symbol, start, end, output_path):
     if len(result) is 0:
         print 'No data found.'
 
-    if not start:
-        start = result.ix[0].name
+    filename = '%s(%s)[%s:%s].csv' % (reference,
+                                      symbol,
+                                      dateutils.datetime_to_string(result.ix[0].name),
+                                      dateutils.datetime_to_string(result.ix[-1].name))
 
-    if not end:
-        end = result.ix[-1].name
-
-    filename = reference
-    filename += '_' + dateutils.datetime_to_string(start)
-    filename += '_' + dateutils.datetime_to_string(end)
-    filename += '.csv'
     file_path = os.path.join(output_path, filename)
 
     print 'Start: %s' % start
