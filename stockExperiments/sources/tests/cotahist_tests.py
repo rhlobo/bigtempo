@@ -34,21 +34,21 @@ class TestCotahistModuleFunctions(unittest.TestCase):
     def test_function_importData_should_import_correct_stock_data_from_file(self):
         data = cotahist._import_data(fileutils.get_test_data_files_path(__file__, ['COTAHIST_A0001.txt']))
         assert len(data) == 4
-        assert data[0] == ['PETR3', datetime.date(2007, 1, 2), 54.59, 54.59, 55.75, 55.75, 726400L]
-        assert data[1] == ['PETR4', datetime.date(2007, 1, 2), 50.0, 49.76, 50.45, 50.45, 5122400L]
-        assert data[2] == ['PETR3', datetime.date(2007, 1, 3), 55.0, 53.09, 55.6, 53.6, 3311900L]
-        assert data[3] == ['PETR4', datetime.date(2007, 1, 3), 50.16, 48.01, 50.4, 48.7, 9949300L]
+        assert data[0] == ['PETR3', datetime.datetime(2007, 1, 2), 54.59, 54.59, 55.75, 55.75, 726400L]
+        assert data[1] == ['PETR4', datetime.datetime(2007, 1, 2), 50.0, 49.76, 50.45, 50.45, 5122400L]
+        assert data[2] == ['PETR3', datetime.datetime(2007, 1, 3), 55.0, 53.09, 55.6, 53.6, 3311900L]
+        assert data[3] == ['PETR4', datetime.datetime(2007, 1, 3), 50.16, 48.01, 50.4, 48.7, 9949300L]
 
     def test_function_importData_should_import_correct_stock_data_from_multiple_files(self):
         ls_files = ['COTAHIST_A0001.txt', 'COTAHIST_A0002.txt']
         data = cotahist._import_data(fileutils.get_test_data_files_path(__file__, ls_files))
         assert len(data) == 6
-        assert data[0] == ['PETR3', datetime.date(2007, 1, 2), 54.59, 54.59, 55.75, 55.75, 726400L]
-        assert data[2] == ['PETR3', datetime.date(2007, 1, 3), 55.0, 53.09, 55.6, 53.6, 3311900L]
-        assert data[4] == ['PETR3', datetime.date(2007, 12, 28), 103.7, 102.7, 105.0, 105.0, 1845300L]
-        assert data[1] == ['PETR4', datetime.date(2007, 1, 2), 50.0, 49.76, 50.45, 50.45, 5122400L]
-        assert data[3] == ['PETR4', datetime.date(2007, 1, 3), 50.16, 48.01, 50.4, 48.7, 9949300L]
-        assert data[5] == ['PETR4', datetime.date(2007, 12, 28), 86.2, 85.87, 88.4, 88.4, 13169600L]
+        assert data[0] == ['PETR3', datetime.datetime(2007, 1, 2), 54.59, 54.59, 55.75, 55.75, 726400L]
+        assert data[2] == ['PETR3', datetime.datetime(2007, 1, 3), 55.0, 53.09, 55.6, 53.6, 3311900L]
+        assert data[4] == ['PETR3', datetime.datetime(2007, 12, 28), 103.7, 102.7, 105.0, 105.0, 1845300L]
+        assert data[1] == ['PETR4', datetime.datetime(2007, 1, 2), 50.0, 49.76, 50.45, 50.45, 5122400L]
+        assert data[3] == ['PETR4', datetime.datetime(2007, 1, 3), 50.16, 48.01, 50.4, 48.7, 9949300L]
+        assert data[5] == ['PETR4', datetime.datetime(2007, 12, 28), 86.2, 85.87, 88.4, 88.4, 13169600L]
 
 
 class TestCotahistImporter(unittest.TestCase):

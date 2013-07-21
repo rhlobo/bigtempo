@@ -23,6 +23,7 @@ def assert_datasource_correctness_using_datafiles(test_instance, symbol, start, 
         class DatasourceMock(object):
 
             def evaluate(self, context, symbol, start=None, end=None):
+                print 'Mocked datasource; using "%s"' % data_file
                 return data
 
         return DatasourceMock
@@ -43,6 +44,10 @@ def assert_datasource_correctness_using_datafiles(test_instance, symbol, start, 
 
     actual = instances.data_engine.get(tested_reference).process(symbol, start, end)
     expected = get_dataframe_from_csv(test_file, expected_result_file, test_filename_to_data_dir_function=fileutils.get_commum_test_data_dir)
+
+    print actual.dropna().tail()
+    print expected.dropna()
+
     assert_dataframe_almost_equal(expected, actual)
 
 
@@ -125,8 +130,6 @@ def assert_data_index_is_ordered(data):
 
 def assert_dataframe_almost_equal(expected, actual, margin=0.0000000001):
     tmp = ((expected.dropna() - actual.dropna()).abs() < margin)
-    print expected.dropna()
-    print actual.dropna()
     assert tmp.all().all()
 
 
