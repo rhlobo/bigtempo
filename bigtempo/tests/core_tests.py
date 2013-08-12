@@ -1,7 +1,7 @@
 import unittest
 from mockito import mock, when, any as anyx, verify
 
-import util.testutils as testutils
+import bigtempo.utils as utils
 import bigtempo.core as core
 
 
@@ -135,12 +135,12 @@ class TestDatasourceEngine_tag_related_behaviours_not_considering_tag_inference(
     def setUp(self):
         self.TagSelector = core.tagselection.TagSelector
         self.tagSelectorMock = mock(core.tagselection.TagSelector)
-        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+        core.tagselection.TagSelector = utils.CallableMock(self.tagSelectorMock)
         when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
 
         self.TagRegistrationManager = core.tagselection.TagRegistrationManager
         self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
-        core.tagselection.TagRegistrationManager = testutils.CallableMock(self.tagRegistrationManagerMock)
+        core.tagselection.TagRegistrationManager = utils.CallableMock(self.tagRegistrationManagerMock)
         when(self.tagRegistrationManagerMock).__call__(anyx()).thenReturn(self.tagRegistrationManagerMock)
         when(self.tagRegistrationManagerMock).infere_tags(anyx()).thenReturn(set())
 
@@ -188,12 +188,12 @@ class TestDatasourceEngine_delegators(unittest.TestCase):
     def setUp(self):
         self.TagSelector = core.tagselection.TagSelector
         self.tagSelectorMock = mock(core.tagselection.TagSelector)
-        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+        core.tagselection.TagSelector = utils.CallableMock(self.tagSelectorMock)
         when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
 
         self.TagRegistrationManager = core.tagselection.TagRegistrationManager
         self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
-        core.tagselection.TagRegistrationManager = testutils.CallableMock(self.tagRegistrationManagerMock)
+        core.tagselection.TagRegistrationManager = utils.CallableMock(self.tagRegistrationManagerMock)
         when(self.tagRegistrationManagerMock).__call__(anyx()).thenReturn(self.tagRegistrationManagerMock)
         when(self.tagRegistrationManagerMock).infere_tags(anyx()).thenReturn(set())
 
@@ -252,7 +252,7 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
         self.TagSelector = core.tagselection.TagSelector
         self.tagSelectorMock = mock(core.tagselection.TagSelector)
         when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
-        core.tagselection.TagSelector = testutils.CallableMock(self.tagSelectorMock)
+        core.tagselection.TagSelector = utils.CallableMock(self.tagSelectorMock)
 
         self.engine = core.DatasourceEngine()
 
@@ -453,7 +453,7 @@ class TestDatasourceEngine_tag_inference_and_declaration(unittest.TestCase):
 
         self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
         when(self.tagRegistrationManagerMock).__call__(anyx(dict)).thenReturn(self.tagRegistrationManagerMock)
-        core.tagselection.TagRegistrationManager = testutils.CallableMock(self.tagRegistrationManagerMock)
+        core.tagselection.TagRegistrationManager = utils.CallableMock(self.tagRegistrationManagerMock)
 
         self.engine = core.DatasourceEngine()
 

@@ -2,7 +2,7 @@ import unittest
 from mockito import mock, when, any as anyx, verify, verifyNoMoreInteractions
 import collections as collections
 
-import util.testutils as testutils
+import bigtempo.utils as utils
 import bigtempo.tagselection as tagselection
 
 
@@ -12,7 +12,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         self.registrations = {}
         self.manager = tagselection.TagRegistrationManager(self.registrations)
         self.listener_mock = mock()
-        self.listener_callable_mock = testutils.CallableMock(self.listener_mock)
+        self.listener_callable_mock = utils.CallableMock(self.listener_mock)
 
     def test_register_should_not_call_listener_when_there_is_no_existent_reference(self):
         selection = []
@@ -61,7 +61,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         when(selection).__iter__().thenReturn([].__iter__()).thenReturn([reference].__iter__())
         when(selection).is_elegible(reference).thenReturn(True)
 
-        self.manager.register(self.listener_callable_mock, testutils.IterableMock(selection))
+        self.manager.register(self.listener_callable_mock, utils.IterableMock(selection))
         verify(self.listener_mock, times=0).__call__(anyx())
         verifyNoMoreInteractions(self.listener_mock)
 
@@ -81,7 +81,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         when(selection).is_elegible(reference2).thenReturn(True)
         when(selection).is_elegible(reference3).thenReturn(True)
 
-        self.manager.register(self.listener_callable_mock, testutils.IterableMock(selection))
+        self.manager.register(self.listener_callable_mock, utils.IterableMock(selection))
         verify(self.listener_mock, times=1).__call__(reference1)
         verifyNoMoreInteractions(self.listener_mock)
 
@@ -113,7 +113,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
             .thenReturn([reference1b, reference2b].__iter__()))
         when(selection_b).is_elegible(reference2b).thenReturn(True)
 
-        self.manager.register(self.listener_callable_mock, testutils.IterableMock(selection_a), testutils.IterableMock(selection_b))
+        self.manager.register(self.listener_callable_mock, utils.IterableMock(selection_a), utils.IterableMock(selection_b))
         verify(self.listener_mock, times=1).__call__(reference1a, reference1b)
         verifyNoMoreInteractions(self.listener_mock)
 
@@ -168,7 +168,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         when(selection_b).intersection('{%s}' % reference3a).thenReturn([reference3b])
 
         self.manager.register_synched(self.listener_callable_mock,
-                                      [selection_a, testutils.IterableMock(selection_b)])
+                                      [selection_a, utils.IterableMock(selection_b)])
         verify(self.listener_mock, times=1).__call__(reference1a, reference1b)
         verify(self.listener_mock, times=1).__call__(reference2a, reference2b)
         verify(self.listener_mock, times=1).__call__(reference3a, reference3b)
@@ -181,7 +181,7 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         when(selection).__iter__().thenReturn([].__iter__()).thenReturn([reference].__iter__())
         when(selection).is_elegible(reference).thenReturn(True)
 
-        self.manager.register_synched(self.listener_callable_mock, [testutils.IterableMock(selection)])
+        self.manager.register_synched(self.listener_callable_mock, [utils.IterableMock(selection)])
         verify(self.listener_mock, times=0).__call__(anyx())
         verifyNoMoreInteractions(self.listener_mock)
 
@@ -325,7 +325,7 @@ class TestTagSelection(unittest.TestCase):
     def setUp(self):
         self.callable_factory = mock()
         self.tag_mappings = collections.defaultdict(set)
-        self.tagSelection = tagselection._TagSelection(self.tag_mappings, testutils.CallableMock(self.callable_factory))
+        self.tagSelection = tagselection._TagSelection(self.tag_mappings, utils.CallableMock(self.callable_factory))
 
     def test__evaluate_selectors_should_return_entire_set_of_references_when_only_one_tag_is_passed(self):
         selection = self.tagSelection
@@ -740,7 +740,7 @@ class TestTagSelector(unittest.TestCase):
 
         tagSelectionMock = mock(tagselection._TagSelection)
         when(tagSelectionMock).__call__(anyx(), anyx()).thenReturn(tagSelectionMock)
-        tagselection._TagSelection = testutils.CallableMock(tagSelectionMock)
+        tagselection._TagSelection = utils.CallableMock(tagSelectionMock)
 
         tagselection.TagSelector(callable_factory).get(*args)
         verify(tagSelectionMock, times=1).__call__(anyx(collections.defaultdict), callable_factory)

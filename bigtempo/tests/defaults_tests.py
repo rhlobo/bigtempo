@@ -28,12 +28,12 @@ class TestDatasourceTask(unittest.TestCase):
     def test_process_should_process_dependencies(self):
         instance = mock()
         dependencies = {
-            'a': mock(defaults.DatasourceTask),
-            'b': mock(defaults.DatasourceTask),
-            'c': mock(defaults.DatasourceTask),
+            'a': mock(defaults.SimpleDatasourceTask),
+            'b': mock(defaults.SimpleDatasourceTask),
+            'c': mock(defaults.SimpleDatasourceTask),
         }
 
-        defaults.DatasourceTask(instance, dependencies).process()
+        defaults.SimpleDatasourceTask(instance, dependencies).process()
 
         verify(dependencies['a'], times=1).process()
         verify(dependencies['b'], times=1).process()
@@ -50,13 +50,13 @@ class TestDatasourceTask(unittest.TestCase):
                 assert context['b'] == '2'
 
         dependencies = {
-            'a': mock(defaults.DatasourceTask),
-            'b': mock(defaults.DatasourceTask),
+            'a': mock(defaults.SimpleDatasourceTask),
+            'b': mock(defaults.SimpleDatasourceTask),
         }
         when(dependencies['a']).process().thenReturn('1')
         when(dependencies['b']).process().thenReturn('2')
 
-        defaults.DatasourceTask(DatasourceMock(), dependencies).process()
+        defaults.SimpleDatasourceTask(DatasourceMock(), dependencies).process()
 
 
 class TestDataFrameDatasourceTask(unittest.TestCase):

@@ -8,7 +8,9 @@ import bigtempo.tagselection as tagselection
 
 class DatasourceEngine(object):
 
-    def __init__(self, builder=defaults.builder, processingtask_factory=defaults.processingtask_factory):
+    def __init__(self,
+                 builder=defaults.builder,
+                 processingtask_factory=defaults.processingtask_factory):
         self._registrations = {}
         self._instances = {}
         self._tag_selector = tagselection.TagSelector(self.get)
