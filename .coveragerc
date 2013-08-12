@@ -1,0 +1,12 @@
+[run]
+branch = True
+cover_pylib = False
+data_file = .coverage
+source = bigtempo
+
+[report]
+ignore_errors = True
+show_missing = True
+
+[html]
+directory = ../coverage
