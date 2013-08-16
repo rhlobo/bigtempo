@@ -14,7 +14,7 @@ except ImportError:
     from distutils.core import setup
 
 
-def packages(path=__path__, prefix="", excludes=None):
+def packages(path=None, prefix="", excludes=None):
     try:
         return find_packages(excludes=excludes)
     except:
