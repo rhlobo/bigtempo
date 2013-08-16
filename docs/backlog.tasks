@@ -1,0 +1,21 @@
+Publish bigtempo:
+	Extract bigtempo:
+	 ✔ Remove bigtempo dependencies @done (13-08-15 21:30)
+	 ✔ Create new repo for bigtempo @done (13-08-15 21:30)
+	 ✔ Extract bigtempo @done (13-08-15 21:29)
+	Make it usable:
+	☐ Create setup.py
+	☐ Publish to pypi
+	Document bigtempo:
+	☐ Create readme
+	☐ Document dependencies
+	☐ Create example usages
+	☐ Create project backlog (features, refactorings, source, documentation, installation, support, marketing, ...)
+	Document source files:
+	☐ Name
+	☐ Description
+	☐ Logic overview
+	☐ big-O complexity
+	Make it usable:
+	☐ Create setup.py
+	☐ Publish to pypi
