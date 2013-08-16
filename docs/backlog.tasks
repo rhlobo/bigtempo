@@ -4,7 +4,7 @@ Publish bigtempo:
 	 ✔ Create new repo for bigtempo @done (13-08-15 21:30)
 	 ✔ Extract bigtempo @done (13-08-15 21:29)
 	Make it usable:
-	☐ Create setup.py
+	✔ Create setup.py @done (13-08-15 23:16)
 	☐ Publish to pypi
 	Document bigtempo:
 	☐ Create readme
@@ -16,6 +16,7 @@ Publish bigtempo:
 	☐ Description
 	☐ Logic overview
 	☐ big-O complexity
-	Make it usable:
-	☐ Create setup.py
-	☐ Publish to pypi
+
+Going agead!:
+	Refactor it!:
+	☐ Create registrations() method on engine

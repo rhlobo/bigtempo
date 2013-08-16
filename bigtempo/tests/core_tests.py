@@ -138,16 +138,16 @@ class TestDatasourceEngine_tag_related_behaviours_not_considering_tag_inference(
         core.tagselection.TagSelector = utils.CallableMock(self.tagSelectorMock)
         when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
 
-        self.TagRegistrationManager = core.tagselection.TagRegistrationManager
-        self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
-        core.tagselection.TagRegistrationManager = utils.CallableMock(self.tagRegistrationManagerMock)
-        when(self.tagRegistrationManagerMock).__call__(anyx()).thenReturn(self.tagRegistrationManagerMock)
-        when(self.tagRegistrationManagerMock).infere_tags(anyx()).thenReturn(set())
+        self.TagManager = core.tagselection.TagManager
+        self.tagManagerMock = mock(core.tagselection.TagManager)
+        core.tagselection.TagManager = utils.CallableMock(self.tagManagerMock)
+        when(self.tagManagerMock).__call__(anyx()).thenReturn(self.tagManagerMock)
+        when(self.tagManagerMock).infere_tags(anyx()).thenReturn(set())
 
         self.engine = core.DatasourceEngine()
 
     def tearDown(self):
-        core.tagselection.TagRegistrationManager = self.TagRegistrationManager
+        core.tagselection.TagManager = self.TagManager
         core.tagselection.TagSelector = self.TagSelector
 
     def test_register_datasource_should_instantiate_tag_selector_on_initialization(self):
@@ -191,16 +191,16 @@ class TestDatasourceEngine_delegators(unittest.TestCase):
         core.tagselection.TagSelector = utils.CallableMock(self.tagSelectorMock)
         when(self.tagSelectorMock).__call__(anyx()).thenReturn(self.tagSelectorMock)
 
-        self.TagRegistrationManager = core.tagselection.TagRegistrationManager
-        self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
-        core.tagselection.TagRegistrationManager = utils.CallableMock(self.tagRegistrationManagerMock)
-        when(self.tagRegistrationManagerMock).__call__(anyx()).thenReturn(self.tagRegistrationManagerMock)
-        when(self.tagRegistrationManagerMock).infere_tags(anyx()).thenReturn(set())
+        self.TagManager = core.tagselection.TagManager
+        self.tagManagerMock = mock(core.tagselection.TagManager)
+        core.tagselection.TagManager = utils.CallableMock(self.tagManagerMock)
+        when(self.tagManagerMock).__call__(anyx()).thenReturn(self.tagManagerMock)
+        when(self.tagManagerMock).infere_tags(anyx()).thenReturn(set())
 
         self.engine = core.DatasourceEngine()
 
     def tearDown(self):
-        core.tagselection.TagRegistrationManager = self.TagRegistrationManager
+        core.tagselection.TagManager = self.TagManager
         core.tagselection.TagSelector = self.TagSelector
 
     def test_select_should_delegate_to_tag_selector(self):
@@ -225,7 +225,7 @@ class TestDatasourceEngine_delegators(unittest.TestCase):
         verify(self.tagSelectorMock, times=1).tags(*args)
         assert expected is result
 
-    def test_for_each_should_delegate_to_tagRegistrationManager_register_method(self):
+    def test_for_each_should_delegate_to_tagManager_register_method(self):
         selection = object()
 
         def function():
@@ -233,9 +233,9 @@ class TestDatasourceEngine_delegators(unittest.TestCase):
 
         self.engine.for_each(selection)(function)
 
-        verify(self.tagRegistrationManagerMock, times=1).register(function, selection)
+        verify(self.tagManagerMock, times=1).register(function, selection)
 
-    def test_for_synched_should_delegate_to_tagRegistrationManager_register_synched_method(self):
+    def test_for_synched_should_delegate_to_tagManager_register_synched_method(self):
         selection = object()
 
         def function():
@@ -243,7 +243,7 @@ class TestDatasourceEngine_delegators(unittest.TestCase):
 
         self.engine.for_synched(selection)(function)
 
-        verify(self.tagRegistrationManagerMock, times=1).register_synched(function, anyx())
+        verify(self.tagManagerMock, times=1).register_synched(function, anyx())
 
 
 class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unittest.TestCase):
@@ -449,23 +449,23 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
 class TestDatasourceEngine_tag_inference_and_declaration(unittest.TestCase):
 
     def setUp(self):
-        self.TagRegistrationManager = core.tagselection.TagRegistrationManager
+        self.TagManager = core.tagselection.TagManager
 
-        self.tagRegistrationManagerMock = mock(core.tagselection.TagRegistrationManager)
-        when(self.tagRegistrationManagerMock).__call__(anyx(dict)).thenReturn(self.tagRegistrationManagerMock)
-        core.tagselection.TagRegistrationManager = utils.CallableMock(self.tagRegistrationManagerMock)
+        self.tagManagerMock = mock(core.tagselection.TagManager)
+        when(self.tagManagerMock).__call__(anyx(dict)).thenReturn(self.tagManagerMock)
+        core.tagselection.TagManager = utils.CallableMock(self.tagManagerMock)
 
         self.engine = core.DatasourceEngine()
 
     def tearDown(self):
-        core.tagselection.TagRegistrationManager = self.TagRegistrationManager
+        core.tagselection.TagManager = self.TagManager
 
     def test_register_datasource_should_register_tags_based_on_declared_and_infered(self):
         reference = 'REFERENCE'
         infered_tags = set(['infered1', 'infered2'])
         declared_tags = set(['declared1', 'declared2'])
 
-        when(self.tagRegistrationManagerMock).infere_tags(reference).thenReturn(infered_tags)
+        when(self.tagManagerMock).infere_tags(reference).thenReturn(infered_tags)
 
         @self.engine.datasource(reference,
                                 tags=declared_tags)

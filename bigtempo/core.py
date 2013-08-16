@@ -14,7 +14,7 @@ class DatasourceEngine(object):
         self._registrations = {}
         self._instances = {}
         self._tag_selector = tagselection.TagSelector(self.get)
-        self._tag_iteration_manager = tagselection.TagRegistrationManager(self._registrations)
+        self._tag_iteration_manager = tagselection.TagManager(self._registrations)
         self._processingtask_factory = processingtask_factory
         self._builder = builder
 

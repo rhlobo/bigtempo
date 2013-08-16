@@ -6,11 +6,11 @@ import bigtempo.utils as utils
 import bigtempo.tagselection as tagselection
 
 
-class TestTagRegistrationManager_registrations(unittest.TestCase):
+class TestTagManager_registrations(unittest.TestCase):
 
     def setUp(self):
         self.registrations = {}
-        self.manager = tagselection.TagRegistrationManager(self.registrations)
+        self.manager = tagselection.TagManager(self.registrations)
         self.listener_mock = mock()
         self.listener_callable_mock = utils.CallableMock(self.listener_mock)
 
@@ -190,11 +190,11 @@ class TestTagRegistrationManager_registrations(unittest.TestCase):
         verifyNoMoreInteractions(self.listener_mock)
 
 
-class TestTagRegistrationManager_tag_inference(unittest.TestCase):
+class TestTagManager_tag_inference(unittest.TestCase):
 
     def setUp(self):
         self.registrations = {}
-        self.manager = tagselection.TagRegistrationManager(self.registrations)
+        self.manager = tagselection.TagManager(self.registrations)
 
     def test_infere_tags_should_infere_tag_using_reference_name(self):
         reference = 'REFERENCE'

@@ -4,20 +4,21 @@
 
 import os
 import sys
+import bigtempo
 from pkgutil import walk_packages
 
+
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
     from distutils.core import setup
 
 
-def find_packages(path=__path__, prefix=""):
-    yield prefix
-    prefix = prefix + "."
-    for _, name, ispkg in walk_packages(path, prefix):
-        if ispkg:
-            yield name
+def packages(path=__path__, prefix="", excludes=None):
+    try:
+        return find_packages(excludes=excludes)
+    except:
+        return [name for _, name, ispkg in walk_packages(path, prefix) if ispkg]
 
 
 def read(*rnames):
@@ -29,24 +30,30 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 
-import bigtempo
-
-
 setup(
     name='bigtmepo',
     version=bigtempo.__version__,
     description='Powerful processment of temporal data.',
     long_description=read('README.md'),
+    license=read('LICENSE'),
+
+    #url='http://',
     author='Roberto Haddock Lobo',
     author_email='rhlobo+bigtempo@gmail.com',
-    #url='http://',
-    packages=list(find_packages(bigtempo.__path__, bigtempo.__name__)),
-    package_data={'': ['LICENSE']},
-    package_dir={'bigtempo': 'bigtempo'},
-    include_package_data=True,
+
     install_requires=[],
-    license=read('LICENSE'),
     zip_safe=False,
+
+    package_dir={'bigtempo': 'bigtempo'},
+    packages=packages(bigtempo.__path__,
+                      bigtempo.__name__,
+                      exclude=["*.tests",
+                               "*.tests.*",
+                               "tests.*",
+                               "tests"]),
+    include_package_data=True,
+    package_data={'': ['LICENSE', 'requirements.txt']},
+
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Environment :: Console',

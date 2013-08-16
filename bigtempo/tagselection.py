@@ -7,7 +7,7 @@ import itertools
 import collections
 
 
-class TagRegistrationManager(object):
+class TagManager(object):
 
     def __init__(self, registrations):
         self._registrations = registrations
