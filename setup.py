@@ -14,9 +14,9 @@ except ImportError:
     from distutils.core import setup
 
 
-def packages(path=None, prefix="", excludes=None):
+def packages(path=None, prefix="", exclude=None):
     try:
-        return find_packages(excludes=excludes)
+        return find_packages(exclude=exclude)
     except:
         return [name for _, name, ispkg in walk_packages(path, prefix) if ispkg]
 
@@ -31,15 +31,15 @@ if sys.argv[-1] == 'publish':
 
 
 setup(
-    name='bigtmepo',
+    name='bigtempo',
     version=bigtempo.__version__,
     description='Powerful processment of temporal data.',
     long_description=read('README.md'),
     license=read('LICENSE'),
 
-    #url='http://',
     author='Roberto Haddock Lobo',
     author_email='rhlobo+bigtempo@gmail.com',
+    url='https://github.com/rhlobo/bigtempo',
 
     install_requires=[],
     zip_safe=False,
