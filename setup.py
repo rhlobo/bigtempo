@@ -41,19 +41,6 @@ setup(
     author_email='rhlobo+bigtempo@gmail.com',
     url='https://github.com/rhlobo/bigtempo',
 
-    install_requires=[],
-    zip_safe=False,
-
-    package_dir={'bigtempo': 'bigtempo'},
-    packages=packages(bigtempo.__path__,
-                      bigtempo.__name__,
-                      exclude=["*.tests",
-                               "*.tests.*",
-                               "tests.*",
-                               "tests"]),
-    include_package_data=True,
-    package_data={'': ['LICENSE', 'requirements.txt']},
-
     classifiers=(
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
@@ -68,5 +55,19 @@ setup(
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Software Development :: Libraries :: Python Modules'
-    )
+    ),
+
+
+    install_requires=read('requirements.txt').split('\n'),
+    package_data={'': ['LICENSE', 'requirements.txt']},
+    package_dir={'bigtempo': 'bigtempo'},
+    packages=packages(bigtempo.__path__,
+                      bigtempo.__name__,
+                      exclude=["*.tests",
+                               "*.tests.*",
+                               "tests.*",
+                               "tests"]),
+
+    include_package_data=True,
+    zip_safe=False
 )
