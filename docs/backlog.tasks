@@ -5,7 +5,7 @@ Publish bigtempo:
 	 ✔ Extract bigtempo @done (13-08-15 21:29)
 	Make it usable:
 	✔ Create setup.py @done (13-08-15 23:16)
-	☐ Publish to pypi
+	✔ Publish to pypi @done (13-08-19 21:33)
 	Document bigtempo:
 	☐ Create readme
 	☐ Document dependencies
