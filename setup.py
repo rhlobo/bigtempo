@@ -64,7 +64,7 @@ setup(
     ),
 
     install_requires=filter_comments(read('requirements.txt').split('\n')),
-    package_data={'': ['LICENSE', 'requirements.txt']},
+    package_data={'': ['README.md', 'LICENSE', 'requirements.txt']},
     package_dir={'bigtempo': 'bigtempo'},
     packages=packages(bigtempo.__path__,
                       bigtempo.__name__,
