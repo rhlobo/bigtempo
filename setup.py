@@ -3,6 +3,7 @@
 
 
 import os
+import re
 import sys
 import bigtempo
 from pkgutil import walk_packages
@@ -23,6 +24,11 @@ def packages(path=None, prefix="", exclude=None):
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+
+def filter_comments(contents):
+    filter_pattern = re.compile(r'[\s]*#.*')
+    return filter(lambda x: not filter_pattern.match(x), contents)
 
 
 if sys.argv[-1] == 'publish':
@@ -57,8 +63,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules'
     ),
 
-
-    install_requires=read('requirements.txt').split('\n'),
+    install_requires=filter_comments(read('requirements.txt').split('\n')),
     package_data={'': ['LICENSE', 'requirements.txt']},
     package_dir={'bigtempo': 'bigtempo'},
     packages=packages(bigtempo.__path__,
