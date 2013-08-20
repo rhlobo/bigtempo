@@ -6,7 +6,7 @@ coverage==3.6
 # Pandas Dependencies
 numpy>=1.6.1
 python-dateutil>=1.5
-pytz==2013b
+pytz>=2013b
 # Pandas Highly Recommended Dependencies
 numexpr>=2.1-rc2
 Bottleneck>=0.6.0
