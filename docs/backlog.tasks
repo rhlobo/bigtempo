@@ -8,15 +8,18 @@ Publish bigtempo:
 	✔ Publish to pypi @done (13-08-19 21:33)
 	Document bigtempo:
 	☐ Create readme
-	☐ Document dependencies
+	✔ Document dependencies @done (13-08-25 21:31)
 	☐ Create example usages
-	☐ Create project backlog (features, refactorings, source, documentation, installation, support, marketing, ...)
+	✔ Create project backlog (features, refactorings, source, documentation, installation, support, marketing, ...) @done (13-08-25 21:31)
 	Document source files:
 	☐ Name
 	☐ Description
 	☐ Logic overview
 	☐ big-O complexity
+	Compatibilization:
+	☐ Expand it's support to python 2.7+
 
 Going agead!:
 	Refactor it!:
 	☐ Create registrations() method on engine
+	☐ Make processor equivalent registration available
