@@ -1,10 +1,10 @@
 bigtempo
 ========
 
-.. image:: https://pypip.in/d/bigtempo/badge.png
+.. image:: https://pypip.in/v/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
 
-.. image:: https://pypip.in/v/bigtempo/badge.png
+.. image:: https://pypip.in/d/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
 
 .. image:: https://travis-ci.org/rhlobo/bigtempo.png?branch=master
