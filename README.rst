@@ -1,13 +1,12 @@
 bigtempo
 ========
-Temporal data processment and analysis
---------------------------------------
 
 .. image:: https://pypip.in/d/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
 
 .. image:: https://pypip.in/v/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
+
 
 .. 
     ..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO
@@ -19,10 +18,10 @@ Temporal data processment and analysis
 :Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, exploration, production ready, python
 
 
-What is it?
-===========
+About
+=====
 
-Powerful temporal data processment / analysis library for Python, providing a scalable programming model conceived for data analysis, exploration and evaluation at massive levels.
+**BigTempo** is a powerful temporal data processment / analysis library for Python, providing a scalable programming model conceived for data analysis, exploration and evaluation at massive levels.
 
 .. Python package providing a powerful and scalable programming model specially crafted for temporal data processment / analysis. It was conceived for data analysis, exploration and production use, and it is ready to handle massive levels of data.
 
@@ -37,10 +36,10 @@ There were no simple solutions aiming temporal processments available out there.
 **BigTempo** is here to complement the set of tools you have available to solve bigdata problems.
 
 
-It is...
+Features
 --------
 
-- **Simple**
+- **Simplicity**
 
 ..     
     // TODO
@@ -48,7 +47,7 @@ It is...
     Encapsulates complexity of complex processment chains
     Evaluates dependencies automatically
 
-- **Flexible**
+- **Flexiblity**
 
 .. 
     // TODO
@@ -57,7 +56,7 @@ It is...
     Can be adapted to process other data domains / models
 
 
-- **Scalable**
+- **Scalablability**
 
 .. 
     // TODO
@@ -65,7 +64,8 @@ It is...
     Integration with celery_ is in the way
     Thread / process pools also in the way
 
-- **Fast**
+
+- **Performance**
 
 .. 
     // TODO
@@ -114,9 +114,9 @@ But, you really shouldn't do that.
 Dependencies
 ------------
 
-Both the installation methods above should take care of dependencies on its own, automatically.
+    Both the installation methods above should take care of dependencies on its own, automatically.
 
-The only direct dependency we have to run it, is the pandas_ library. You should visit its page to find out what it depends on. For best results, we recommend installing optional packages as well. 
+The pandas_ library is the only direct dependency the package has. You should visit its page to find out what it depends on. For best results, we recommend installing optional packages as well. 
 
 If you want to run the package tests, or enjoy its testing facilities, you'll need:
 
@@ -132,28 +132,41 @@ In order to run the tests using the command contained in the ``bin`` directory, 
 .. _pandas: http://github.com/pydata/pandas
 
 
-Installation from source
+Installing from source
 ------------------------
 
 To install bigtempo from source you need:
 
-1. Install dependencies (listed above)
-2. Clone the git repository:
+Clone the git repository:
 
 .. code-block:: bash
 
-    $ git clone // TODO
+    $ git clone https://github.com/rhlobo/bigtempo.git
 
-3. In ``bigtempo``s directory, execute:
+Get into the project directory:
 
 .. code-block:: bash
 
-    python setup.py install
+    $ cd bigtempo
+
+Install dependencies (if you are not using virtualenv, it may need super user privileges):
+
+.. code-block:: bash
+
+    $ pip install -r requirements.txt
+
+Install it:
+
+.. code-block:: bash
+
+    $ python setup.py install
 
 Alternatively, you can use `pip` if you want all the dependencies pulled in automatically (the optional ``-e`` option is for installing it in
 `development mode <http://www.pip-installer.org/en/latest/usage.html>`__)::
 
-    pip install -e .
+.. code-block:: bash
+
+    $ pip install -e .
 
 
 Bug tracker
@@ -167,7 +180,7 @@ If you have any suggestions, bug reports or annoyances please report them to our
 Contribute
 ==========
 
-1. Check for open issues or open a fresh issue on the tracker_ to start a discussion around a feature idea or a bug. 
+1. On the tracker_, check for open issues or open a new one to start a discussion around a feature, idea or bug.
 2. Fork the repository_ on GitHub to start making your changes.
 3. Write a test which shows that the bug was fixed or that the feature works as expected.
 4. Send a pull request and wait until it gets merged and published. Make sure to add yourself to AUTHORS_.
