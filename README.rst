@@ -1,7 +1,15 @@
 bigtempo - temporal data processment / analysis library
 =======================================================
 
-..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO
+.. image:: https://pypip.in/d/bigtempo/badge.png
+        :target: https://pypi.python.org/pypi/bigtempo
+
+.. image:: https://pypip.in/v/bigtempo/badge.png
+        :target: https://pypi.python.org/pypi/bigtempo
+
+.. 
+    ..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO
+
 
 :Implementation: Python 2.7+
 :Download: http://pypi.python.org/pypi/bigtempo/
@@ -14,9 +22,9 @@ What is it?
 
 Powerful temporal data processment / analysis library for Python, providing a scalable programming model conceived for data analysis, exploration and evaluation at massive levels.
 
-Python package providing a powerful and scalable programming model specially crafted for temporal data processment / analysis. It was conceived for data analysis, exploration and production use, and it is ready to handle massive levels of data.
+.. Python package providing a powerful and scalable programming model specially crafted for temporal data processment / analysis. It was conceived for data analysis, exploration and production use, and it is ready to handle massive levels of data.
 
-A powerful and scalable programming model specially crafted for temporal data processment / analysis. It's not only production ready: it's ready to handle massive levels of data.
+.. A powerful and scalable programming model specially crafted for temporal data processment / analysis. It's production ready and can handle large ammounts of data.
 
 
 Motivation
@@ -31,32 +39,36 @@ It is...
 --------
 
 - **Simple**
-	
-	// TODO
-	All you have to do is to declare your 'datasources'
-	Encapsulates complexity of complex processment chains
-	Evaluates dependencies automatically
+
+..     
+    // TODO
+    All you have to do is to declare your 'datasources'
+    Encapsulates complexity of complex processment chains
+    Evaluates dependencies automatically
 
 - **Flexible**
 
-	// TODO
-	Designed to be easily extended
-	Does not compete... Can be used in with simpy, theano, ... Complements them
-	Can be adapted to process other data domains / models
+.. 
+    // TODO
+    Designed to be easily extended
+    Does not compete... Can be used in with simpy, theano, ... Complements them
+    Can be adapted to process other data domains / models
 
 
 - **Scalable**
 
-	// TODO
-	Provides programming model built for distributed evaluation
-	Integration with celery_ is in the way
-	Thread / process pools also in the way
+.. 
+    // TODO
+    Provides programming model built for distributed evaluation
+    Integration with celery_ is in the way
+    Thread / process pools also in the way
 
 - **Fast**
 
-	// TODO
-	Promotes lazy evaluation
-	Smart caching is in the way
+.. 
+    // TODO
+    Promotes lazy evaluation
+    Smart caching is in the way
 
 
 .. _celery: http://github.com/celery/celery
@@ -65,16 +77,18 @@ It is...
 Getting started
 ===============
 
-//TODO
+Coming out soon!
+
+.. 
+    http://pandas.pydata.org/pandas-docs/dev/dsintro.html
 
 
-Usage
------
+More on about how to use it
+---------------------------
 
+If you need more examples, or just feel like checking out how bigtempo can be used in a project, refer to stockExperiments_.
 
-Example projects
-----------------
-
+.. _stockExperiments: https://github.com/rhlobo/stockExperiments
 
 
 Installation
