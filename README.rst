@@ -1,12 +1,14 @@
 bigtempo
 ========
 
+.. image:: https://travis-ci.org/rhlobo/bigtempo.png?branch=master
+        :target: https://travis-ci.org/rhlobo/bigtempo
+
 .. image:: https://pypip.in/d/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
 
 .. image:: https://pypip.in/v/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
-
 
 .. 
     ..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO

@@ -1,3 +1,5 @@
+# Online coverage
+python-coveralls
 # Test requirements
 mockito>=0.5.1
 nose>=1.3.0
