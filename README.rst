@@ -1,5 +1,7 @@
-bigtempo - temporal data processment / analysis library
-=======================================================
+bigtempo
+========
+Temporal data processment and analysis
+--------------------------------------
 
 .. image:: https://pypip.in/d/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
