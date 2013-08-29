@@ -1,14 +1,17 @@
 bigtempo
 ========
 
-.. image:: https://travis-ci.org/rhlobo/bigtempo.png?branch=master
-        :target: https://travis-ci.org/rhlobo/bigtempo
-
 .. image:: https://pypip.in/d/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
 
 .. image:: https://pypip.in/v/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
+
+.. image:: https://travis-ci.org/rhlobo/bigtempo.png?branch=master
+        :target: https://travis-ci.org/rhlobo/bigtempo
+
+.. image:: https://coveralls.io/repos/rhlobo/bigtempo/badge.png
+        :target: https://coveralls.io/r/rhlobo/bigtempo
 
 .. 
     ..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO
@@ -59,7 +62,7 @@ Scalablability
 Performance
     Promotes lazy evaluation
     Smart caching is in the way (v5)
-    Tries to use C to evaluate processments (through numpy and pandas)
+.. Tries to use C to evaluate processments (through numpy and pandas)
 
 
 .. _celery: http://github.com/celery/celery
