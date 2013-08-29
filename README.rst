@@ -39,38 +39,25 @@ There were no simple solutions aiming temporal processments available out there.
 Features
 --------
 
-- **Simplicity**
-
-..     
-    // TODO
-    All you have to do is to declare your 'datasources'
+Simplicity
     Encapsulates complexity of complex processment chains
     Evaluates dependencies automatically
+.. All you have to do is to declare your 'datasources'
 
-- **Flexiblity**
-
-.. 
-    // TODO
+Flexiblity
     Designed to be easily extended
-    Does not compete... Can be used in with simpy, theano, ... Complements them
     Can be adapted to process other data domains / models
+.. Does not compete... Can be used in with simpy, theano, ... Complements them
 
-
-- **Scalablability**
-
-.. 
-    // TODO
+Scalablability
     Provides programming model built for distributed evaluation
-    Integration with celery_ is in the way
-    Thread / process pools also in the way
+    Integration with celery_ is in the way (v0.4)
+    Thread / process pools also in the way (v0.4)
 
-
-- **Performance**
-
-.. 
-    // TODO
+Performance
     Promotes lazy evaluation
-    Smart caching is in the way
+    Smart caching is in the way (v5)
+    Tries to use C to evaluate processments (through numpy and pandas)
 
 
 .. _celery: http://github.com/celery/celery
@@ -179,7 +166,7 @@ If you have any suggestions, bug reports or annoyances please report them to our
 Contribute
 ==========
 
-1. On the tracker_, check for open issues or open a new one to start a discussion around a feature, idea or bug.
+1. On the tracker_, check for open issues or open a new one to start a discussion around an idea or bug.
 2. Fork the repository_ on GitHub to start making your changes.
 3. Write a test which shows that the bug was fixed or that the feature works as expected.
 4. Send a pull request and wait until it gets merged and published. Make sure to add yourself to AUTHORS_.
