@@ -85,8 +85,8 @@ Coming out soon!
     http://pandas.pydata.org/pandas-docs/dev/dsintro.html
 
 
-More on about how to use it
----------------------------
+Need more?
+----------
 
 If you need more examples, or just feel like checking out how bigtempo can be used in a project, refer to stockExperiments_.
 
@@ -108,13 +108,12 @@ Or, if you absolutely must:
 
     $ easy_install bigtempo
 
-But, you really shouldn't do that.
-
 
 Dependencies
 ------------
 
     Both the installation methods above should take care of dependencies on its own, automatically.
+
 
 The pandas_ library is the only direct dependency the package has. You should visit its page to find out what it depends on. For best results, we recommend installing optional packages as well. 
 
@@ -162,7 +161,7 @@ Install it:
     $ python setup.py install
 
 Alternatively, you can use `pip` if you want all the dependencies pulled in automatically (the optional ``-e`` option is for installing it in
-`development mode <http://www.pip-installer.org/en/latest/usage.html>`__)::
+`development mode <http://www.pip-installer.org/en/latest/usage.html>`__):
 
 .. code-block:: bash
 
