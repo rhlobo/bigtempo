@@ -17,55 +17,31 @@ bigtempo
     ..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO
 
 
+**BigTempo** is a powerful and scalable programming model, originally crafted for temporal data processment / analysis. It's production ready and can handle large ammounts of data.
+
+.. **BigTempo** is a powerful temporal data processment / analysis library for Python, providing a scalable programming model conceived for data analysis, exploration and evaluation at massive levels.
+
+.. Python package providing a powerful and scalable programming model specially crafted for temporal data processment / analysis. It was conceived for data analysis, exploration and production use, and it is ready to handle massive levels of data.
+
+
 :Implementation: Python 2.7+
 :Download: http://pypi.python.org/pypi/bigtempo/
 :Source: http://github.com/rhlobo/bigtempo/
 :Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, exploration, production ready, python
 
 
-About
-=====
+This is a Python package created to help you build complex hierarchies of processments, each refered as a datasource. 
+It handles dependency resolution, provides a tagging system that enables querying operations over datasource sets, and much more.
 
-**BigTempo** is a powerful temporal data processment / analysis library for Python, providing a scalable programming model conceived for data analysis, exploration and evaluation at massive levels.
+It is here to address the plumbing associated with complex chained data evaluation processes, and because cach datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
+Using it, you are able - for instance - to easily spawn multiple variations of processments over sets of other datasources. 
 
-.. Python package providing a powerful and scalable programming model specially crafted for temporal data processment / analysis. It was conceived for data analysis, exploration and production use, and it is ready to handle massive levels of data.
+There are other software packages that focus on lower level aspects of data processing, like Numpy, Sympy, Theano. 
+BigTempo is not a framework to replace these. Instead, it helps you stitch many processments together, where each one can use these tools.
+It provides a decoupled programming model that was built with scalability in mind, and it takes care of a lot of the workflow management so that you can focus on the data itself.
 
-.. A powerful and scalable programming model specially crafted for temporal data processment / analysis. It's production ready and can handle large ammounts of data.
-
-
-Motivation
-----------
-
-There were no simple solutions aiming temporal processments available out there.  **MapReduce**, for instance, can't process interdependent data models such as time series. So, altough easy exploration of many bigdata application domains was made viable lately, there is still a humonguous demand for more...
-
-**BigTempo** is here to complement the set of tools you have available to solve bigdata problems.
-
-
-Features
---------
-
-Simplicity
-    Encapsulates complexity of complex processment chains
-    Evaluates dependencies automatically
-.. All you have to do is to declare your 'datasources'
-
-Flexiblity
-    Designed to be easily extended
-    Can be adapted to process other data domains / models
-.. Does not compete... Can be used in with simpy, theano, ... Complements them
-
-Scalablability
-    Provides programming model built for distributed evaluation
-    Integration with celery_ is in the way (v0.4)
-    Thread / process pools also in the way (v0.4)
-
-Performance
-    Promotes lazy evaluation
-    Smart caching is in the way (v5)
-.. Tries to use C to evaluate processments (through numpy and pandas)
-
-
-.. _celery: http://github.com/celery/celery
+The package was originally conceived to handle temporal data, but it is flexible and can easily be extended to support other data models.
+It is a great tool for distributed processment when you have 'quadrillion' processments for interdependent data sets.
 
 
 Getting started
@@ -88,7 +64,7 @@ If you need more examples, or just feel like checking out how bigtempo can be us
 Installation
 ============
 
-To install bigTempo, simply:
+To install, simply:
 
 .. code-block:: bash
 
@@ -107,7 +83,7 @@ Dependencies
     Both the installation methods above should take care of dependencies on its own, automatically.
 
 
-The pandas_ library is the only direct dependency the package has. You should visit its page to find out what it depends on. For best results, we recommend installing optional packages as well. 
+The pandas_ library is the only direct dependency the package has in order to be executed. You should visit its page to find out what it depends on. For best results, we recommend installing optional packages as well. 
 
 If you want to run the package tests, or enjoy its testing facilities, you'll need:
 
@@ -158,6 +134,16 @@ Alternatively, you can use `pip` if you want all the dependencies pulled in auto
 .. code-block:: bash
 
     $ pip install -e .
+
+
+What is in the owen?
+--------------------
+
+- Integration with celery_
+- Build in thread / process pools
+- Smart temporal data caching
+
+.. _celery: http://github.com/celery/celery
 
 
 Bug tracker
