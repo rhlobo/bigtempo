@@ -38,12 +38,6 @@ The package was originally conceived to handle temporal data, but it is flexible
 It is a great tool for distributed processment when you have 'quadrillion' processments for interdependent data sets.
 
 
-.. _pandas: http://pandas.pydata.org
-.. _numpy: http://www.numpy.org/
-.. _sympy: http://sympy.org/
-.. _theano: http://deeplearning.net/software/theano/
-
-
 Getting started
 ---------------
 
@@ -56,8 +50,6 @@ Need more?
 ^^^^^^^^^^
 
 If you need more examples, or just feel like checking out how bigtempo can be used in a project, refer to stockExperiments_.
-
-.. _stockExperiments: https://github.com/rhlobo/stockExperiments
 
 
 Installation
@@ -93,9 +85,6 @@ In order to run the tests using the command contained in the ``bin`` directory, 
 - nose >= 1.3.0
 - coverage >= 3.6
 - pep8 >= 1.4.5
-
-.. _mockito: https://pypi.python.org/pypi/mockito
-.. _pandas: http://github.com/pydata/pandas
 
 
 Installing from source
@@ -143,15 +132,11 @@ Next versions?
 - Smart temporal data caching
 - Python 2.7+
 
-.. _celery: http://github.com/celery/celery
-
 
 Bug tracker
 -----------
 
 If you have any suggestions, bug reports or annoyances please report them to our issue_tracker_.
-
-.. _issue_tracker: http://github.com/rhlobo/bigtempo/issues
 
 
 Contribute
@@ -162,6 +147,15 @@ Contribute
 3. Write a test which shows that the bug was fixed or that the feature works as expected.
 4. Send a pull request and wait until it gets merged and published. Make sure to add yourself to AUTHORS_.
 
+
+.. _pandas: http://pandas.pydata.org
+.. _numpy: http://www.numpy.org/
+.. _sympy: http://sympy.org/
+.. _theano: http://deeplearning.net/software/theano/
+.. _mockito: https://pypi.python.org/pypi/mockito
+.. _celery: http://github.com/celery/celery
+.. _stockExperiments: https://github.com/rhlobo/stockExperiments
+.. _issue_tracker: http://github.com/rhlobo/bigtempo/issues
 .. _tracker: http://github.com/rhlobo/bigtempo/issues
 .. _repository: http://github.com/rhlobo/bigtempo
 .. _AUTHORS: https://github.com/rhlobo/bigtempo/blob/master/AUTHORS.rst
