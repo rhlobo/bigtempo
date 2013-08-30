@@ -16,8 +16,6 @@
 
 
 **BigTempo** is a powerful and scalable programming model, originally crafted for temporal data processment / analysis. It's production ready and can handle large ammounts of data.
-.. **BigTempo** is a powerful temporal data processment / analysis library for Python, providing a scalable programming model conceived for data analysis, exploration and evaluation at massive levels.
-.. Python package providing a powerful and scalable programming model specially crafted for temporal data processment / analysis. It was conceived for data analysis, exploration and production use, and it is ready to handle massive levels of data.
 
 
 :Implementation: Python 2.7
