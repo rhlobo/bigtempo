@@ -13,8 +13,8 @@ bigtempo
 .. image:: https://coveralls.io/repos/rhlobo/bigtempo/badge.png
         :target: https://coveralls.io/r/rhlobo/bigtempo
 
-.. 
-    ..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO
+
+.. ..image:: http://cloud.github.com/downloads/rhlobo/bigtempo/bigtempo_128.png // TODO
 
 
 **BigTempo** is a powerful and scalable programming model, originally crafted for temporal data processment / analysis. It's production ready and can handle large ammounts of data.
@@ -45,16 +45,15 @@ It is a great tool for distributed processment when you have 'quadrillion' proce
 
 
 Getting started
-===============
+---------------
 
 Coming out soon!
 
-.. 
-    http://pandas.pydata.org/pandas-docs/dev/dsintro.html
+.. http://pandas.pydata.org/pandas-docs/dev/dsintro.html
 
 
 Need more?
-----------
+^^^^^^^^^^
 
 If you need more examples, or just feel like checking out how bigtempo can be used in a project, refer to stockExperiments_.
 
@@ -62,7 +61,7 @@ If you need more examples, or just feel like checking out how bigtempo can be us
 
 
 Installation
-============
+------------
 
 To install, simply:
 
@@ -78,7 +77,7 @@ Or, if you absolutely must:
 
 
 Dependencies
-------------
+^^^^^^^^^^^^
 
     Both the installation methods above should take care of dependencies on its own, automatically.
 
@@ -100,7 +99,7 @@ In order to run the tests using the command contained in the ``bin`` directory, 
 
 
 Installing from source
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 To install bigtempo from source you need:
 
@@ -136,8 +135,8 @@ Alternatively, you can use `pip` if you want all the dependencies pulled in auto
     $ pip install -e .
 
 
-What is in the owen?
---------------------
+Next version?
+-------------
 
 - Integration with celery_
 - Build in thread / process pools
@@ -147,7 +146,7 @@ What is in the owen?
 
 
 Bug tracker
-===========
+-----------
 
 If you have any suggestions, bug reports or annoyances please report them to our issue_tracker_.
 
@@ -155,7 +154,7 @@ If you have any suggestions, bug reports or annoyances please report them to our
 
 
 Contribute
-==========
+----------
 
 1. On the tracker_, check for open issues or open a new one to start a discussion around an idea or bug.
 2. Fork the repository_ on GitHub to start making your changes.
