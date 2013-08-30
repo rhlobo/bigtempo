@@ -27,12 +27,12 @@
 This is a Python package created to help you build complex hierarchies of processments, each refered as a datasource. 
 It handles dependency resolution, provides a tagging system that enables querying operations over datasource sets, and much more.
 
-It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
-Using it, you are able - for instance - to easily spawn multiple variations of processments over sets of other datasources. 
-
 There are other software packages that focus on lower level aspects of data processing, like pandas_, numpy_, sympy_, theano_. 
 This is not a framework to replace these. Instead, it aims to support many of these tools, helping you to stitch many processments together.
 It provides a decoupled programming model that was built with scalability support in its heart and it takes care of a lot of the workflow management so that you can focus on the data itself.
+
+It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
+Using it, you are able - for instance - to easily spawn multiple variations of processments over sets of other datasources. 
 
 The package was originally conceived to handle temporal data, but it is flexible and can easily be extended to support other data models.
 It is a great tool for distributed processment when you have 'quadrillion' processments for interdependent data sets.
