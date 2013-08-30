@@ -1,5 +1,3 @@
-bigtempo
-========
 
 .. image:: https://pypip.in/v/bigtempo/badge.png
         :target: https://pypi.python.org/pypi/bigtempo
@@ -24,7 +22,7 @@ bigtempo
 .. Python package providing a powerful and scalable programming model specially crafted for temporal data processment / analysis. It was conceived for data analysis, exploration and production use, and it is ready to handle massive levels of data.
 
 
-:Implementation: Python 2.7+
+:Implementation: Python 2.7
 :Download: http://pypi.python.org/pypi/bigtempo/
 :Source: http://github.com/rhlobo/bigtempo/
 :Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, exploration, production ready, python
@@ -33,15 +31,21 @@ bigtempo
 This is a Python package created to help you build complex hierarchies of processments, each refered as a datasource. 
 It handles dependency resolution, provides a tagging system that enables querying operations over datasource sets, and much more.
 
-It is here to address the plumbing associated with complex chained data evaluation processes, and because cach datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
+It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
 Using it, you are able - for instance - to easily spawn multiple variations of processments over sets of other datasources. 
 
-There are other software packages that focus on lower level aspects of data processing, like Numpy, Sympy, Theano. 
-BigTempo is not a framework to replace these. Instead, it helps you stitch many processments together, where each one can use these tools.
-It provides a decoupled programming model that was built with scalability in mind, and it takes care of a lot of the workflow management so that you can focus on the data itself.
+There are other software packages that focus on lower level aspects of data processing, like pandas_, numpy_, sympy_, theano_. 
+This is not a framework to replace these. Instead, it aims to support many of these tools, helping you to stitch many processments together.
+It provides a decoupled programming model that was built with scalability support in its heart and it takes care of a lot of the workflow management so that you can focus on the data itself.
 
 The package was originally conceived to handle temporal data, but it is flexible and can easily be extended to support other data models.
 It is a great tool for distributed processment when you have 'quadrillion' processments for interdependent data sets.
+
+
+.. _pandas: http://pandas.pydata.org
+.. _numpy: http://www.numpy.org/
+.. _sympy: http://sympy.org/
+.. _theano: http://deeplearning.net/software/theano/
 
 
 Getting started
@@ -135,12 +139,13 @@ Alternatively, you can use `pip` if you want all the dependencies pulled in auto
     $ pip install -e .
 
 
-Next version?
--------------
+Next versions?
+--------------
 
 - Integration with celery_
 - Build in thread / process pools
 - Smart temporal data caching
+- Python 2.7+
 
 .. _celery: http://github.com/celery/celery
 
