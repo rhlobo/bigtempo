@@ -2,6 +2,5 @@ AUTHORS
 =======
 
 
-- Roberto Haddock Lobo (RHLOBO_)
-
-.. _AUTHORS: http://github.com/rhlobo
+Roberto Haddock Lobo
+  http://github.com/rhlobo
