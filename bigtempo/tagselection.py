@@ -23,12 +23,10 @@ class TagManager(object):
         for dependency_reference in self._registrations[reference]['dependencies']:
 
             dependency = self._registrations.get(dependency_reference)
-            if not dependency:
-                continue
+            # if not dependency: continue
 
             dependency_tags = dependency.get('tags')
-            if not dependency_tags:
-                continue
+            # if not dependency_tags: continue
 
             for tag in dependency_tags:
                 inherited_tag = ('{%s}' % tag) if tag[0] != '{' or tag[-1] != '}' else tag

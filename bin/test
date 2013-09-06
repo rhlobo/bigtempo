@@ -12,7 +12,8 @@ cd "${PROJECT_LOCATION}"
 echo
 echo "TESTS"
 echo "--------------------------------------------------------------------------------"
-nosetests -v --with-coverage --cover-erase --cover-inclusive --cover-branches --cover-package=bigtempo --cover-html --cover-html-dir="../coverage/" -w bigtempo
+nosetests --with-coverage --cover-erase --cover-inclusive --cover-branches --cover-package=bigtempo --cover-html --cover-html-dir="../coverage/" -w bigtempo
+#nosetests -v --with-coverage --cover-erase --cover-inclusive --cover-branches --cover-package=bigtempo --cover-html --cover-html-dir="../coverage/" -w bigtempo
 echo
 echo
 echo "PEP8 CODE STYLE CHECK"

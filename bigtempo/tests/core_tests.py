@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import unittest
 from mockito import mock, when, any as anyx, verify
 

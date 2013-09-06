@@ -11,7 +11,7 @@ x'Publish bigtempo:
 	☐ Document characteristics
 	✔ Document dependencies @done (13-08-25 21:31)
 		Create example usages:
-		☐ Creating the instance and using a module
+		✔ Creating the instance and using a module @done (13-08-31 11:21)
 		☐ Creating a simple datasource
 		☐ Evaluating a simple datasource
 		☐ Creating a dependent datasource
@@ -44,6 +44,6 @@ x'Publish bigtempo:
 
 Going agead!:
 	Refactor it!:
-	☐ Extract processors to a package / Remodule defaults
+	✔ Extract processors to a package / Remodule defaults @done (13-09-06 00:37)
 	☐ Create registrations() method on engine
-	☐ Make processor equivalent registration available
+	✔ Make processor equivalent registration available @done (13-09-06 00:37)

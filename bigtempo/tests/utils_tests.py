@@ -1,6 +1,18 @@
+# -*- coding: utf-8 -*-
+
+
+import pandas
 import unittest
 
 import bigtempo.utils as utils
+
+
+class TestDatasourceLogger(unittest.TestCase):
+
+    def test_log_should_not_break_given_empty_dataframe(self):
+        logger = utils.DatasourceLogger()
+        logger.log('Description', pandas.DataFrame())
+        logger.print_summary()
 
 
 class TestModuleFunctions(unittest.TestCase):
@@ -28,3 +40,8 @@ class TestModuleFunctions(unittest.TestCase):
 
         result = utils.slice(data)
         assert result == data
+
+    def test_assure_is_valid_set_should_return_empty_set_when_invalid_object(self):
+        result = utils.assure_is_valid_set(object())
+        assert isinstance(result, set)
+        assert len(result) is 0

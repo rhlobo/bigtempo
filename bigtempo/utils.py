@@ -8,9 +8,6 @@ class CallableMock(object):
     def __call__(self, *args, **kwargs):
         return self.mock.__call__(*args, **kwargs)
 
-    def __getattr__(self, method_name):
-        return self.mock.__getattr__(method_name)
-
 
 class IterableMock(object):
     def __init__(self, mock):

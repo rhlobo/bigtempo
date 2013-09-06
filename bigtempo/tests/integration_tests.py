@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import unittest
 
 import bigtempo.core as core

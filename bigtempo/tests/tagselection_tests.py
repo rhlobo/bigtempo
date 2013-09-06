@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 import unittest
 from mockito import mock, when, any as anyx, verify, verifyNoMoreInteractions
 import collections as collections
@@ -13,6 +16,10 @@ class TestTagManager_registrations(unittest.TestCase):
         self.manager = tagselection.TagManager(self.registrations)
         self.listener_mock = mock()
         self.listener_callable_mock = utils.CallableMock(self.listener_mock)
+
+    def test_register_should_not_register_new_mapping_if_no_selection_is_given(self):
+        self.manager.register(self.listener_callable_mock)
+        assert len(self.manager._mappings) is 0
 
     def test_register_should_not_call_listener_when_there_is_no_existent_reference(self):
         selection = []
@@ -720,6 +727,12 @@ class TestTagSelection(unittest.TestCase):
 
         self.tagSelection.difference('2').get(2)
         verify(self.callable_factory, times=1).__call__(anyx())
+
+    def test__evaluate_selectors_should_be_passive_to_string_representation(self):
+        selection = self.tagSelection
+        print '%s' % selection
+        print str(selection)
+        print repr(selection)
 
 
 class TestTagSelector(unittest.TestCase):
