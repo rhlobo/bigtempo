@@ -23,7 +23,7 @@
 :Implementation: Python 2.7
 :Download: http://pypi.python.org/pypi/bigtempo/
 :Source: http://github.com/rhlobo/bigtempo/
-:Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, exploration, production ready, python
+:Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, data exploration, python
 
 
 This is a Python package created to help you build complex hierarchies of processments, each refered as a datasource. 
