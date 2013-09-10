@@ -12,7 +12,10 @@ import bigtempo.utils as utils
 
 def generate_for_references(engine, references, symbol, start, end, test_data_dir, module=None):
     for reference in references:
-        generate_for_reference(engine, reference, symbol, start, end, test_data_dir, module)
+        result = generate_for_reference(engine, reference, symbol, start, end, test_data_dir, module)
+
+        if not module:
+            yield result
 
 
 def generate_for_reference(engine, reference, symbol, start, end, test_data_dir, module=None):
@@ -30,6 +33,8 @@ def generate_for_reference(engine, reference, symbol, start, end, test_data_dir,
         setattr(module,
                 'assert_datasource_correctness_using_datafiles(%s){%s}[%s:%s]' % (reference, symbol, start, end),
                 CustomDatasourceTestCase)
+    else:
+        return CustomDatasourceTestCase
 
 
 def _create_datasource_test_case_for(engine):
@@ -37,21 +42,21 @@ def _create_datasource_test_case_for(engine):
 
         @classmethod
         def setUpClass(cls):
-            testing_builder_mock = mock()
+            testing_datasource_factory_mock = mock()
 
-            def testing_builder(cls):
-                mock_result = testing_builder_mock.build(cls)
+            def testing_datasource_factory(cls):
+                mock_result = testing_datasource_factory_mock.build(cls)
                 if mock_result:
                     return mock_result
                 return cls()
 
-            cls.testing_builder_mock = testing_builder_mock
-            cls.original_builder = engine._builder
-            engine._builder = testing_builder
+            cls.testing_datasource_factory_mock = testing_datasource_factory_mock
+            cls.original_datasource_factory = engine._datasource_factory
+            engine._datasource_factory = testing_datasource_factory
 
         @classmethod
         def tearDownClass(cls):
-            engine._builder = cls.original_builder
+            engine._datasource_factory = cls.original_datasource_factory
             engine._instances = {}
 
         def setUp(self):
