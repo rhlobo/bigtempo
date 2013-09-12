@@ -1,11 +1,9 @@
 #!/bin/bash
 
 
-CURRDIR="$(pwd)"
-PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
-export PYTHONPATH="${PROJECT_LOCATION}/bigtempo"
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
 
-cd $PROJECT_LOCATION
+cd "${PROJECT_LOCATION}"
 echo
 echo "SAVING REQUIREMENTS"
 echo "--------------------------------------------------------------------------------"

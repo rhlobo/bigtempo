@@ -1,8 +1,7 @@
 #!/bin/bash
 
 
-CURRDIR="$(pwd)"
-PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
 
 cd "${PROJECT_LOCATION}"
 echo
