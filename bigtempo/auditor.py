@@ -2,6 +2,7 @@
 
 
 import os
+import copy
 import pandas
 
 import unittest
@@ -10,31 +11,32 @@ from mockito import mock, unstub
 import bigtempo.utils as utils
 
 
-def generate_for_references(engine, references, symbol, start, end, test_data_dir, module=None):
+def generate_multiple(engine, references, symbol, start, end, test_data_filepath_fn, module=None):
+    results = []
     for reference in references:
-        result = generate_for_reference(engine, reference, symbol, start, end, test_data_dir, module)
+        result = generate(engine, reference, symbol, start, end, test_data_filepath_fn, module)
+        results.append(result)
+    if module is None:
+        return results
 
-        if not module:
-            yield result
 
-
-def generate_for_reference(engine, reference, symbol, start, end, test_data_dir, module=None):
-    if not os.path.isfile(_get_datafile_path(reference, symbol, test_data_dir)):
+def generate(engine, reference, symbol, start, end, test_data_filepath_fn, module=None):
+    if not os.path.isfile(test_data_filepath_fn(reference, symbol)):
         return
 
     class CustomDatasourceTestCase(_create_datasource_test_case_for(engine)):
 
         def test_datasource_using_test_data(self):
-            _assert_datasource_correctness_using_datafiles(engine, reference, symbol, start, end, test_data_dir)
+            _assert_datasource_correctness_using_datafiles(engine, reference, symbol, start, end, test_data_filepath_fn)
 
     CustomDatasourceTestCase.__name__ = '%s{%s}[%s:%s]' % (reference, symbol, start, end)
 
-    if module:
-        setattr(module,
-                'assert_datasource_correctness_using_datafiles(%s){%s}[%s:%s]' % (reference, symbol, start, end),
-                CustomDatasourceTestCase)
-    else:
+    if module is None:
         return CustomDatasourceTestCase
+
+    setattr(module,
+            'TestDatasourceCorrectness(%s){%s}[%s:%s]' % (reference, symbol, start, end),
+            CustomDatasourceTestCase)
 
 
 def _create_datasource_test_case_for(engine):
@@ -68,17 +70,12 @@ def _create_datasource_test_case_for(engine):
     return DatasourceTestCase
 
 
-def _get_datafile_path(reference, symbol, test_data_dir):
-    filename = '%s{%s}.csv' % (reference, symbol)
-    return os.path.join(test_data_dir, filename)
-
-
-def _assert_datasource_correctness_using_datafiles(engine, reference, symbol, start, end, test_data_dir):
+def _assert_datasource_correctness_using_datafiles(engine, reference, symbol, start, end, test_data_filepath_fn):
     logger = utils.DatasourceLogger()
-    mocked_registrations = {}
+    original_registrations = {}
 
     for dependency_reference in engine._registrations[reference]['dependencies']:
-        mock_data_file = _get_datafile_path(dependency_reference, symbol, test_data_dir)
+        mock_data_file = test_data_filepath_fn(dependency_reference, symbol)
 
         if not os.path.isfile(mock_data_file):
             continue
@@ -88,14 +85,13 @@ def _assert_datasource_correctness_using_datafiles(engine, reference, symbol, st
         if not engine._registrations.get(dependency_reference):
             engine._registrations[dependency_reference] = {}
 
-        mocked_registrations[dependency_reference] = engine._registrations[dependency_reference]
-        engine._registrations[dependency_reference] = {
-            'class': datasource_mock_cls,
-            'lookback': 0,
-            'dependencies': set()
-        }
+        original_registrations[dependency_reference] = engine._registrations[dependency_reference]
+        registration_mock = copy.deepcopy(engine._registrations[dependency_reference])
+        registration_mock['class'] = datasource_mock_cls
+        registration_mock['dependencies'] = set()
+        engine._registrations[dependency_reference] = registration_mock
 
-    expected_data_file = _get_datafile_path(reference, symbol, test_data_dir)
+    expected_data_file = test_data_filepath_fn(reference, symbol)
 
     actual = engine.get(reference).process(symbol, start, end)
     expected = utils.slice(pandas.DataFrame.from_csv(expected_data_file), start, end)
@@ -109,7 +105,7 @@ def _assert_datasource_correctness_using_datafiles(engine, reference, symbol, st
         logger.print_summary()
         raise e
     finally:
-        for dependency_reference, original_registration in mocked_registrations.items():
+        for dependency_reference, original_registration in original_registrations.items():
             engine._registrations[dependency_reference] = original_registration
 
 
@@ -118,8 +114,9 @@ def _create_mock_datasource(mock_reference, mock_data_file, logger):
 
         def evaluate(self, context, symbol, start=None, end=None):
             data = pandas.DataFrame.from_csv(mock_data_file)
-            logger.log(os.path.basename(mock_data_file), data)
-            return data
+            sliced_data = utils.slice(data, start, end)
+            logger.log(os.path.basename(mock_data_file), sliced_data)
+            return sliced_data
 
     return DatasourceMock
 

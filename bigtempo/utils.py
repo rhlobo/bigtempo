@@ -35,6 +35,7 @@ class DatasourceLogger(object):
             start = '-------------------' if size is 0 else dataframe.index[0]
             end = '-------------------' if size is 0 else dataframe.index[-1]
             print '[ %s : %s ] ~ %i \t > \t %s' % (start, end, size, title)
+
         for description, dataframe in self.logs:
             print ''
             title = description + ' ' + ((80 - len(description) - 1) * '-')

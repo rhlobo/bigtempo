@@ -6,11 +6,12 @@ x'Publish bigtempo:
 	Make it usable:
 	✔ Create setup.py @done (13-08-15 23:16)
 	✔ Publish to pypi @done (13-08-19 21:33)
-	Document bigtempo:
+	Document bigtempo (simple):
 	✔ Create readme @done (13-08-29 14:26)
 	☐ Document characteristics
 	✔ Document dependencies @done (13-08-25 21:31)
-		Create example usages:
+	☐ Create full documentation
+		Create tutorial:
 		✔ Creating the instance and using a module @done (13-08-31 11:21)
 		☐ Creating a simple datasource
 		☐ Evaluating a simple datasource
@@ -45,5 +46,8 @@ x'Publish bigtempo:
 Going agead!:
 	Refactor it!:
 	✔ Extract processors to a package / Remodule defaults @done (13-09-06 00:37)
-	☐ Create registrations() method on engine
 	✔ Make processor equivalent registration available @done (13-09-06 00:37)
+	☐ Modularization: Extract and create a registration_factory for each datasource, receiving a **kwargs
+	☐ Flexibility: Tester should receive 'data_filepath_factory' instead of 'test_data_dir' (filename format should not be imposed)
+	☐ Create registrations() & registration() method on engine
+	☐ Improve context dependency retrieval using brackets

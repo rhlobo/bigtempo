@@ -31,18 +31,18 @@ class DatasourceEngine(object):
             return fn
         return wrapper
 
-    def datasource(self, reference, dependencies=None, lookback=0, tags=None, frequency='B'):
+    def datasource(self, reference, dependencies=None, tags=None, lookback=0, frequency=None):
         def wrapper(cls):
             self._register_datasource(reference,
                                       cls,
                                       dependencies=dependencies,
+                                      tags=tags,
                                       lookback=lookback,
-                                      declared_tags=tags,
                                       frequency=frequency)
             return cls
         return wrapper
 
-    def _register_datasource(self, reference, cls, dependencies=None, lookback=0, declared_tags=None, frequency='B'):
+    def _register_datasource(self, reference, cls, dependencies=None, tags=None, lookback=0, frequency=None):
         self._instances[reference] = None
         self._registrations[reference] = {
             'class': cls,
@@ -52,10 +52,10 @@ class DatasourceEngine(object):
         }
 
         infered_tags = self._tag_iteration_manager.infere_tags(reference)
-        tags = utils.assure_is_valid_set(declared_tags) | utils.assure_is_valid_set(infered_tags)
+        all_tags = utils.assure_is_valid_set(tags) | utils.assure_is_valid_set(infered_tags)
 
-        self._registrations[reference]['tags'] = tags
-        self._tag_selector.register(reference, tags)
+        self._registrations[reference]['tags'] = all_tags
+        self._tag_selector.register(reference, all_tags)
         self._tag_iteration_manager.evaluate_new_candidate(reference)
 
     def select(self, *selectors):
