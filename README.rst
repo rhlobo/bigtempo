@@ -43,14 +43,11 @@ It is a great tool for distributed processment when you have 'a few quadrillion'
 Getting started
 ---------------
 
-You can `get started here`_
-
-For a better understandment of what can be done, you may take a peek at `pandas introduction`_.
+You can `get started reading an ipython notebook`_, and for a better understandment of what can be done, you may take a peek at `pandas introduction`_.
 
 
-
-Need more?
-^^^^^^^^^^
+Example project
+^^^^^^^^^^^^^^^
 
 If you need more examples, or just feel like checking out how bigtempo can be used in a project, refer to stockExperiments_.
 
@@ -163,4 +160,4 @@ Contribute
 .. _tracker: http://github.com/rhlobo/bigtempo/issues
 .. _repository: http://github.com/rhlobo/bigtempo
 .. _AUTHORS: https://github.com/rhlobo/bigtempo/blob/master/AUTHORS.rst
-.. _`get started here`: http://nbviewer.ipython.org/urls/raw.github.com/rhlobo/bigtempo/master/ipy-notebooks/getting_started.ipynb
+.. _`get started reading an ipython notebook`: http://nbviewer.ipython.org/urls/raw.github.com/rhlobo/bigtempo/master/ipy-notebooks/getting_started.ipynb
