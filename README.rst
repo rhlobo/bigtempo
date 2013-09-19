@@ -43,9 +43,10 @@ It is a great tool for distributed processment when you have 'a few quadrillion'
 Getting started
 ---------------
 
-Coming out soon!
+You can `get started here`_
 
-.. http://pandas.pydata.org/pandas-docs/dev/dsintro.html
+For a better understandment of what can be done, you may take a peek at `pandas introduction`_.
+
 
 
 Need more?
@@ -151,6 +152,7 @@ Contribute
 
 
 .. _pandas: http://pandas.pydata.org
+.. _`pandas introduction`: http://pandas.pydata.org/pandas-docs/dev/dsintro.html
 .. _numpy: http://www.numpy.org/
 .. _sympy: http://sympy.org/
 .. _theano: http://deeplearning.net/software/theano/
@@ -161,3 +163,4 @@ Contribute
 .. _tracker: http://github.com/rhlobo/bigtempo/issues
 .. _repository: http://github.com/rhlobo/bigtempo
 .. _AUTHORS: https://github.com/rhlobo/bigtempo/blob/master/AUTHORS.rst
+.. _`get started here`: http://nbviewer.ipython.org/urls/raw.github.com/rhlobo/bigtempo/master/ipy-notebooks/getting_started.ipynb
