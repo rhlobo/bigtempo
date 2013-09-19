@@ -72,6 +72,7 @@ def _create_datasource_test_case_for(engine):
 
 def _assert_datasource_correctness_using_datafiles(engine, reference, symbol, start, end, test_data_filepath_fn):
     logger = utils.DatasourceLogger()
+
     original_registrations = {}
 
     for dependency_reference in engine._registrations[reference]['dependencies']:

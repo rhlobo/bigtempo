@@ -109,5 +109,4 @@ def test_all_test_methods_are_being_generated():
                                                      None,
                                                      None,
                                                      _get_test_data_filepath)))
-    print len(result)
     assert len(result) == 22

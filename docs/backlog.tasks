@@ -51,3 +51,4 @@ Going agead!:
 	☐ Flexibility: Tester should receive 'data_filepath_factory' instead of 'test_data_dir' (filename format should not be imposed)
 	☐ Create registrations() & registration() method on engine
 	☐ Improve context dependency retrieval using brackets
+	☐ Extend selections to meet same interface contract than sets have (including operators) - http://docs.python.org/2/library/sets.html

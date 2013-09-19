@@ -63,11 +63,7 @@ def evaluate_loopback_period(datasource_registration, dependencies, date):
 
     lookback += 1
 
-    result = relative_period(-lookback, frequency, date)
-
-    print 'Date: ', date, 'Lookback: ', datasource_registration['lookback'], '(', lookback, ')', 'Frequency: ', frequency, 'Result: ', result
-
-    return result
+    return relative_period(-lookback, frequency, date)
 
 
 def determine_frequency(datasource_frequency=None, dependencies=None):
