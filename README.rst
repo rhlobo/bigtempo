@@ -43,7 +43,7 @@ It is a great tool for distributed processment when you have 'a few quadrillion'
 Getting started
 ---------------
 
-You can `get started reading an ipython notebook`_, and for a better understandment of what can be done, you may take a peek at `pandas introduction`_.
+You can `get started reading an ipython notebook`_, and for a better understandment of what can be done, you shall take a peek in the `pandas introduction`_.
 
 
 Example project
