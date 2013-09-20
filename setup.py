@@ -41,7 +41,7 @@ def packages(path=None, prefix="", exclude=None):
 setup(
     name='bigtempo',
     version=bigtempo.__version__,
-    description=('BigTempo is a powerful and scalable programming model, originally crafted for temporal data processment / analysis.',
+    description='BigTempo is a powerful and scalable programming model, originally crafted for temporal data processment / analysis.',
     long_description=read('README.rst'),
     license=read('LICENSE'),
 
