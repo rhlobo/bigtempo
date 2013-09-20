@@ -132,8 +132,8 @@ Next versions?
 
 Distributed processing
 
-- Integration with celery_
 - Build in process pools
+- Integration with celery_
 - Integration with Apache ZooKeeper and ZeroMQ
 
 Caching
