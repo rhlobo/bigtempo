@@ -15,12 +15,8 @@
 .. image:: http://rhlobo.github.io/bigtempo/bigtempo_small.png
 
 
-**BigTempo** is a powerful and scalable programming model, originally crafted for temporal data processment / analysis.
-
-.. It's production ready and can handle large ammounts of data.
-
-
 :Implementation: Python 2.7
+:Development Status: Alpha (contract may change)
 :Download: http://pypi.python.org/pypi/bigtempo/
 :Source: http://github.com/rhlobo/bigtempo/
 :Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, data exploration, python
@@ -37,7 +33,12 @@ It provides a decoupled programming model that was built with scalability suppor
 It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
 Using it, you are able - for instance - to easily spawn multiple variations of a processment over sets of other datasources. 
 
-It is a great tool for distributed processment when you have 'a few quadrillion' [interdependent] processments for interdependent data sets.
+.. It is a great tool for distributed processment when you have 'a few quadrillion' [interdependent] processments for interdependent data sets.
+
+    +----------------------------------------------------------------------+
+    | Although being really performatic, the package is still in Alpha and |
+    | its caching and distributed processing capabilities are in the owen. |
+    +----------------------------------------------------------------------+
 
 
 Getting started
@@ -127,9 +128,18 @@ Alternatively, you can use `pip` if you want all the dependencies pulled in auto
 Next versions?
 --------------
 
+.. Although this is an open source project, some of its next big features are going to be released publicly only when they are better defined.
+.. This measure will be valid and applyed til the project achieves a Beta development stage. Feel free to get in contact if you want to know more about it.
+
+Distributed processing
 - Integration with celery_
-- Build in thread / process pools
+- Build in process pools
+- Integration with Apache ZooKeeper and ZeroMQ
+
+Caching
 - Smart temporal data caching
+
+Compatibility
 - Python 2.7+
 
 
