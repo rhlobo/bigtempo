@@ -49,7 +49,7 @@ You can `get started reading an ipython notebook`_, and for a better understandm
 Example project
 ^^^^^^^^^^^^^^^
 
-If you need more examples, or just feel like checking out how bigtempo can be used in a project, refer to stockExperiments_.
+If you need more examples, or just feel like checking out how bigtempo can be used in a project, please refer to stockExperiments_.
 
 
 Installation
@@ -131,14 +131,17 @@ Next versions?
 .. This measure will be valid and applyed til the project achieves a Beta development stage. Feel free to get in contact if you want to know more about it.
 
 Distributed processing
+
 - Integration with celery_
 - Build in process pools
 - Integration with Apache ZooKeeper and ZeroMQ
 
 Caching
+
 - Smart temporal data caching
 
 Compatibility
+
 - Python 2.7+
 
 
