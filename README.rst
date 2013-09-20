@@ -16,7 +16,7 @@
 
 
 :Implementation: Python 2.7
-:Development Status: Alpha (contract may change)
+:Status: Alpha (contract may change)
 :Download: http://pypi.python.org/pypi/bigtempo/
 :Source: http://github.com/rhlobo/bigtempo/
 :Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, data exploration, python
@@ -30,15 +30,14 @@ There are other software packages that focus on lower level aspects of data proc
 This is not a framework to replace these. Instead, it aims to support many of these tools, helping you to stitch many processments together.
 It provides a decoupled programming model that was built with scalability support in its heart and it takes care of a lot of the workflow management so that you can focus on the data itself.
 
-It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
-Using it, you are able - for instance - to easily spawn multiple variations of a processment over sets of other datasources. 
-
+.. It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
+.. Using it, you are able - for instance - to easily spawn multiple variations of a processment over sets of other datasources. 
 .. It is a great tool for distributed processment when you have 'a few quadrillion' [interdependent] processments for interdependent data sets.
 
-    +----------------------------------------------------------------------+
-    | Although being really performatic, the package is still in Alpha and |
-    | its caching and distributed processing capabilities are in the owen. |
-    +----------------------------------------------------------------------+
++----------------------------------------------------------------------+
+| Although being really performatic, the package is still in Alpha and |
+| its caching and distributed processing capabilities are in the owen. |
++----------------------------------------------------------------------+
 
 
 Getting started
