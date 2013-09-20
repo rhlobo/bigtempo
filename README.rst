@@ -34,10 +34,10 @@ It provides a decoupled programming model that was built with scalability suppor
 .. Using it, you are able - for instance - to easily spawn multiple variations of a processment over sets of other datasources. 
 .. It is a great tool for distributed processment when you have 'a few quadrillion' [interdependent] processments for interdependent data sets.
 
-+----------------------------------------------------------------------+
-| Although being really performatic, the package is still in Alpha and |
-| its caching and distributed processing capabilities are in the owen. |
-+----------------------------------------------------------------------+
++--------------------------------------------------------------------------------------+
+| Keep in mind that the package - although performatic - is in Alpha Stage and, as so, |
+| most of its caching and distributed processing capabilities are still in the owen.   |
++--------------------------------------------------------------------------------------+
 
 
 Getting started
