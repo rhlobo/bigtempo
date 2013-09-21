@@ -177,3 +177,8 @@ Contribute
 .. _repository: http://github.com/rhlobo/bigtempo
 .. _AUTHORS: https://github.com/rhlobo/bigtempo/blob/master/AUTHORS.rst
 .. _`get started reading an ipython notebook`: http://nbviewer.ipython.org/urls/raw.github.com/rhlobo/bigtempo/master/ipy-notebooks/getting_started.ipynb
+
+
+.. image:: https://cruel-carlota.pagodabox.com/72a329aaa141ddda4059d84df6c4d9ea
+    :alt: githalytics.com
+    :target: https://githalytics.com/rhlobo/bigtempo
