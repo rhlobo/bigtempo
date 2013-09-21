@@ -11,9 +11,6 @@
 .. image:: https://coveralls.io/repos/rhlobo/bigtempo/badge.png
         :target: https://coveralls.io/r/rhlobo/bigtempo
 
-.. image:: https://d2weczhvl823v0.cloudfront.net/rhlobo/bigtempo/trend.png
-        :target: https://bitdeli.com/free
-
 .. image:: http://rhlobo.github.io/bigtempo/bigtempo_small.png
 
 
@@ -185,8 +182,6 @@ Contribute
     :alt: githalytics.com
     :target: https://githalytics.com/rhlobo/bigtempo
 
-
 .. image:: https://d2weczhvl823v0.cloudfront.net/rhlobo/bigtempo/trend.png
    :alt: Bitdeli badge
    :target: https://bitdeli.com/free
-
