@@ -31,7 +31,7 @@ This is not a framework to replace these. Instead, it aims to support many of th
 It provides a decoupled programming model that was built with scalability support in its heart and it takes care of a lot of the workflow management so that you can focus on the data itself.
 
 Bigtempo aims to provide support an wide range of applications - including artificial intelligence systems - working in data pull fashion. 
-Its philosophy is to lazyload things as possible: analysis are retrieved from cache if available, or process it otherwise.
+Its philosophy is to lazyload things as possible: analysis are retrieved from cache if available, processed otherwise.
 A `datasource` serves data through processors that can be used by other `datasources` (or by you directly) and processors are made to be executed in a distributed fashion, if that is desired.
 
 .. It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
