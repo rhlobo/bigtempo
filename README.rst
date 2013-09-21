@@ -30,7 +30,7 @@ There are other software packages that focus on lower level aspects of data proc
 This is not a framework to replace these. Instead, it aims to support many of these tools, helping you to stitch many processments together.
 It provides a decoupled programming model that was built with scalability support in its heart and it takes care of a lot of the workflow management so that you can focus on the data itself.
 
-Bigtempo aims to provide support to artificial intelligence systems, working in data pull fashion. 
+Bigtempo aims to provide support an wide range of applications - including artificial intelligence systems - working in data pull fashion. 
 Its philosophy is to lazyload things as possible: analysis are retrieved from cache if available, or process it otherwise.
 A `datasource` serves data through processors that can be used by other `datasources` (or by you directly) and processors are made to be executed in a distributed fashion, if that is desired.
 
