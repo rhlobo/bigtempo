@@ -178,6 +178,7 @@ Contribute
 .. _`get started reading an ipython notebook`: http://nbviewer.ipython.org/urls/raw.github.com/rhlobo/bigtempo/master/ipy-notebooks/getting_started.ipynb
 
 
+
 --------------------------------------------------------------
 
 .. image:: https://d2weczhvl823v0.cloudfront.net/rhlobo/bigtempo/trend.png
