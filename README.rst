@@ -178,10 +178,10 @@ Contribute
 .. _`get started reading an ipython notebook`: http://nbviewer.ipython.org/urls/raw.github.com/rhlobo/bigtempo/master/ipy-notebooks/getting_started.ipynb
 
 
-.. image:: https://cruel-carlota.pagodabox.com/72a329aaa141ddda4059d84df6c4d9ea
-    :alt: githalytics.com
-    :target: https://githalytics.com/rhlobo/bigtempo
+--------------------------------------------------------------
 
 .. image:: https://d2weczhvl823v0.cloudfront.net/rhlobo/bigtempo/trend.png
-   :alt: Bitdeli badge
    :target: https://bitdeli.com/free
+
+.. image:: https://cruel-carlota.pagodabox.com/72a329aaa141ddda4059d84df6c4d9ea
+    :target: https://githalytics.com/rhlobo/bigtempo
