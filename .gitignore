@@ -7,6 +7,9 @@
 *.so
 *.py[cod]
 
+### Development temporary files
+/.ropeproject
+
 ### Distribution temporary files
 *.egg
 *.egg-info
