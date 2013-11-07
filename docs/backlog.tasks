@@ -1,60 +1,66 @@
 Publish bigtempo:
-	Extract bigtempo:
-	 ✔ Remove bigtempo dependencies @done (13-08-15 21:30)
-	 ✔ Create new repo for bigtempo @done (13-08-15 21:30)
-	 ✔ Extract bigtempo @done (13-08-15 21:29)
-	Make it usable:
-	✔ Create setup.py @done (13-08-15 23:16)
-	✔ Publish to pypi @done (13-08-19 21:33)
-	Document bigtempo (simple):
-	✔ Create readme @done (13-08-29 14:26)
-	☐ Document characteristics
-	✔ Document dependencies @done (13-08-25 21:31)
-	☐ Create full documentation
-		Create getting started:
-		✔ Creating the instance and using a module @done (13-08-31 11:21)
-		✔ Creating a simple datasource @done (13-09-21 12:29)
-		✔ Evaluating a simple datasource @done (13-09-21 12:29)
-		✔ Creating a dependent datasource @done (13-09-21 12:29)
-		✔ Evaluating it @done (13-09-21 12:29)
-		✔ Plotting it @done (13-09-21 12:29)
-		✔ Saving and loading dataframes > see documentation reference @done (13-09-21 12:29)
-		✔ Explaining dependency resolution @done (13-09-21 12:29)
-		✔ Simple selection by reference @done (13-09-21 12:29)
-		✔ Explaining tags and selection @done (13-09-21 12:29)
-		✔ Selection by tags @done (13-09-21 12:29)
-		✔ Intro to selection operations (set theory) @done (13-09-21 12:29)
-		✔ Selecting all @done (13-09-21 12:29)
-		✔ Selection intersection @done (13-09-21 12:29)
-		✔ Selection difference @done (13-09-21 12:29)
-		✔ Selection union @done (13-09-21 12:29)
-		✔ Intro advanced concepts @done (13-09-21 12:29)
-		✔ Datasource registration listenners @done (13-09-21 12:29)
-		✔ Using listeners to create variations @done (13-09-21 12:29)
-		✔ Using multiple time scales @done (13-09-21 12:29)
-		✔ Concept integration > explaining cenario @done (13-09-21 12:29)
-		✔ Dependent DSs: Creating weekly and monthly datasources @done (13-09-21 12:29)
-		✔ Creating a datasource that handles 3 dss @done (13-09-21 12:29)
-	✔ Create project backlog (features, refactorings, source, documentation, installation, support, marketing, ...) @done (13-08-25 21:31)
-	Document source files:
-	☐ Description
-	☐ Logic overview
-	☐ big-O complexity
+    Extract bigtempo:
+    ✔ Remove bigtempo dependencies @done (13-08-15 21:30)
+    ✔ Create new repo for bigtempo @done (13-08-15 21:30)
+    ✔ Extract bigtempo @done (13-08-15 21:29)
+    Make it usable:
+    ✔ Create setup.py @done (13-08-15 23:16)
+    ✔ Publish to pypi @done (13-08-19 21:33)
+    Document bigtempo (simple):
+    ✔ Create readme @done (13-08-29 14:26)
+    ☐ Document characteristics
+    ✔ Document dependencies @done (13-08-25 21:31)
+    ☐ Create full documentation
+        Create getting started:
+        ✔ Creating the instance and using a module @done (13-08-31 11:21)
+        ✔ Creating a simple datasource @done (13-09-21 12:29)
+        ✔ Evaluating a simple datasource @done (13-09-21 12:29)
+        ✔ Creating a dependent datasource @done (13-09-21 12:29)
+        ✔ Evaluating it @done (13-09-21 12:29)
+        ✔ Plotting it @done (13-09-21 12:29)
+        ✔ Saving and loading dataframes > see documentation reference @done (13-09-21 12:29)
+        ✔ Explaining dependency resolution @done (13-09-21 12:29)
+        ✔ Simple selection by reference @done (13-09-21 12:29)
+        ✔ Explaining tags and selection @done (13-09-21 12:29)
+        ✔ Selection by tags @done (13-09-21 12:29)
+        ✔ Intro to selection operations (set theory) @done (13-09-21 12:29)
+        ✔ Selecting all @done (13-09-21 12:29)
+        ✔ Selection intersection @done (13-09-21 12:29)
+        ✔ Selection difference @done (13-09-21 12:29)
+        ✔ Selection union @done (13-09-21 12:29)
+        ✔ Intro advanced concepts @done (13-09-21 12:29)
+        ✔ Datasource registration listenners @done (13-09-21 12:29)
+        ✔ Using listeners to create variations @done (13-09-21 12:29)
+        ✔ Using multiple time scales @done (13-09-21 12:29)
+        ✔ Concept integration > explaining cenario @done (13-09-21 12:29)
+        ✔ Dependent DSs: Creating weekly and monthly datasources @done (13-09-21 12:29)
+        ✔ Creating a datasource that handles 3 dss @done (13-09-21 12:29)
+    ✔ Create project backlog (features, refactorings, source, documentation, installation, support, marketing, ...) @done (13-08-25 21:31)
+    Document source files:
+    ☐ Description
+    ☐ Logic overview
+    ☐ big-O complexity
 
 Going agead!:
-	Refactor it!:
-	✔ Extract processors to a package / Remodule defaults @done (13-09-06 00:37)
-	✔ Make processor equivalent registration available @done (13-09-06 00:37)
-	☐ Modularization: Extract and create a registration_factory for each datasource, receiving a **kwargs
-	✔ Flexibility: Tester should receive 'data_filepath_factory' instead of 'test_data_dir' (filename format should not be imposed) @done (13-09-21 12:30)
-	☐ Create registrations() & registration() method on engine
-	☐ Improve context dependency retrieval using brackets
-	☐ Extend selections to meet same interface contract than sets have (including operators) - http://docs.python.org/2/library/sets.html
-	Distributed processing:
-	 ☐ Build in process pools
-	 ☐ Integration with celery
-	 ☐ Integration with Apache ZooKeeper and ZeroMQ
-	Caching:
-	 ☐ Smart temporal data caching
-	Compatibility:
-	 ☐ Python 2.7+
+    Refactor it!:
+    ✔ Extract processors to a package / Remodule defaults @done (13-09-06 00:37)
+    ✔ Make processor equivalent registration available @done (13-09-06 00:37)
+    Modularization:
+    ☐ Extract and create a registration_factory for each datasource, receiving a **kwargs
+    Flexibility:
+    ✔  Tester should receive 'data_filepath_factory' instead of 'test_data_dir' (filename format should not be imposed) @done (13-09-21 12:30)
+    ☐ Create registrations() & registration() method on engine
+    ☐ Improve context dependency retrieval using brackets
+    ☐ Extend selections to meet same interface contract than sets have (including operators) - http://docs.python.org/2/library/sets.html
+    Distributed processing:
+    ☐ Build in process pools
+    ☐ Integration with celery
+    ☐ Integration with Apache ZooKeeper and ZeroMQ
+    Caching:
+    ☐ Smart temporal data caching
+    Compatibility:
+    ☐ Python 2.7+
+    Features:
+    ☐ Generators for listener registrations / Global generator (random internal decisions between verifications)
+    ☐ Disabling out-of-order loading of datasources
+    ☐ Serialization/Deserialization of datasource definition & automatic naming
