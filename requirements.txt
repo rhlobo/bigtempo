@@ -13,7 +13,7 @@ Bottleneck>=0.6.0
 # Pandas Optional Dependencies
 Cython>=0.19.1
 scipy>=0.12.0
-matplotlib>=1.3.0
+matplotlib
 # Pandas
 pandas>=0.12.0
 # Statistics over pandas
