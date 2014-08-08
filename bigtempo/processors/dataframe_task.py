@@ -67,7 +67,7 @@ def evaluate_loopback_period(datasource_registration, dependencies, date):
 
 
 def determine_frequency(datasource_frequency=None, dependencies=None):
-    if not datasource_frequency is None:
+    if datasource_frequency is not None:
         return datasource_frequency
 
     if dependencies is None or len(dependencies) is 0:
@@ -84,7 +84,7 @@ def determine_frequency(datasource_frequency=None, dependencies=None):
 
 def _frequency_sort_key(value):
     frequency = value.split('-')[0]
-    if not frequency in _FREQUENCY_ENUMERATION_DICT:
+    if frequency not in _FREQUENCY_ENUMERATION_DICT:
         return 0
 
     return _FREQUENCY_ENUMERATION_DICT[frequency]

@@ -311,9 +311,9 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
     def test_register_datasource_should_trigger_tag_registration_with_dependencies_as_tags_when_datasources_has_multiple_dependencies(self):
         reference = 'REFERENCE'
         expected_tags = set(['tag1', 'tag2', 'REFERENCE',
-                            '{REFERENCE_DEPENDENCY_A}',
-                            '{REFERENCE_DEPENDENCY_B}',
-                            '{REFERENCE_DEPENDENCY_C}'])
+                             '{REFERENCE_DEPENDENCY_A}',
+                             '{REFERENCE_DEPENDENCY_B}',
+                             '{REFERENCE_DEPENDENCY_C}'])
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_A')
         class DatasourceDependencyA(object):
@@ -338,9 +338,9 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
     def test_register_datasource_should_trigger_tag_registration_with_dependencies_and_subdependencies_as_tags(self):
         reference = 'REFERENCE'
         expected_tags = set(['tag1', 'tag2', 'REFERENCE',
-                            '{REFERENCE_DEPENDENCY_A}',
-                            '{REFERENCE_DEPENDENCY_B}',
-                            '{REFERENCE_DEPENDENCY_C}'])
+                             '{REFERENCE_DEPENDENCY_A}',
+                             '{REFERENCE_DEPENDENCY_B}',
+                             '{REFERENCE_DEPENDENCY_C}'])
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_A')
         class DatasourceDependencyA(object):
@@ -387,9 +387,9 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
     def test_register_datasource_should_trigger_tag_registration_with_multiple_dependencies_and_its_tags_as_tags_when(self):
         reference = 'REFERENCE'
         expected_tags = set(['tag1', 'tag2', 'REFERENCE',
-                            '{tag1A}', '{tag2A}', '{REFERENCE_DEPENDENCY_A}',
-                            '{tag1B}', '{tag2B}', '{REFERENCE_DEPENDENCY_B}',
-                            '{tag1C}', '{tag2C}', '{REFERENCE_DEPENDENCY_C}'])
+                             '{tag1A}', '{tag2A}', '{REFERENCE_DEPENDENCY_A}',
+                             '{tag1B}', '{tag2B}', '{REFERENCE_DEPENDENCY_B}',
+                             '{tag1C}', '{tag2C}', '{REFERENCE_DEPENDENCY_C}'])
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_A',
                                 tags=['tag1A', 'tag2A'])
@@ -418,9 +418,9 @@ class TestDatasourceEngine_tag_related_behaviours_considering_tag_inference(unit
     def test_register_datasource_should_trigger_tag_registration_with_multiple_nested_dependencies_and_its_tags_as_tags(self):
         reference = 'REFERENCE'
         expected_tags = set(['tag1', 'tag2', 'REFERENCE',
-                            '{tag1A}', '{tag2A}', '{REFERENCE_DEPENDENCY_A}',
-                            '{tag1B}', '{tag2B}', '{REFERENCE_DEPENDENCY_B}',
-                            '{tag1C}', '{tag2C}', '{REFERENCE_DEPENDENCY_C}'])
+                             '{tag1A}', '{tag2A}', '{REFERENCE_DEPENDENCY_A}',
+                             '{tag1B}', '{tag2B}', '{REFERENCE_DEPENDENCY_B}',
+                             '{tag1C}', '{tag2C}', '{REFERENCE_DEPENDENCY_C}'])
 
         @self.engine.datasource('REFERENCE_DEPENDENCY_A',
                                 tags=['tag1A', 'tag2A'])

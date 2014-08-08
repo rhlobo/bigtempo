@@ -699,7 +699,7 @@ class TestTagSelection(unittest.TestCase):
                                  })
 
         selection = self.tagSelection.intersection('2')
-        assert not selection in self.tagSelection
+        assert selection not in self.tagSelection
 
     def test_instance_is_not_changed_upon_operation_being_able_to_be_execute_multiple_times(self):
         self.tagSelection._initial_selection = set('abcdefghij')
