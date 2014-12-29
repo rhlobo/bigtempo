@@ -2,11 +2,19 @@
 
 
 ## INSTALLING DEPENDENCIES
+### MISC DEPS
+sudo apt-get install --yes --quiet git wget
+
 ### C COMPILER
 sudo apt-get install --yes --quiet build-essential
 
+### PYTHON
+sudo apt-get install --yes --quiet software-properties-common python-software-properties
+sudo apt-get install --yes --quiet python python-dev python-setuptools python-pip
+
 ### SETUP TOOLS
 pip install -U setuptools
+#pip install -U pip
 
 ### TEST TOOLS
 pip install -U pep8
@@ -35,9 +43,11 @@ pip install -U sphinx
 pip install -U Cython
 pip install -U pytz
 pip install -U python-dateutil
+pip install -U pyparsing
 
 #### NUMPY
 sudo apt-get install --yes --quiet libatlas-base-dev liblapack-dev
+sudo apt-get install --yes --quiet libatlas3gf-sse2 || echo 'Skipping libatlas3gf-sse2'
 mkdir -p "${VIRTUAL_ENV}/local"
 rm -Rf "${VIRTUAL_ENV}/local/lib"
 ln -s "${VIRTUAL_ENV}/lib" "${VIRTUAL_ENV}/local/lib"

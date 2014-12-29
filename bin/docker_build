@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
+
+cd "${PROJECT_LOCATION}"
+echo
+echo "BUILDING DOCKER IMAGE"
+echo "--------------------------------------------------------------------------------"
+docker build --rm=true -t "${PROJECT_REPO}" .
+echo
+cd "${CURRDIR}"

@@ -11,7 +11,6 @@ echo
 echo "TESTS"
 echo "--------------------------------------------------------------------------------"
 nosetests --with-coverage --cover-erase --cover-inclusive --cover-branches --cover-package="${PROJECT_NAME}" --cover-html --cover-html-dir="../coverage/" -w "${PROJECT_NAME}"
-#nosetests -v --with-coverage --cover-erase --cover-inclusive --cover-branches --cover-package=${PROJECT_NAME} --cover-html --cover-html-dir="../coverage/" -w ${PROJECT_NAME}
 echo
 echo
 echo "PEP8 CODE STYLE CHECK"

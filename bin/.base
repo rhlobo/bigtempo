@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export PROJECT_NAME='bigtempo'
+export PROJECT_REPO="rhlobo/bigtempo"
 
 export CURRDIR="$(pwd)"
 export PROJECT_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"

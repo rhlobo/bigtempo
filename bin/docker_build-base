@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
+
+cd "${PROJECT_LOCATION}"
+echo
+echo "BUILDING DOCKER BASE IMAGE"
+echo "--------------------------------------------------------------------------------"
+docker build --rm=true -t rhlobo/base-bigtempo "${PROJECT_LOCATION}/bin/docker_base"
+echo
+cd "${CURRDIR}"

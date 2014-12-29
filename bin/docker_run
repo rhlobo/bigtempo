@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+COMMAND=${1:-'run'}
+source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
+
+cd "${PROJECT_LOCATION}"
+echo
+echo "RUNNING DOCKER CONTAINER"
+echo "--------------------------------------------------------------------------------"
+docker run -i -p 127.0.0.1:8888:8888 -t "${PROJECT_REPO}" "${COMMAND}"
+RETURN=$?
+echo
+cd "${CURRDIR}"
+
+exit $RETURN

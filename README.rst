@@ -21,20 +21,20 @@
 :Keywords: bigdata, time series, temporal processment, temporal analysis, data processment, data analysis, scalable, distributed, data exploration, python
 
 
-This is a Python package created to help you build complex hierarchies of processments, each refered as a datasource. 
+This is a Python package created to help you build complex hierarchies of processments, each refered as a datasource.
 The package was originally conceived to handle temporal data and it is typically used as a colleague of pandas_ - dealing with time series and dataframes - but it is flexible and can easily be extended to support other data models.
 It handles dependency resolution, provides a tagging system that enables querying operations over datasource sets, and much more.
 
-There are other software packages that focus on lower level aspects of data processing, like pandas_, numpy_, sympy_, theano_. 
+There are other software packages that focus on lower level aspects of data processing, like pandas_, numpy_, sympy_, theano_.
 This is not a framework to replace these. Instead, it aims to support many of these tools, helping you to stitch many processments together.
 It provides a decoupled programming model that was built with scalability support in its heart and it takes care of a lot of the workflow management so that you can focus on the data itself.
 
-Bigtempo aims to provide support an wide range of applications - including artificial intelligence systems - working in data pull fashion. 
+Bigtempo aims to provide support an wide range of applications - including artificial intelligence systems - working in data pull fashion.
 Its philosophy is to lazyload things as possible: analysis are retrieved from cache if available, processed otherwise.
 A `datasource` serves data through processors that can be used by other `datasources` (or by you directly) and processors are made to be executed in a distributed fashion, if that is desired.
 
-.. It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis. 
-.. Using it, you are able - for instance - to easily spawn multiple variations of a processment over sets of other datasources. 
+.. It is here to address the plumbing associated with complex chained data evaluation processes, and because each datasource can be used as input for new datasources, it is ideal for data exploration and analysis.
+.. Using it, you are able - for instance - to easily spawn multiple variations of a processment over sets of other datasources.
 .. It is a great tool for distributed processment when you have 'a few quadrillion' [interdependent] processments for interdependent data sets.
 
 +--------------------------------------------------------------------------------------+
@@ -77,7 +77,7 @@ Dependencies
     Both the installation methods above should take care of dependencies on its own, automatically.
 
 
-The pandas_ library is the only direct dependency the package has in order to be executed. You should visit its page to find out what it depends on. For best results, we recommend installing optional packages as well. 
+The pandas_ library is the only direct dependency the package has in order to be executed. You should visit its page to find out what it depends on. For best results, we recommend installing optional packages as well.
 
 If you want to run the package tests, or enjoy its testing facilities, you'll need:
 
@@ -88,6 +88,8 @@ In order to run the tests using the command contained in the ``bin`` directory, 
 - nose >= 1.3.0
 - coverage >= 3.6
 - pep8 >= 1.4.5
+
+    At `bin/docker_base` you can find a script named `setup-ubuntu_14.04_x64.sh` that is able to prepare an Ubuntu (Trusty Tahr) machine with pandas and all of its dependencies. It is originally mean to be used to build the project's docker image but it should work on real machines.
 
 
 Installing from source

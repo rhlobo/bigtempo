@@ -4,5 +4,5 @@
 source "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.base"
 
 cd "${PROJECT_LOCATION}/ipy-notebooks"
-ipython notebook --pylab inline
+USE_HTTP=1 ipython notebook --no-browser --port 8888 --ip=* --pylab inline
 cd "${CURRDIR}"
