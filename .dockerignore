@@ -1,0 +1,46 @@
+### Output files
+output/
+code.report
+
+### Personal configurations
+.codeintel
+
+### Env/IDE temporary files
+.ropeproject
+
+### SVM files
+.git/
+
+### Distribution temporary files
+*.egg
+*.egg-info
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+__pycache__
+setup.cfg
+pip-log.txt
+
+### Logs and databases
+*.log
+.coverage
+coverage/
+cover/
+profile/
+.tox
+nosetests.xml
+
+### OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
