@@ -1,0 +1,40 @@
+machine:
+  services:
+    - docker
+
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - if [[ -e ~/docker/base-bigtempo.tar ]]; then docker load --input ~/docker/base-bigtempo.tar; fi
+    - if [[ -e ~/docker/bigtempo.tar ]]; then docker load --input ~/docker/bigtempo.tar; fi
+    - docker build -t rhlobo/bigtempo .
+    - mkdir -p ~/docker; docker save rhlobo/bigtempo > ~/docker/bigtempo.tar;
+    - mkdir -p ~/docker; docker save rhlobo/base-bigtempo > ~/docker/base-bigtempo.tar;
+    - docker history "rhlobo/bigtempo"
+
+
+test:
+  override:
+    - bin/docker_run test
+
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push rhlobo/bigtempo:latest
+      - docker tag rhlobo/bigtempo:latest rhlobo/bigtempo:$CIRCLE_SHA1
+      - docker push rhlobo/bigtempo:$CIRCLE_SHA1
+  staging:
+    branch: staging
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push rhlobo/bigtempo:staging
+  feature:
+    branch: /feat_.*/
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push rhlobo/bigtempo:$CIRCLE_BRANCHs
