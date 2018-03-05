@@ -1,8 +1,8 @@
 
-.. image:: https://pypip.in/v/bigtempo/badge.png
+.. image:: https://img.shields.io/pypi/v/bigtempo.svg
         :target: https://pypi.python.org/pypi/bigtempo
 
-.. image:: https://pypip.in/d/bigtempo/badge.png
+.. image:: https://img.shields.io/pypi/dm/bigtempo.svg
         :target: https://pypi.python.org/pypi/bigtempo
 
 .. image:: https://travis-ci.org/rhlobo/bigtempo.png?branch=master
